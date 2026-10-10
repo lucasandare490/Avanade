@@ -1,0 +1,29 @@
+# Fontes privadas, ferramentas e pacotes locais
+/auditoria/
+/ferramentas/
+/entrega-final-*/
+/*.zip
+/*.apk
+
+# Dependências e arquivos gerados
+**/node_modules/
+**/dist/
+**/build/
+**/.gradle/
+**/.kotlin/
+**/*.tsbuildinfo
+**/local.properties
+**/.idea/
+**/.DS_Store
+
+# Segredos e configurações privadas
+**/.env
+**/.env.*
+!**/.env.example
+**/*.jks
+**/*.keystore
+**/*.pem
+**/*.key
+
+# Histórico local de entregas antigas; documentação vigente permanece versionada
+/frontend/documentacao/historico/

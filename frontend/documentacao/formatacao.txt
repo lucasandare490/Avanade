@@ -1,0 +1,27 @@
+src/Aplicacao.tsx 179ms
+src/componentes/ElementosInterface.tsx 34ms (unchanged)
+src/componentes/EstruturaPainel.tsx 42ms
+src/dados/cenarioDemonstrativo.ts 17ms (unchanged)
+src/estilos.css 176ms
+src/inicializar.tsx 3ms (unchanged)
+src/servicos/clienteHttp.test.ts 13ms
+src/servicos/clienteHttp.ts 9ms (unchanged)
+src/servicos/servicoDemonstrativo.test.ts 13ms
+src/servicos/servicoDemonstrativo.ts 10ms
+src/telas/TelaAnalise.tsx 11ms (unchanged)
+src/telas/TelaConfiguracoes.tsx 6ms (unchanged)
+src/telas/TelaDashboard.tsx 55ms
+src/telas/TelaDespesas.tsx 30ms
+src/telas/TelaEntrada.tsx 7ms (unchanged)
+src/telas/TelaFluxoCaixa.tsx 17ms (unchanged)
+src/telas/TelaOperacoes.tsx 27ms
+src/telas/TelaSimulacao.tsx 8ms (unchanged)
+src/telas/TelaVendaDemonstrativa.tsx 15ms
+src/testes/fluxosInterface.test.tsx 45ms
+src/tipos.ts 8ms (unchanged)
+src/utilitarios/usePreferenciaSessao.ts 4ms
+src/utilitarios/validarDespesa.test.ts 4ms
+src/utilitarios/validarDespesa.ts 7ms
+src/utilitarios/valoresFinanceiros.test.ts 9ms (unchanged)
+src/utilitarios/valoresFinanceiros.ts 13ms (unchanged)
+package.json 50ms (unchanged)

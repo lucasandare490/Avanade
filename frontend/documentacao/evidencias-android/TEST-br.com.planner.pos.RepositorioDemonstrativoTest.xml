@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.planner.pos.RepositorioDemonstrativoTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-10-10T09:11:58" hostname="DESKTOP-NMNVNRJ" time="0.055">
+  <properties/>
+  <testcase name="restauracaoPreservaIdempotencia" classname="br.com.planner.pos.RepositorioDemonstrativoTest" time="0.045"/>
+  <testcase name="chaveDivergenteFalha" classname="br.com.planner.pos.RepositorioDemonstrativoTest" time="0.004"/>
+  <testcase name="pendenteNaoPodeSerConcluidoLocalmente" classname="br.com.planner.pos.RepositorioDemonstrativoTest" time="0.001"/>
+  <testcase name="composicaoConservaValor" classname="br.com.planner.pos.RepositorioDemonstrativoTest" time="0.001"/>
+  <testcase name="respostaPerdidaRecuperaMesmaVenda" classname="br.com.planner.pos.RepositorioDemonstrativoTest" time="0.0"/>
+  <testcase name="entradaMonetaria" classname="br.com.planner.pos.RepositorioDemonstrativoTest" time="0.002"/>
+  <testcase name="retomadaPreservaParcelas" classname="br.com.planner.pos.RepositorioDemonstrativoTest" time="0.0"/>
+  <testcase name="repeticaoNaoDuplica" classname="br.com.planner.pos.RepositorioDemonstrativoTest" time="0.0"/>
+  <testcase name="recusaNaoRegistra" classname="br.com.planner.pos.RepositorioDemonstrativoTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

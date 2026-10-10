@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.planner.pos.FluxoPosTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-10T09:10:34" hostname="DESKTOP-NMNVNRJ" time="83.489">
+  <properties/>
+  <testcase name="recriacaoPreservaTentativaSemReenvioAutomatico" classname="br.com.planner.pos.FluxoPosTest" time="72.434"/>
+  <testcase name="indisponibilidadePreservaTentativa" classname="br.com.planner.pos.FluxoPosTest" time="4.444"/>
+  <testcase name="vendaAssincronaChegaAoDetalhe" classname="br.com.planner.pos.FluxoPosTest" time="3.366"/>
+  <testcase name="expiracaoRetornaParaEntrada" classname="br.com.planner.pos.FluxoPosTest" time="0.884"/>
+  <testcase name="historicoEDetalheConsultamServico" classname="br.com.planner.pos.FluxoPosTest" time="2.356"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

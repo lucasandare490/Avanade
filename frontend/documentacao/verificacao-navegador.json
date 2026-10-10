@@ -1,0 +1,88 @@
+{
+  "desktop": [
+    {
+      "documento": 1265,
+      "largura": 1280,
+      "pagina": "Operações"
+    },
+    {
+      "documento": 1280,
+      "largura": 1280,
+      "pagina": "Despesas"
+    },
+    {
+      "documento": 1265,
+      "largura": 1280,
+      "pagina": "Fluxo de Caixa"
+    },
+    {
+      "documento": 1280,
+      "largura": 1280,
+      "pagina": "Simulação Split"
+    },
+    {
+      "documento": 1280,
+      "largura": 1280,
+      "pagina": "Análise com IA"
+    },
+    {
+      "documento": 1265,
+      "largura": 1280,
+      "pagina": "Sobre esta demonstração"
+    },
+    {
+      "documento": 1265,
+      "largura": 1280,
+      "pagina": "Nova venda demonstrativa"
+    },
+    {
+      "documento": 1265,
+      "largura": 1280,
+      "pagina": "Olá, Maria"
+    }
+  ],
+  "celular": [
+    {
+      "documento": 375,
+      "largura": 390,
+      "pagina": "Operações"
+    },
+    {
+      "documento": 375,
+      "largura": 390,
+      "pagina": "Despesas"
+    },
+    {
+      "documento": 375,
+      "largura": 390,
+      "pagina": "Fluxo de Caixa"
+    },
+    {
+      "documento": 375,
+      "largura": 390,
+      "pagina": "Simulação Split"
+    },
+    {
+      "documento": 375,
+      "largura": 390,
+      "pagina": "Análise com IA"
+    },
+    {
+      "documento": 375,
+      "largura": 390,
+      "pagina": "Sobre esta demonstração"
+    },
+    {
+      "documento": 375,
+      "largura": 390,
+      "pagina": "Nova venda demonstrativa"
+    },
+    {
+      "documento": 375,
+      "largura": 390,
+      "pagina": "Olá, Maria"
+    }
+  ],
+  "menuEscape": "Foco devolvido ao botão Abrir menu; confirmado no navegador.",
+  "errosConsole": []
+}

@@ -1,0 +1,10 @@
+
+ RUN  v3.2.7 C:/avanade/frontend
+
+········
+
+ Test Files  1 passed (1)
+      Tests  8 passed (8)
+   Start at  07:50:43
+   Duration  13.72s (transform 306ms, setup 0ms, collect 1.57s, tests 8.12s, environment 3.39s, prepare 302ms)
+
