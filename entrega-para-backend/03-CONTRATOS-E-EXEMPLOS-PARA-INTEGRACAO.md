@@ -175,3 +175,21 @@ Definir uma interface não equivale a essa configuração já estar realizada. E
 ## Atualização obrigatória: tendências no MVP
 
 Análise de tendências por IA faz parte do MVP. Crédito simulado e cancelamento ficam na evolução futura. O resumo textual de um período disponível hoje não encerra esse requisito. Incluir na implementação/devolutiva as séries de origem, períodos comparados, indicadores, tratamento de base zero/insuficiente, interpretação segura e contrato para a tela. As definições específicas precisam de alinhamento. Ver [decisão e critérios de aceite](../frontend/documentacao/DECISAO-ESCOPO-MVP.md). Os 219 critérios anteriores permanecem; este adendo acrescenta os critérios específicos da decisão.
+
+## Extensão interna implementada: tendências
+
+`ExplicacaoPeriodo` aceita agora `tendencias?: ComparacaoTendencias`. O campo é opcional para compatibilidade com explicações antigas, mas necessário para concluir o requisito de tendências. Ausência exibe aviso explícito, sem fabricar comparação.
+
+```json
+{
+  "anterior": {"inicio": "2026-10-04", "fim": "2026-10-06"},
+  "indicadores": [
+    {"titulo": "Entradas líquidas", "atual": 13200, "anterior": 11000},
+    {"titulo": "Despesas pagas", "atual": null, "anterior": 0}
+  ]
+}
+```
+
+O exemplo corresponde ao pedido de 07 a 09/10/2026. Valores são centavos inteiros não negativos ou null (sem informação). Zero deve ser zero confirmado. A preparação atual compara o intervalo imediatamente anterior, de mesma quantidade de dias inclusivos, limitado a 366 dias. Essa é uma proposta demonstrativa a ratificar, não uma regra financeira já aprovada. A tela deriva apenas a variação de apresentação; agregação e autorização são do servidor. Não enviar saldo negativo nessa coleção de indicadores não negativos.
+
+O adapter rejeita período divergente, valores inválidos e lista vazia. Se não houver dados, envie indicadores com null e explicação apropriada. A tela mantém a comparação disponível quando houver retorno com indicadores e texto vazio. Contratos que precisem carregar agregados independentemente de uma falha HTTP da IA devem separar as capacidades no próximo acordo; não apresentar essa independência remota como já implementada.

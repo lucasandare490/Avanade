@@ -1,3 +1,5 @@
+> **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A integração com dados e IA do servidor continua pendente. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](documentacao/TENDENCIAS-IMPLEMENTADAS.md).
+
 # Planner Comercial — frontend web
 
 React 19, TypeScript e Vite; CSS próprio, ícones Lucide e fontes locais DM Sans/Manrope. Revisão de 10/10/2026 com build e testes: [evidências](documentacao/RELATORIO-VALIDACAO-ATUAL.md). Referência de design e pesquisa: Thayná Batista da Silva; requisitos: Thayná e Kleysson.

@@ -30,6 +30,7 @@ export interface PeriodoConsulta {
   fim: string;
 }
 export interface ExplicacaoPeriodo {
+  tendencias?: import('../utilitarios/tendencias').ComparacaoTendencias;
   periodo: PeriodoConsulta;
   texto: string;
   origem: 'demonstrativa' | 'servidor';

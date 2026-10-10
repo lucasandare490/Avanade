@@ -1,3 +1,5 @@
+> **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A integração com dados e IA do servidor continua pendente. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](frontend/documentacao/TENDENCIAS-IMPLEMENTADAS.md).
+
 # 💰 Planner Comercial — Split Tributário
 
 Solução experimental para ajudar pequenos estabelecimentos a compreender a separação dos valores de suas vendas, acompanhar o valor líquido e consultar o histórico das operações com transparência e rastreabilidade.

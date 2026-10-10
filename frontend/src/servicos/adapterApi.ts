@@ -1,4 +1,5 @@
 import type { ConsultasPlanner } from './contratosConsultas';
+import { validarTendencias } from '../utilitarios/tendencias';
 import type { BaseDemonstracao, Despesa, NovaVenda, Operacao, ServicoPlanner } from '../tipos';
 import type { Credenciais, ServicoSessao, SessaoUsuario } from './sessaoUsuario';
 import { criarTransporteApi, type OpcoesRequisicao } from './transporteApi';
@@ -149,6 +150,7 @@ export function criarIntegracaoApi(
             !['demonstrativa', 'servidor'].includes(r.origem)
           )
             throw new Error('Explicação recebida não corresponde ao período.');
+          if (r.tendencias !== undefined) validarTendencias(r.tendencias, periodo);
           return r;
         };
       return {

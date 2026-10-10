@@ -1,3 +1,5 @@
+> **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A integração com dados e IA do servidor continua pendente. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](TENDENCIAS-IMPLEMENTADAS.md).
+
 # Decisão de escopo — atualização recebida em 10/10/2026
 
 Fonte: captura de conversa enviada pelo usuário nesta data, com mensagem atribuída a Thayná. A captura informa alterações nas páginas 5 e 6 da documentação de planejamento; essas páginas revisadas não foram fornecidas nesta atualização. A data de recebimento não é uma afirmação sobre a data original da mensagem. A imagem privada não integra o repositório.

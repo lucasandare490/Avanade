@@ -1,4 +1,6 @@
 import { Sparkles } from 'lucide-react';
+import { PainelTendencias } from '../componentes/PainelTendencias';
+import { tendenciasDemonstrativas } from '../utilitarios/tendencias';
 import { useState } from 'react';
 import type { BaseDemonstracao } from '../tipos';
 import { Aviso, CabecalhoPagina, Estado } from '../componentes/ElementosInterface';
@@ -10,6 +12,12 @@ export function TelaAnalise({ base }: { base: BaseDemonstracao }) {
   const operacoes = base.operacoes.filter((o) => dentroPeriodo(o.data, inicio, fim));
   const despesas = base.despesas.filter((d) => dentroPeriodo(d.data, inicio, fim));
   const r = resumir(operacoes, despesas);
+  let tendencias;
+  try {
+    tendencias = tendenciasDemonstrativas(base, { inicio, fim });
+  } catch {
+    /* Datas em edição não geram comparações. */
+  }
   return (
     <>
       <CabecalhoPagina
@@ -31,6 +39,11 @@ export function TelaAnalise({ base }: { base: BaseDemonstracao }) {
           <input type="date" value={fim} onChange={(e) => setFim(e.target.value)} />
         </label>
       </div>
+      {tendencias ? (
+        <PainelTendencias comparacao={tendencias} />
+      ) : (
+        <Estado titulo="Selecione um período válido de até 366 dias para comparar" />
+      )}
       <section className="painel">
         <div className="titulo-painel">
           <h2>
@@ -89,8 +102,9 @@ export function TelaAnalise({ base }: { base: BaseDemonstracao }) {
               concluídas. Seus valores líquidos não foram incluídos no caixa.
             </p>
             <p>
-              Não há previsão de caixa ou comparação de crescimento neste cenário. Essas análises
-              precisam de premissas e períodos compatíveis.
+              A tabela compara valores históricos de intervalos de mesma duração. Essa leitura é
+              demonstrativa e não prevê resultados futuros. Uma interpretação por IA depende da
+              integração com o servidor.
             </p>
             <a className="botao secundario" href="#/fluxo-caixa">
               Conferir movimentações

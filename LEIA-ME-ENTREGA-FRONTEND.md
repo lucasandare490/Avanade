@@ -1,3 +1,5 @@
+> **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A integração com dados e IA do servidor continua pendente. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](frontend/documentacao/TENDENCIAS-IMPLEMENTADAS.md).
+
 # Planner Comercial — entrega de frontend e orientação do backend
 
 Revisão: 10/10/2026. Comece por este arquivo. Há dois clientes: dashboard web e POS Android. Os dois são demonstrativos; a API do projeto ainda precisa ser entregue e conectada.

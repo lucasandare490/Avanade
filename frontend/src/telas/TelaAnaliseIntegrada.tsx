@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { PainelTendencias } from '../componentes/PainelTendencias';
 import type { ServicoPlanner } from '../tipos';
 import { Aviso, CabecalhoPagina, Estado } from '../componentes/ElementosInterface';
 import { useConsultaRemota } from '../utilitarios/useConsultaRemota';
@@ -67,6 +68,16 @@ export function TelaAnaliseIntegrada({ servico }: { servico: ServicoPlanner }) {
           </form>
         </section>
       )}
+      {pedido && !consulta.carregando && !consulta.erro && consulta.dados?.tendencias && (
+        <PainelTendencias comparacao={consulta.dados.tendencias} />
+      )}
+      {pedido &&
+        !consulta.carregando &&
+        !consulta.erro &&
+        consulta.dados &&
+        !consulta.dados.tendencias && (
+          <Estado titulo="Comparações de tendências ainda não fornecidas pelo servidor" />
+        )}
       {pedido &&
         (consulta.carregando ? (
           <Estado titulo="Preparando explicação" carregando />
