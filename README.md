@@ -78,7 +78,7 @@ O núcleo do MVP continua sendo **venda → identificação → separação → 
 
 Crédito simulado e cancelamento de operações/compra ficam na evolução futura, fora do MVP atual, conforme atualização comunicada pela equipe. **Análise de tendências por IA faz parte do MVP e ainda precisa ser implementada além do resumo textual atual.** Recorrência de despesas, projeções com regras não aprovadas, PWA, SDK de fabricante, impressão física e publicação em loja continuam condicionados à definição de escopo. Veja a [decisão de escopo](frontend/documentacao/DECISAO-ESCOPO-MVP.md).
 
-## ✅ O que já foi feito
+## ✅ O que já foi feito:
 
 ### Descoberta, pesquisa e planejamento
 
