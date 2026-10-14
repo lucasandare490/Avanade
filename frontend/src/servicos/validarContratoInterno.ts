@@ -120,6 +120,8 @@ export function validarSessao(valor: unknown): SessaoUsuario {
     throw new Error('Sessão expirada.');
   return {
     id: texto(s.id),
+    ...(s.identidade !== undefined ? { identidade: texto(s.identidade) } : {}),
+    ...(s.fusoHorario !== undefined ? { fusoHorario: texto(s.fusoHorario) } : {}),
     nome: texto(s.nome),
     loja: texto(s.loja),
     permissoes: s.permissoes as Permissao[],

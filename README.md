@@ -1,4 +1,6 @@
-> **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A integração com dados e IA do servidor continua pendente. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](frontend/documentacao/TENDENCIAS-IMPLEMENTADAS.md).
+> **Integração web — 14/10/2026:** frontend conectado ao backend Spring/PostgreSQL. Execute `./scripts/dev.sh` na raiz e abra http://127.0.0.1:5173. [Guia de execução, contas, recuperação e testes](frontend/documentacao/INTEGRACAO-BACKEND.md). Pagamentos/tributos/explicações permanecem simulados; Android e tendências do servidor seguem separados.
+
+> **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A comparação de tendências com dados e IA do servidor continua pendente; a integração web atual está descrita no guia acima. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](frontend/documentacao/TENDENCIAS-IMPLEMENTADAS.md).
 
 # 💰 Planner Comercial — Split Tributário
 
@@ -6,7 +8,7 @@ Solução experimental para ajudar pequenos estabelecimentos a compreender a sep
 
 O projeto nasceu como **Split Tributário** e é apresentado nas interfaces e no protótipo como **Planner Comercial**. Reúne um dashboard web e um aplicativo Android para o fluxo de Smart POS.
 
-**Estado da entrega — 10/10/2026:** os clientes web e Android estão implementados em modo demonstrativo, com testes locais e builds executados. A estrutura de integração está preparada; o backend e o banco ainda precisam ser implementados, entregues e conectados. Nenhuma transferência financeira ou arrecadação tributária real é realizada.
+**Registro histórico da entrega — 10/10/2026:** os clientes web e Android estão implementados em modo demonstrativo, com testes locais e builds executados. A estrutura de integração está preparada; o backend e o banco ainda precisam ser implementados, entregues e conectados. Nenhuma transferência financeira ou arrecadação tributária real é realizada.
 
 ## 📌 Sobre o projeto
 

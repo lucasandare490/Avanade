@@ -1,0 +1,14 @@
+{
+  "countsBeforeAndAfter" : {
+    "sales" : 1,
+    "events" : 6,
+    "operations" : 1,
+    "parcels" : 3,
+    "cashEntries" : 1
+  },
+  "restart" : "new JVM, same PostgreSQL; original bearer session and idempotency key recovered",
+  "replayStatus" : 200,
+  "fault" : "halt(86) after service transaction committed, before buffered HTTP body copied",
+  "responseIdentical" : true,
+  "clientObserved" : "IOException: no successful response received"
+}

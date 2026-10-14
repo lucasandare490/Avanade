@@ -12,10 +12,13 @@ import './estilos.css';
 let integracao: ReturnType<typeof criarIntegracaoApi> | undefined;
 let erroConfiguracao = '';
 try {
-  const modo = import.meta.env.VITE_MODO_DADOS ?? 'demo';
+  const modo = import.meta.env.VITE_MODO_DADOS ?? 'api';
   if (modo !== 'demo' && modo !== 'api') throw new Error('Modo de dados inválido.');
   if (modo === 'api') {
-    const url = lerUrlApi({ ...import.meta.env });
+    const url = lerUrlApi({
+      ...import.meta.env,
+      VITE_API_URL: import.meta.env.VITE_API_URL || window.location.origin,
+    });
     if (!url || !contratoServidor)
       throw new Error(
         'Integração não configurada. É necessário definir a URL e o contrato do servidor. Nenhum dado demonstrativo será carregado neste modo.',

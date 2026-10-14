@@ -18,10 +18,17 @@ export function TelaDespesasIntegrada({
   const [aberto, setAberto] = useState(false),
     [ocupado, setOcupado] = useState(false),
     [mensagem, setMensagem] = useState(''),
-    [incerta, setIncerta] = useState(false);
+    [incerta, setIncerta] = useState(() => servico.despesaPendente?.() ?? false);
   const [erros, setErros] = useState<Record<string, string>>({});
   const trava = useRef(false),
     botaoAbrir = useRef<HTMLButtonElement>(null);
+  const categoriasConsulta = useConsultaRemota('categorias', async (sinal) => {
+    if (!permitirRegistro) return [];
+    return servico.consultarCategoriasDespesa
+      ? servico.consultarCategoriasDespesa(sinal)
+      : (servico.categoriasDespesa ?? []);
+  });
+  const categorias = categoriasConsulta.dados ?? servico.categoriasDespesa ?? [];
   const filtro = { busca, inicio, fim, pagina, tamanho: 20 };
   const consulta = useConsultaRemota(JSON.stringify(filtro), async (sinal) => {
     if (inicio && fim && inicio > fim) throw new Error('Confira o período informado.');
@@ -40,7 +47,7 @@ export function TelaDespesasIntegrada({
       return;
     }
     const categoria = String(dados.get('categoria'));
-    if (!servico.categoriasDespesa?.includes(categoria)) {
+    if (!categorias.includes(categoria)) {
       setErros({ categoria: 'Selecione uma categoria disponível.' });
       return;
     }
@@ -62,7 +69,7 @@ export function TelaDespesasIntegrada({
     } catch (e) {
       if (e instanceof FalhaTransporte) {
         setErros(e.campos);
-        if (e.codigo === 0 || e.codigo >= 500) setIncerta(true);
+        if (e.codigo === 0 || e.codigo >= 500 || servico.despesaPendente?.()) setIncerta(true);
         setMensagem(e.message);
       } else {
         setIncerta(true);
@@ -70,6 +77,24 @@ export function TelaDespesasIntegrada({
           'Não foi possível confirmar o registro. Consulte as despesas antes de iniciar outra tentativa.',
         );
       }
+    } finally {
+      trava.current = false;
+      setOcupado(false);
+    }
+  }
+  async function recuperar() {
+    if (trava.current || !servico.recuperarDespesa) return;
+    trava.current = true;
+    setOcupado(true);
+    try {
+      await servico.recuperarDespesa();
+      setIncerta(false);
+      setAberto(false);
+      setMensagem('Despesa confirmada. A consulta será atualizada.');
+      consulta.recarregar();
+    } catch (e) {
+      setIncerta(servico.despesaPendente?.() ?? true);
+      setMensagem(e instanceof Error ? e.message : 'Não foi possível recuperar a tentativa.');
     } finally {
       trava.current = false;
       setOcupado(false);
@@ -84,7 +109,7 @@ export function TelaDespesasIntegrada({
           <button
             ref={botaoAbrir}
             className="botao primario"
-            disabled={!permitirRegistro || !servico.categoriasDespesa?.length || ocupado || incerta}
+            disabled={!permitirRegistro || !categorias.length || ocupado || incerta}
             onClick={() => {
               setAberto(true);
               setErros({});
@@ -95,8 +120,16 @@ export function TelaDespesasIntegrada({
           </button>
         }
       />
-      {!servico.categoriasDespesa?.length && (
-        <p className="aviso">O cadastro aguarda as categorias permitidas pelo contrato.</p>
+      {permitirRegistro && categoriasConsulta.carregando && (
+        <p role="status">Carregando categorias…</p>
+      )}
+      {permitirRegistro && categoriasConsulta.erro && (
+        <p className="erro" role="alert">
+          {categoriasConsulta.erro}{' '}
+          <button className="botao secundario" onClick={categoriasConsulta.recarregar}>
+            Recarregar categorias
+          </button>
+        </p>
       )}
       {mensagem && (
         <p role="status" className="aviso">
@@ -105,9 +138,17 @@ export function TelaDespesasIntegrada({
       )}
       {incerta && (
         <p role="alert" className="erro">
-          Resultado desconhecido: o envio não será repetido automaticamente. Consulte o histórico. A
-          liberação segura de outra tentativa depende da consulta de confirmação definida pelo
-          backend.
+          Resultado desconhecido. Recupere a mesma tentativa para evitar um registro duplicado.
+          {servico.recuperarDespesa && (
+            <button
+              type="button"
+              className="botao secundario"
+              disabled={ocupado}
+              onClick={recuperar}
+            >
+              {ocupado ? 'Recuperando…' : 'Recuperar despesa'}
+            </button>
+          )}
         </p>
       )}
       {aberto && (
@@ -149,7 +190,7 @@ export function TelaDespesasIntegrada({
                   aria-invalid={Boolean(erros.categoria)}
                   aria-describedby={erros.categoria ? 'erro-api-categoria' : undefined}
                 >
-                  {servico.categoriasDespesa?.map((c) => (
+                  {categorias.map((c) => (
                     <option key={c}>{c}</option>
                   ))}
                 </select>

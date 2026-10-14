@@ -1,4 +1,4 @@
-import type { Despesa, Operacao, StatusOperacao, MeioPagamento } from '../tipos';
+import type { Despesa, Operacao, StatusOperacao, MeioPagamento, Venda } from '../tipos';
 export interface ConsultaOperacoes {
   busca: string;
   inicio: string;
@@ -60,6 +60,17 @@ export interface PaginaDespesas {
   tamanho: number;
 }
 export interface ConsultasPlanner {
+  consultarVendas?: (
+    consulta: Omit<ConsultaOperacoes, 'status'>,
+    sinal?: AbortSignal,
+  ) => Promise<{ itens: Venda[]; total: number; pagina: number; tamanho: number }>;
+  consultarVenda?: (id: string, sinal?: AbortSignal) => Promise<Venda>;
+  consultarCategoriasDespesa?: (sinal?: AbortSignal) => Promise<string[]>;
+  recuperarDespesa?: () => Promise<void>;
+  despesaPendente?: () => boolean;
+  recuperarVenda?: () => Promise<import('../tipos').ResultadoVenda>;
+  vendaPendente?: () => boolean;
+
   categoriasDespesa?: string[];
   consultarDespesas?: (consulta: ConsultaDespesas, sinal?: AbortSignal) => Promise<PaginaDespesas>;
 

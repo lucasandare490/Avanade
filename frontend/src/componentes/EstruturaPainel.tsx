@@ -22,6 +22,7 @@ const grupos = [
   {
     nome: 'OPERAÇÕES',
     itens: [
+      { rota: 'vendas', nome: 'Vendas', icone: Receipt },
       { rota: 'operacoes', nome: 'Operações', icone: ArrowLeftRight },
       { rota: 'despesas', nome: 'Despesas', icone: Receipt },
     ],
@@ -60,11 +61,13 @@ export function EstruturaPainel({
   sair,
   children,
   sessao,
+  demonstrativo = true,
 }: {
   rota: string;
   sair: () => void;
   children: ReactNode;
   sessao?: SessaoUsuario;
+  demonstrativo?: boolean;
 }) {
   const [menu, setMenu] = useState(false);
   const lateral = useRef<HTMLElement>(null);
@@ -167,7 +170,11 @@ export function EstruturaPainel({
             <div className="grupo-menu" key={g.nome}>
               <p>{g.nome}</p>
               {g.itens
-                .filter((item) => !sessao || podeAcessarRota(item.rota, sessao))
+                .filter(
+                  (item) =>
+                    (!demonstrativo || item.rota !== 'vendas') &&
+                    (!sessao || podeAcessarRota(item.rota, sessao)),
+                )
                 .map(({ rota: r, nome, icone: Icone }) => (
                   <a
                     href={`#/${r}`}
@@ -178,7 +185,7 @@ export function EstruturaPainel({
                     aria-current={rota.split('/')[0] === r ? 'page' : undefined}
                   >
                     <Icone size={18} />
-                    {nome}
+                    {r === 'venda-demonstrativa' && !demonstrativo ? 'Nova venda · POS web' : nome}
                     {r === 'analise' && (
                       <span className="mini-selo" aria-hidden="true">
                         IA
@@ -198,7 +205,7 @@ export function EstruturaPainel({
           </div>
           <button onClick={sair}>
             <LogOut size={17} />
-            Sair da demonstração
+            {demonstrativo ? 'Sair da demonstração' : 'Sair'}
           </button>
         </div>
       </aside>
@@ -222,7 +229,7 @@ export function EstruturaPainel({
           <div className="acoes-topo">
             <span className="modo-demo">
               <i />
-              Demonstração local
+              {demonstrativo ? 'Demonstração local' : 'Servidor conectado · simulado'}
             </span>
             <a href="#/configuracoes" className="botao-icone" aria-label="Sobre esta demonstração">
               <CircleHelp size={19} />

@@ -1,6 +1,12 @@
 import type { ConsultasPlanner } from './contratosConsultas';
 import { validarTendencias } from '../utilitarios/tendencias';
-import type { BaseDemonstracao, Despesa, NovaVenda, Operacao, ServicoPlanner } from '../tipos';
+import type {
+  BaseDemonstracao,
+  Despesa,
+  NovaVenda,
+  ResultadoVenda,
+  ServicoPlanner,
+} from '../tipos';
 import type { Credenciais, ServicoSessao, SessaoUsuario } from './sessaoUsuario';
 import { criarTransporteApi, type OpcoesRequisicao } from './transporteApi';
 import {
@@ -14,6 +20,12 @@ export interface RequisicaoMapeada extends OpcoesRequisicao {
 }
 export interface ContratoServidor {
   versao: string;
+  extrairToken?: (resposta: unknown) => string;
+  mapearVenda?: (resposta: unknown) => ResultadoVenda;
+  prepararServico?: (
+    enviar: ReturnType<typeof criarTransporteApi>,
+    sessao: SessaoUsuario,
+  ) => Partial<ServicoPlanner>;
   consultas?: (enviar: ReturnType<typeof criarTransporteApi>) => ConsultasPlanner;
   interpretarCampos?: (status: number, resposta: unknown) => Record<string, string>;
   credenciais: RequestCredentials;
@@ -37,20 +49,34 @@ export function criarIntegracaoApi(
 ): { autenticacao: ServicoSessao; criarServico: (sessao: SessaoUsuario) => ServicoPlanner } {
   if (!contrato.versao.trim()) throw new Error('Identifique a versão do contrato.');
   const enviar = criarTransporteApi(url, contrato.credenciais, contrato.interpretarCampos);
+  let token: string | undefined;
   const executar = <T>(pedido: RequisicaoMapeada, validar: (v: unknown) => T) =>
     enviar(pedido.caminho, validar, pedido);
   return {
     autenticacao: {
       async entrar(dados) {
-        return executar(contrato.login(dados), (v) => validarSessao(contrato.mapearSessao(v)));
+        token = undefined;
+        const resultado = await executar(contrato.login(dados), (v) => ({
+          sessao: validarSessao(contrato.mapearSessao(v)),
+          token: contrato.extrairToken?.(v),
+        }));
+        token = resultado.token;
+        return resultado.sessao;
       },
       async sair() {
-        await executar(contrato.logout(), () => undefined);
+        const anterior = token;
+        token = undefined;
+        await executar({ ...contrato.logout(), token: anterior }, () => undefined);
       },
     },
-    criarServico() {
+    criarServico(sessao) {
+      const tokenSessao = token;
+      const autenticado: typeof enviar = (caminho, validar, opcoes) =>
+        enviar(caminho, validar, { ...opcoes, token: tokenSessao });
+      const executar = <T>(pedido: RequisicaoMapeada, validar: (v: unknown) => T) =>
+        autenticado(pedido.caminho, validar, pedido);
       const chavesRetomada = new Map<string, string>();
-      const consultas = contrato.consultas?.(enviar);
+      const consultas = contrato.consultas?.(autenticado);
       const seguras: ConsultasPlanner = {};
       if (
         consultas?.categoriasDespesa &&
@@ -156,13 +182,16 @@ export function criarIntegracaoApi(
       return {
         ...seguras,
         async carregar(sinal?: AbortSignal): Promise<BaseDemonstracao> {
-          return validarBase(await contrato.carregar(enviar, sinal));
+          return validarBase(await contrato.carregar(autenticado, sinal));
         },
-        async registrarVenda(venda): Promise<Operacao> {
+        async registrarVenda(venda): Promise<ResultadoVenda> {
           const pedido = contrato.venda(venda);
           return executar(
             { ...pedido, chaveIdempotencia: pedido.chaveIdempotencia ?? venda.chave },
-            (v) => validarOperacao(contrato.mapearOperacao(v)),
+            (v) =>
+              contrato.mapearVenda
+                ? contrato.mapearVenda(v)
+                : validarOperacao(contrato.mapearOperacao(v)),
           );
         },
         async registrarDespesa(despesa) {
@@ -178,6 +207,7 @@ export function criarIntegracaoApi(
           );
           chavesRetomada.delete(id);
         },
+        ...contrato.prepararServico?.(autenticado, sessao),
       };
     },
   };

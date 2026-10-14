@@ -2,23 +2,27 @@ import { FalhaTransporte } from '../servicos/transporteApi';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Smartphone } from 'lucide-react';
 import { Aviso, CabecalhoPagina, SeloSimulado } from '../componentes/ElementosInterface';
-import type { MeioPagamento, NovaVenda, Operacao } from '../tipos';
+import type { MeioPagamento, NovaVenda, ResultadoVenda } from '../tipos';
 import { lerCentavos, moeda } from '../utilitarios/valoresFinanceiros';
 export function TelaVendaDemonstrativa({
   registrar,
+  recuperar,
+  pendente = false,
   demonstrativo = true,
   informarTentativa,
 }: {
   demonstrativo?: boolean;
-  registrar: (v: NovaVenda) => Promise<Operacao>;
+  registrar: (v: NovaVenda) => Promise<ResultadoVenda>;
+  recuperar?: () => Promise<ResultadoVenda>;
+  pendente?: boolean;
   informarTentativa?: (ativa: boolean) => void;
 }) {
   const [valor, setValor] = useState('150,00'),
     [meio, setMeio] = useState<MeioPagamento>('PIX'),
     [cenario, setCenario] = useState<NovaVenda['cenario']>('sucesso'),
-    [revisar, setRevisar] = useState(false),
+    [revisar, setRevisar] = useState(pendente),
     [ocupado, setOcupado] = useState(false),
-    [respostaDesconhecida, setRespostaDesconhecida] = useState(false),
+    [respostaDesconhecida, setRespostaDesconhecida] = useState(pendente),
     [erro, setErro] = useState('');
   const chave = useRef(crypto.randomUUID()),
     bloqueio = useRef(false);
@@ -49,20 +53,24 @@ export function TelaVendaDemonstrativa({
     setOcupado(true);
     setErro('');
     try {
-      const o = await registrar({
-        chave: chave.current,
-        bruto: lerCentavos(valor)!,
-        meio,
-        cenario,
-      });
+      const o =
+        respostaDesconhecida && recuperar
+          ? await recuperar()
+          : await registrar({
+              chave: chave.current,
+              bruto: lerCentavos(valor)!,
+              meio,
+              cenario,
+            });
       setRevisar(false);
       setRespostaDesconhecida(false);
       setValor('150,00');
       chave.current = crypto.randomUUID();
-      location.hash = `/operacoes/${o.id}`;
+      location.hash = 'tipo' in o ? `/vendas/${o.id}` : `/operacoes/${o.id}`;
     } catch (e) {
       setRespostaDesconhecida(
-        cenario === 'resposta-perdida' ||
+        pendente ||
+          cenario === 'resposta-perdida' ||
           (e instanceof FalhaTransporte && (e.codigo === 0 || e.codigo >= 500)),
       );
       setErro(e instanceof Error ? e.message : 'Não foi possível confirmar.');
@@ -81,7 +89,7 @@ export function TelaVendaDemonstrativa({
       <Aviso>
         {demonstrativo
           ? 'Demonstração web do fluxo POS, sem movimentação real.'
-          : 'Confira os dados antes de enviar. A confirmação e os valores finais pertencem ao serviço de vendas.'}
+          : 'Vendas persistidas no servidor de demonstração. Pagamentos e tributos são simulados, sem movimentação real.'}
       </Aviso>
       <section className="painel formulario-venda">
         <div className="icone-destaque">
@@ -133,7 +141,14 @@ export function TelaVendaDemonstrativa({
           </form>
         ) : (
           <div className="formulario-vertical">
-            <strong className="valor-revisao">{moeda(lerCentavos(valor)!)}</strong>
+            {respostaDesconhecida && recuperar ? (
+              <p role="status">
+                Existe uma tentativa sem confirmação. Recupere os dados enviados antes de iniciar
+                outra venda.
+              </p>
+            ) : (
+              <strong className="valor-revisao">{moeda(lerCentavos(valor)!)}</strong>
+            )}
             <p>
               {meio} ·{' '}
               {!demonstrativo

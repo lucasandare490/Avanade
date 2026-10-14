@@ -1,0 +1,6 @@
+app:
+  demo-seed: true
+  demo-password: ${DEMO_PASSWORD:}
+springdoc:
+  api-docs.enabled: true
+  swagger-ui.enabled: true

@@ -23,8 +23,8 @@ export function TelaAnaliseIntegrada({ servico }: { servico: ServicoPlanner }) {
         descricao="Explicação do período solicitado, sem alterar os registros financeiros."
       />
       <Aviso>
-        O servidor deve buscar os dados de origem. Esta tela envia apenas o período, sem totais
-        editáveis como fonte financeira.
+        Explicação demonstrativa baseada nos registros do período. Nenhuma ação financeira é
+        executada.
       </Aviso>
       {!servico.explicar ? (
         <Estado

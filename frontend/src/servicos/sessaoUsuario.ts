@@ -1,6 +1,8 @@
 export type Permissao = 'consultar' | 'financeiro' | 'vender' | 'despesa' | 'retomar' | 'exportar';
 export interface SessaoUsuario {
   id: string;
+  identidade?: string;
+  fusoHorario?: string;
   nome: string;
   loja: string;
   permissoes: Permissao[];
@@ -63,6 +65,7 @@ export function podeAcessarRota(rota: string, sessao: SessaoUsuario) {
   const requisito: Partial<Record<string, Permissao>> = {
     dashboard: 'financeiro',
     operacoes: 'consultar',
+    vendas: 'consultar',
     despesas: 'financeiro',
     'fluxo-caixa': 'financeiro',
     analise: 'financeiro',

@@ -59,7 +59,10 @@ export function criarTransporteApi(
       if (!resposta.ok) {
         const mensagens: Record<number, string> = {
           400: 'Confira os campos informados.',
-          401: 'Sua sessão expirou. Entre novamente.',
+          401:
+            caminho === '/api/v1/auth/login'
+              ? 'E-mail ou senha inválidos.'
+              : 'Sua sessão expirou. Entre novamente.',
           403: 'Seu perfil não tem permissão para esta ação.',
           404: 'O registro não foi encontrado.',
           409: 'O registro mudou ou esta tentativa possui dados diferentes. Consulte seu estado.',

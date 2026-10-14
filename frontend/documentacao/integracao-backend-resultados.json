@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-14",
+  "scope": "Integração web React com Spring/PostgreSQL local, pagamentos e tributos simulados",
+  "frontend": {
+    "command": "npm --prefix frontend test",
+    "passed": 89,
+    "failed": 0,
+    "files": 10
+  },
+  "backend": {
+    "command": "./mvnw verify",
+    "lastSuccessfulRun": "2026-10-13",
+    "suites": [
+      {
+        "name": "br.com.avanade.split.BackendIntegrationTest",
+        "tests": "16",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "br.com.avanade.split.CrashRecoveryTest",
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "br.com.avanade.split.QueryAndCashIntegrationTest",
+        "tests": "8",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      },
+      {
+        "name": "br.com.avanade.split.TaxEngineTest",
+        "tests": "4",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0"
+      }
+    ],
+    "passed": 29,
+    "failed": 0
+  },
+  "browser": {
+    "command": "npm --prefix frontend run test:e2e",
+    "engine": "Google Chrome / Playwright",
+    "stats": {
+      "startTime": "2026-10-14T17:50:30.448Z",
+      "duration": 13317.768,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "scenarios": [
+      {
+        "title": "venda, despesas, totais, simulação, análise, consulta e logout contra PostgreSQL",
+        "passed": true
+      },
+      {
+        "title": "resposta de venda perdida após commit é recuperada após recarregar, sem duplicar",
+        "passed": true
+      },
+      {
+        "title": "resposta de despesa perdida permite recuperação única depois de recarregar",
+        "passed": true
+      },
+      {
+        "title": "perfis, isolamento entre lojas e sessão expirada",
+        "passed": true
+      }
+    ],
+    "networkLoss": "Real API response discarded after commit; reload and recovery without a second create POST"
+  },
+  "build": {
+    "command": "npm --prefix frontend run build",
+    "passed": true
+  },
+  "localHealth": {
+    "backend": "UP",
+    "frontendHttp": 200
+  },
+  "limitations": [
+    "Android não alterado nesta etapa",
+    "Sem PSP ou IA externa",
+    "Tendências/projeções do backend continuam pendentes",
+    "Intenções locais dependem da mesma aba/sessionStorage",
+    "E2E cria registros sintéticos no banco demo local"
+  ]
+}

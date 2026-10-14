@@ -1,0 +1,12 @@
+{
+  "restart": "SIGTERM then new LocalDemo process, same PostgreSQL directory",
+  "recovery": "original sale response identical (scripts/smoke.py --recover)",
+  "counts": {
+    "sale": 1,
+    "operation": 1,
+    "parcel": 3,
+    "ledger_event": 6,
+    "request_intent": 1,
+    "cash_entry": 1
+  }
+}

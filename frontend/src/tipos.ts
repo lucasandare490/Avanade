@@ -44,9 +44,22 @@ export interface NovaVenda {
   meio: MeioPagamento;
   cenario: 'sucesso' | 'falha' | 'recusa' | 'resposta-perdida';
 }
+export interface Venda {
+  id: string;
+  data: string;
+  bruto: number;
+  meio: MeioPagamento;
+  pagamento: 'confirmado' | 'pendente' | 'recusado';
+  motivo: string | null;
+  operacao: Operacao | null;
+}
+export interface VendaSemOperacao extends Omit<Venda, 'operacao'> {
+  tipo: 'sem-operacao';
+}
+export type ResultadoVenda = Operacao | VendaSemOperacao;
 export interface ServicoPlanner extends ConsultasPlanner {
   carregar(sinal?: AbortSignal): Promise<BaseDemonstracao>;
   registrarDespesa(despesa: Omit<Despesa, 'id'>): Promise<void>;
-  registrarVenda(venda: NovaVenda): Promise<Operacao>;
+  registrarVenda(venda: NovaVenda): Promise<ResultadoVenda>;
   reprocessar(id: string): Promise<void>;
 }

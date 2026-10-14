@@ -1,0 +1,66 @@
+{
+  "postgres": "17.11",
+  "method": "pg_dump custom / pg_restore --single-transaction into empty disposable database",
+  "tables": [
+    {
+      "table": "merchant",
+      "rows": 2,
+      "identical": true
+    },
+    {
+      "table": "app_user",
+      "rows": 6,
+      "identical": true
+    },
+    {
+      "table": "sale",
+      "rows": 1,
+      "identical": true
+    },
+    {
+      "table": "payment",
+      "rows": 1,
+      "identical": true
+    },
+    {
+      "table": "split_operation",
+      "rows": 1,
+      "identical": true
+    },
+    {
+      "table": "parcel",
+      "rows": 3,
+      "identical": true
+    },
+    {
+      "table": "ledger_event",
+      "rows": 6,
+      "identical": true
+    },
+    {
+      "table": "cash_entry",
+      "rows": 1,
+      "identical": true
+    },
+    {
+      "table": "request_intent",
+      "rows": 1,
+      "identical": true
+    },
+    {
+      "table": "expense",
+      "rows": 0,
+      "identical": true
+    },
+    {
+      "table": "expense_category",
+      "rows": 3,
+      "identical": true
+    },
+    {
+      "table": "tax_rule",
+      "rows": 1,
+      "identical": true
+    }
+  ]
+}

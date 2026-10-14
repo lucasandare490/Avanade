@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-13",
+  "command": "./mvnw clean verify",
+  "suites": [
+    {
+      "name": "br.com.avanade.split.BackendIntegrationTest",
+      "tests": "16",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "16.092"
+    },
+    {
+      "name": "br.com.avanade.split.CrashRecoveryTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "15.182"
+    },
+    {
+      "name": "br.com.avanade.split.QueryAndCashIntegrationTest",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "7.331"
+    },
+    {
+      "name": "br.com.avanade.split.TaxEngineTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.025"
+    }
+  ],
+  "total": 28
+}

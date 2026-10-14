@@ -104,13 +104,11 @@ it('despesa com resposta desconhecida bloqueia um segundo envio', async () => {
 
 it('explicação remota renderiza marcação como texto, sem executar HTML', async () => {
   const servico = criarServicoDemonstrativo();
-  servico.explicar = vi
-    .fn()
-    .mockImplementation(async (periodo) => ({
-      periodo,
-      texto: '<img src=x onerror=alert(1)>',
-      origem: 'servidor',
-    }));
+  servico.explicar = vi.fn().mockImplementation(async (periodo) => ({
+    periodo,
+    texto: '<img src=x onerror=alert(1)>',
+    origem: 'servidor',
+  }));
   render(<TelaAnaliseIntegrada servico={servico} />);
   fireEvent.change(screen.getByLabelText('Análise de'), { target: { value: '2026-10-01' } });
   fireEvent.change(screen.getByLabelText('Análise até'), { target: { value: '2026-10-09' } });
@@ -168,4 +166,34 @@ it('rota inexistente tem saída utilizável', async () => {
     'href',
     '#/dashboard',
   );
+});
+
+it('preserva verificações síncronas de intenção sem bloquear nova venda ou despesa', async () => {
+  location.hash = '/venda-demonstrativa';
+  const servico = criarServicoDemonstrativo();
+  servico.vendaPendente = () => false;
+  servico.despesaPendente = () => false;
+  servico.categoriasDespesa = ['Estoque'];
+  servico.consultarDespesas = async () => ({ itens: [], total: 0, pagina: 1, tamanho: 20 });
+  render(
+    <Aplicacao
+      integracao={{
+        criarServico: () => servico,
+        autenticacao: {
+          entrar: async () => sessaoDemonstrativa(),
+          sair: async () => {},
+        },
+      }}
+    />,
+  );
+  fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'gerente@demo.local' } });
+  fireEvent.change(screen.getByLabelText('Senha'), { target: { value: 'demo' } });
+  fireEvent.click(screen.getByRole('button', { name: /^Entrar$/ }));
+  expect(await screen.findByLabelText('Valor da venda (R$)')).toBeVisible();
+  expect(screen.queryByRole('button', { name: 'Consultar a mesma tentativa' })).toBeNull();
+  act(() => {
+    location.hash = '/despesas';
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+  });
+  expect(await screen.findByRole('button', { name: 'Registrar despesa' })).toBeEnabled();
 });

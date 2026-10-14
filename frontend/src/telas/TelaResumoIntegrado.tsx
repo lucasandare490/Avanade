@@ -6,13 +6,25 @@ import { useConsultaRemota } from '../utilitarios/useConsultaRemota';
 export function TelaResumoIntegrado({
   servico,
   area,
+  fusoHorario = 'America/Recife',
 }: {
   servico: ServicoPlanner;
   area: 'dashboard' | 'fluxo-caixa';
+  fusoHorario?: string;
 }) {
-  const [inicio, setInicio] = useState(''),
-    [fim, setFim] = useState('');
-  const [periodo, setPeriodo] = useState<{ inicio: string; fim: string } | null>(null);
+  const hoje = new Intl.DateTimeFormat('en-CA', {
+    timeZone: fusoHorario,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date());
+  const primeiroDia = `${hoje.slice(0, 7)}-01`;
+  const [inicio, setInicio] = useState(primeiroDia),
+    [fim, setFim] = useState(hoje);
+  const [periodo, setPeriodo] = useState<{ inicio: string; fim: string } | null>({
+    inicio: primeiroDia,
+    fim: hoje,
+  });
   const estado = useConsultaRemota(JSON.stringify([area, periodo]), async (sinal) => {
     if (!periodo) return null;
     if (!servico.consultarResumo)

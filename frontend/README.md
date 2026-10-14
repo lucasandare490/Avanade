@@ -1,4 +1,6 @@
-> **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A integração com dados e IA do servidor continua pendente. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](documentacao/TENDENCIAS-IMPLEMENTADAS.md).
+> **Integração web — 14/10/2026:** modo API ativo por padrão, com backend Spring/PostgreSQL. Execute `../scripts/dev.sh` a partir desta pasta ou `./scripts/dev.sh` na raiz. [Guia atual de integração](documentacao/INTEGRACAO-BACKEND.md).
+
+> **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. Tendências/projeções e IA externa continuam pendentes; consultas e explicação mock já usam o backend. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](documentacao/TENDENCIAS-IMPLEMENTADAS.md).
 
 # Planner Comercial — frontend web
 
@@ -18,7 +20,7 @@ npm run preview
 
 Para a porta usada na demonstração: `node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5175`. Abra a URL exibida pelo terminal. A versão compilada fica em dist. Não abra index.html diretamente pelo sistema de arquivos; use um servidor HTTP.
 
-## Uso demonstrativo
+## Uso demonstrativo (VITE_MODO_DADOS=demo)
 
 Escolha o perfil na entrada demonstrativa. Os perfis gestor, financeiro e operador ilustram uma política de acesso; permissões definitivas precisam ser ratificadas. Quando usar o formulário demonstrativo: gestor@exemplo.invalid, financeiro@exemplo.invalid ou operador@exemplo.invalid, senha demo. Não utilize senhas reais.
 
@@ -47,24 +49,22 @@ Tributo de 10% e taxa de 2% são exclusivamente fictícios. A operação de R$15
 | src/servicos/servicoDemonstrativo.ts | Cenários em memória e recuperação simulada |
 | src/servicos/adapterApi.ts | Tradução e validação das respostas externas para os tipos internos |
 | src/servicos/transporteApi.ts | HTTP, prazo, cancelamento, erros e cabeçalhos centralizados |
-| src/servicos/integracaoConfigurada.ts | Ponto de preenchimento do contrato aprovado; atualmente null |
+| src/servicos/integracaoConfigurada.ts | Contrato /api/v1: autenticação, DTOs, consultas e intenções |
 | src/servicos/contratosConsultas.ts | Consultas por capacidade e tipos paginados |
 | src/testes e demais *.test.* | Testes de fluxos, serviços, valores e acessibilidade estrutural |
 | documentacao | Checklist, guias, evidências e limites da entrega |
 
 ## Integração com backend
 
-Copie .env.example para uma configuração local. O padrão VITE_MODO_DADOS=demo não faz chamadas ao servidor. O modo api exige VITE_API_URL e o preenchimento de contratoServidor em integracaoConfigurada.ts. Somente mudar a variável não conecta uma API desconhecida: o aplicativo informa a falta de contrato, sem trocar para dados fictícios.
+O modo padrão é `api`, usando a mesma origem do frontend e o proxy `/api` para `http://127.0.0.1:8080`. A configuração está em `.env.example`; `demo` é uma opção explícita para o cenário em memória.
 
-As telas remotas consultam histórico/detalhe/despesas/resumo/simulação/explicações por capacidade. Não carregam toda a base ao entrar. Endpoints, DTOs, sessão e permissões precisam ser acordados. O cliente trata ausência de capacidade explicitamente. Valores autoritativos vêm do servidor; não implemente TaxEngine, SplitEngine, banco ou credenciais de provedor aqui.
+Login, sessão bearer, logout, vendas, despesas, operações, caixa, simulação e explicação mock estão conectados. As respostas são validadas e nunca substituídas por dados fictícios após falha. Categorias vêm da API; totais financeiros vêm dos agregados do servidor. Intenções sem confirmação são preservadas por aba e conta para recuperação idempotente.
 
-As chamadas aceitam HTTPS; HTTP é permitido somente para desenvolvimento no computador local. Tokens não são persistidos por conveniência em localStorage. Sessão por cookie exige acordo de CORS/CSRF. Erros 401 encerram sessão; 403, 404, 409, 422, 429 e indisponibilidade possuem tratamento. Uma despesa com resposta incerta não é reenviada automaticamente; recuperação definitiva depende do contrato idempotente.
-
-Leia [sessão e integração](documentacao/SESSAO-E-INTEGRACAO.md) e os [contratos para o backend](../entrega-para-backend/03-CONTRATOS-E-EXEMPLOS-PARA-INTEGRACAO.md).
+Veja [execução, recuperação e testes E2E](documentacao/INTEGRACAO-BACKEND.md).
 
 ## Qualidade e limites
 
-Os testes usam serviços substitutos e dados fictícios. Não comprovam a API do projeto, persistência ou autorização de servidor. Acessibilidade automatizada não substitui leitor de tela real. A publicação e a comparação integral com o Figma ainda exigem os ambientes/aceites indicados em [pendências](documentacao/PENDENCIAS-OBJETIVAS.md). O aplicativo Android está em ../android-pos e tem validação separada.
+Os testes unitários usam fixtures; a suíte `npm run test:e2e` executa os fluxos web contra a API e o PostgreSQL locais, incluindo autorização e recuperação após perda de resposta. Acessibilidade automatizada não substitui leitor de tela real. A publicação e a comparação integral com o Figma ainda exigem os ambientes/aceites indicados em [pendências](documentacao/PENDENCIAS-OBJETIVAS.md). O aplicativo Android está em ../android-pos e tem validação separada.
 
 ## Atualização de escopo do MVP
 

@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   test: {
+    include: ['src/**/*.test.{ts,tsx}'],
     // Fluxos completos e axe podem levar mais tempo em máquinas compartilhadas.
     testTimeout: 30000,
     hookTimeout: 15000,

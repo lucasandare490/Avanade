@@ -27,3 +27,7 @@
 
 # Histórico local de entregas antigas; documentação vigente permanece versionada
 /frontend/documentacao/historico/
+
+# Relatórios locais de navegador
+/frontend/test-results/
+/frontend/playwright-report/

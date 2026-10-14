@@ -1,3 +1,4 @@
+import { TelaVendasIntegrada, TelaDetalheVenda } from './telas/TelaVendasIntegrada';
 import { TelaDespesasIntegrada } from './telas/TelaDespesasIntegrada';
 import { TelaResumoIntegrado } from './telas/TelaResumoIntegrado';
 import { TelaAnaliseIntegrada } from './telas/TelaAnaliseIntegrada';
@@ -44,10 +45,10 @@ export class LimiteErro extends Component<{ children: ReactNode }, { falhou: boo
     return this.state.falhou ? (
       <Estado
         titulo="Não foi possível exibir esta tela"
-        descricao="Recarregue a demonstração para restaurar o cenário inicial."
+        descricao="Recarregue a página. Os registros confirmados no servidor serão preservados."
         acao={
           <button className="botao primario" onClick={() => location.reload()}>
-            Reabrir demonstração
+            Recarregar página
           </button>
         }
       />
@@ -104,17 +105,17 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
       get(alvo, chave) {
         const membro = Reflect.get(alvo, chave);
         if (typeof membro !== 'function') return membro;
-        return async (...argumentos: unknown[]) => {
+        const tratar = (e: unknown): never => {
+          if (servicoRef.current === protegido && e instanceof FalhaTransporte && e.codigo === 401)
+            encerrar(true);
+          throw e;
+        };
+        return (...argumentos: unknown[]) => {
           try {
-            return await Reflect.apply(membro, alvo, argumentos);
+            const resultado = Reflect.apply(membro, alvo, argumentos);
+            return resultado instanceof Promise ? resultado.catch(tratar) : resultado;
           } catch (e) {
-            if (
-              servicoRef.current === protegido &&
-              e instanceof FalhaTransporte &&
-              e.codigo === 401
-            )
-              encerrar(true);
-            throw e;
+            return tratar(e);
           }
         };
       },
@@ -232,7 +233,11 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         ? { operacoes: [], despesas: [] }
         : base;
   let conteudo: ReactNode;
-  if (integracao && rota.startsWith('operacoes/'))
+  if (integracao && rota.startsWith('vendas/'))
+    conteudo = <TelaDetalheVenda key={rota} id={rota.split('/')[1]} servico={servicoPlanner} />;
+  else if (integracao && rota === 'vendas')
+    conteudo = <TelaVendasIntegrada servico={servicoPlanner} />;
+  else if (integracao && rota.startsWith('operacoes/'))
     conteudo = (
       <TelaDetalheRemoto
         key={rota}
@@ -249,7 +254,14 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
   else if (integracao && rota === 'analise')
     conteudo = <TelaAnaliseIntegrada servico={servicoPlanner} />;
   else if (integracao && (rota === 'dashboard' || rota === 'fluxo-caixa'))
-    conteudo = <TelaResumoIntegrado key={rota} servico={servicoPlanner} area={rota} />;
+    conteudo = (
+      <TelaResumoIntegrado
+        key={rota}
+        servico={servicoPlanner}
+        area={rota}
+        fusoHorario={sessao.fusoHorario}
+      />
+    );
   else if (integracao && rota === 'despesas')
     conteudo = (
       <TelaDespesasIntegrada
@@ -337,7 +349,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         );
         break;
       case 'ajuda':
-        conteudo = <TelaAjuda />;
+        conteudo = <TelaAjuda demonstrativo={!integracao} />;
         break;
       case 'previa-acesso':
         conteudo = <TelaEstadosAcesso />;
@@ -399,6 +411,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
     );
   return (
     <EstruturaPainel
+      demonstrativo={!integracao}
       rota={rota}
       sessao={sessao}
       sair={() => (tentativaAtiva ? setConfirmarSaida(true) : sair())}
@@ -406,7 +419,11 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
       {confirmarSaida && (
         <DialogoConfirmacao
           titulo="Existe uma tentativa em andamento"
-          descricao="Sair apaga os dados fictícios desta sessão, inclusive a tentativa com confirmação desconhecida. Para consultá-la, continue na demonstração e volte ao modo POS."
+          descricao={
+            integracao
+              ? 'A tentativa será preservada nesta aba. Entre novamente com a mesma conta para recuperar a confirmação antes de iniciar outra venda.'
+              : 'Sair apaga os dados fictícios desta sessão, inclusive a tentativa com confirmação desconhecida. Para consultá-la, continue na demonstração e volte ao modo POS.'
+          }
           confirmar={sair}
           cancelar={() => setConfirmarSaida(false)}
         />
@@ -455,6 +472,13 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         }
       >
         <TelaVendaDemonstrativa
+          key={sessao.id}
+          pendente={servicoPlanner.vendaPendente?.()}
+          recuperar={
+            servicoPlanner.recuperarVenda
+              ? () => executarAcao(() => servicoPlanner.recuperarVenda!())
+              : undefined
+          }
           demonstrativo={!integracao}
           informarTentativa={setTentativaAtiva}
           registrar={async (v) => {
