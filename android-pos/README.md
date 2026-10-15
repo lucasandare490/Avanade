@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Planner Comercial — POS Android demonstrativo
 
 Revisão de 10/10/2026. Cliente Kotlin nativo, compilado em APK debug. Testes unitários e de Activity com Robolectric executados; consulte ../frontend/documentacao/RELATORIO-VALIDACAO-ATUAL.md. Ainda não instalado/homologado em aparelho físico ou maquineta.
@@ -44,3 +46,11 @@ A Activity instancia ClientePosDemonstrativo. Para ativar API, fornecer autentic
 Controles nativos, rótulos, mensagens anunciadas, títulos, área de toque mínima e bloqueio de ações ocupadas estão implementados. A Activity usa ajuste de tamanho ao abrir teclado e respeita insets. TalkBack, teclado real, rotação física e maquineta precisam ser conferidos no alvo escolhido. Impressão física, SDK do fabricante, publicação na loja e pagamentos reais não fazem parte desta demonstração.
 
 Design/protótipo e pesquisa: Thayná Batista da Silva. Requisitos: Thayná e Kleysson, conforme fontes fornecidas. Guia completo para o servidor: ../entrega-para-backend/.
+
+## Integração adicionada em 14/10/2026
+
+Na entrada, selecione **Conectar ao servidor HTTPS**. Informe a origem do servidor (sem `/api/v1`), e-mail e senha provisionados pelo backend. `TelaServidorActivity.kt` implementa os fluxos integrados; `ContratoBackendPos.kt` valida os DTOs; `TransporteApiPos.kt` envia bearer em memória, sem redirecionamentos.
+
+A recriação da Activity solicita novo login; a intenção fica preservada em preferências privadas por servidor/loja/usuário, sem envio automático. O valor e o meio da intenção são persistidos, mas a senha/token não. Uma resposta perdida deve ser recuperada antes de nova venda. O app exige certificado HTTPS confiável; não foi instalado bypass de certificado.
+
+O APK atual compila, os testes locais passam, mas a equipe informou que não tem endereço HTTPS compartilhado. Assim, comunicação em dispositivo ainda não foi homologada. Para apresentação imediata, use o web local integrado conforme `../COMO-APRESENTAR.md`.

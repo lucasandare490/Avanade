@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 > **Registro histórico de uma etapa anterior.** Os avisos de não realização de testes abaixo descrevem aquela etapa. Para o estado vigente, consulte [RELATORIO-VALIDACAO-ATUAL.md](RELATORIO-VALIDACAO-ATUAL.md).
 
 > **Estado atual:** houve alterações posteriores aos testes registrados. As novas implementações não foram testadas nem compiladas nesta rodada, a pedido do usuário. Consulte AMPLIACAO-FRONTEND.md.

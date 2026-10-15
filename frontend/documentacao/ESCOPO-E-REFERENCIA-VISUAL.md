@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 > **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A integração com dados e IA do servidor continua pendente. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](TENDENCIAS-IMPLEMENTADAS.md).
 
 > **Atualização de escopo:** análise de tendências por IA pertence ao MVP e está pendente além do resumo atual. Crédito simulado e cancelamento ficam na evolução futura. Esta decisão prevalece sobre classificações anteriores desses temas. Consulte [DECISAO-ESCOPO-MVP.md](DECISAO-ESCOPO-MVP.md).

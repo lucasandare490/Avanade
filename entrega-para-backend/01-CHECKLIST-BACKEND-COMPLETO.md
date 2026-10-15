@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Checklist de implementação — Backend e banco de dados do Planner Comercial
 
 Objetivo: entregar uma API executável, persistente e documentada que atenda ao dashboard React/TypeScript e ao POS Kotlin, com separação entre pagamento, split, rastreabilidade, despesas e caixa. O MVP é experimental: processamento demonstrativo deve permanecer identificado. Não habilitar transferências, recolhimento fiscal ou crédito real.
@@ -103,7 +105,7 @@ Marque cada item somente com evidência: arquivo, comando, exemplo de resposta o
 - [x] BE-059 — Fornecer consulta por chave autorizada para recuperar resultado após timeout, recarga ou reinício do aplicativo.
 - [x] BE-060 — Não tratar timeout do cliente como prova de falha ou de cancelamento da gravação.
 - [ ] BE-061 — Definir validade/retenção da chave e impedir reaproveitamento que possa duplicar efeitos após expiração.
-- [ ] BE-062 — Aplicar política equivalente a despesas e retomadas; o formulário de despesa precisa resolver confirmação desconhecida.
+- [x] BE-062 — Aplicar política equivalente a despesas e retomadas; o formulário de despesa precisa resolver confirmação desconhecida.
 - [x] BE-063 — Cobrir falha entre commit e envio HTTP, reinício de processo e duas requisições concorrentes.
 - [ ] BE-064 — Não repetir chamada externa de resultado incerto antes de reconciliar com o provedor ou referência idempotente.
 - [ ] BE-065 — Em integrações futuras, usar outbox/inbox ou mecanismo equivalente para não perder eventos entre banco e fila.
@@ -172,7 +174,7 @@ Marque cada item somente com evidência: arquivo, comando, exemplo de resposta o
 - [x] BE-112 — Implementar simulação sem efeitos em venda, split persistido ou ledger.
 - [x] BE-113 — Validar parâmetros de simulação; retornar bruto, tributo, taxa, líquido, regra e inclusão de taxa.
 - [x] BE-114 — Cobrir a diferença documental de 150 − 15 = 135 sem taxa e 150 − 15 − 3 = 132 com taxa fictícia.
-- [ ] BE-115 — Não expor dados de outra loja em agregados, mesmo quando não houver IDs individuais.
+- [x] BE-115 — Não expor dados de outra loja em agregados, mesmo quando não houver IDs individuais.
 
 
 ## 10. Explicações e IA
@@ -209,12 +211,12 @@ Marque cada item somente com evidência: arquivo, comando, exemplo de resposta o
 
 - [x] BE-138 — Testar cálculo e arredondamento com valores mínimos, limites, resíduos e composição de parcelas.
 - [x] BE-139 — Testar repetição idêntica, chave divergente, solicitações concorrentes e recuperação após commit sem resposta.
-- [ ] BE-140 — Testar login válido/inválido, expiração, revogação, 401 e 403.
+- [x] BE-140 — Testar login válido/inválido, expiração, revogação, 401 e 403.
 - [ ] BE-141 — Testar isolamento entre pelo menos duas lojas em lista, detalhe, ledger, despesa, exportação e agregados.
 - [x] BE-142 — Testar recusa, pagamento pendente, sucesso, falha parcial e retomada concorrente.
 - [x] BE-143 — Testar que a mesma parcela não é registrada ou confirmada duas vezes.
 - [x] BE-144 — Testar mudança de regra sem alteração de operações históricas.
-- [ ] BE-145 — Testar despesa afetando caixa uma vez, exclusão de pendências e taxa não duplicada.
+- [x] BE-145 — Testar despesa afetando caixa uma vez, exclusão de pendências e taxa não duplicada.
 - [x] BE-146 — Testar paginação estável, filtro vazio, limites de datas e horários próximos à meia-noite.
 - [x] BE-147 — Testar simulação sem escrita e IA indisponível sem interromper o núcleo.
 - [ ] BE-148 — Testar migrations em banco vazio e atualização de banco com dados; não usar apenas H2 para provar comportamento PostgreSQL.
@@ -235,3 +237,7 @@ Análise de tendências por IA faz parte do MVP. Crédito simulado e cancelament
 Marcações deste incremento se referem ao backend demonstrativo. Veja [relatório de execução](../backend/docs/VALIDACAO.md), [contrato](../backend/docs/API.md), [decisões](../backend/docs/DECISOES.md) e [checklist de pendências](../backend/docs/CHECKLIST.md). Critérios não marcados permanecem pendentes ou parcialmente atendidos; Docker e integração dos clientes não foram declarados validados.
 
 Evidência adicional (13/10/2026): [incremento 0.2](../backend/docs/INCREMENTO-02.md), com consultas em lote, datas do caixa e recuperação após queda antes da resposta HTTP.
+
+## Reconciliação desta revisão
+
+BE-062: despesas e retomadas usam Idempotency e recuperação no cliente web. BE-115: agregados filtram merchant_id. BE-140: testes de sessão em BackendIntegrationTest. BE-145: caixa/efeito único em QueryAndCashIntegrationTest. Marcações não abrangem PSP externo nem exportação ausente.

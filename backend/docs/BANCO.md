@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Modelo PostgreSQL
 
 [Dicionário por coluna, constraints e índices](BANCO-DICIONARIO.md), extraído do schema real por `src/test/.../DatabaseReport`. Regras adicionais em [V2](../src/main/resources/db/migration/V2__financial_guards.sql), privilégios em [V3](../src/main/resources/db/migration/V3__runtime_privileges.sql). Flyway é a única fonte de evolução estrutural; JPA valida o schema.

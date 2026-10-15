@@ -1,0 +1,10 @@
+{
+  "name": "planner-comercial",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:backend": "powershell -NoProfile -File scripts/iniciar-backend-local.ps1",
+    "build": "npm --prefix frontend run build",
+    "test:frontend": "npm --prefix frontend test"
+  }
+}

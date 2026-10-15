@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Validação dos incrementos 0.1 e 0.2
 
 Ambiente: Linux x86_64, Java21.0.12.1, Maven3.9.11, Spring Boot3.5.16, PostgreSQL17.11 real (binários Zonky2.2.2 / BOM17.11.0). Validação inicial:12/10/2026; atualização:13/10/2026. Mudanças locais sobre main/e45ffda, sem commit/push criado.
@@ -30,3 +32,7 @@ Comparação entre origem/destino: count e fingerprint determinístico de **todo
 - Frontend e Android não foram alterados. Auditoria anterior já tinha73 testes web aprovados; não se apresenta esse número como teste da integração atual.
 - Tendências/projeção não implementadas por orientação do usuário. Explicação de um período não encerra esses requisitos.
 - EXPLAIN com massa sintética foi executado; não constitui ensaio de carga sustentada. Faltam carga sustentada, aceite web/POS, HTTPS, varredura de vulnerabilidades, upgrade estrutural com dados e política operacional de retenção.
+
+## Validação desta revisão no Windows
+
+Em 14/10/2026 foram reexecutados e aprovados 89 testes web, 29 backend e 4 cenários de navegador com PostgreSQL real, além de ambos os builds. Android, Docker e restore não foram repetidos. Evidências consolidadas em `documentacao/revisao-2026-10-14/RESULTADOS-VALIDACAO.md` a partir da raiz.

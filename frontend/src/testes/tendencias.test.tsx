@@ -72,3 +72,30 @@ it('mantém comparações acessíveis quando a explicação falha e atualiza o p
   fireEvent.change(screen.getByLabelText('Análise de'), { target: { value: '' } });
   expect(screen.queryByRole('table')).toBeNull();
 });
+it('mantém comparação do banco quando a explicação remota falha', async () => {
+  const servico = criarServicoDemonstrativo();
+  servico.explicar = async () => { throw new Error('Provedor indisponível'); };
+  servico.consultarTendencias = async p => ({ anterior: periodoAnterior(p), indicadores: [{ titulo: 'Entradas líquidas', atual: 20000, anterior: 10000 }] });
+  render(<TelaAnaliseIntegrada servico={servico} />);
+  fireEvent.change(screen.getByLabelText('Análise de'), { target: { value: '2026-10-07' } });
+  fireEvent.change(screen.getByLabelText('Análise até'), { target: { value: '2026-10-09' } });
+  fireEvent.click(screen.getByRole('button', { name: 'Solicitar explicação' }));
+  expect(await screen.findByText('Aumento de 100%')).toBeInTheDocument();
+  expect(await screen.findByText('Explicação indisponível')).toBeInTheDocument();
+});
+it('permite repetir apenas comparação após falha sem repetir explicação', async () => {
+  const servico = criarServicoDemonstrativo();
+  let chamadas = 0, explicacoes = 0;
+  servico.explicar = async periodo => { explicacoes++; return { periodo, texto: 'Resumo disponível', origem: 'servidor' }; };
+  servico.consultarTendencias = async p => {
+    if (++chamadas === 1) throw new Error('Sem conexão');
+    return { anterior: periodoAnterior(p), indicadores: [{ titulo: 'Entradas líquidas', atual: 20000, anterior: 10000 }] };
+  };
+  render(<TelaAnaliseIntegrada servico={servico} />);
+  fireEvent.change(screen.getByLabelText('Análise de'), { target: { value: '2026-10-07' } });
+  fireEvent.change(screen.getByLabelText('Análise até'), { target: { value: '2026-10-09' } });
+  fireEvent.click(screen.getByRole('button', { name: 'Solicitar explicação' }));
+  fireEvent.click(await screen.findByRole('button', { name: 'Tentar comparação novamente' }));
+  expect(await screen.findByText('Aumento de 100%')).toBeInTheDocument();
+  expect(explicacoes).toBe(1);
+});

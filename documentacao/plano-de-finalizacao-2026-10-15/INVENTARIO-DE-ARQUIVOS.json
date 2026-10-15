@@ -1,0 +1,1192 @@
+[
+  {
+    "arquivo": ".gitattributes",
+    "bytes": 202,
+    "sha256": "8b1366fd77fa551ae7c26befedeb22f1b15c9664e11102dfb2cab375a4071f9f"
+  },
+  {
+    "arquivo": ".gitignore",
+    "bytes": 584,
+    "sha256": "ee2bfb1f00ea5c27f604a74bda12ea7f2817cc75f75680fc86444e9b1d517540"
+  },
+  {
+    "arquivo": "COMO-APRESENTAR.md",
+    "bytes": 3953,
+    "sha256": "9322d1689cda217600ebe10ac513200b51e05b546fcd6b08df03060a37bbbdeb"
+  },
+  {
+    "arquivo": "LEIA-ME-ENTREGA-FRONTEND.md",
+    "bytes": 2658,
+    "sha256": "65c4e17328c65e2f690f1b859d905829c0a7d8d59a6b61ca70ca00e1afc2ff54"
+  },
+  {
+    "arquivo": "package.json",
+    "bytes": 309,
+    "sha256": "347ae5184369f8c9b8ce9352990fdc1f32bc44e9ea649b69530eb08f53817fd7"
+  },
+  {
+    "arquivo": "README.md",
+    "bytes": 10003,
+    "sha256": "8509bc453f59d95b63830dd19e5788d0dad6579ecb71b4c73e5fcbacfe2db7cc"
+  },
+  {
+    "arquivo": "android-pos/.gitignore",
+    "bytes": 68,
+    "sha256": "aaf22cdb3ffa3a2f7992a1c7bfc18baf1180cb803713e0773a23549e931d7f73"
+  },
+  {
+    "arquivo": "android-pos/build.gradle.kts",
+    "bytes": 142,
+    "sha256": "a30bf9a9fb1abc05948ef0cd60d68e3b0a33e73d41b43dcc287e595138b1fe35"
+  },
+  {
+    "arquivo": "android-pos/gradle.properties",
+    "bytes": 104,
+    "sha256": "1619a012dffb71f245685362a65355f17559719d1ff4ca98d9a482aa4d5e31a2"
+  },
+  {
+    "arquivo": "android-pos/gradlew",
+    "bytes": 8762,
+    "sha256": "a3648413b47ef77af21d5ebc36c687c7d103aaef3e17f33de7d4f080a6f300a3"
+  },
+  {
+    "arquivo": "android-pos/gradlew.bat",
+    "bytes": 2966,
+    "sha256": "57931b17dd228e5c24dac90e815d0bf82477e831a4618dfab4136f5446b42a9f"
+  },
+  {
+    "arquivo": "android-pos/README.md",
+    "bytes": 5386,
+    "sha256": "b4ea2e3a19bb87713a864ef5d10018753695de8944c3be64c1301af1b010645c"
+  },
+  {
+    "arquivo": "android-pos/settings.gradle.kts",
+    "bytes": 281,
+    "sha256": "0016d160755069540c54c52736e18c1ca7f94406a9758b3ed2fcef4961b39f54"
+  },
+  {
+    "arquivo": "backend/.dockerignore",
+    "bytes": 34,
+    "sha256": "48199ac24c3fe82041ce6f7e22f48c6321bf53194162c5777231b2ed3ecfe367"
+  },
+  {
+    "arquivo": "backend/.env.example",
+    "bytes": 516,
+    "sha256": "a70e8cb442e36284fb300d4df20d57daa7f0a1a3f8f73471ef7dbf88d914232b"
+  },
+  {
+    "arquivo": "backend/.gitignore",
+    "bytes": 32,
+    "sha256": "f5b555a29efa5f4621880e652f39472741e76eeb63df3925bee7cf9342afa9eb"
+  },
+  {
+    "arquivo": "backend/compose.yml",
+    "bytes": 1165,
+    "sha256": "2057d06a08902053cb3fbb6eedfa47c7927d6f44110ffb763a4ba99d0decd68c"
+  },
+  {
+    "arquivo": "backend/Dockerfile",
+    "bytes": 616,
+    "sha256": "d3dcd9adebe9daa5af30cd1889a9218b34c17c4ea90cf95d6ec0963fdf4d88b7"
+  },
+  {
+    "arquivo": "backend/mvnw",
+    "bytes": 11790,
+    "sha256": "cae96cef89ebea3531221f4ae17c23cf8edf67d00eae8306d4186ae1bbed4d02"
+  },
+  {
+    "arquivo": "backend/mvnw.cmd",
+    "bytes": 8292,
+    "sha256": "4a361e1374a3e5ad6d03e18e9adc0cf181ac5058ac6203b76f0ba3b456b56481"
+  },
+  {
+    "arquivo": "backend/pom.xml",
+    "bytes": 2548,
+    "sha256": "0eb90de8abf4637dff372ff8214faf3b7cc33de3570ce472cc122985b1968b03"
+  },
+  {
+    "arquivo": "backend/README.md",
+    "bytes": 5621,
+    "sha256": "fd54d2c526c5745d3b9518787bc38f8126fb019da3653fb383f77a1fd5fa7988"
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "bytes": 24366,
+    "sha256": "c9d73e52299e9dbaeef11874caf1d75599239b9e6eab24d12516e86cd4c5678a"
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "bytes": 12904,
+    "sha256": "ac0b653a7c97a9053ba368991eb879e9b5e77bf2ecb9e66d672636a5cd09c0cb"
+  },
+  {
+    "arquivo": "entrega-para-backend/03-CONTRATOS-E-EXEMPLOS-PARA-INTEGRACAO.md",
+    "bytes": 13545,
+    "sha256": "6a65f825f1133b5d383cf87c88cfd4e0a3f9ce6f12a44271e1967a44fe03808b"
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "bytes": 7695,
+    "sha256": "44eb78a86b171556dd884bf25fb0006d9d0214857a1288d3f98714f443d9ab62"
+  },
+  {
+    "arquivo": "entrega-para-backend/LEIA-ME-PARA-O-RESPONSAVEL-BACKEND.md",
+    "bytes": 2079,
+    "sha256": "0aece15fbd41918fe1c1ceefe05a7e32f6325355ab30a930501182bc357d96ab"
+  },
+  {
+    "arquivo": "frontend/.env.example",
+    "bytes": 263,
+    "sha256": "d571d9f1e30e44f560816ba0b6b8ea3f4caf71d740f4e5930efb6dc1961b6204"
+  },
+  {
+    "arquivo": "frontend/.gitignore",
+    "bytes": 64,
+    "sha256": "1915cfc2611f3463cc6cdfb81ab614b2825d5745ba6b0b98ee4f403b6ede9a5b"
+  },
+  {
+    "arquivo": "frontend/.prettierrc.json",
+    "bytes": 65,
+    "sha256": "401ce6b6c26b4914434a891badd3d9d331fa8a6ba6f44dc2f0cb4fc0a5263255"
+  },
+  {
+    "arquivo": "frontend/audit-producao.json",
+    "bytes": 385,
+    "sha256": "b05255567f0e3f4311313f2e070768942687818dccb3e76159f9568a15f9a9d4"
+  },
+  {
+    "arquivo": "frontend/index.html",
+    "bytes": 459,
+    "sha256": "fae32521532499afc3764da2c24125cbfee05bd497a535adf8427e0b1be29c51"
+  },
+  {
+    "arquivo": "frontend/package-lock.json",
+    "bytes": 101942,
+    "sha256": "318e71a6eef332d001baf6cf2f554c3788095390e167b29380ad4e00adb25fbe"
+  },
+  {
+    "arquivo": "frontend/package.json",
+    "bytes": 1056,
+    "sha256": "11a600a9a4ca5da9f80f7c2a3440d65fd28e4fa987f9ba8729dc335ea2323a2d"
+  },
+  {
+    "arquivo": "frontend/playwright.config.ts",
+    "bytes": 457,
+    "sha256": "8b697e06ff3d1ea83d22832c9fbf323ed7d2375965e2a604e1c50e24671e730d"
+  },
+  {
+    "arquivo": "frontend/README.md",
+    "bytes": 6093,
+    "sha256": "0ac52f0a7d50978beed913c901c6035cb85a7674e16afb1e4ef50f2441cd07dc"
+  },
+  {
+    "arquivo": "frontend/tsconfig.json",
+    "bytes": 468,
+    "sha256": "56b55683999ce35f13f4600db77a832dc8bc393ee7c35d2f4582a7fcb9f4ac2a"
+  },
+  {
+    "arquivo": "frontend/vite.config.ts",
+    "bytes": 417,
+    "sha256": "33613b3037ad39e41b8e3f814c9ee70de1ef9d5f908e26dd74342aba06ab1b81"
+  },
+  {
+    "arquivo": "frontend/vitest.config.ts",
+    "bytes": 385,
+    "sha256": "c27df2988185057f78671a7fd5549f76bb9c3df0fad3e90a3041f2140826e29e"
+  },
+  {
+    "arquivo": "scripts/dev.sh",
+    "bytes": 1685,
+    "sha256": "1a0dc26a4077b426505132dd2632e993dc749824d379ecf7986e0b3b9397c2db"
+  },
+  {
+    "arquivo": "scripts/iniciar-backend-local.ps1",
+    "bytes": 2978,
+    "sha256": "3bc8122d616a3024315bb5609a2e3a5a3bd2645c58125bfae79a6aef9e7154c3"
+  },
+  {
+    "arquivo": ".github/workflows/validacao.yml",
+    "bytes": 1760,
+    "sha256": "f52858dae199fc8007475b5ff20b72b31e85924e499d097abd380b7139f9e5a0"
+  },
+  {
+    "arquivo": "android-pos/app/build.gradle.kts",
+    "bytes": 719,
+    "sha256": "72df58a345d844b8aa61847e6215ceb0f8ee947c95fa822021f4698ac2bc8df1"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/AndroidManifest.xml",
+    "bytes": 925,
+    "sha256": "624b23176e2ebf091e8a52e3cc67beabe4c9e597756e6364c54323335435a2cc"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/ClientePos.kt",
+    "bytes": 3426,
+    "sha256": "59f09824c02f2378c4e839886d664cb759e3aece44867bb62710055a912622a5"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/ContratoBackendPos.kt",
+    "bytes": 5713,
+    "sha256": "9561c63dde7c822d74f7be52d601a06cc57a89392995cfff5daef09c314764b1"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/EstadoTelaPos.kt",
+    "bytes": 581,
+    "sha256": "5702ec16d351512baa5c02497e2bdf7e16ead2f1adc2e1f83ab15538da7e5815"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/ModelosVenda.kt",
+    "bytes": 956,
+    "sha256": "7437b9b5ad1551a8528e6088d61f79ebcae1abfe85391739ca825e59bc5d44b0"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/RepositorioDemonstrativo.kt",
+    "bytes": 3085,
+    "sha256": "318dae62d5df142a66a169b4de9f91437e992e75448eedb36513a04d1a569a3c"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/ServicoPosIntegrado.kt",
+    "bytes": 3611,
+    "sha256": "71d05580ed39d69c3690097f0defd2232142f751837c74afcf3c32612d20c7bc"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/TelaPrincipalActivity.kt",
+    "bytes": 18574,
+    "sha256": "b141932454cd4ee8bd1691b35a1005748b20e0e8371f7fbb872f9f938d5750bf"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/TelaServidorActivity.kt",
+    "bytes": 12023,
+    "sha256": "257063fc2fde90545e3e00b8e519dd22edc32a5a025b1c00007ef2d03c76552b"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/TransporteApiPos.kt",
+    "bytes": 4320,
+    "sha256": "1568901dda4140119b306bf21508a7031d848d8131a7aaad392e5238c043abfa"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/res/drawable/icone_planner.xml",
+    "bytes": 343,
+    "sha256": "e4d8be069181fe06330c29c77e19fcfe46b56b81ba9b07e9d8411e5ce010835e"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/res/values/styles.xml",
+    "bytes": 360,
+    "sha256": "f4464f9d2e631efb9b59c5f6d27e346c2e72534b0feaa96f068461de04021c11"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/res/xml/regras_backup_legado.xml",
+    "bytes": 293,
+    "sha256": "2c5c697984f4c52b526337ab61113f5843e0bfc6af4722374916ffe6da38dd9a"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/res/xml/regras_extracao.xml",
+    "bytes": 469,
+    "sha256": "334397043590a14ba97b97796b1076a4a2cba8a46c3db8a597e27315e18f3aaa"
+  },
+  {
+    "arquivo": "android-pos/app/src/test/resources/venda-servidor.json",
+    "bytes": 4140,
+    "sha256": "f932aa49addd4060287877eff0052b19ede67aebb850f9a8a53bb4f30d4b6df8"
+  },
+  {
+    "arquivo": "android-pos/app/src/test/java/br/com/planner/pos/ContratoBackendPosTest.kt",
+    "bytes": 3642,
+    "sha256": "c6eb5c13ee5215ab633599cfe768dc6bbc1e63c980b7471d5a4954401e598642"
+  },
+  {
+    "arquivo": "android-pos/app/src/test/java/br/com/planner/pos/FluxoPosTest.kt",
+    "bytes": 3982,
+    "sha256": "dadd00d30e5c1899a6dddf06064a41c279c228ca46a62595c83d48f311d9197e"
+  },
+  {
+    "arquivo": "android-pos/app/src/test/java/br/com/planner/pos/RepositorioDemonstrativoTest.kt",
+    "bytes": 2196,
+    "sha256": "33ca75b7741147093e865666cb041bf8b930997ab5d770567b6a8300b4eab537"
+  },
+  {
+    "arquivo": "android-pos/gradle/wrapper/gradle-wrapper.jar",
+    "bytes": 43504,
+    "sha256": "498495120a03b9a6ab5d155f5de3c8f0d986a449153702fb80fc80e134484f17"
+  },
+  {
+    "arquivo": "android-pos/gradle/wrapper/gradle-wrapper.properties",
+    "bytes": 250,
+    "sha256": "3d91f0932da99885c41e9dc4e85c9f9a2d3bfef4f0ad87473014dc0827a94884"
+  },
+  {
+    "arquivo": "backend/docker/init-runtime.sh",
+    "bytes": 347,
+    "sha256": "c7c1284f488bbd647fd3d1d45f43fc70903224fcdd045050a5431e939eabc155"
+  },
+  {
+    "arquivo": "backend/docs/API.md",
+    "bytes": 9582,
+    "sha256": "95cf220e3e33b78401af914b87179842f5f68443dc02c7f348c7825fb78fe67e"
+  },
+  {
+    "arquivo": "backend/docs/BANCO-DICIONARIO.md",
+    "bytes": 15951,
+    "sha256": "28dfebf5a7acc45dcece56ed096a75b8efcd1f18ce374acaf994f840d683e736"
+  },
+  {
+    "arquivo": "backend/docs/BANCO.md",
+    "bytes": 4162,
+    "sha256": "356a6d526e6d51b76d6db268eab5ee9d4c8e6cab4cc76c18a9d6ce50049ad4d0"
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "bytes": 3248,
+    "sha256": "03c629af416269327f36c5a7c9a3f6cba38afcdbc45eca2c152dda5b2168fb80"
+  },
+  {
+    "arquivo": "backend/docs/crash-recovery.json",
+    "bytes": 448,
+    "sha256": "aa75ef5cd02a666cb1f9d32a23d0baa36d1e3a2ea54288876b9374c955ab8c3e"
+  },
+  {
+    "arquivo": "backend/docs/DECISOES.md",
+    "bytes": 6299,
+    "sha256": "a0f1dc7e56e4423fca1403a49a601dafb32cb2f9d907394675eb7d9f27230c90"
+  },
+  {
+    "arquivo": "backend/docs/INCREMENTO-02.md",
+    "bytes": 4017,
+    "sha256": "42b768d166986113dbfa76b5d4268a052d6b4d88c86dee0c942fb1b0d49a5b4f"
+  },
+  {
+    "arquivo": "backend/docs/openapi.json",
+    "bytes": 45499,
+    "sha256": "f399103000a7cb185b6193c727e10454643dac68ad04198729cd2eb49b261762"
+  },
+  {
+    "arquivo": "backend/docs/query-plans.json",
+    "bytes": 10761,
+    "sha256": "a939fbee56be2e70c5651ed902166b17d7a454eacf216525fc5fd52e2d6445f9"
+  },
+  {
+    "arquivo": "backend/docs/restart-evidence.json",
+    "bytes": 299,
+    "sha256": "e12308c543a825fcf8652e3c587c93c8dbb10b68f9d26a0a2a60ccac11c77c7f"
+  },
+  {
+    "arquivo": "backend/docs/restore-evidence.json",
+    "bytes": 1130,
+    "sha256": "c9d95e18c1148cda2f10bd5bc08befa2a683bf8594b17314e444f1e539621547"
+  },
+  {
+    "arquivo": "backend/docs/test-results.json",
+    "bytes": 818,
+    "sha256": "2e7027c0b7baf966b495f5c3134c2c5162708f20d29029f210ed170d589efca1"
+  },
+  {
+    "arquivo": "backend/docs/VALIDACAO.md",
+    "bytes": 4976,
+    "sha256": "3bcd584faac85d44accf0253bf3704399c746d2ee0745732ceb2f42d1427d55e"
+  },
+  {
+    "arquivo": "backend/scripts/backup.sh",
+    "bytes": 278,
+    "sha256": "4005056d8bb763039f512e5ece2960b004c90be541b2d4d05bbab0730e4f3634"
+  },
+  {
+    "arquivo": "backend/scripts/check.sh",
+    "bytes": 194,
+    "sha256": "fb61409d11c129f32491a11b7595addcf59a64cd94c9c673ebb7fef0b1411c22"
+  },
+  {
+    "arquivo": "backend/scripts/restore.sh",
+    "bytes": 563,
+    "sha256": "99bd41637cecb3d68ee020a20ff36869c7f5493aa6ed6443f97c9c32fbb82d0c"
+  },
+  {
+    "arquivo": "backend/scripts/run-local.sh",
+    "bytes": 416,
+    "sha256": "d22d3da64b73019a810cfbb3d71c41cfaaed79828c2f69e9dd4d8c27e9d1af8e"
+  },
+  {
+    "arquivo": "backend/scripts/smoke.py",
+    "bytes": 2566,
+    "sha256": "0f501a6c38634f588735f3412db4a6d4f5922efabf1c65a28ee9b0bd572173d6"
+  },
+  {
+    "arquivo": "backend/.mvn/wrapper/maven-wrapper.properties",
+    "bytes": 168,
+    "sha256": "8f2a4438810348270d9d98f8d6d530541ddb7271e373db207e8ac381e0e35b62"
+  },
+  {
+    "arquivo": "backend/docs/examples/sale-confirmed.json",
+    "bytes": 4140,
+    "sha256": "f932aa49addd4060287877eff0052b19ede67aebb850f9a8a53bb4f30d4b6df8"
+  },
+  {
+    "arquivo": "backend/src/main/resources/application-demo.yml",
+    "bytes": 121,
+    "sha256": "e60cdd54932897b5b5850f1992b3bab8b3dcd74757e970cffebe47156b08acae"
+  },
+  {
+    "arquivo": "backend/src/main/resources/application.yml",
+    "bytes": 1395,
+    "sha256": "b96daf6bbd2f55bbff0ef0fca2715058452dd2dd8426ad92f72ba1653fea1aa9"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/SplitApplication.java",
+    "bytes": 585,
+    "sha256": "86fc33304610a85cbd359bf21292dbbe28f4e80278705abf180e492f5a4337db"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/auth/Actor.java",
+    "bytes": 816,
+    "sha256": "75d81703b7485eb8fa8c5eb26643a1dab1f86497966101d7d13ccfb1f2a3d548"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/auth/AuthController.java",
+    "bytes": 3604,
+    "sha256": "608d0389b285659897bc03626b6dbfc4d1e22e8d00aca02604004b28abd8af32"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/ApiSchemas.java",
+    "bytes": 3013,
+    "sha256": "a9fb2ef1399a1dcd028437b43878b69f4eeba09187014cdcc251bbcc0f334cb4"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/DemoSeed.java",
+    "bytes": 2425,
+    "sha256": "f789ed08127efcce3e646a22a9894a4c158268f48c4cce5d88fe40bbed876769"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/LimitedBody.java",
+    "bytes": 1015,
+    "sha256": "153a8130cb833438ffc9acc1e4ad49453f25ddd2a0281f7c46b24587b62dbe49"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/OpenApiConfig.java",
+    "bytes": 7293,
+    "sha256": "1263c73f847533ce90905237fd71dc75d1c2ed5c5c5feb6251ecca6e858f6a93"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/SecurityConfig.java",
+    "bytes": 2215,
+    "sha256": "1cc8036c6d5577db475beb471f3206ce9185ad34237e1d848002814637e1ea6d"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/SessionFilter.java",
+    "bytes": 4241,
+    "sha256": "04bf6eeb33eebb279ee7c58943f85a3fdd40ebefe3b9e3d30a5f66c29af9dc1a"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/CoreController.java",
+    "bytes": 3361,
+    "sha256": "9aaf35da44c67636ffb2f2fefc12e4c1b30bc1b04052c81aa37871fb40592155"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/Ledger.java",
+    "bytes": 1625,
+    "sha256": "f9bcadce39ce289d9b985330024e13b7a4df29080d8dde3207cc820d5c68d943"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/MockAdapters.java",
+    "bytes": 867,
+    "sha256": "8cfe9a3cdab8154188a95f459a7d3fa10b5317f0c3eb4703497346bc8a4e0bc5"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/Operation.java",
+    "bytes": 1342,
+    "sha256": "58595f4808e2f3e2c73dca26aeca5e74252516efde1935812c04d7f3d4def595"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/OperationRepository.java",
+    "bytes": 476,
+    "sha256": "8f68cc005421b160c32c6412b827bc176a36521ed494b46380eeeba3a3f5d058"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/SaleService.java",
+    "bytes": 5658,
+    "sha256": "6c70c26c61892b236c05afc8c737574b2fd9dae0aecaf21dca0562fe422b3509"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/TaxEngine.java",
+    "bytes": 2040,
+    "sha256": "8c00dbff913a1e79d9c967c7d3e23fb246ac2ee094a55cebb9bad17964220ff7"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/Views.java",
+    "bytes": 11108,
+    "sha256": "d848ed6c575dfc233a77659563ef00cb9cbb8df334d67d6c2405519f1b139b08"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/AIProvider.java",
+    "bytes": 138,
+    "sha256": "9e438202046c8ef2a5a58727eab434f4968c8b9d92557529e56b56176227acf0"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/AnalysisService.java",
+    "bytes": 2338,
+    "sha256": "10b246b364e0a387bfc895575128b41cfd943ad3f061b94c16a18e7161d32c0f"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/AnalyticsService.java",
+    "bytes": 4127,
+    "sha256": "0dffbcf8b1699d062d2f02dfffd9fb8cd3b1b218572b50ea3553377ac329967a"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/FinanceController.java",
+    "bytes": 4251,
+    "sha256": "795dfd3fb0b02361296ca6702b18b37ea357f7fd4195a3af761e6490375d021a"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/FinanceService.java",
+    "bytes": 6573,
+    "sha256": "4909b882303b29a91ea4a7ab2e67d0868208d2227514235cfb04d3fcb97335c0"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/MockAIProvider.java",
+    "bytes": 840,
+    "sha256": "12adffb626f47f5476a71a7ff7b73651c3fa93fdcac02046cd26307c54b520a1"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/OperationExport.java",
+    "bytes": 2012,
+    "sha256": "2adab3e3bc5aeeefe808a097ea48931c59567cebbb5457ab683c3d6659b35d7f"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/OperationExportController.java",
+    "bytes": 775,
+    "sha256": "af3d150cfb3720a25204cc4ed9e9d6a1bbd81accf842654683828a0988ff7449"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/shared/ApiErrors.java",
+    "bytes": 3230,
+    "sha256": "3eb512900a73d2af5b5911eca5ed433265aaa91a13e4c44ac38d74f01e82f64c"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/shared/ApiException.java",
+    "bytes": 408,
+    "sha256": "36d23b40507c811d8cc0fbbd7a1f0702e9142da3f06bb8229b77620ecf565b51"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/shared/Hashes.java",
+    "bytes": 513,
+    "sha256": "f3f18f763df8ec7266bf6eb45ee4b21ba847938cbb009888062fdf370b2d836c"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/shared/Idempotency.java",
+    "bytes": 3588,
+    "sha256": "cf90313da3d936edb6e00dc5dffd43a4b99b8210cde23eea7562a3bbd7c25fd1"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/shared/Period.java",
+    "bytes": 792,
+    "sha256": "d1f1ed81f6c3ed5160776d480ff44e8dad8bc42c0e659da7952358036b12ac91"
+  },
+  {
+    "arquivo": "backend/src/main/resources/db/migration/V1__initial_schema.sql",
+    "bytes": 6513,
+    "sha256": "61e219e2eab8e5adfaef74746b07f4b23743361209b5fa23dea1caa2c59dc9f2"
+  },
+  {
+    "arquivo": "backend/src/main/resources/db/migration/V2__financial_guards.sql",
+    "bytes": 3337,
+    "sha256": "dc240ad1cbd4ecf86b4f20c8b7e3f456dcdac760da61ae2d9d76fc0262ff4225"
+  },
+  {
+    "arquivo": "backend/src/main/resources/db/migration/V3__runtime_privileges.sql",
+    "bytes": 324,
+    "sha256": "3f4098923fe8a2b2fd31914315940632a02fd24b4441ad1fbc5cb56419098dfe"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/BackendIntegrationTest.java",
+    "bytes": 21620,
+    "sha256": "089c4ef7deabe662cddc4e1b7f672e316813e34f0b5adc52627962b203179c08"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/CrashRecoveryTest.java",
+    "bytes": 7709,
+    "sha256": "28f7f098f0f3994606521cf5d00cf213a1785d43c67f1856b226cc65cfe89346"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/CrashTestServer.java",
+    "bytes": 2708,
+    "sha256": "aa0bf67fb02c6a18a1e6be188d23fdc9cab57692eb248cb6b37bcf9e5ae9a4b0"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/DatabaseReport.java",
+    "bytes": 3787,
+    "sha256": "28c92df4078b3c0cf282c52714d46a8ef00fef00f009dc7783b2f1f5ec49f0f4"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/LocalDemo.java",
+    "bytes": 2682,
+    "sha256": "c8dd251ef48939689b043bf3f9e31437636a7ec5750b6a0cfec1defa3ab48e7c"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/MigrationUpgradeTest.java",
+    "bytes": 3354,
+    "sha256": "9e7441e0419450ade7dd8bcff8e6bcb7f05956a9994eefaeb39d0c81f2910527"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/OperationExportLimitTest.java",
+    "bytes": 1110,
+    "sha256": "5c2be683b70091579c614cf6f744ceaba7e1b769dc054a6c7501b2208ce0886f"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/PostgresSupport.java",
+    "bytes": 1524,
+    "sha256": "91fec7394436460c8e1eca7a28f5029e104e2a11ead935053bb1d619dd96dcb3"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/QueryAndCashIntegrationTest.java",
+    "bytes": 19010,
+    "sha256": "0310cb22769148277793c0cc0c879ec25cdc7887039e2b0403198eae4e8d2964"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/QueryPerformanceFixture.java",
+    "bytes": 4524,
+    "sha256": "a88e947611a78203ea5e36c8e082e51bbae19029b260e432ba5dfc39c61bebc9"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/QueryProbe.java",
+    "bytes": 3709,
+    "sha256": "ffd191707da04fdf04989ae21dc8874dd4db85464928f3445481629fe40d60a2"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/TaxEngineTest.java",
+    "bytes": 1328,
+    "sha256": "e549c9099f856b5545b68025d86e25b0c4d97ef85084a55c27d393d3f1ced0b3"
+  },
+  {
+    "arquivo": "documentacao/historico/README-recebido-2026-10-14.md",
+    "bytes": 26131,
+    "sha256": "2a3bcc5e9949d0b78f15b4f506c934b5dc30ab6d286c32e2fae61e716d46303b"
+  },
+  {
+    "arquivo": "documentacao/revisao-2026-10-14/ARQUIVOS-ATUALIZADOS.json",
+    "bytes": 1903,
+    "sha256": "207ace591571b6e5891c4311981758f85cc689873b018598311fd496f37ae640"
+  },
+  {
+    "arquivo": "documentacao/revisao-2026-10-14/comparacao-arquivos.json",
+    "bytes": 21977,
+    "sha256": "8622a90f1eea4658452af1601fc22e913f7362e0f89ae63b43335bb1a0837859"
+  },
+  {
+    "arquivo": "documentacao/revisao-2026-10-14/ESTADO-ATUAL.md",
+    "bytes": 5660,
+    "sha256": "70e6f1fe8260cabf0b67783b70e3961ad7af0b4e54896af7a365df42658376f5"
+  },
+  {
+    "arquivo": "documentacao/revisao-2026-10-14/INCREMENTO-TENDENCIAS-E-DASHBOARD.md",
+    "bytes": 2337,
+    "sha256": "e37d3eb34cba44eac662bf16d78cdb076783f43e8fe82ea1824ebff179940cd5"
+  },
+  {
+    "arquivo": "documentacao/revisao-2026-10-14/MATRIZ-CONSOLIDADA.md",
+    "bytes": 139897,
+    "sha256": "482d4c84e9e5148157bed939d91556989704d10ec53cf97645cc93c83202ebd5"
+  },
+  {
+    "arquivo": "documentacao/revisao-2026-10-14/resultados-validacao.json",
+    "bytes": 1544,
+    "sha256": "8cd6e43e613f30d4c6dbced2198f907507acdb4c0272cefacda22cc5177e78bc"
+  },
+  {
+    "arquivo": "documentacao/revisao-2026-10-14/RESULTADOS-VALIDACAO.md",
+    "bytes": 2509,
+    "sha256": "487793f1ea3ae0104eb903c429b3a4019585897e8f8a89df44e8dae01f343430"
+  },
+  {
+    "arquivo": "documentacao/revisao-2026-10-14/REVISAO-COMPLETA.md",
+    "bytes": 7902,
+    "sha256": "9e4d9bdd546b9f46a401b149bbc0aad0a4653f90e4841addabe3d92ee9b5b3d8"
+  },
+  {
+    "arquivo": "documentacao/revisao-2026-10-14/validacao-android-atual.json",
+    "bytes": 449,
+    "sha256": "c4a2ae00543df1bf88c6697a8d9a5d28362a290a98a7f2785d8fb58221df0458"
+  },
+  {
+    "arquivo": "frontend/documentacao/AMPLIACAO-FRONTEND.md",
+    "bytes": 5155,
+    "sha256": "fd8475714f88810133e0d10c1e1a42334ec7bde1f77fb1cc3a2cdea4a92cfae0"
+  },
+  {
+    "arquivo": "frontend/documentacao/auditoria-dependencias-atualizada.json",
+    "bytes": 363,
+    "sha256": "a2ae44d875590bd738a786cd2da6466ea52f73b298e2d20d5cf61de88d040add"
+  },
+  {
+    "arquivo": "frontend/documentacao/auditoria-dependencias.json",
+    "bytes": 363,
+    "sha256": "a2ae44d875590bd738a786cd2da6466ea52f73b298e2d20d5cf61de88d040add"
+  },
+  {
+    "arquivo": "frontend/documentacao/build-tendencias.txt",
+    "bytes": 963,
+    "sha256": "cbca37a349be3c73e658741e4e59c68916e11a4865b7b19d183b40b13a2c0974"
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "bytes": 40483,
+    "sha256": "98ac16c5843d96df942746100ca9754963476759616199be4e77f4c78a2f5ef1"
+  },
+  {
+    "arquivo": "frontend/documentacao/CONTINUACAO-CONSULTAS-WEB-ANDROID.md",
+    "bytes": 5551,
+    "sha256": "d2253ec23aed242b34bf4fb27ca993a2d598e2ba7bf4cf75a9998f9c3872e3b3"
+  },
+  {
+    "arquivo": "frontend/documentacao/CONTRATO-PARA-BACKEND.md",
+    "bytes": 5373,
+    "sha256": "af7d5b271d6b7b25033067ba5047981eaaed3632bd1d0ce6a9b139d6a90e4147"
+  },
+  {
+    "arquivo": "frontend/documentacao/dashboard-celular.png",
+    "bytes": 33187,
+    "sha256": "a00ddc43ff246d173972668a321263c8a361c77d00a9142476c651eeba44bfb4"
+  },
+  {
+    "arquivo": "frontend/documentacao/dashboard-demonstrativo.png",
+    "bytes": 85657,
+    "sha256": "b0a4eabc56202a57a7e3bd80b7cba58dd80366f656215d00f26b9bd350e4017c"
+  },
+  {
+    "arquivo": "frontend/documentacao/DECISAO-ESCOPO-MVP.md",
+    "bytes": 4234,
+    "sha256": "2f9553cfd207a6fa4cd854f9bceeffe51181f5e02aa5c773f2ad69982e75d806"
+  },
+  {
+    "arquivo": "frontend/documentacao/ENTREGA-FRONTEND.md",
+    "bytes": 4311,
+    "sha256": "1b261997d637cfa7aefa5fd7bbbe908c8aa25b66c394b45ef5fba87676686a03"
+  },
+  {
+    "arquivo": "frontend/documentacao/ESCOPO-E-REFERENCIA-VISUAL.md",
+    "bytes": 3490,
+    "sha256": "a35d06cc0d25ccdbd1d4b15bc839403b64dde98819fd27b301c7bb3d080cfeed"
+  },
+  {
+    "arquivo": "frontend/documentacao/formatacao.txt",
+    "bytes": 1103,
+    "sha256": "4479542009f87a47abcbbcca7c9c310729a14c2040c4a029c8763c9dde869b45"
+  },
+  {
+    "arquivo": "frontend/documentacao/GUIA-TELAS-E-ARQUIVOS.md",
+    "bytes": 2431,
+    "sha256": "ec21f814644a83585c7b0c40f990ba6cf0a5a49ecf4dc1346de4af566307ce2f"
+  },
+  {
+    "arquivo": "frontend/documentacao/integracao-backend-resultados.json",
+    "bytes": 2474,
+    "sha256": "ff1b43e8c90f8bed06fd33a197fc0b5eda58605f7213bfddf5c3faaacdc6b237"
+  },
+  {
+    "arquivo": "frontend/documentacao/INTEGRACAO-BACKEND.md",
+    "bytes": 6488,
+    "sha256": "060b892ba81148ce38e0fd56fb08a9f75dae52f753567bbe906d82b99a269931"
+  },
+  {
+    "arquivo": "frontend/documentacao/PENDENCIAS-OBJETIVAS.md",
+    "bytes": 1296,
+    "sha256": "73bf58b4d7190df5ac7a4eb2b7d1df78953b670cc686aad2ded27ef37e1c0a15"
+  },
+  {
+    "arquivo": "frontend/documentacao/PUBLICACAO-WEB.md",
+    "bytes": 2003,
+    "sha256": "10c1a625e539a4cbb16eccad78e8c69177085f459d50d18fc7fed8302178d74b"
+  },
+  {
+    "arquivo": "frontend/documentacao/RELATORIO-VALIDACAO-ATUAL.md",
+    "bytes": 6326,
+    "sha256": "d13b25b0553bdf96dff11fccb1520cd21a88c22f94523a0636bd20720661d314"
+  },
+  {
+    "arquivo": "frontend/documentacao/resultado-build-atual.txt",
+    "bytes": 964,
+    "sha256": "83f0b9489427a802be35e678383881feba97498df33d89879a5471584b8fcba8"
+  },
+  {
+    "arquivo": "frontend/documentacao/resultado-build.txt",
+    "bytes": 963,
+    "sha256": "c3311cd75649318f8923f5ea7df17a2cb86458c36e32c7c990bf5c6899e838ec"
+  },
+  {
+    "arquivo": "frontend/documentacao/resultado-testes-completos.txt",
+    "bytes": 243,
+    "sha256": "d9fa7067b8e9361626bb3d6152035cf2b8ddb6463e2b38a867e129ea6cb5dcc4"
+  },
+  {
+    "arquivo": "frontend/documentacao/resultado-testes-interface.txt",
+    "bytes": 239,
+    "sha256": "0a197059d73f50ec7accc17a2b8b638e2269e583706d579afc1633f47b65e02b"
+  },
+  {
+    "arquivo": "frontend/documentacao/revisao-testes-2026-10-14.json",
+    "bytes": 28863,
+    "sha256": "0bf80c3e7b534d5cebb5d506a3b944ea5ec069ece035d2fafac3df5900ad4858"
+  },
+  {
+    "arquivo": "frontend/documentacao/ROTEIRO-DE-DEMONSTRACAO.md",
+    "bytes": 2490,
+    "sha256": "c37db50c3e143b511d27713811682b84347ccc6abfcb4a19215679de586a2e09"
+  },
+  {
+    "arquivo": "frontend/documentacao/SESSAO-E-INTEGRACAO.md",
+    "bytes": 3049,
+    "sha256": "b42a568d4107cad8c9d673f3e8c57d67305fe40180cb16a0fb42173cf670d1d0"
+  },
+  {
+    "arquivo": "frontend/documentacao/STATUS-CHECKLIST.md",
+    "bytes": 76776,
+    "sha256": "8f2d72706d9f9e1ae462a44d8c6a81ac115f1c7d0b9b1177ceab5f0c4c18e218"
+  },
+  {
+    "arquivo": "frontend/documentacao/TENDENCIAS-IMPLEMENTADAS.md",
+    "bytes": 3345,
+    "sha256": "9edbea57fe100ab8713e43f8cadc26882f50a7705736e626813350b3bef9799b"
+  },
+  {
+    "arquivo": "frontend/documentacao/testes-atualizados.json",
+    "bytes": 20290,
+    "sha256": "9a4790b36b6a5a02fa46161becfee42d0ccd49847c17ef0d1e4ddb02d94bf66a"
+  },
+  {
+    "arquivo": "frontend/documentacao/testes-tendencias.json",
+    "bytes": 12514,
+    "sha256": "72da684a5f70b776e98dc42ca76d4990ef92bf29a4d02af63dad3decc0249d81"
+  },
+  {
+    "arquivo": "frontend/documentacao/verificacao-navegador.json",
+    "bytes": 1657,
+    "sha256": "abaa2ad77df622cc0d742d827065d3c69d38592b1b8beffd212d230a0e04bde3"
+  },
+  {
+    "arquivo": "frontend/e2e/integracao.spec.ts",
+    "bytes": 11963,
+    "sha256": "43a84fd97f79ec67d8fe3aadc9ba7e78ae8fb8b4a2a38707937ae8ff4ff028db"
+  },
+  {
+    "arquivo": "frontend/e2e/responsividade.spec.ts",
+    "bytes": 2751,
+    "sha256": "703bfbb0a1547fe4d709a6d9c8058bffb5789789328b915afeecd7110de092a6"
+  },
+  {
+    "arquivo": "frontend/src/ambiente.d.ts",
+    "bytes": 163,
+    "sha256": "23e4a0c21ea6e25d386f7ee61691e25d0d3a4f429215ef97fc484417e4c41105"
+  },
+  {
+    "arquivo": "frontend/src/Aplicacao.tsx",
+    "bytes": 18613,
+    "sha256": "db2888e96a9f1863b013ec0a9e6db40ced25b4b4550587f306ef723fa290f3ee"
+  },
+  {
+    "arquivo": "frontend/src/estilos.css",
+    "bytes": 26556,
+    "sha256": "e981b8c2c8e4753314cc1d40b3603fa3b87897c155aaab97466dde5eb1ab64c6"
+  },
+  {
+    "arquivo": "frontend/src/inicializar.tsx",
+    "bytes": 1700,
+    "sha256": "85126a65f5338668f205c739af4874e10317c2bc69d1214e9c0683e6899cf0a8"
+  },
+  {
+    "arquivo": "frontend/src/tipos.ts",
+    "bytes": 1712,
+    "sha256": "579007a9557b50701985f132d59f60504a724153bd3e2b52399580bf6aee20ce"
+  },
+  {
+    "arquivo": "frontend/documentacao/evidencias-android/lint-results-debug.xml",
+    "bytes": 86,
+    "sha256": "c7a2290ec2f47fc454842b002f672d72342d094edd15317604457fa9bd748c89"
+  },
+  {
+    "arquivo": "frontend/documentacao/evidencias-android/TEST-br.com.planner.pos.FluxoPosTest.xml",
+    "bytes": 883,
+    "sha256": "f28b570a61157819d6b7b8ab2c492645730407bc502e387b7115c8d7b4b20d65"
+  },
+  {
+    "arquivo": "frontend/documentacao/evidencias-android/TEST-br.com.planner.pos.RepositorioDemonstrativoTest.xml",
+    "bytes": 1402,
+    "sha256": "f5e35df0ceb44ddd4fcacaed7a04a23f9420f6043958dff4136d0698dda5399b"
+  },
+  {
+    "arquivo": "frontend/documentacao/evidencias-android/validacao-android-final.log",
+    "bytes": 2750,
+    "sha256": "0f82b2c739530d0f6519784a9fcab8c492caebb62930a3c683e45777d720d3c2"
+  },
+  {
+    "arquivo": "frontend/src/componentes/AvisoConexao.tsx",
+    "bytes": 709,
+    "sha256": "db5a4ee0f46c919e122802b87797585a9ea934b6b1f00057cffb0abebb7aeccc"
+  },
+  {
+    "arquivo": "frontend/src/componentes/Botao.tsx",
+    "bytes": 731,
+    "sha256": "17ac1de73aeb90494f1007cb453a2097c111caa8b8b45ff6ea0993ebde7cf8cb"
+  },
+  {
+    "arquivo": "frontend/src/componentes/ComposicaoServidor.tsx",
+    "bytes": 2131,
+    "sha256": "a1a93b2ce52d5280b3546b4bd728571865760592ee7790f4295dc1a9c3a9cba8"
+  },
+  {
+    "arquivo": "frontend/src/componentes/DialogoConfirmacao.tsx",
+    "bytes": 1204,
+    "sha256": "8c5406d2338d490f4ce212b607369c5bb381c9c11caf6bd315d91d89cf5e76cc"
+  },
+  {
+    "arquivo": "frontend/src/componentes/ElementosInterface.tsx",
+    "bytes": 4424,
+    "sha256": "bffd023136474a61a2a96c627152743edd8c073f59a04914ced625d71e45f9f2"
+  },
+  {
+    "arquivo": "frontend/src/componentes/EstruturaPainel.tsx",
+    "bytes": 7699,
+    "sha256": "3fdaf3790ab73f3cc986035f9ffbf1313ca856051f35c92bc720c11166bbaad4"
+  },
+  {
+    "arquivo": "frontend/src/componentes/ExportarOperacoesServidor.tsx",
+    "bytes": 1873,
+    "sha256": "33c061cee883d0bb84f601455bedbbaf550fce28c0f293893026ec26186a1c6a"
+  },
+  {
+    "arquivo": "frontend/src/componentes/PainelTendencias.tsx",
+    "bytes": 1691,
+    "sha256": "7ba2523ce219d31fc55a99936befa032c34d77700d3cfc63c2a77f18c1efa023"
+  },
+  {
+    "arquivo": "frontend/src/dados/cenarioDemonstrativo.ts",
+    "bytes": 1985,
+    "sha256": "be8a8c1afd4b4924ce09cdcace78875060a76574b5bbc7fcf47cedae94045265"
+  },
+  {
+    "arquivo": "frontend/src/servicos/adapterApi.ts",
+    "bytes": 9361,
+    "sha256": "9ce130f6f0cabf4fd22f7b4214af24ee803a2bb473468788551d9b291804795f"
+  },
+  {
+    "arquivo": "frontend/src/servicos/capacidadesApi.ts",
+    "bytes": 2326,
+    "sha256": "d8fc9f8d9a1bf9e5f3bebcba31b915b24a81784c678cbca8ba7b6d790f1e3145"
+  },
+  {
+    "arquivo": "frontend/src/servicos/clienteHttp.test.ts",
+    "bytes": 2144,
+    "sha256": "c3077ce2a9523e295ef88cd8e6b94ce4168c5945c18a6d9ad9b4fcd441c246b6"
+  },
+  {
+    "arquivo": "frontend/src/servicos/clienteHttp.ts",
+    "bytes": 1043,
+    "sha256": "9b928b15609ae347c7d8c49333e294efdb025be8c19f7af3e0565750d5aec18c"
+  },
+  {
+    "arquivo": "frontend/src/servicos/configuracaoAmbiente.ts",
+    "bytes": 497,
+    "sha256": "b9df8dafd69e34b3e888419ee8be3a296365584c1e3029314bcc03cca511bb93"
+  },
+  {
+    "arquivo": "frontend/src/servicos/contratoBackend.test.ts",
+    "bytes": 12053,
+    "sha256": "f93f58dba1db69dee2f58bd5d7a8ef93f5182ee504a651a843598eac98d2e1cb"
+  },
+  {
+    "arquivo": "frontend/src/servicos/contratosConsultas.ts",
+    "bytes": 3254,
+    "sha256": "787346c78e38b72766a37ea159c38decec30a705645f685794fa1f7d383989ff"
+  },
+  {
+    "arquivo": "frontend/src/servicos/integracaoApi.test.ts",
+    "bytes": 6504,
+    "sha256": "ce7b73422beae5ebb87dccebd853b5bd71193733aa665956c95e92174a9dc809"
+  },
+  {
+    "arquivo": "frontend/src/servicos/integracaoConfigurada.ts",
+    "bytes": 16446,
+    "sha256": "ed9d8e031cb9df633b76c8aedf034a81899e619e26796056f6698aea2dea1f16"
+  },
+  {
+    "arquivo": "frontend/src/servicos/intencoesApi.ts",
+    "bytes": 2968,
+    "sha256": "56c74d444aa7cbc64982fa8d9e1d98b17ac0fd95bad633c4899ca85a7a141cad"
+  },
+  {
+    "arquivo": "frontend/src/servicos/servicoDemonstrativo.test.ts",
+    "bytes": 2524,
+    "sha256": "0f54b0c7fe4fefb6ba63b59ac3e698b1c0855dc3b51bcfaeb8a143e30dc9d3ca"
+  },
+  {
+    "arquivo": "frontend/src/servicos/servicoDemonstrativo.ts",
+    "bytes": 3223,
+    "sha256": "e25a543754e82e3ef7a4643f517af471af837195531dfe688b74a71ac823332b"
+  },
+  {
+    "arquivo": "frontend/src/servicos/sessaoUsuario.ts",
+    "bytes": 2246,
+    "sha256": "fddda2a76ed24dde3ef66ee14955c395436d9c03e71a500bc36495307ad2c2bb"
+  },
+  {
+    "arquivo": "frontend/src/servicos/transporteApi.ts",
+    "bytes": 4275,
+    "sha256": "0f807d23f90aa6d98b9d9b98f91af4f5d1df04db0cfef28da318ce6031f705f5"
+  },
+  {
+    "arquivo": "frontend/src/servicos/validarContratoInterno.ts",
+    "bytes": 4702,
+    "sha256": "2840b489d2bd593807da20e16678da6f04e1b907e47faf6d6264ef552e5634cc"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaAjuda.tsx",
+    "bytes": 2924,
+    "sha256": "601ee5ea7ecc456ddb311778103da6ab0bb473d4a297f586ca13723ce8ff1c70"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaAnalise.tsx",
+    "bytes": 5160,
+    "sha256": "e597b2992deda28bc2184974a109819aece28294d0b172de2ce812edfa734034"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaAnaliseIntegrada.tsx",
+    "bytes": 5164,
+    "sha256": "d025b118b5e8fcead2ae5d9337ae52e8417bd4baf2990bb6c27f7a1ca5c6812b"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaConfiguracoes.tsx",
+    "bytes": 5235,
+    "sha256": "8ebdb6fa5161acafd21dc6ee97acbdddee81ed735af9c93fc68620a6ed7ae25c"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaDashboard.tsx",
+    "bytes": 9929,
+    "sha256": "97cee951a33fadd8f707531008bc354c5ec3bf8a5bdc24b565cd9b61e6ded36a"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaDespesas.tsx",
+    "bytes": 11850,
+    "sha256": "d833d1e2cd0e80e186d90ea1dc10fa80f29b77acb860f698ecaedcaa0f706166"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaDespesasIntegrada.tsx",
+    "bytes": 11567,
+    "sha256": "d6fe45375895e3b053f6a78c251018661b5f5f52567156b12660a786899e1f63"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaEntrada.tsx",
+    "bytes": 1831,
+    "sha256": "24ff2324fe6d92e8640fe4c94ff625366621b6e38b01bcd73a30fd590fa65061"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaEstadosAcesso.tsx",
+    "bytes": 3949,
+    "sha256": "31c0e4c16697e778ede6835f883207cc47212c9842b855429c42b4942585a38a"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaFluxoCaixa.tsx",
+    "bytes": 5984,
+    "sha256": "4e7981d00a5c9eee612b14d3b93f919b73136e1d36fb1a7c74121bcee75416be"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaLogin.tsx",
+    "bytes": 3338,
+    "sha256": "ee1544ab0ca1ebbeb09063adb721aeaa66c146fa65191b6af48223f4bc3de242"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaOperacoes.tsx",
+    "bytes": 12086,
+    "sha256": "52ad33df16fb2906652fdb864d11b6f0c105f5cf7a46ea0cf6d5a22da97678ec"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaOperacoesRemotas.tsx",
+    "bytes": 10540,
+    "sha256": "64842835d283c595238527d5e180a5087974f1ffa9ef07822c0f144bd260da36"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaResumoIntegrado.tsx",
+    "bytes": 4568,
+    "sha256": "d9d7a22d8cfbe7c9eed08131e4f8ddab74f36587d7c015480584f45feaea35cb"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaSimulacao.tsx",
+    "bytes": 4482,
+    "sha256": "75bf3935487173ced00061ab03629c119cc24d2687b8f2de6dd307a428a3f4eb"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaSimulacaoIntegrada.tsx",
+    "bytes": 4407,
+    "sha256": "c6a656c9f13c2b3739866640f9d27152d40dcb73ba1fc067222c355ec7cb0b18"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaVendaDemonstrativa.tsx",
+    "bytes": 7362,
+    "sha256": "d8a0df84711928f366d1f54353b39cda321c34f931cc90fa2eabf240bf3daeee"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaVendasIntegrada.tsx",
+    "bytes": 7116,
+    "sha256": "a9e88b6eeb557fa9e2f51ebfd311cfaacdc4358beeb1b0c34150ed9a6ae300fd"
+  },
+  {
+    "arquivo": "frontend/src/testes/configurarTestes.ts",
+    "bytes": 92,
+    "sha256": "09132c393e92600e90b6c8ef99a96ec2871a8078e1be0e0ff2bfc3955c6fecc6"
+  },
+  {
+    "arquivo": "frontend/src/testes/consultasESessao.test.tsx",
+    "bytes": 8562,
+    "sha256": "d537600c758ea70806fa0c1a0d5aba50c32f83fd69f3025c8ca5793cf8426e3f"
+  },
+  {
+    "arquivo": "frontend/src/testes/fluxosInterface.test.tsx",
+    "bytes": 8205,
+    "sha256": "abb871262588994b340e94a8a4098985b5edccfad2f097c9f6f25a833d5bad90"
+  },
+  {
+    "arquivo": "frontend/src/testes/tendencias.test.tsx",
+    "bytes": 5749,
+    "sha256": "ef4bc9ab2bf487105382f1227126acf566b8fac0697b98227a43b241d6e441da"
+  },
+  {
+    "arquivo": "frontend/src/testes/vendasIntegradas.test.tsx",
+    "bytes": 1750,
+    "sha256": "873990a1fbad8e23c77a4676223ceef9df08beadb73fdc7c8836298f423fa40b"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/exportarRelatorio.ts",
+    "bytes": 782,
+    "sha256": "fea5afc4c90c5d3b3b04595c99c78738888f140f188b959bda510680cb9ab791"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/tendencias.ts",
+    "bytes": 3089,
+    "sha256": "204f30bff9ae8d54596d92dbaf1ab831e394624400658068b98cea76bba895c7"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/useConsultaRemota.ts",
+    "bytes": 1385,
+    "sha256": "62b2e70390b83e9c8b641ac1376bc446437dd6eac800d6074a7cc9c330803011"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/usePreferenciaSessao.ts",
+    "bytes": 902,
+    "sha256": "1dce16c6308461ba9241cb695659c1a78430824d7106e3cf13e8296abb8d9a32"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/validarDespesa.test.ts",
+    "bytes": 795,
+    "sha256": "8faddba754b6d46fde957ca50cfce2f31c74fa64415b03844301e3dd29dffbc5"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/validarDespesa.ts",
+    "bytes": 1002,
+    "sha256": "b8ce846a085ec2073e991c84af9447dbd64fb42d41c1e73fb57213dc58f76b86"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/valoresFinanceiros.test.ts",
+    "bytes": 1574,
+    "sha256": "b303608ca6fce999ad7b5b23758d43914a25c024084405c2d35b9909ebc27bfa"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/valoresFinanceiros.ts",
+    "bytes": 2036,
+    "sha256": "55c80958a86a7a6cd950333db68c4815a927124f2f78ce2553e3081c5f5891f7"
+  }
+]

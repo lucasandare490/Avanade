@@ -26,6 +26,8 @@ class QueryAndCashIntegrationTest extends PostgresSupport {
   @Autowired Views views;
   @Autowired SaleService sales;
   @Autowired FinanceService finance;
+  @Autowired br.com.avanade.split.finance.OperationExport exports;
+  @Autowired br.com.avanade.split.finance.AnalyticsService analytics;
   @Autowired MutableClock clock;
   @Autowired org.springframework.transaction.PlatformTransactionManager transactions;
   @Autowired com.fasterxml.jackson.databind.ObjectMapper json;
@@ -73,6 +75,62 @@ class QueryAndCashIntegrationTest extends PostgresSupport {
     clock.at("2026-09-15T15:00:00Z");
     actor = actor();
     other = actor();
+  }
+
+  @Test
+  void trendsComparePersistedPeriodsAndIsolateMerchants() {
+    clock.at("2026-09-14T15:00:00Z"); sale(actor);
+    clock.at("2026-09-15T15:00:00Z"); sale(actor); sale(actor); sale(other);
+    var p = new Period(LocalDate.parse("2026-09-15"),LocalDate.parse("2026-09-15"));
+    var result = analytics.compare(actor,p);
+    assertThat(result.anterior().inicio()).isEqualTo(LocalDate.parse("2026-09-14"));
+    assertThat(result.indicadores().get(0).atual()).isEqualTo(30000L);
+    assertThat(result.indicadores().get(0).anterior()).isEqualTo(15000L);
+    assertThat(result.indicadores().get(1).atual()).isEqualTo(26400L);
+    assertThat(result.indicadores().get(2).atual()).isNull();
+  }
+
+  @Test
+  void dashboardFillsEmptyDaysAndExcludesPendingPayments() {
+    sale(actor);
+    when(adapters.confirmPayment()).thenReturn("PENDING"); sale(actor);
+    var p = new Period(LocalDate.parse("2026-09-14"),LocalDate.parse("2026-09-16"));
+    var result = analytics.dashboard(actor,p);
+    assertThat(result.totals().count()).isEqualTo(1);
+    assertThat(result.series()).hasSize(3);
+    assertThat(result.series().get(0).grossCents()).isZero();
+    assertThat(result.series().get(1).grossCents()).isEqualTo(15000);
+    assertThat(result.series().stream().mapToLong(d -> d.netCents()).sum()).isEqualTo(result.totals().netCents());
+  }
+
+  @Test
+  void emptyTrendsRemainUnknownAndSupportEarliestDate() {
+    var result = analytics.compare(actor,new Period(LocalDate.parse("2000-01-01"),LocalDate.parse("2000-01-01")));
+    assertThat(result.indicadores()).allSatisfy(m -> {
+      assertThat(m.atual()).isNull(); assertThat(m.anterior()).isNull();
+    });
+  }
+
+  @Test
+  void exportIncludesAllPagesAndOnlyAuthorizedMerchant() {
+    for(int i=0;i<101;i++) sale(actor);
+    sale(other);
+    var date=LocalDate.parse("2026-09-15");
+    var result=exports.export(actor,date,date,"CONCLUIDA","PIX",null);
+    assertThat(result.total()).isEqualTo(101);
+    assertThat(result.rows()).hasSize(101);
+    assertThat(result.rows().stream().map(row->row.getFirst()).distinct().count()).isEqualTo(101);
+    assertThat(result.rows()).allSatisfy(row->{assertThat(row).hasSize(8);assertThat(row.get(7)).isEqualTo("13200");});
+    assertThat(exports.export(other,date,date,null,null,null).total()).isEqualTo(1);
+    assertThat(exports.export(actor,date,date,"FALHA",null,null).total()).isZero();
+    assertThat(exports.export(actor,date.minusDays(1),date.minusDays(1),null,null,null).rows()).isEmpty();
+  }
+  @Test
+  void exportRejectsOperatorAndInvalidPeriod() {
+    var operator=new Actor(actor.sessionId(),actor.userId(),actor.merchantId(),actor.name(),actor.merchantName(),actor.timeZone(),"OPERADOR");
+    var date=LocalDate.parse("2026-09-15");
+    assertThatThrownBy(()->exports.export(operator,date,date,null,null,null)).isInstanceOf(br.com.avanade.split.shared.ApiException.class);
+    assertThatThrownBy(()->exports.export(actor,date,date.minusDays(1),null,null,null)).isInstanceOf(br.com.avanade.split.shared.ApiException.class);
   }
 
   Actor actor() {

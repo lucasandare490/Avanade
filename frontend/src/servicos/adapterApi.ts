@@ -78,6 +78,11 @@ export function criarIntegracaoApi(
       const chavesRetomada = new Map<string, string>();
       const consultas = contrato.consultas?.(autenticado);
       const seguras: ConsultasPlanner = {};
+      if (consultas?.exportarOperacoes) seguras.exportarOperacoes = consultas.exportarOperacoes;
+      if (consultas?.consultarComposicao) seguras.consultarComposicao = consultas.consultarComposicao;
+      if (consultas?.consultarTendencias)
+        seguras.consultarTendencias = async (p, sinal) =>
+          validarTendencias(await consultas.consultarTendencias!(p, sinal), p);
       if (
         consultas?.categoriasDespesa &&
         consultas.categoriasDespesa.every((c) => typeof c === 'string' && c.trim())

@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 > Atualização de 14/10/2026: integração web implementada; [guia atual e validação](../frontend/documentacao/INTEGRACAO-BACKEND.md). O conteúdo abaixo registra os incrementos anteriores do backend; o Android continua separado.
 
 # Devolutiva — backend e banco, incrementos 0.1 e 0.2
@@ -21,7 +23,7 @@
 - [ ] Exemplos completos de todos os estados/erros para aceite dos parsers dos clientes.
 - [x] Migrations V1–V3, seed controlada com duas lojas e três perfis.
 - [x] [Diagrama/dicionário](../backend/docs/BANCO.md), constraints e índices.
-- [x] [Relatório de validação](../backend/docs/VALIDACAO.md):28 testes aprovados, PostgreSQL real, concorrência e isolamento.
+- [x] [Relatório de validação](../backend/docs/VALIDACAO.md):29 testes registrados na entrega integrada (28 no incremento 0.2), PostgreSQL real, concorrência e isolamento.
 - [x] Reinício preservando intenção e backup/restore em banco descartável, com evidências.
 - [x] [Decisões](../backend/docs/DECISOES.md), [checklist do incremento](../backend/docs/CHECKLIST.md) e marcações BE/BD com referência de evidência.
 
@@ -63,7 +65,7 @@ As rotas/capacidades disponíveis, permissões, entradas/saídas e diferenças d
 
 | Verificação | Resultado / evidência |
 |---|---|
-| Build e testes |28 aprovados,0 falhas/erros; [resultado](../backend/docs/test-results.json) |
+| Build e testes |29 aprovados na evidência integrada recebida; consultar reexecução na revisão; [resultado](../backend/docs/test-results.json) |
 | PostgreSQL |17.11 real; migrations em base vazia; runtime sem DDL; constraints testadas |
 | Concorrência | Venda com mesma chave e retomadas com chaves diferentes sem duplicação |
 | Histórico | Mudança de regra preserva snapshot; trilha de hashes validada |
@@ -72,14 +74,14 @@ As rotas/capacidades disponíveis, permissões, entradas/saídas e diferenças d
 | Reinício | Resposta recuperada integralmente igual; [evidência](../backend/docs/restart-evidence.json) |
 | Backup/restore |12 tabelas com contagem e conteúdo idênticos; [evidência](../backend/docs/restore-evidence.json) |
 | Upgrade estrutural com dados | Pendente; reinício revalidou mesmas migrations, não simula upgrade futuro |
-| Web/POS real | Pendente de autorização para integração e aceite conjunto |
+| Web/POS | Web integrado ao servidor demonstrativo; Android e aceite em dispositivo pendentes |
 
 ## Pendências e responsáveis
 
 | Pendência | Impacto | Responsável a confirmar |
 |---|---|---|
 | Projeção/tendências e regras estatísticas | Requisito MVP ainda aberto conforme escolha do usuário | Responsável funcional + backend |
-| Mapeamento de contratos/sessão web e Android | Telas permanecem demonstrativas; pagamento sem operação precisa tratamento | Equipes clientes; autorização específica do usuário |
+| Mapeamento de contratos/sessão Android | Web já trata venda sem operação; Kotlin ainda depende do mapeamento | Android + backend |
 | HTTPS/POS, Docker executado, ambiente compartilhado | Sem aceite em dispositivo real/infraestrutura | Infraestrutura + backend |
 | Carga sustentada e upgrade com dados | Limites operacionais ainda não homologados | Backend |
 | CI remoto e análise de vulnerabilidades | Verificação local pronta; automação hospedada/scan pendentes | Backend + responsável pelo repositório |
@@ -87,3 +89,7 @@ As rotas/capacidades disponíveis, permissões, entradas/saídas e diferenças d
 | Classificação sugerida e alertas P3 | Fora deste incremento; exigem regras correspondentes | Produto + backend |
 
 Não há prazo acordado para essas pendências. Esta é uma entrega funcional inicial do backend, não aceite integral do MVP nem implantação em produção.
+
+## Validação desta revisão no Windows
+
+Em 14/10/2026 foram reexecutados e aprovados 89 testes web, 29 backend e 4 cenários de navegador com PostgreSQL real, além de ambos os builds. Android, Docker e restore não foram repetidos. Evidências consolidadas em `documentacao/revisao-2026-10-14/RESULTADOS-VALIDACAO.md` a partir da raiz.

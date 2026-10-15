@@ -166,7 +166,52 @@ test('perfis, isolamento entre lojas e sessão expirada', async ({ page }) => {
   await page.request.post('/api/v1/auth/logout', {
     headers: { Authorization: `Bearer ${token2}` },
   });
-  await page.getByRole('link', { name: 'Vendas', exact: true }).click();
+  // A consulta do dashboard também pode detectar a revogação antes da navegação.
+  await page.evaluate(() => { location.hash = '/vendas'; });
   await expect(page.getByRole('heading', { name: 'Entrar no Planner' })).toBeVisible();
   await expect(page.getByText(/Sua sessão expirou/)).toBeVisible();
+});
+test('dashboard e tendências usam o servidor, mesmo com explicação indisponível', async ({ page }) => {
+  const token = await entrar(page);
+  const auth = { Authorization: `Bearer ${token}` };
+  const r = await page.request.get(`/api/v1/dashboard/details?from=${hoje}&to=${hoje}`, { headers: auth });
+  expect(r.status()).toBe(200);
+  const dados = await r.json();
+  expect(dados.series).toHaveLength(1);
+  expect(dados.totals.grossCents).toBe(dados.totals.taxCents + dados.totals.feeCents + dados.totals.netCents);
+  await page.goto('/#/dashboard');
+  await expect(page.getByRole('region', { name: 'Composição das vendas concluídas', exact: true })).toBeVisible();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.getByRole('table', { name: 'Valores por dia de conclusão no fuso da loja' })).toBeVisible();
+  await page.route('**/api/v1/ai/cash-analysis', route => route.abort('failed'));
+  await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
+  await page.getByRole('link', { name: /Análise com IA/ }).click();
+  await page.getByLabel('Análise de').fill(hoje);
+  await page.getByLabel('Análise até').fill(hoje);
+  await page.getByRole('button', { name: 'Solicitar explicação' }).click();
+  await expect(page.getByText('Explicação indisponível', { exact: true })).toBeVisible();
+  await expect(page.getByRole('table', { name: 'Valores em reais e variação frente ao período anterior' })).toBeVisible();
+});
+
+test('exportação baixa todo o filtro e servidor impede operador', async ({ page }) => {
+  const token = await entrar(page);
+  const url = `/api/v1/exports/operations?from=${hoje}&to=${hoje}`;
+  const resposta = await page.request.get(url, { headers: { Authorization: `Bearer ${token}` } });
+  expect(resposta.status()).toBe(200);
+  const dados = await resposta.json();
+  await page.getByRole('link', { name: 'Operações', exact: true }).click();
+  await page.getByLabel('De', { exact: true }).fill(hoje);
+  await page.getByLabel('Até', { exact: true }).fill(hoje);
+  const download = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Exportar filtro completo (CSV)' }).click();
+  const arquivo = await download;
+  expect(arquivo.suggestedFilename()).toContain('SIMULADO.csv');
+  const csv = readFileSync((await arquivo.path())!, 'utf8');
+  expect(csv.split('\r\n')).toHaveLength(dados.total + 1);
+  expect(csv).toContain('centavos');
+  if (dados.total) expect(csv).toContain(dados.rows[0][0]);
+  const login = await page.request.post('/api/v1/auth/login', { data: { email: 'operador1@demo.local', password: senha } });
+  expect(login.status()).toBe(200);
+  const operador = (await login.json()).accessToken;
+  expect((await page.request.get(url, { headers: { Authorization: `Bearer ${operador}` } })).status()).toBe(403);
 });

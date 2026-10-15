@@ -248,7 +248,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
       />
     );
   else if (integracao && rota === 'operacoes')
-    conteudo = <TelaOperacoesRemotas servico={servicoPlanner} />;
+    conteudo = <TelaOperacoesRemotas servico={servicoPlanner} permitirExportacao={sessao.permissoes.includes("financeiro")} />;
   else if (integracao && rota === 'simulacao')
     conteudo = <TelaSimulacaoIntegrada servico={servicoPlanner} />;
   else if (integracao && rota === 'analise')

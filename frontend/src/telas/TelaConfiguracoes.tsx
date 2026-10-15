@@ -84,14 +84,14 @@ export function TelaConfiguracoes({
         <section className="painel">
           <h2>Integração e próximos passos</h2>
           <p>
-            Login real, perfis, banco de dados, regras oficiais e recuperação persistente dependem
-            do backend. Projeções, recorrência e alterações nas configurações aguardam contratos
-            definidos.
+            Este modo usa dados locais. O modo integrado já utiliza login, permissões e banco do
+            servidor demonstrativo. Regras oficiais, projeções, recorrência e alterações de
+            configurações não estão disponíveis nesta entrega.
           </p>
           <p>
             O modo POS desta interface demonstra o fluxo no navegador. Não substitui o aplicativo
-            Android. A base Kotlin separada foi escrita, mas ainda não foi compilada ou validada em
-            dispositivo.
+            Android. O APK demonstrativo já foi gerado; a integração com este backend e a
+            validação em dispositivo continuam pendentes.
           </p>
           <p>
             Não há pagamento real, emissão fiscal, crédito ou conexão com IA externa nesta versão.
@@ -101,8 +101,9 @@ export function TelaConfiguracoes({
       <section className="painel">
         <h2>Recursos de demonstração</h2>
         <p>
-          A consulta de operações permite exportar todo o filtro em CSV. O detalhe possui
-          comprovante para impressão, sempre sem valor fiscal.
+          {demonstrativo
+            ? 'No modo demonstrativo, a consulta de operações permite exportar o filtro em CSV e o detalhe oferece impressão sem valor fiscal.'
+            : 'No modo integrado, contas com acesso financeiro podem exportar operações filtradas em CSV, até 2.000 registros. Os valores estão em centavos BRL; não é comprovante fiscal.'}
         </p>
         <a className="botao secundario" href="#/previa-acesso">
           Conhecer as telas de acesso

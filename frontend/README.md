@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 > **Integração web — 14/10/2026:** modo API ativo por padrão, com backend Spring/PostgreSQL. Execute `../scripts/dev.sh` a partir desta pasta ou `./scripts/dev.sh` na raiz. [Guia atual de integração](documentacao/INTEGRACAO-BACKEND.md).
 
 > **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. Tendências/projeções e IA externa continuam pendentes; consultas e explicação mock já usam o backend. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](documentacao/TENDENCIAS-IMPLEMENTADAS.md).

@@ -1,0 +1,2827 @@
+[
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 31,
+    "texto": "- [x] BE-001 — Criar o backend na organização/pasta acordada, preservando README e créditos existentes; não sobrescrever o frontend."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 32,
+    "texto": "- [x] BE-002 — Fixar versões de Java, Spring Boot, gerenciador Maven/Gradle e PostgreSQL; incluir wrapper e lock/versionamento aplicável."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 33,
+    "texto": "- [x] BE-003 — Organizar controller/DTO, aplicação, domínio, persistência e integrações; não concentrar regra fiscal no controller."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 34,
+    "texto": "- [x] BE-004 — Utilizar Spring Web, validação de entrada, segurança, persistência e OpenAPI conforme a stack documentada; justificar mudanças."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 35,
+    "texto": "- [x] BE-005 — Fornecer `.env.example` sem senhas reais e documentar todas as variáveis obrigatórias, opcionais e padrões."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 36,
+    "texto": "- [ ] BE-006 — Criar perfis de desenvolvimento, teste e demonstração; modo simulado deve ser determinado pelo servidor."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 37,
+    "texto": "- [ ] BE-007 — Entregar Dockerfile e Compose com API e PostgreSQL, healthcheck e volume; não expor banco publicamente por padrão."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 38,
+    "texto": "- [x] BE-008 — Permitir subir banco vazio, aplicar migrations e iniciar API com os comandos do README."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 39,
+    "texto": "- [x] BE-009 — Fornecer endpoint de saúde sem expor credenciais, queries ou estrutura interna."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 40,
+    "texto": "- [x] BE-010 — Garantir que reiniciar API/container não apague vendas, despesas, idempotência ou eventos."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 41,
+    "texto": "- [ ] BE-011 — Documentar porta, base URL local e URL acessível ao Android; localhost no emulador não significa computador."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 42,
+    "texto": "- [x] BE-012 — Não colocar auditoria privada, conversas, imagens pessoais, `.env`, dumps reais ou tokens no repositório."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 47,
+    "texto": "- [ ] BE-013 — Entregar OpenAPI versionado com schemas completos de request, sucesso e erros, incluindo autenticação."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 48,
+    "texto": "- [x] BE-014 — Documentar cada rota existente e cada rota proposta, diferenciando o que está implementado do que está planejado."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 49,
+    "texto": "- [x] BE-015 — Definir identificadores distintos de venda, pagamento, operação, parcela, evento, despesa e tentativa; informar relações."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 50,
+    "texto": "- [x] BE-016 — Definir representação monetária, moeda BRL, limite máximo e escala; proibir NaN, infinitos e valores negativos onde não fazem sentido."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 51,
+    "texto": "- [x] BE-017 — Definir representação de percentuais: por exemplo basis points ou decimal textual; não misturar 10, 0.10 e 1000."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 52,
+    "texto": "- [x] BE-018 — Definir arredondamento por parcela e tratamento de resíduo para garantir bruto = tributo + taxa + líquido."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 53,
+    "texto": "- [x] BE-019 — Definir timestamps com offset/UTC, fuso de negócio por loja, datas de competência e pagamento."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 54,
+    "texto": "- [x] BE-020 — Definir período de consulta inclusivo/exclusivo; exemplo recomendado: início inclusivo e próximo dia final exclusivo no fuso da loja."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 55,
+    "texto": "- [ ] BE-021 — Definir campos obrigatórios, opcionais, null e listas vazias; ausência de saldo não equivale a saldo zero."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 56,
+    "texto": "- [x] BE-022 — Definir estados oficiais e a conversão para os rótulos do cliente; estado novo não pode virar concluído por padrão."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 57,
+    "texto": "- [x] BE-023 — Definir paginação com ordem estável e desempate por ID, limites de página/tamanho e total do filtro."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 58,
+    "texto": "- [x] BE-024 — Definir se total e itens são lidos no mesmo snapshot ou informar consistência eventual."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 59,
+    "texto": "- [ ] BE-025 — Fornecer exemplos sintéticos copiáveis para sucesso, lista vazia, recusa, pendência, falha parcial e resposta inválida."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 60,
+    "texto": "- [ ] BE-026 — Registrar versão, breaking changes e compatibilidade; alinhar DTOs antes de pedir que os clientes sejam conectados."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 65,
+    "texto": "- [x] BE-027 — Implementar login validado no servidor e erro genérico para credencial inválida, sem enumeração de contas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 66,
+    "texto": "- [x] BE-028 — Definir provisionamento de usuários de teste; cadastro público não está automaticamente incluído no MVP."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 67,
+    "texto": "- [x] BE-029 — Armazenar senhas somente com função de hash apropriada; nunca devolver senha, hash ou segredo na API."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 68,
+    "texto": "- [x] BE-030 — Definir cookie HttpOnly/Secure/SameSite ou tokens e justificar a estratégia para web e Android."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 69,
+    "texto": "- [ ] BE-031 — Se usar cookies, implementar proteção CSRF onde aplicável; CORS não substitui CSRF nem autorização."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 70,
+    "texto": "- [ ] BE-032 — Se usar token, definir expiração, renovação, revogação, rotação e detecção de reutilização conforme arquitetura."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 71,
+    "texto": "- [x] BE-033 — Entregar endpoint de logout/revogação e comportamento quando sessão já estiver encerrada."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 72,
+    "texto": "- [x] BE-034 — Retornar identificador de sessão/usuário, nome público, estabelecimento autorizado, permissões e instante de expiração."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 73,
+    "texto": "- [x] BE-035 — Diferenciar 401 (sessão inválida/expirada) de 403 (autenticado sem permissão)."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 74,
+    "texto": "- [ ] BE-036 — Validar loja e papel em cada operação, consulta, agregado, exportação e reprocessamento."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 75,
+    "texto": "- [x] BE-037 — Não confiar em merchantId, role ou permissões enviados pelo cliente como prova de autorização."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 76,
+    "texto": "- [x] BE-038 — Definir política para usuário associado a mais de uma loja; sessão deve indicar contexto inequívoco."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 77,
+    "texto": "- [x] BE-039 — Limitar tentativas de login e solicitações excessivas; documentar 429 e eventual Retry-After."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 78,
+    "texto": "- [x] BE-040 — Fornecer três contas sintéticas correspondentes aos papéis acordados, sem reutilizar credenciais reais."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 83,
+    "texto": "- [x] BE-041 — Receber somente entradas necessárias: valor bruto, meio permitido, categoria quando exigida e chave da intenção."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 84,
+    "texto": "- [x] BE-042 — Derivar contexto da loja da sessão e validar valor, moeda, meio e categoria no servidor."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 85,
+    "texto": "- [x] BE-043 — Não confiar em tributo, taxa, líquido, destino ou status enviados pelo navegador."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 86,
+    "texto": "- [x] BE-044 — Persistir intenção e estado inicial antes de comunicar resultado que possa ser recuperado."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 87,
+    "texto": "- [x] BE-045 — Separar identidade/estado do pagamento do estado do split; pagamento confirmado não significa todas as parcelas concluídas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 88,
+    "texto": "- [ ] BE-046 — Implementar cenários demonstrativos controlados: sucesso, recusa, pendência, falha parcial e resposta perdida."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 89,
+    "texto": "- [x] BE-047 — Garantir que seletores de cenário de teste não permitam alterar processamento em ambiente real."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 90,
+    "texto": "- [x] BE-048 — Definir recusa: rastrear tentativa sem gerar split concluído nem entrada de caixa."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 91,
+    "texto": "- [x] BE-049 — Definir pagamento pendente e consulta posterior; não concluir apenas porque o tempo passou."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 92,
+    "texto": "- [x] BE-050 — Retornar venda/operationId e representação suficiente para abrir o detalhe após criação."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 93,
+    "texto": "- [x] BE-051 — Não acoplar confirmação de venda ao sucesso da IA, do dashboard ou de uma segunda requisição de leitura."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 94,
+    "texto": "- [x] BE-052 — Não implementar SDK de adquirente ou transferências reais sem escopo, credenciais, ambiente homologado e autorização próprios."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 99,
+    "texto": "- [x] BE-053 — Definir escopo da chave por loja, tipo de ação e intenção; documentar cabeçalho ou campo utilizado."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 100,
+    "texto": "- [ ] BE-054 — Persistir chave, hash canônico da entrada, estado, recurso associado e resposta recuperável."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 101,
+    "texto": "- [x] BE-055 — Mesma chave e mesma entrada devem recuperar a mesma intenção/recurso; não criar duas vendas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 102,
+    "texto": "- [x] BE-056 — Mesma chave com entrada diferente deve retornar conflito de domínio documentado, sem efeitos adicionais."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 103,
+    "texto": "- [x] BE-057 — Garantir exclusão concorrente no banco com unicidade/transação; verificar antes de inserir sem constraint não basta."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 104,
+    "texto": "- [x] BE-058 — Definir resposta enquanto primeira solicitação está em andamento; não usar 409 indiscriminadamente para toda repetição."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 105,
+    "texto": "- [x] BE-059 — Fornecer consulta por chave autorizada para recuperar resultado após timeout, recarga ou reinício do aplicativo."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 106,
+    "texto": "- [x] BE-060 — Não tratar timeout do cliente como prova de falha ou de cancelamento da gravação."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 107,
+    "texto": "- [ ] BE-061 — Definir validade/retenção da chave e impedir reaproveitamento que possa duplicar efeitos após expiração."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 108,
+    "texto": "- [x] BE-062 — Aplicar política equivalente a despesas e retomadas; o formulário de despesa precisa resolver confirmação desconhecida."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 109,
+    "texto": "- [x] BE-063 — Cobrir falha entre commit e envio HTTP, reinício de processo e duas requisições concorrentes."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 110,
+    "texto": "- [ ] BE-064 — Não repetir chamada externa de resultado incerto antes de reconciliar com o provedor ou referência idempotente."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 111,
+    "texto": "- [ ] BE-065 — Em integrações futuras, usar outbox/inbox ou mecanismo equivalente para não perder eventos entre banco e fila."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 112,
+    "texto": "- [ ] BE-066 — Documentar retries limitados, backoff e filas de erro; nenhum retry pode ignorar a semântica financeira."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 117,
+    "texto": "- [x] BE-067 — Implementar TaxEngine e SplitEngine determinísticos no backend; IA não define alíquota ou destino."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 118,
+    "texto": "- [x] BE-068 — Manter regras demonstrativas explicitamente identificadas e versionadas, separadas de regras oficiais futuras."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 119,
+    "texto": "- [x] BE-069 — Congelar snapshot da regra usada na venda: versão, parâmetros, percentuais, cálculo e referência temporal."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 120,
+    "texto": "- [x] BE-070 — Não recalcular operação histórica com regra atual após mudança de configuração."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 121,
+    "texto": "- [x] BE-071 — Persistir cada parcela com identidade, tipo, valor, destino público e estado próprio."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 122,
+    "texto": "- [x] BE-072 — Validar conservação de valores e impedir parcelas negativas ou confirmação acima do bruto."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 123,
+    "texto": "- [ ] BE-073 — Criar máquina de estados explícita para pagamento, split e parcelas, com transições permitidas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 124,
+    "texto": "- [ ] BE-074 — Gravar eventos ordenados com instante, correlação e descrição pública; manter detalhe técnico restrito."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 125,
+    "texto": "- [x] BE-075 — Na falha parcial, identificar exatamente quais parcelas estão confirmadas e quais estão pendentes."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 126,
+    "texto": "- [x] BE-076 — Retomar apenas etapas elegíveis, preservando parcelas já confirmadas e eventos anteriores."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 127,
+    "texto": "- [x] BE-077 — Definir comportamento para operação concluída, pendente, inexistente, de outra loja e em retomada concorrente."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 128,
+    "texto": "- [x] BE-078 — Não alterar ou apagar ledger histórico para corrigir valores; definir evento compensatório quando esse escopo for aprovado."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 129,
+    "texto": "- [ ] BE-079 — Distinguir comprovante demonstrativo de documento fiscal ou prova de recolhimento real."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 130,
+    "texto": "- [ ] BE-080 — Caso haja processamento assíncrono, fornecer estado consultável e critérios de término; WebSocket não é obrigatório."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 135,
+    "texto": "- [x] BE-081 — Implementar lista de operações com busca por referência, período, status, meio, paginação e ordem definida."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 136,
+    "texto": "- [x] BE-082 — Validar parâmetros de filtros e retornar erro legível para intervalo invertido ou paginação inválida."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 137,
+    "texto": "- [x] BE-083 — Retornar detalhe pelo identificador correto com bruto, tributo, taxa, líquido, datas, pagamento e split."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 138,
+    "texto": "- [x] BE-084 — Incluir regra histórica, parcelas e destinos quando disponíveis; documentar ausência e exposição permitida."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 139,
+    "texto": "- [x] BE-085 — Entregar eventos/ledger públicos em ordem estável e com paginação se necessário."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 140,
+    "texto": "- [x] BE-086 — Proteger detalhe e eventos contra acesso cruzado entre estabelecimentos mesmo com ID conhecido."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 141,
+    "texto": "- [x] BE-087 — Garantir lista vazia com estrutura válida, sem transformar ausência de dados em erro interno."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 142,
+    "texto": "- [ ] BE-088 — Se exportação for incluída, usar o filtro completo e a permissão correta, não apenas a página atual."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 143,
+    "texto": "- [ ] BE-089 — Definir formato, limite, charset, moeda, fuso, processamento assíncrono e validade do download quando aplicável."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 144,
+    "texto": "- [ ] BE-090 — Não incluir dados privados, segredos ou informações internas nas exportações."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 149,
+    "texto": "- [x] BE-091 — Implementar criação e consulta paginada de despesas pagas, escopo atual do frontend."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 150,
+    "texto": "- [x] BE-092 — Fornecer catálogo/valores de categoria autorizados; não exigir categorias que o cliente não consegue consultar."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 151,
+    "texto": "- [x] BE-093 — Validar descrição, comprimento, valor, data de pagamento e categoria no servidor."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 152,
+    "texto": "- [ ] BE-094 — Definir data mínima/máxima e correções; o limite temporal do cenário fictício não é regra oficial."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 153,
+    "texto": "- [ ] BE-095 — Persistir estabelecimento, autor, chave de intenção, valor, moeda, data de pagamento e criação."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 154,
+    "texto": "- [x] BE-096 — Retornar recurso criado e referência recuperável, não apenas sucesso sem identificação."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 155,
+    "texto": "- [x] BE-097 — Definir idempotência e consulta de confirmação para uma despesa com resposta perdida."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 156,
+    "texto": "- [x] BE-098 — Não descontar novamente taxas que já foram incluídas na composição do split."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 157,
+    "texto": "- [x] BE-099 — Garantir efeito único no caixa do período correto e atualização consistente após cadastro."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 158,
+    "texto": "- [x] BE-100 — Não inventar vencido/pendente com base apenas na data; definir modelo antes de ampliar além de despesas pagas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 159,
+    "texto": "- [ ] BE-101 — Recorrência, edição, exclusão lógica, estorno e categorias sugeridas exigem regras e contratos próprios antes da implementação."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 160,
+    "texto": "- [ ] BE-102 — Quando IA sugerir categoria, devolver sugestão revisável; não persistir mudança automaticamente."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 165,
+    "texto": "- [x] BE-103 — Entregar agregados por estabelecimento e período sem exigir que o cliente carregue todas as vendas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 166,
+    "texto": "- [x] BE-104 — Definir quando líquido entra no caixa: pagamento, confirmação de parcela ou liquidação; documentar a escolha."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 167,
+    "texto": "- [ ] BE-105 — Entregar saldo inicial, entradas reconhecidas, saídas, ajustes explícitos e saldo final conciliável."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 168,
+    "texto": "- [x] BE-106 — Não incluir pendências e previsões como dinheiro já disponível."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 169,
+    "texto": "- [x] BE-107 — Não contabilizar bruto e líquido da mesma venda duas vezes."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 170,
+    "texto": "- [ ] BE-108 — Usar os mesmos filtros e regras em indicadores, gráfico, tabela e exportação."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 171,
+    "texto": "- [ ] BE-109 — Definir agrupamentos diários/semanais, semanas parciais, intervalos vazios e saldo negativo."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 172,
+    "texto": "- [x] BE-110 — Retornar período aplicado, fuso, instante de atualização e regra de reconhecimento utilizada."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 173,
+    "texto": "- [ ] BE-111 — Para projeções futuras, retornar horizonte, premissas, base e dados insuficientes; não vender previsão como certeza."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 174,
+    "texto": "- [x] BE-112 — Implementar simulação sem efeitos em venda, split persistido ou ledger."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 175,
+    "texto": "- [x] BE-113 — Validar parâmetros de simulação; retornar bruto, tributo, taxa, líquido, regra e inclusão de taxa."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 176,
+    "texto": "- [x] BE-114 — Cobrir a diferença documental de 150 − 15 = 135 sem taxa e 150 − 15 − 3 = 132 com taxa fictícia."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 177,
+    "texto": "- [x] BE-115 — Não expor dados de outra loja em agregados, mesmo quando não houver IDs individuais."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 182,
+    "texto": "- [x] BE-116 — Manter MockAIProvider e eventual provedor externo atrás de interface, com indicação clara da origem."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 183,
+    "texto": "- [x] BE-117 — Buscar fatos financeiros no servidor pelo período/ID autorizado; não aceitar totais do cliente como fonte confiável."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 184,
+    "texto": "- [x] BE-118 — Enviar ao provedor apenas dados necessários, sem credenciais e sem informação pessoal não requerida."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 185,
+    "texto": "- [ ] BE-119 — Manter chaves do provedor somente em configuração de servidor e fora do Git/logs."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 186,
+    "texto": "- [ ] BE-120 — Retornar texto, referência da consulta, origem, data e limitações quando aplicáveis."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 187,
+    "texto": "- [x] BE-121 — Não executar comandos, links, SQL ou ações financeiras contidos na resposta do modelo."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 188,
+    "texto": "- [ ] BE-122 — Definir timeout, resposta vazia, dados insuficientes, indisponibilidade e limite de chamadas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 189,
+    "texto": "- [x] BE-123 — Manter vendas, consulta e caixa funcionando quando a IA falhar."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 190,
+    "texto": "- [ ] BE-124 — Não gerar benchmark ou recomendação fiscal sem fonte e regra aprovadas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 191,
+    "texto": "- [ ] BE-125 — Se houver cache, isolar por loja, período, versão dos dados e provedor; invalidar após mudança relevante."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 196,
+    "texto": "- [x] BE-126 — Padronizar envelope de erro com código estável, mensagem pública, erros por campo e correlationId."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 197,
+    "texto": "- [x] BE-127 — Mapear 400/422, 401, 403, 404, 409, 429 e 5xx conforme contrato; não entregar stack trace, SQL ou segredo."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 198,
+    "texto": "- [x] BE-128 — Definir quais erros são definitivos e quais deixam resultado financeiro desconhecido."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 199,
+    "texto": "- [x] BE-129 — Configurar CORS para origens autorizadas; credenciais não podem depender de origem curinga."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 200,
+    "texto": "- [ ] BE-130 — Usar HTTPS no ambiente compartilhado; fornecer caminho de desenvolvimento compatível com a política Android."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 201,
+    "texto": "- [x] BE-131 — Validar tamanho de payload, paginação, limites de busca e conteúdo de campos; usar queries parametrizadas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 202,
+    "texto": "- [ ] BE-132 — Aplicar timeouts de banco e integrações e não manter transações abertas esperando IA ou usuário."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 203,
+    "texto": "- [x] BE-133 — Proteger Actuator/Swagger administrativos conforme ambiente sem bloquear documentação de desenvolvimento acordada."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 204,
+    "texto": "- [ ] BE-134 — Produzir logs estruturados com correlação e status, sem senha, token, payload financeiro completo ou dados pessoais desnecessários."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 205,
+    "texto": "- [ ] BE-135 — Medir falhas, latência, pendências e retomadas; distinguir observabilidade técnica de ledger de negócio."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 206,
+    "texto": "- [ ] BE-136 — Documentar backup/restore, retenção e acesso operacional; não prometer conformidade jurídica apenas pela existência do código."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 207,
+    "texto": "- [ ] BE-137 — Configurar pipeline com testes, validação de migrations e análise de dependências; registrar versões e evidências."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 212,
+    "texto": "- [x] BE-138 — Testar cálculo e arredondamento com valores mínimos, limites, resíduos e composição de parcelas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 213,
+    "texto": "- [x] BE-139 — Testar repetição idêntica, chave divergente, solicitações concorrentes e recuperação após commit sem resposta."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 214,
+    "texto": "- [x] BE-140 — Testar login válido/inválido, expiração, revogação, 401 e 403."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 215,
+    "texto": "- [ ] BE-141 — Testar isolamento entre pelo menos duas lojas em lista, detalhe, ledger, despesa, exportação e agregados."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 216,
+    "texto": "- [x] BE-142 — Testar recusa, pagamento pendente, sucesso, falha parcial e retomada concorrente."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 217,
+    "texto": "- [x] BE-143 — Testar que a mesma parcela não é registrada ou confirmada duas vezes."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 218,
+    "texto": "- [x] BE-144 — Testar mudança de regra sem alteração de operações históricas."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 219,
+    "texto": "- [x] BE-145 — Testar despesa afetando caixa uma vez, exclusão de pendências e taxa não duplicada."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 220,
+    "texto": "- [x] BE-146 — Testar paginação estável, filtro vazio, limites de datas e horários próximos à meia-noite."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 221,
+    "texto": "- [x] BE-147 — Testar simulação sem escrita e IA indisponível sem interromper o núcleo."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 222,
+    "texto": "- [ ] BE-148 — Testar migrations em banco vazio e atualização de banco com dados; não usar apenas H2 para provar comportamento PostgreSQL."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 223,
+    "texto": "- [x] BE-149 — Testar reinício da aplicação preservando dados e tentativa idempotente."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 224,
+    "texto": "- [x] BE-150 — Entregar relatório com comando, versão, ambiente, quantidade de testes, falhas e limitações, não só captura de tela verde."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 225,
+    "texto": "- [ ] BE-151 — Executar roteiro conjunto com os dois clientes quando o contrato estiver mapeado; mocks do frontend não substituem essa etapa."
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "linha": 226,
+    "texto": "- [ ] BE-152 — Entregar todos os itens do formulário de devolutiva e relacionar cada pendência a um responsável."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 35,
+    "texto": "- [x] BD-001 — Fixar versão do PostgreSQL e extensão necessária; não exigir extensão sem justificativa."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 36,
+    "texto": "- [x] BD-002 — Escolher Flyway ou Liquibase e versionar todas as mudanças de schema."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 37,
+    "texto": "- [x] BD-003 — Não depender de ddl-auto=update como mecanismo de entrega/produção."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 38,
+    "texto": "- [ ] BD-004 — Separar migrations estruturais de seeds demonstrativas e impedir seed em ambiente real por acidente."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 39,
+    "texto": "- [x] BD-005 — Criar esquema do zero com um comando reproduzível e validar nova execução sem duplicação."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 40,
+    "texto": "- [x] BD-006 — Documentar atualização de versão existente, compatibilidade e estratégia de rollback ou forward fix."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 41,
+    "texto": "- [x] BD-007 — Não editar migration já aplicada; criar versão nova."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 42,
+    "texto": "- [x] BD-008 — Entregar diagrama e dicionário com tipo, nullability, default, PK, FK, índices e regra de cada coluna."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 46,
+    "texto": "- [x] BD-009 — Criar PKs estáveis e FKs para vendas, operações, parcelas, eventos, despesas e usuários."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 47,
+    "texto": "- [x] BD-010 — Aplicar NOT NULL nos campos que o domínio exige, não apenas validação no DTO."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 48,
+    "texto": "- [x] BD-011 — Aplicar CHECK para valores não negativos/positivos e moeda suportada conforme contexto."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 49,
+    "texto": "- [x] BD-012 — Impedir vínculo de operação/parcela/despesa com loja divergente, usando chave composta/FK ou mecanismo equivalente."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 50,
+    "texto": "- [x] BD-013 — Documentar cardinalidade venda-operação e venda-pagamento; não presumir 1:1 se houver múltiplas tentativas."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 51,
+    "texto": "- [x] BD-014 — Garantir unicidade de chave idempotente por loja e ação."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 52,
+    "texto": "- [x] BD-015 — Garantir unicidade de evento financeiro/effect key para evitar dupla contabilização."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 53,
+    "texto": "- [x] BD-016 — Garantir unicidade da sequência do evento dentro da operação."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 54,
+    "texto": "- [x] BD-017 — Controlar estados válidos por constraints ou catálogo, com migration para evolução."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 55,
+    "texto": "- [x] BD-018 — Não usar cascata destrutiva que apague histórico financeiro ao excluir usuário/loja."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 56,
+    "texto": "- [x] BD-019 — Preservar regra histórica imutável e snapshot usado no cálculo."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 57,
+    "texto": "- [x] BD-020 — Validar composição dentro de transação; soma entre linhas de parcelas exige estratégia além de CHECK isolado por linha."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 61,
+    "texto": "- [x] BD-021 — Definir fronteira transacional da criação: intenção, venda, operação, parcelas e eventos consistentes."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 62,
+    "texto": "- [x] BD-022 — Capturar conflito de unicidade e retornar a intenção existente ou conflito de entrada conforme contrato."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 63,
+    "texto": "- [x] BD-023 — Usar lock de linha, controle otimista/versionamento ou estratégia equivalente para transições concorrentes."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 64,
+    "texto": "- [x] BD-024 — Não executar chamada externa longa ou IA mantendo lock/transação aberta."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 65,
+    "texto": "- [ ] BD-025 — Definir estados intermediários duráveis quando a integração externa ocorrer fora da transação."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 66,
+    "texto": "- [ ] BD-026 — Usar outbox quando publicação de evento precisar acompanhar commit sem dupla escrita insegura."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 67,
+    "texto": "- [ ] BD-027 — Implementar consumidor idempotente/inbox para mensagens duplicadas quando houver fila."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 68,
+    "texto": "- [ ] BD-028 — Definir política limitada de repetição para deadlock/serialization failure; repetir a transação inteira quando necessário."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 69,
+    "texto": "- [x] BD-029 — Testar duas criações simultâneas com mesma chave usando conexões distintas."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 70,
+    "texto": "- [x] BD-030 — Testar duas retomadas simultâneas e confirmar que cada efeito/ledger ocorre uma vez."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 71,
+    "texto": "- [ ] BD-031 — Testar queda antes do commit, depois do commit e antes da resposta HTTP."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 72,
+    "texto": "- [x] BD-032 — Garantir que consultar o estado de uma tentativa não crie novo efeito financeiro."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 76,
+    "texto": "- [x] BD-033 — Definir se ledger é de eventos ou contábil; se contábil, documentar contas e regra de partidas conciliadas."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 77,
+    "texto": "- [x] BD-034 — Não confundir descrição de evento com entrada de caixa."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 78,
+    "texto": "- [x] BD-035 — Gravar momento de reconhecimento e identificador único da origem do movimento."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 79,
+    "texto": "- [x] BD-036 — Consultar somente lançamentos reconhecidos para saldo realizado."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 80,
+    "texto": "- [x] BD-037 — Derivar saldo inicial do histórico ou saldo de abertura formalmente registrado, nunca de constante oculta."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 81,
+    "texto": "- [ ] BD-038 — Documentar ajuste de saldo e sua origem; não alterar saldo final manualmente sem evento."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 82,
+    "texto": "- [x] BD-039 — Não duplicar tributo/taxa como despesa após desconto na composição."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 83,
+    "texto": "- [ ] BD-040 — Preservar histórico após atualização de nome/categoria/regra."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 84,
+    "texto": "- [ ] BD-041 — Definir correção por compensação ou nova versão quando o escopo permitir; não apagar rastreabilidade."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 85,
+    "texto": "- [ ] BD-042 — Definir reconciliação de soma de parcelas, venda, operação e movimentos."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 86,
+    "texto": "- [x] BD-043 — Testar agrupamentos com fuso de negócio, virada de dia/mês e períodos sem movimento."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 87,
+    "texto": "- [ ] BD-044 — Definir consistência entre indicadores e listas quando há gravação concorrente."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 91,
+    "texto": "- [x] BD-045 — Indexar listas por merchant_id, data de ordenação e ID de desempate."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 92,
+    "texto": "- [ ] BD-046 — Adicionar índices para FKs e filtros frequentes conforme planos observados, não em toda coluna indiscriminadamente."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 93,
+    "texto": "- [x] BD-047 — Indexar busca por idempotência e referência de operação/pagamento."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 94,
+    "texto": "- [x] BD-048 — Indexar ledger por loja e recognized_at para períodos e saldo inicial."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 95,
+    "texto": "- [x] BD-049 — Indexar despesas por loja e paid_on e definir busca por descrição conforme necessidade."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 96,
+    "texto": "- [x] BD-050 — Limitar tamanho de páginas e consultas de período; evitar retornar toda a base."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 97,
+    "texto": "- [x] BD-051 — Revisar N+1 do ORM em listas e detalhes; retornar DTOs explícitos."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 98,
+    "texto": "- [x] BD-052 — Usar EXPLAIN ANALYZE em base sintética representativa e registrar plano/tempo, sem dados reais."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 99,
+    "texto": "- [x] BD-053 — Definir paginação estável; cursor pode ser necessário quando offset não atender o volume."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 100,
+    "texto": "- [x] BD-054 — Definir pool de conexões, timeout de statement e limites de recursos."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 101,
+    "texto": "- [x] BD-055 — Não criar cache/agregado materializado sem regra de atualização e reconciliação."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 105,
+    "texto": "- [x] BD-056 — Separar usuário de migration do usuário de runtime, com privilégios mínimos."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 106,
+    "texto": "- [x] BD-057 — Não expor PostgreSQL para web/Android ou para internet aberta."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 107,
+    "texto": "- [x] BD-058 — Manter credenciais em configuração segura e nunca em código, imagem Docker, relatório ou dump público."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 108,
+    "texto": "- [x] BD-059 — Aplicar isolamento por loja em toda query; se usar RLS, documentar contexto por conexão e impedir vazamento pelo pool."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 109,
+    "texto": "- [ ] BD-060 — Proteger backups com acesso restrito e retenção definida."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 110,
+    "texto": "- [x] BD-061 — Entregar comandos de backup e restore e executar restauração em banco descartável."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 111,
+    "texto": "- [x] BD-062 — Verificar que restauração conserva intenções, chaves, eventos e relacionamentos."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 112,
+    "texto": "- [ ] BD-063 — Definir retenção/anonimização com responsáveis; não apagar registros fiscais/financeiros sem política aprovada."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 113,
+    "texto": "- [ ] BD-064 — Monitorar locks, conexões, espaço, falhas de migration e tempo de consultas."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 114,
+    "texto": "- [ ] BD-065 — Entregar seeds sintéticas com duas lojas, três perfis, operações em todos os estados e despesas em períodos diferentes."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 115,
+    "texto": "- [x] BD-066 — Não considerar testes em banco em memória como evidência suficiente de constraints/transações PostgreSQL."
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "linha": 116,
+    "texto": "- [x] BD-067 — Entregar relatório de migrations, testes de concorrência e restore com versões e comandos executados."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 18,
+    "texto": "- [x] Código backend e Maven Wrapper em [backend](../backend/README.md)."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 19,
+    "texto": "- [x] README, configuração e `.env.example` sem credenciais reais."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 20,
+    "texto": "- [x] Dockerfile/Compose com volume e healthchecks; **execução Docker não validada** neste ambiente."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 21,
+    "texto": "- [x] [OpenAPI exportado](../backend/docs/openapi.json), [contrato e matriz de endpoints](../backend/docs/API.md)."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 22,
+    "texto": "- [x] Smoke HTTP reproduzível e exemplo de venda sintética confirmada."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 23,
+    "texto": "- [ ] Exemplos completos de todos os estados/erros para aceite dos parsers dos clientes."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 24,
+    "texto": "- [x] Migrations V1–V3, seed controlada com duas lojas e três perfis."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 25,
+    "texto": "- [x] [Diagrama/dicionário](../backend/docs/BANCO.md), constraints e índices."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 26,
+    "texto": "- [x] [Relatório de validação](../backend/docs/VALIDACAO.md):29 testes registrados na entrega integrada (28 no incremento 0.2), PostgreSQL real, concorrência e isolamento."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 27,
+    "texto": "- [x] Reinício preservando intenção e backup/restore em banco descartável, com evidências."
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "linha": 28,
+    "texto": "- [x] [Decisões](../backend/docs/DECISOES.md), [checklist do incremento](../backend/docs/CHECKLIST.md) e marcações BE/BD com referência de evidência."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 7,
+    "texto": "- [x] Fundação: Java21/Spring Boot, Maven Wrapper, estrutura por domínio, PostgreSQL17.11, Flyway e configuração."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 8,
+    "texto": "- [x] Persistência: três migrations, tenant nas FKs, composição, efeitos únicos, histórico imutável, runtime separado do proprietário."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 9,
+    "texto": "- [x] Segurança: sessão revogável/expirável, três perfis, duas lojas, hashes, CORS restrito, limite de corpo e rate limit local."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 10,
+    "texto": "- [x] Venda: mock de pagamento, regra versionada, split determinístico e três parcelas; venda sem operação quando pagamento não confirmado/regra ausente."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 11,
+    "texto": "- [x] Recuperação: intenção durável, conflito por chave divergente, concorrência, reprocessamento de falha parcial sem duplicação."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 12,
+    "texto": "- [x] Consultas: vendas/operações/detalhe/ledger, filtros/páginas/tenant."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 13,
+    "texto": "- [x] Despesas pagas: categorias, validação, idempotência e saída única."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 14,
+    "texto": "- [x] Caixa: abertura por histórico, líquido concluído, despesas, saldo final e fuso."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 15,
+    "texto": "- [x] Simulação sem efeitos financeiros; explicação local com MockAIProvider e fallback."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 16,
+    "texto": "- [x] Testes automatizados de domínio e integração em PostgreSQL real; smoke HTTP."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 17,
+    "texto": "- [x] Backup/restore em banco descartável com comparação integral dos registros de12 tabelas."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 18,
+    "texto": "- [x] Contrato, exemplos, modelo, dicionário, README e devolutiva inicial."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 19,
+    "texto": "- [x] Integração web implementada: contrato, sessão bearer, consultas, vendas, despesas e recuperação. [Guia](../../frontend/documentacao/INTEGRACAO-BACKEND.md)."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 20,
+    "texto": "- [ ] Aceite final do Android e homologação conjunta do MVP."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 21,
+    "texto": "- [ ] Projeção e tendências: mantidas pendentes por decisão expressa do usuário."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 22,
+    "texto": "- [ ] Classificação sugerida de despesas e alertas: P3, dependem de regras/contratos correspondentes."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 23,
+    "texto": "- [ ] Docker Compose executado, HTTPS para POS e implantação compartilhada: ambiente Docker não disponível; produção não autorizada."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 24,
+    "texto": "- [x] Incremento 0.2 (13/10/2026): queda após commit e antes da resposta HTTP, consultas em lote, EXPLAIN com massa sintética e limites de datas do caixa; [evidências](INCREMENTO-02.md)."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 25,
+    "texto": "- [ ] Ensaio de carga sustentada e limites operacionais homologados."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 26,
+    "texto": "- [ ] Upgrade estrutural sobre massa existente (além de revalidar migrations no reinício), CI remoto e auditoria automatizada de vulnerabilidades."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 27,
+    "texto": "- [ ] Retenção/anonimização, política de backups e responsáveis operacionais finais."
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "linha": 28,
+    "texto": "- [ ] Revisão conjunta do OpenAPI e dos estados sem operação pelos consumidores."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 15,
+    "texto": "- [ ] FE-001 — Adotar V2 e entrega parcial como referência de trabalho, preservando V1 como histórico."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 16,
+    "texto": "- [ ] FE-002 — Registrar divergências do README e propor sua conciliação com a stack documentada."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 17,
+    "texto": "- [ ] FE-003 — Preservar os créditos do design/protótipo e pesquisa a Thayná e dos requisitos a Thayná e Kleysson."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 18,
+    "texto": "- [ ] FE-004 — Separar entregas do dashboard web das entregas do aplicativo Kotlin; uma não comprova a conclusão da outra."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 19,
+    "texto": "- [ ] FE-005 — Definir quem desenvolve e revisa cada cliente, sem presumir disponibilidade de alguém pela autoria anterior."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 20,
+    "texto": "- [ ] FE-006 — Identificar cada tela como primeiro incremento, complemento, proposta ou fora do MVP."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 21,
+    "texto": "- [ ] FE-007 — Registrar que crédito, cancelamento/estorno e tendências ampliadas continuam pendentes de definição."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 22,
+    "texto": "- [ ] FE-008 — Confirmar o dispositivo Android de demonstração e os critérios de entrega com a equipe."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 23,
+    "texto": "- [ ] FE-009 — Manter o rótulo SIMULADO nas experiências que representam pagamento, split e comprovante."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 24,
+    "texto": "- [ ] FE-010 — Não transportar do outro projeto FastAPI, Firestore, identidade visual, requisitos de idosos, PWA obrigatória ou endpoints de agendamento."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 30,
+    "texto": "- [ ] FE-011 — Criar a aplicação web com React e TypeScript, conforme documentação."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 31,
+    "texto": "- [ ] FE-012 — Registrar a escolha da ferramenta de build; Vite é uma sugestão, não uma exigência encontrada nas fontes."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 32,
+    "texto": "- [ ] FE-013 — Selecionar uma solução de rotas compatível com a aplicação e registrar a escolha."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 33,
+    "texto": "- [ ] FE-014 — Organizar páginas, componentes, serviços de dados, tipos e recursos visuais com responsabilidades claras."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 34,
+    "texto": "- [ ] FE-015 — Configurar checagem de tipos e scripts de execução, build e testes pertinentes."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 35,
+    "texto": "- [ ] FE-016 — Centralizar a URL da API por ambiente; usar VITE_API_URL somente se Vite for escolhido."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 36,
+    "texto": "- [ ] FE-017 — Criar arquivo de exemplo de configuração sem credenciais."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 37,
+    "texto": "- [ ] FE-018 — Separar explicitamente modo demonstrativo com fixtures e modo integrado à API."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 38,
+    "texto": "- [ ] FE-019 — Impedir que uma falha da API faça a aplicação trocar silenciosamente para dados fictícios."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 39,
+    "texto": "- [ ] FE-020 — Manter os mesmos contratos de dados nos adapters de demonstração e integração."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 40,
+    "texto": "- [ ] FE-021 — Implementar página de endereço inexistente e recuperação de falha inesperada de renderização."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 41,
+    "texto": "- [ ] FE-022 — Garantir que acesso direto e atualização de uma rota interna funcionem no ambiente escolhido."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 42,
+    "texto": "- [ ] FE-023 — Fixar dependências no arquivo de lock e documentar requisitos do ambiente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 43,
+    "texto": "- [ ] FE-024 — Não tornar Tailwind, Lucide ou outra biblioteca obrigatórios apenas por aparecerem na lista de referência."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 49,
+    "texto": "- [ ] FE-025 — Inventariar cores, tipografia, espaçamentos, ícones, cartões, tabelas e estados do Figma."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 50,
+    "texto": "- [ ] FE-026 — Definir tokens visuais reutilizáveis, preservando a identidade do Planner Comercial."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 51,
+    "texto": "- [ ] FE-027 — Criar componentes de botão primário, secundário, destrutivo e somente ícone, com nomes acessíveis."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 52,
+    "texto": "- [ ] FE-028 — Criar campos de texto, senha, valor monetário, seleção e período com rótulo e erro associado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 53,
+    "texto": "- [ ] FE-029 — Criar cartões de indicador com título, valor, período e estado de carregamento."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 54,
+    "texto": "- [ ] FE-030 — Criar tabela/lista de operações com versão utilizável em tela pequena."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 55,
+    "texto": "- [ ] FE-031 — Criar badges de status com texto e ícone; cor não deve ser a única informação."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 56,
+    "texto": "- [ ] FE-032 — Criar mensagens de sucesso, erro, aviso e informação com linguagem consistente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 57,
+    "texto": "- [ ] FE-033 — Criar estados de carregamento, lista vazia, acesso negado e serviço indisponível."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 58,
+    "texto": "- [ ] FE-034 — Criar modal ou painel de detalhe com fechamento por teclado e restauração de foco."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 59,
+    "texto": "- [ ] FE-035 — Criar apresentação consistente de moeda, percentuais, datas e identificadores."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 60,
+    "texto": "- [ ] FE-036 — Reutilizar os padrões visuais sem copiar dados incoerentes do protótipo."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 66,
+    "texto": "- [ ] FE-037 — Implementar navegação para dashboard, operações, financeiro, despesas, simulação e explicações, conforme a fase entregue."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 67,
+    "texto": "- [ ] FE-038 — Destacar a página atual e manter navegação utilizável em celular e desktop."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 68,
+    "texto": "- [ ] FE-039 — Implementar login com rótulos, validação de preenchimento e envio protegido contra clique duplo."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 69,
+    "texto": "- [ ] FE-040 — Exibir erro de credencial inválida sem revelar detalhes internos da conta."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 70,
+    "texto": "- [ ] FE-041 — Diferenciar login demonstrativo de autenticação validada pelo backend."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 71,
+    "texto": "- [ ] FE-042 — Preparar cadastro básico documentado; alinhar campos, criação da loja e provisionamento antes de integrar."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 72,
+    "texto": "- [ ] FE-043 — Definir com o backend o mecanismo de sessão, expiração e renovação, se houver."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 73,
+    "texto": "- [ ] FE-044 — Implementar proteção de navegação para páginas autenticadas, sem tratá-la como autorização de servidor."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 74,
+    "texto": "- [ ] FE-045 — Exibir estabelecimento e usuário do contexto autenticado, quando disponíveis no contrato."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 75,
+    "texto": "- [ ] FE-046 — Tratar sessão expirada levando ao login e evitando ciclos de redirecionamento."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 76,
+    "texto": "- [ ] FE-047 — Distinguir sessão inválida de usuário autenticado sem permissão."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 77,
+    "texto": "- [ ] FE-048 — Implementar saída e limpeza de dados da sessão na interface e no cache do cliente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 78,
+    "texto": "- [ ] FE-049 — Impedir que dados de uma sessão anterior reapareçam após entrada de outro usuário."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 79,
+    "texto": "- [ ] FE-050 — Alinhar matriz mínima de permissões para consulta, venda, despesa e reprocessamento."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 80,
+    "texto": "- [ ] FE-051 — Ocultar ou desabilitar ações sem permissão, mantendo a validação obrigatória no backend."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 81,
+    "texto": "- [ ] FE-052 — Não oferecer recuperação de senha, convites ou administração de usuários como funcionais sem fluxo e API definidos."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 87,
+    "texto": "- [ ] FE-053 — Criar conjunto fictício único para operações, parcelas, despesas e indicadores."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 88,
+    "texto": "- [ ] FE-054 — Atribuir identificadores únicos e relacionamentos coerentes entre os registros."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 89,
+    "texto": "- [ ] FE-055 — Usar datas coerentes e período de demonstração visível; não apresentar 2024 como dados atuais."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 90,
+    "texto": "- [ ] FE-056 — Incluir operações concluídas, em processamento e com falha, conforme estados propostos e depois ratificados."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 91,
+    "texto": "- [ ] FE-057 — Separar status do pagamento de status do split e das parcelas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 92,
+    "texto": "- [ ] FE-058 — Incluir cenário de R$150,00, tributo demonstrativo R$15,00, taxa R$3,00 e líquido R$132,00."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 93,
+    "texto": "- [ ] FE-059 — Identificar 10% e 2% como parâmetros fictícios do cenário, sem apresentá-los como alíquotas oficiais."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 94,
+    "texto": "- [ ] FE-060 — Incluir lista vazia, dados insuficientes, erro, lentidão e acesso negado como cenários reproduzíveis."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 95,
+    "texto": "- [ ] FE-061 — Derivar indicadores demonstrativos dos mesmos registros usados em listas e detalhes."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 96,
+    "texto": "- [ ] FE-062 — Garantir igualdade exata entre bruto e soma das parcelas nas fixtures."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 97,
+    "texto": "- [ ] FE-063 — Não usar dados pessoais, contatos ou conversas reais do grupo como massa demonstrativa."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 98,
+    "texto": "- [ ] FE-064 — Documentar que fixtures não são persistência real nem evidência de backend concluído."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 104,
+    "texto": "- [ ] FE-065 — Exibir lista com identificação, data, bruto, tributo, taxa, líquido e status, conforme disponibilidade do contrato."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 105,
+    "texto": "- [ ] FE-066 — Permitir abrir o detalhe pelo identificador da operação selecionada."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 106,
+    "texto": "- [ ] FE-067 — Implementar filtro por período com validação de início e fim."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 107,
+    "texto": "- [ ] FE-068 — Alinhar filtros adicionais de status e meio de pagamento com a API antes de exibi-los como funcionais."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 108,
+    "texto": "- [ ] FE-069 — Definir fuso e limites do período com o backend para evitar perda de vendas na mudança de dia."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 109,
+    "texto": "- [ ] FE-070 — Implementar paginação ou carregamento incremental conforme contrato."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 110,
+    "texto": "- [ ] FE-071 — Reiniciar paginação quando o filtro mudar."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 111,
+    "texto": "- [ ] FE-072 — Distinguir ausência de operações de ausência de resultado para os filtros."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 112,
+    "texto": "- [ ] FE-073 — Permitir limpar filtros e recuperar a consulta inicial."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 113,
+    "texto": "- [ ] FE-074 — Evitar que resposta antiga sobrescreva uma busca mais recente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 114,
+    "texto": "- [ ] FE-075 — Mostrar atualização ou carregamento sem permitir ações sobre registros de outro filtro por engano."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 115,
+    "texto": "- [ ] FE-076 — Preservar filtro e posição de navegação ao retornar do detalhe, quando viável."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 116,
+    "texto": "- [ ] FE-077 — Não calcular total geral somando apenas a página carregada; usar agregação correspondente ao filtro."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 122,
+    "texto": "- [ ] FE-078 — Buscar o detalhe pelo ID da rota, sem fixture fixa para todas as operações."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 123,
+    "texto": "- [ ] FE-079 — Exibir bruto, tributo, taxa e líquido da operação consultada."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 124,
+    "texto": "- [ ] FE-080 — Exibir datas, referência da venda e meio de pagamento quando definidos no contrato."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 125,
+    "texto": "- [ ] FE-081 — Mostrar cada parcela e seu destino demonstrativo sem insinuar recolhimento real."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 126,
+    "texto": "- [ ] FE-082 — Exibir regra e percentuais históricos retornados pela operação, sem aplicar regras atuais à venda antiga."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 127,
+    "texto": "- [ ] FE-083 — Apresentar etapas e eventos do histórico de forma cronológica e compreensível."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 128,
+    "texto": "- [ ] FE-084 — Distinguir pagamento confirmado de split concluído."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 129,
+    "texto": "- [ ] FE-085 — Apresentar falha parcial indicando parcelas confirmadas e pendentes, se disponibilizadas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 130,
+    "texto": "- [ ] FE-086 — Mostrar resposta desconhecida após timeout sem concluir automaticamente que a operação falhou."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 131,
+    "texto": "- [ ] FE-087 — Oferecer consulta/atualização do estado antes de sugerir novo envio."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 132,
+    "texto": "- [ ] FE-088 — Exibir reprocessamento somente para estado e perfil autorizados pelo contrato."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 133,
+    "texto": "- [ ] FE-089 — Explicar a ação de retomada e impedir cliques repetidos durante a solicitação."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 134,
+    "texto": "- [ ] FE-090 — Atualizar detalhe, histórico e indicadores pertinentes após retorno confirmado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 135,
+    "texto": "- [ ] FE-091 — Não remover visualmente o histórico anterior após reprocessamento."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 136,
+    "texto": "- [ ] FE-092 — Não reenviar individualmente parcelas confirmadas a partir de decisões locais do frontend."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 137,
+    "texto": "- [ ] FE-093 — Tratar operação inexistente, acesso negado e indisponibilidade como estados diferentes."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 138,
+    "texto": "- [ ] FE-094 — Não oferecer edição ou exclusão de eventos do ledger."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 144,
+    "texto": "- [ ] FE-095 — Apresentar período de referência e estabelecimento dos indicadores."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 145,
+    "texto": "- [ ] FE-096 — Exibir vendas brutas, tributos, taxas e líquido como grandezas distintas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 146,
+    "texto": "- [ ] FE-097 — Usar “entradas líquidas” quando o indicador representar líquido elegível para o caixa."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 147,
+    "texto": "- [ ] FE-098 — Alinhar o momento de reconhecimento da entrada antes da integração financeira definitiva."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 148,
+    "texto": "- [ ] FE-099 — Distinguir ausência de informação de valor zero."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 149,
+    "texto": "- [ ] FE-100 — Conciliar cartões, gráficos e tabelas com a mesma fonte e filtros."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 150,
+    "texto": "- [ ] FE-101 — Permitir navegar de um indicador para a lista correspondente quando esse vínculo estiver implementado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 151,
+    "texto": "- [ ] FE-102 — Exibir comparações somente quando existirem dois períodos compatíveis."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 152,
+    "texto": "- [ ] FE-103 — Tratar base anterior zero ou ausente sem percentual infinito ou crescimento inventado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 153,
+    "texto": "- [ ] FE-104 — Identificar dado desatualizado quando a atualização falhar; não apresentá-lo como consulta recente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 154,
+    "texto": "- [ ] FE-105 — Fornecer alternativa textual aos gráficos e rótulos que não dependam só de cores."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 155,
+    "texto": "- [ ] FE-106 — Não incorporar saldo de simulações gerenciais aos indicadores de vendas realizadas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 161,
+    "texto": "- [ ] FE-107 — Criar formulário com campos acordados para descrição, valor, categoria e data."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 162,
+    "texto": "- [ ] FE-108 — Validar valor positivo, formato de data e campos obrigatórios antes do envio."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 163,
+    "texto": "- [ ] FE-109 — Preservar campos preenchidos após falha recuperável."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 164,
+    "texto": "- [ ] FE-110 — Exibir envio, confirmação e erro sem criar registro definitivo antes do retorno da API."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 165,
+    "texto": "- [ ] FE-111 — Atualizar lista e consultas financeiras afetadas após cadastro confirmado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 166,
+    "texto": "- [ ] FE-112 — Permitir consultar despesas por período conforme API."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 167,
+    "texto": "- [ ] FE-113 — Alinhar se edição e exclusão pertencem ao MVP; não presumir esses endpoints."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 168,
+    "texto": "- [ ] FE-114 — Definir vencimento, pagamento e estados antes de reproduzir pago/pendente/vencido do Figma."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 169,
+    "texto": "- [ ] FE-115 — Implementar recorrência somente após definição de campos, geração e efeitos no caixa."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 170,
+    "texto": "- [ ] FE-116 — Diferenciar taxa já deduzida no split de despesa independente para evitar desconto duplicado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 171,
+    "texto": "- [ ] FE-117 — Não deduzir automaticamente despesa prevista do caixa realizado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 172,
+    "texto": "- [ ] FE-118 — Preparar sugestão de categoria como valor revisável, se a funcionalidade P3 for mantida."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 178,
+    "texto": "- [ ] FE-119 — Apresentar saldo inicial, entradas, saídas e saldo final com período explícito."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 179,
+    "texto": "- [ ] FE-120 — Alinhar fórmula, fuso, reconhecimento financeiro e fonte do saldo inicial com o backend."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 180,
+    "texto": "- [ ] FE-121 — Separar movimentos realizados de previstos."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 181,
+    "texto": "- [ ] FE-122 — Conciliar saldo final com saldo inicial mais entradas menos saídas e eventuais ajustes identificados."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 182,
+    "texto": "- [ ] FE-123 — Garantir que a soma das semanas concilie com o total do mesmo intervalo."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 183,
+    "texto": "- [ ] FE-124 — Tratar semanas parciais e intervalos sem movimento."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 184,
+    "texto": "- [ ] FE-125 — Exibir projeção como estimativa, com horizonte, premissas e data de referência."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 185,
+    "texto": "- [ ] FE-126 — Mostrar dados insuficientes quando não houver base para projetar."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 186,
+    "texto": "- [ ] FE-127 — Não extrapolar previsão localmente com fórmula escolhida sem alinhamento."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 187,
+    "texto": "- [ ] FE-128 — Exibir saldo negativo claramente sem depender só de vermelho."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 188,
+    "texto": "- [ ] FE-129 — Diferenciar alerta determinístico de caixa de explicação textual por IA."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 189,
+    "texto": "- [ ] FE-130 — Manter consulta financeira utilizável quando o serviço de explicação estiver indisponível."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 195,
+    "texto": "- [ ] FE-131 — Criar tela separada do registro efetivo de venda demonstrativa."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 196,
+    "texto": "- [ ] FE-132 — Identificar explicitamente que a simulação não cria venda, split persistido ou entrada de caixa."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 197,
+    "texto": "- [ ] FE-133 — Validar valor e parâmetros permitidos pelo contrato."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 198,
+    "texto": "- [ ] FE-134 — Informar se taxa de pagamento está incluída no resultado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 199,
+    "texto": "- [ ] FE-135 — Explicar a diferença entre R$135,00 sem a taxa do exemplo e R$132,00 com taxa demonstrativa de 2%."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 200,
+    "texto": "- [ ] FE-136 — Exibir entrada e resultado juntos para permitir conferência do cenário."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 201,
+    "texto": "- [ ] FE-137 — Marcar resultado anterior como desatualizado quando os parâmetros forem alterados."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 202,
+    "texto": "- [ ] FE-138 — Tratar solicitação inválida, indisponibilidade e ausência de regra com mensagens específicas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 203,
+    "texto": "- [ ] FE-139 — Evitar que uma resposta antiga apareça como resultado de parâmetros novos."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 204,
+    "texto": "- [ ] FE-140 — Não transformar simulação em apuração tributária oficial ou recomendação fiscal."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 210,
+    "texto": "- [ ] FE-141 — Exibir explicação do split e dos indicadores somente sobre dados identificados da operação/período."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 211,
+    "texto": "- [ ] FE-142 — Diferenciar resposta demonstrativa do MockAIProvider de resposta produzida por provedor externo."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 212,
+    "texto": "- [ ] FE-143 — Implementar carregamento, resposta vazia, erro, timeout e dados insuficientes."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 213,
+    "texto": "- [ ] FE-144 — Manter valores oficiais da aplicação visíveis quando a explicação falhar."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 214,
+    "texto": "- [ ] FE-145 — Evitar que explicação de consulta anterior apareça junto de outro período ou outra operação."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 215,
+    "texto": "- [ ] FE-146 — Renderizar texto recebido sem execução de HTML ou código arbitrário."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 216,
+    "texto": "- [ ] FE-147 — Não permitir que texto da IA execute reprocessamento, altere despesa ou movimente valores."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 217,
+    "texto": "- [ ] FE-148 — Não enviar totais editáveis pelo cliente como fonte financeira confiável para o servidor."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 218,
+    "texto": "- [ ] FE-149 — Identificar comparações com os dados que as sustentam; não reproduzir benchmark “ideal” sem fonte."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 219,
+    "texto": "- [ ] FE-150 — Permitir corrigir categoria sugerida caso a funcionalidade P3 seja mantida."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 220,
+    "texto": "- [ ] FE-151 — Mostrar alertas somente a partir de condições definidas e dados do backend."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 221,
+    "texto": "- [ ] FE-152 — Manter chaves de provedor externo exclusivamente no backend."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 227,
+    "texto": "- [ ] FE-153 — Classificar perfil da loja, usuários, notificações, integrações e exportação quanto ao escopo efetivamente aceito."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 228,
+    "texto": "- [ ] FE-154 — Exibir somente dados de configuração disponíveis e autorizados pelo backend."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 229,
+    "texto": "- [ ] FE-155 — Não oferecer botão Salvar funcional sem persistência e tratamento de erro."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 230,
+    "texto": "- [ ] FE-156 — Não permitir alterar regime ou alíquota por controle visual sem regra, permissão e contrato definidos."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 231,
+    "texto": "- [ ] FE-157 — Se exportação for aprovada, definir formato, campos, período, permissões e origem dos dados."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 232,
+    "texto": "- [ ] FE-158 — Garantir que exportação represente o filtro completo, não apenas a página visível, conforme escopo acordado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 233,
+    "texto": "- [ ] FE-159 — Identificar conteúdo indisponível ou retirar a ação da navegação da entrega, evitando botão sem efeito."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 234,
+    "texto": "- [ ] FE-160 — Não apresentar integração bancária, crédito ou recolhimento real como ativos no MVP."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 242,
+    "texto": "- [ ] FE-161 — Criar o cliente Kotlin conforme documentação e definir versões compatíveis do ambiente Android."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 243,
+    "texto": "- [ ] FE-162 — Confirmar Android mínimo, emulador/aparelho e orientação de demonstração."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 244,
+    "texto": "- [ ] FE-163 — Organizar interface, estado das telas e comunicação HTTP em responsabilidades separadas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 245,
+    "texto": "- [ ] FE-164 — Configurar endereço da API conforme emulador/dispositivo, sem presumir que localhost aponta para o computador."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 246,
+    "texto": "- [ ] FE-165 — Implementar login, saída, sessão expirada e acesso negado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 247,
+    "texto": "- [ ] FE-166 — Implementar início com acesso à nova venda e histórico."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 248,
+    "texto": "- [ ] FE-167 — Implementar entrada de valor com teclado apropriado e leitura correta de vírgula decimal."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 249,
+    "texto": "- [ ] FE-168 — Validar vazio, zero, negativo e limites acordados."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 250,
+    "texto": "- [ ] FE-169 — Exibir meios e categorias realmente permitidos pelo contrato demonstrativo."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 251,
+    "texto": "- [ ] FE-170 — Não tratar categorias 8%, 10% e 12% do protótipo como legislação validada."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 252,
+    "texto": "- [ ] FE-171 — Mostrar resumo antes de enviar a venda, com identificação de simulação."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 253,
+    "texto": "- [ ] FE-172 — Enviar os campos de entrada acordados; receber cálculos e estados do backend."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 254,
+    "texto": "- [ ] FE-173 — Gerar/manter identificador de tentativa conforme contrato de idempotência."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 255,
+    "texto": "- [ ] FE-174 — Reutilizar a mesma chave ao consultar/repetir a mesma tentativa após perda de resposta."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 256,
+    "texto": "- [ ] FE-175 — Gerar nova chave apenas para uma nova intenção de venda."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 257,
+    "texto": "- [ ] FE-176 — Proteger contra toque duplo sem considerar essa proteção suficiente para idempotência financeira."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 258,
+    "texto": "- [ ] FE-177 — Mostrar pagamento aguardando confirmação, confirmado ou recusado conforme estado recebido."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 259,
+    "texto": "- [ ] FE-178 — Mostrar andamento e resultado do split separadamente do pagamento."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 260,
+    "texto": "- [ ] FE-179 — Tratar timeout como resultado possivelmente desconhecido e permitir recuperação segura do estado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 261,
+    "texto": "- [ ] FE-180 — Exibir parcelas e comprovante demonstrativo sem afirmar recolhimento fiscal real."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 262,
+    "texto": "- [ ] FE-181 — Implementar histórico e detalhe pelo identificador correto."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 263,
+    "texto": "- [ ] FE-182 — Reutilizar critérios de falha parcial e reprocessamento das seções anteriores."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 264,
+    "texto": "- [ ] FE-183 — Preservar ou recuperar tentativa ativa após retorno à tela, rotação ou recriação do aplicativo, conforme estratégia acordada."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 265,
+    "texto": "- [ ] FE-184 — Não reenviar cobrança automaticamente ao reabrir ou recompor uma tela."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 266,
+    "texto": "- [ ] FE-185 — Garantir que o teclado não esconda valor, erro ou ação principal."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 267,
+    "texto": "- [ ] FE-186 — Apresentar falta de rede e permitir consulta posterior sem fabricar confirmação local."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 268,
+    "texto": "- [ ] FE-187 — Não criar fila de pagamentos offline sem projeto específico e contrato correspondente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 269,
+    "texto": "- [ ] FE-188 — Produzir build instalável e validar no alvo escolhido."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 270,
+    "texto": "- [ ] FE-189 — Registrar que funcionamento em Android comum não comprova homologação em maquineta física."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 271,
+    "texto": "- [ ] FE-190 — Manter SDK de fabricante, impressão física e publicação em loja fora da primeira entrega, salvo inclusão explícita."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 279,
+    "texto": "- [ ] FE-191 — Manter cliente HTTP centralizado e tipos de requisição/resposta por capacidade."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 280,
+    "texto": "- [ ] FE-192 — Definir com o backend autenticação, provisionamento e contexto de loja."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 281,
+    "texto": "- [ ] FE-193 — Definir criação/consulta da venda e relação entre saleId e operationId."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 282,
+    "texto": "- [ ] FE-194 — Definir lista, filtros, paginação, detalhe, parcelas e eventos da operação."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 283,
+    "texto": "- [ ] FE-195 — Definir reprocessamento, estados elegíveis e comportamento de operação já concluída."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 284,
+    "texto": "- [ ] FE-196 — Definir cadastro/consulta de despesas e operações adicionais aprovadas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 285,
+    "texto": "- [ ] FE-197 — Definir agregações de caixa, projeção, simulação e explicações."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 286,
+    "texto": "- [ ] FE-198 — Fixar representação de dinheiro: centavos inteiros ou decimal textual conforme acordo; evitar valores ambíguos."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 287,
+    "texto": "- [ ] FE-199 — Fixar representação de percentuais e escala; distinguir 10 de 0,10 no contrato."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 288,
+    "texto": "- [ ] FE-200 — Fixar datas, timestamps, fuso e limites inclusivos/exclusivos dos filtros."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 289,
+    "texto": "- [ ] FE-201 — Definir campos obrigatórios, opcionais, nulos e listas vazias."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 290,
+    "texto": "- [ ] FE-202 — Mapear estados recebidos para rótulos; valor desconhecido deve ter fallback seguro."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 291,
+    "texto": "- [ ] FE-203 — Definir chave de idempotência, escopo e resposta para repetição idêntica e conteúdo divergente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 292,
+    "texto": "- [ ] FE-204 — Resolver a divergência entre recuperar operação existente e responder conflito; não adotar 409 para toda repetição."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 293,
+    "texto": "- [ ] FE-205 — Definir erros de validação, autenticação, autorização, inexistência, conflito e indisponibilidade."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 294,
+    "texto": "- [ ] FE-206 — Associar erros de campo aos respectivos controles quando a API fornecer essa informação."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 295,
+    "texto": "- [ ] FE-207 — Definir estratégia de consulta de andamento, intervalo e encerramento; não presumir WebSocket obrigatório."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 296,
+    "texto": "- [ ] FE-208 — Cancelar ou ignorar consultas obsoletas após troca de tela, filtro ou sessão."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 297,
+    "texto": "- [ ] FE-209 — Invalidar consultas afetadas após mutações confirmadas, sem atualizar apenas uma das telas relacionadas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 298,
+    "texto": "- [ ] FE-210 — Limitar repetição automática a ações seguras; não repetir gravação sem semântica idempotente acordada."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 299,
+    "texto": "- [ ] FE-211 — Não aceitar merchantId editável como autorização; o backend valida o contexto de acesso."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 300,
+    "texto": "- [ ] FE-212 — Documentar exemplos de sucesso e falha que possam ser usados igualmente no mock e na API."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 301,
+    "texto": "- [ ] FE-213 — Registrar a versão do contrato e discrepâncias encontradas durante integração."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 307,
+    "texto": "- [ ] FE-214 — Testar layouts estreitos, intermediários e desktop sem cortes de conteúdo essencial."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 308,
+    "texto": "- [ ] FE-215 — Adaptar tabelas extensas sem tornar valores e ações inacessíveis."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 309,
+    "texto": "- [ ] FE-216 — Permitir navegação por teclado com foco visível e ordem previsível."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 310,
+    "texto": "- [ ] FE-217 — Usar títulos, regiões, botões, links e rótulos semanticamente adequados."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 311,
+    "texto": "- [ ] FE-218 — Associar mensagens de erro aos campos e indicar como corrigi-los."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 312,
+    "texto": "- [ ] FE-219 — Anunciar mudanças relevantes de status sem excesso de mensagens para leitores de tela."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 313,
+    "texto": "- [ ] FE-220 — Verificar contraste de texto, foco e controles; registrar problemas e correções."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 314,
+    "texto": "- [ ] FE-221 — Testar ampliação de texto/zoom sem impedir o fluxo principal."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 315,
+    "texto": "- [ ] FE-222 — Garantir áreas de toque adequadas e separação entre ações sensíveis."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 316,
+    "texto": "- [ ] FE-223 — Fornecer texto alternativo útil para imagens informativas e ignorar decoração no leitor de tela."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 317,
+    "texto": "- [ ] FE-224 — Não depender de hover para revelar ações essenciais."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 318,
+    "texto": "- [ ] FE-225 — Respeitar preferência de movimento reduzido nas animações adotadas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 319,
+    "texto": "- [ ] FE-226 — Usar linguagem clara para comerciante, responsável financeiro e operador."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 320,
+    "texto": "- [ ] FE-227 — Explicar tributo, taxa, líquido e simulação sem exigir conhecimento técnico."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 321,
+    "texto": "- [ ] FE-228 — Testar pelo menos um fluxo web com leitor de tela e o fluxo Android com recursos de acessibilidade do dispositivo escolhido."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 327,
+    "texto": "- [ ] FE-229 — Manter senha, token, chave de provedor e dados privados fora de logs, URLs e repositório."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 328,
+    "texto": "- [ ] FE-230 — Definir armazenamento de sessão conforme mecanismo acordado; não adotar armazenamento persistente por conveniência sem avaliação."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 329,
+    "texto": "- [ ] FE-231 — Coordenar proteção de sessão, CORS e eventual CSRF com o backend; não tentar resolver autorização apenas no cliente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 330,
+    "texto": "- [ ] FE-232 — Não conectar os clientes diretamente ao PostgreSQL nem distribuir credencial de banco."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 331,
+    "texto": "- [ ] FE-233 — Não reproduzir TaxEngine, SplitEngine ou ledger autoritativos no frontend."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 332,
+    "texto": "- [ ] FE-234 — Tratar validação de formulário como ajuda ao usuário; validação de negócio permanece no servidor."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 333,
+    "texto": "- [ ] FE-235 — Não permitir que parâmetros do navegador habilitem modo REAL."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 334,
+    "texto": "- [ ] FE-236 — Não apresentar stack trace, resposta interna sensível ou credencial em mensagens de erro."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 335,
+    "texto": "- [ ] FE-237 — Limpar caches de dados financeiros ao encerrar ou trocar sessão."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 336,
+    "texto": "- [ ] FE-238 — Não aplicar cache offline persistente de respostas financeiras sem escopo e política definidos."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 337,
+    "texto": "- [ ] FE-239 — Manter WhatsApp, imagens pessoais e pacote privado de auditoria fora do Git público."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 338,
+    "texto": "- [ ] FE-240 — Revisar dependências e resultados de verificações de segurança disponíveis, sem prometer ausência absoluta de vulnerabilidades."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 344,
+    "texto": "- [ ] FE-241 — Exibir erro de rede com possibilidade segura de recuperação."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 345,
+    "texto": "- [ ] FE-242 — Não usar apenas um indicador de conexão para concluir que a API está acessível."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 346,
+    "texto": "- [ ] FE-243 — Preservar consulta/dados anteriores com indicação de desatualização quando apropriado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 347,
+    "texto": "- [ ] FE-244 — Evitar múltiplas requisições equivalentes causadas por renderização da tela."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 348,
+    "texto": "- [ ] FE-245 — Encerrar consultas periódicas ao sair da página ou encerrar a sessão."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 349,
+    "texto": "- [ ] FE-246 — Tratar grandes listas pela paginação contratada, sem carregar toda a base por padrão."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 350,
+    "texto": "- [ ] FE-247 — Verificar carregamento inicial, tamanho de recursos e travamentos nas telas principais."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 351,
+    "texto": "- [ ] FE-248 — Definir hospedagem/demonstração web e configurar rotas e API para esse ambiente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 352,
+    "texto": "- [ ] FE-249 — Utilizar transporte seguro no ambiente publicado e tratar incompatibilidade de conteúdo misto."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 353,
+    "texto": "- [ ] FE-250 — Não incluir PWA, service worker ou transações offline como exigências herdadas do outro projeto."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 354,
+    "texto": "- [ ] FE-251 — Se PWA for posteriormente aprovada, planejar instalação, cache, atualização e privacidade como escopo adicional."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 362,
+    "texto": "- [ ] FE-252 — Testar login válido, inválido, expiração, logout e nova sessão."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 363,
+    "texto": "- [ ] FE-253 — Testar navegação, acesso direto, atualização de rota e página inexistente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 364,
+    "texto": "- [ ] FE-254 — Testar lista → detalhe de pelo menos duas operações com valores diferentes."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 365,
+    "texto": "- [ ] FE-255 — Testar filtro, paginação, retorno do detalhe e ausência de resultados."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 366,
+    "texto": "- [ ] FE-256 — Testar chegada fora de ordem de respostas após mudança rápida de filtro."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 367,
+    "texto": "- [ ] FE-257 — Testar reconciliação de indicadores, tabela, gráfico e detalhes no conjunto demonstrativo."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 368,
+    "texto": "- [ ] FE-258 — Testar operação de R$150,00 com parcelas demonstrativas 15/3/132."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 369,
+    "texto": "- [ ] FE-259 — Testar campos monetários com vírgula, centavos, vazio, zero, negativo e limite acordado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 370,
+    "texto": "- [ ] FE-260 — Testar pagamento recusado sem interface de split concluído."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 371,
+    "texto": "- [ ] FE-261 — Testar falha parcial preservando parcelas já confirmadas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 372,
+    "texto": "- [ ] FE-262 — Testar perda de resposta após envio e recuperação do estado, sem criar outra intenção de venda."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 373,
+    "texto": "- [ ] FE-263 — Testar toque/clique duplo e retomada; verificar com backend que os registros não duplicaram."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 374,
+    "texto": "- [ ] FE-264 — Testar repetição de mesma chave com dados diferentes conforme contrato de conflito."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 375,
+    "texto": "- [ ] FE-265 — Testar encerramento/retorno do aplicativo Android durante tentativa ativa."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 376,
+    "texto": "- [ ] FE-266 — Testar despesa válida, rejeitada e erro de envio preservando formulário."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 377,
+    "texto": "- [ ] FE-267 — Testar caixa realizado versus previsto e ausência de dedução duplicada de taxa."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 378,
+    "texto": "- [ ] FE-268 — Testar projeção sem dados suficientes e comparação com base zero."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 379,
+    "texto": "- [ ] FE-269 — Testar simulação sem criação de venda ou alteração de caixa."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 380,
+    "texto": "- [ ] FE-270 — Testar IA mock, indisponível, vazia e resposta de período anterior."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 381,
+    "texto": "- [ ] FE-271 — Testar conteúdo textual recebido sem execução de marcação insegura."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 382,
+    "texto": "- [ ] FE-272 — Testar acesso negado a operação de outra loja em conjunto com backend; esconder botão não conta como prova."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 383,
+    "texto": "- [ ] FE-273 — Testar erro de API sem substituição silenciosa por mock."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 384,
+    "texto": "- [ ] FE-274 — Testar celular, desktop, zoom, teclado e leitura acessível dos estados críticos."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 385,
+    "texto": "- [ ] FE-275 — Testar instalação e execução do Android no alvo definido."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 386,
+    "texto": "- [ ] FE-276 — Rodar checagem de tipos, build e testes configurados; corrigir falhas relevantes."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 387,
+    "texto": "- [ ] FE-277 — Revisar console/logs sem erros relevantes nem dados sensíveis."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 388,
+    "texto": "- [ ] FE-278 — Executar novamente o fluxo principal com a API do projeto, registrando versão e ambiente."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 394,
+    "texto": "- [ ] FE-279 — Confirmar repositório e branch de trabalho com a equipe; não presumir branch frontend existente ou obrigatória."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 395,
+    "texto": "- [ ] FE-280 — Preservar trabalho de outros integrantes e evitar sobrescrever alterações compartilhadas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 396,
+    "texto": "- [ ] FE-281 — Fazer commits delimitados com descrição do comportamento entregue."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 397,
+    "texto": "- [ ] FE-282 — Abrir revisão com escopo, evidências, dependências e limitações reais."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 398,
+    "texto": "- [ ] FE-283 — Publicar commits no remoto conforme o fluxo acordado e autorização de trabalho no repositório."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 399,
+    "texto": "- [ ] FE-284 — Integrar na branch compartilhada somente conforme processo de revisão combinado."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 400,
+    "texto": "- [ ] FE-285 — Documentar instalação, configuração, execução, build e escolha do modo mock/API."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 401,
+    "texto": "- [ ] FE-286 — Documentar como executar os cenários demonstrativos sem API paga."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 402,
+    "texto": "- [ ] FE-287 — Registrar contratos pendentes, rotas implementadas e recursos indisponíveis."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 403,
+    "texto": "- [ ] FE-288 — Atualizar README de acordo com código e capacidades efetivamente presentes."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 404,
+    "texto": "- [ ] FE-289 — Preparar roteiro de demonstração com caso normal, falha, retomada e consulta."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 405,
+    "texto": "- [ ] FE-290 — Entregar evidências separadas de web, Android, integração e validações do backend."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 406,
+    "texto": "- [ ] FE-291 — Revisar arquivos incluídos na entrega para excluir segredos e fontes privadas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 407,
+    "texto": "- [ ] FE-292 — Marcar conclusão por recurso e ambiente, sem declarar todo o sistema pronto porque o build passou."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 448,
+    "texto": "- [ ] FE-293 — **Pronto visual:** telas e estados revisados contra o Figma, com diferenças justificadas."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 449,
+    "texto": "- [ ] FE-294 — **Pronto em demonstração:** fluxo funciona com dados fictícios consistentes e identificação de simulação."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 450,
+    "texto": "- [ ] FE-295 — **Pronto para integração:** contrato, adapter, erros e configuração estão documentados e alinhados."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 451,
+    "texto": "- [ ] FE-296 — **Integrado:** fluxo executado com backend real do projeto, incluindo persistência e recuperação verificadas em conjunto."
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "linha": 452,
+    "texto": "- [ ] FE-297 — **Pronto para entrega:** build, testes pertinentes, acessibilidade, roteiro, documentação e limitações registrados para cada cliente entregue."
+  },
+  {
+    "arquivo": "frontend/documentacao/DECISAO-ESCOPO-MVP.md",
+    "linha": 27,
+    "texto": "- [ ] Produto/backend: definir quais indicadores serão analisados, janelas comparadas, granularidade e quantidade mínima de dados. Essas definições não aparecem na captura."
+  },
+  {
+    "arquivo": "frontend/documentacao/DECISAO-ESCOPO-MVP.md",
+    "linha": 28,
+    "texto": "- [ ] Backend: obter séries e agregados a partir dos registros autorizados da loja, com moeda, fuso, filtros e reconhecimento financeiro explícitos."
+  },
+  {
+    "arquivo": "frontend/documentacao/DECISAO-ESCOPO-MVP.md",
+    "linha": 29,
+    "texto": "- [ ] Backend: calcular comparações determinísticas; diferenciar alta, queda, estabilidade e ausência de base, sem dividir por zero ou inventar percentual."
+  },
+  {
+    "arquivo": "frontend/documentacao/DECISAO-ESCOPO-MVP.md",
+    "linha": 30,
+    "texto": "- [ ] Backend/IA: produzir interpretação ancorada nos dados, identificar origem mock/provedor, período e limitações; impedir recomendações ou ações financeiras automáticas."
+  },
+  {
+    "arquivo": "frontend/documentacao/DECISAO-ESCOPO-MVP.md",
+    "linha": 31,
+    "texto": "- [ ] Contrato: devolver períodos comparados, indicadores, valores de origem, variação quando calculável, estado de dados insuficientes e texto. O DTO final deve ser aprovado; não existe endpoint novo presumido."
+  },
+  {
+    "arquivo": "frontend/documentacao/DECISAO-ESCOPO-MVP.md",
+    "linha": 32,
+    "texto": "- [ ] Frontend: ampliar a tela para exibir comparações e dados que sustentam cada tendência, com rótulos acessíveis, estado sem base e vínculo claro com o período solicitado."
+  },
+  {
+    "arquivo": "frontend/documentacao/DECISAO-ESCOPO-MVP.md",
+    "linha": 33,
+    "texto": "- [ ] Frontend: manter as consultas financeiras utilizáveis quando a IA falhar, descartar respostas antigas e renderizar explicações como texto seguro."
+  },
+  {
+    "arquivo": "frontend/documentacao/DECISAO-ESCOPO-MVP.md",
+    "linha": 34,
+    "texto": "- [ ] Testes conjuntos: aumento, queda, estabilidade, período vazio, base anterior zero, mudança de período durante carregamento, falha de IA e tentativa de acessar dados de outra loja."
+  },
+  {
+    "arquivo": "frontend/documentacao/PENDENCIAS-OBJETIVAS.md",
+    "linha": 7,
+    "texto": "- [x] Contrato web, bearer, contexto de loja, consultas, venda, despesas e recuperação."
+  },
+  {
+    "arquivo": "frontend/documentacao/PENDENCIAS-OBJETIVAS.md",
+    "linha": 8,
+    "texto": "- [x] Reexecutar 89 testes web e build nesta revisão."
+  },
+  {
+    "arquivo": "frontend/documentacao/PENDENCIAS-OBJETIVAS.md",
+    "linha": 9,
+    "texto": "- [ ] Completar tendências do servidor e interpretação do MVP."
+  },
+  {
+    "arquivo": "frontend/documentacao/PENDENCIAS-OBJETIVAS.md",
+    "linha": 10,
+    "texto": "- [ ] Completar dados/séries do dashboard API para os recursos presentes na demo."
+  },
+  {
+    "arquivo": "frontend/documentacao/PENDENCIAS-OBJETIVAS.md",
+    "linha": 11,
+    "texto": "- [ ] Implementar contrato Kotlin, HTTPS e validação em dispositivo."
+  },
+  {
+    "arquivo": "frontend/documentacao/PENDENCIAS-OBJETIVAS.md",
+    "linha": 12,
+    "texto": "- [ ] Aceite visual Figma e leitor de tela."
+  },
+  {
+    "arquivo": "frontend/documentacao/PENDENCIAS-OBJETIVAS.md",
+    "linha": 13,
+    "texto": "- [ ] Ratificar módulos adicionais: relatórios, classificação, alertas e configurações administrativas."
+  },
+  {
+    "arquivo": "frontend/documentacao/PENDENCIAS-OBJETIVAS.md",
+    "linha": 14,
+    "texto": "- [ ] Validar infraestrutura, carga, upgrade com dados e operação de backups."
+  }
+]

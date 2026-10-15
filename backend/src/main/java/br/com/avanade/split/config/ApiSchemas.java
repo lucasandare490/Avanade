@@ -103,5 +103,5 @@ public final class ApiSchemas {
       String origin,
       String provider,
       String status,
-      br.com.avanade.split.finance.FinanceService.CashFlow facts) {}
+      br.com.avanade.split.finance.FinanceService.CashFlow facts, br.com.avanade.split.finance.AnalyticsService.Comparison tendencias) {}
 }

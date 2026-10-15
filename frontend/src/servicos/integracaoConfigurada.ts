@@ -1,3 +1,4 @@
+import { validarTendencias, type ComparacaoTendencias } from '../utilitarios/tendencias';
 import type { ContratoServidor } from './adapterApi';
 import type { ConsultaOperacoes, ConsultaDespesas, PeriodoConsulta } from './contratosConsultas';
 import type { MeioPagamento, Operacao, Venda, ResultadoVenda } from '../tipos';
@@ -224,6 +225,41 @@ export const contratoServidor: ContratoServidor = {
     chaveIdempotencia: chave,
   }),
   consultas: (enviar) => ({
+    exportarOperacoes: (f, sinal) => {
+      const p = filtros(f); p.delete('page'); p.delete('size');
+      Object.entries(periodo(f)).forEach(([k,v]) => p.set(k,v));
+      if (f.status) p.set('status', {concluida:'CONCLUIDA',falha:'FALHA',pendente:'PENDENTE'}[f.status]);
+      return enviar(`/api/v1/exports/operations?${p}`, v => {
+        const r=objeto(v), total=inteiro(r.total);
+        const colunas=lista(r.columns).map(texto);
+        const linhas=lista(r.rows).map(row => lista(row).map(texto));
+        if(r.mode!=='SIMULADO' || total>2000 || linhas.length!==total || colunas.length!==8 || colunas.some(c=>c.length>100) || linhas.some(l=>l.length!==8 || l.some(c=>c.length>200)) || new Set(linhas.map(l=>l[0])).size!==total) throw new Error('Exportação incompleta ou inválida.');
+        return {colunas,linhas,total};
+      }, {sinal});
+    },
+    consultarComposicao: (p, sinal) => enviar(
+      `/api/v1/dashboard/details?${new URLSearchParams(periodo(p))}`, v => {
+        const r = objeto(v); periodoRecebido(r.period, p);
+        if (r.recognition !== 'COMPLETED_AT_IN_MERCHANT_TIME_ZONE') throw new Error('Reconhecimento desconhecido.');
+        const valores = (v: unknown) => {
+          const a = objeto(v);
+          const bruto = inteiro(a.grossCents), tributo = inteiro(a.taxCents), taxa = inteiro(a.feeCents), liquido = inteiro(a.netCents);
+          if (bruto !== tributo + taxa + liquido) throw new Error('Composição divergente.');
+          return { bruto, tributo, taxa, liquido };
+        };
+        const totais = { ...valores(r.totals), quantidade: inteiro(objeto(r.totals).count) };
+        const dias = lista(r.series).map(v => ({ ...valores(v), data: texto(objeto(v).date) }));
+        const primeiro = Date.parse(p.inicio + 'T00:00:00Z'), ultimo = Date.parse(p.fim + 'T00:00:00Z');
+        if (dias.length !== (ultimo - primeiro) / 86400000 + 1 || dias.some((d,i) => d.data !== new Date(primeiro + i*86400000).toISOString().slice(0,10))) throw new Error('Série diária incompleta.');
+        for (const campo of ['bruto','tributo','taxa','liquido'] as const) {
+          const soma = dias.reduce((n,d) => n + d[campo],0);
+          if (!Number.isSafeInteger(soma) || soma !== totais[campo]) throw new Error('Série e totais divergentes.');
+        }
+        return { totais, dias };
+      }, { sinal }),
+    consultarTendencias: (p, sinal) => enviar(
+      `/api/v1/trends?${new URLSearchParams(periodo(p))}`,
+      v => validarTendencias(v as ComparacaoTendencias, p), { sinal }),
     async consultarOperacoes(f, sinal) {
       const p = filtros(f);
       if (f.status)
@@ -309,6 +345,7 @@ export const contratoServidor: ContratoServidor = {
           const r = objeto(v);
           return {
             periodo: periodoRecebido(r.period, p),
+            tendencias: r.tendencias === undefined ? undefined : validarTendencias(r.tendencias as ComparacaoTendencias, p),
             texto: texto(r.text),
             origem: opcao(r.origin, {
               demonstrativa: 'demonstrativa',

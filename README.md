@@ -1,363 +1,120 @@
-> **Integração web — 14/10/2026:** frontend conectado ao backend Spring/PostgreSQL. Execute `./scripts/dev.sh` na raiz e abra http://127.0.0.1:5173. [Guia de execução, contas, recuperação e testes](frontend/documentacao/INTEGRACAO-BACKEND.md). Pagamentos/tributos/explicações permanecem simulados; Android e tendências do servidor seguem separados.
+> **Estado atual:** consulte o [incremento de integração e validação](documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
 
-> **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A comparação de tendências com dados e IA do servidor continua pendente; a integração web atual está descrita no guia acima. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](frontend/documentacao/TENDENCIAS-IMPLEMENTADAS.md).
+> Para executar no VS Code e apresentar: [guia de execução](COMO-APRESENTAR.md).
 
-# 💰 Planner Comercial — Split Tributário
+> **Incremento local de tendências e dashboard:** comparação persistida, consulta independente da explicação e composição diária implementadas. Consulte [evidências e limites](documentacao/revisao-2026-10-14/INCREMENTO-TENDENCIAS-E-DASHBOARD.md). Esta atualização não encerra todas as pendências.
 
-Solução experimental para ajudar pequenos estabelecimentos a compreender a separação dos valores de suas vendas, acompanhar o valor líquido e consultar o histórico das operações com transparência e rastreabilidade.
+# Planner Comercial — Split Tributário
 
-O projeto nasceu como **Split Tributário** e é apresentado nas interfaces e no protótipo como **Planner Comercial**. Reúne um dashboard web e um aplicativo Android para o fluxo de Smart POS.
+Projeto acadêmico da Squad 19, GrowUp/Senac com Avanade, voltado a pequenos estabelecimentos. A proposta é mostrar como o valor de uma venda se divide entre tributo, taxa e líquido, registrar o caminho de cada parcela e permitir acompanhar operações, despesas e fluxo de caixa.
 
-**Registro histórico da entrega — 10/10/2026:** os clientes web e Android estão implementados em modo demonstrativo, com testes locais e builds executados. A estrutura de integração está preparada; o backend e o banco ainda precisam ser implementados, entregues e conectados. Nenhuma transferência financeira ou arrecadação tributária real é realizada.
+## Problema e usuários
 
-## 📌 Sobre o projeto
+O comerciante precisa entender quanto recebeu e para onde foi cada parcela, sem fazer conciliações manuais complexas. A responsável financeira precisa consultar histórico, conferir o líquido e acompanhar o caixa. O operador do Smart POS precisa registrar vendas rapidamente e distinguir pagamento confirmado de split concluído.
 
-Pequenos comerciantes frequentemente têm pouco tempo e recursos para compreender e acompanhar os tributos de cada venda. A proposta é tornar visíveis o valor bruto, as parcelas destinadas a tributos e taxas e o valor líquido disponível ao estabelecimento, seguindo regras previamente definidas.
+As personas são Carlos (comerciante), Mariana (financeiro) e João (operador). A solução combina um painel web com um aplicativo Android. O fluxo principal é venda → pagamento → cálculo → separação e direcionamento → registro → consulta.
 
-Na solução integrada planejada, o servidor identifica os valores, aplica regras determinísticas, registra a separação e o direcionamento demonstrativo das parcelas e mantém o histórico consultável. As interfaces apresentam o resultado de forma simples, sem exigir cálculos manuais do usuário.
+## Estado atual — revisão de 14/10/2026
 
-O caráter atual é acadêmico e experimental, no contexto GrowUp/Senac com Avanade. Regras tributárias e integrações financeiras precisam de validação específica antes de qualquer uso real.
+Esta pasta contém backend e banco implementados e integração web. A revisão local aprovou **89 testes web, 29 backend e 4 cenários no navegador**, além dos builds. O Android ainda não está conectado a esta API. A pasta `Avanade-main` é uma cópia sem `.git`; não confundir o nome da pasta com evidência de branch ou publicação.
 
-## 🎯 Problema
+**Persistência no PostgreSQL é real; pagamento, roteamento, regras tributárias e explicações permanecem simulados.** Não há arrecadação real, PSP ou IA externa. Valores de 10% e 2% são fictícios. Uma venda de R$ 150,00 no cenário padrão gera R$ 15,00 de tributo, R$ 3,00 de taxa e R$ 132,00 líquidos. Sem taxa, o exemplo de simulação resulta em R$ 135,00.
 
-- Dificuldade para entender quanto de cada venda corresponde a tributos e taxas.
-- Necessidade de cálculos e controles manuais.
-- Dificuldade para conciliar valores brutos e líquidos.
-- Falta de rastreabilidade sobre o destino e o estado de cada parcela.
-- Dificuldade para acompanhar vendas, despesas e impacto no fluxo de caixa.
-- Risco de erros de lançamento durante o atendimento.
-- Informações financeiras apresentadas de forma complexa.
-
-## 💡 Solução e fluxo principal
-
-O sistema deve permitir registrar a venda, identificar e separar os valores, acompanhar o processamento, registrar eventos e consultar o resultado posteriormente.
-
-```text
-Venda
-  → identificação dos valores
-  → aplicação das regras tributárias e de taxas
-  → separação das parcelas
-      ├─ tributos → destino definido
-      ├─ taxa → destino definido, quando aplicável
-      └─ líquido → estabelecimento
-  → registro da operação e dos eventos
-  → consulta, conferência e acompanhamento financeiro
-```
-
-Pagamento confirmado e split concluído são estados diferentes. Uma operação pode estar pendente, ter falha parcial ou ficar com resposta desconhecida após uma interrupção. A interface deve mostrar essa diferença e permitir recuperação segura, sem criar uma nova venda por engano.
-
-## 👥 Personas
-
-| Persona | Papel | Necessidades | Dificuldades |
-|---|---|---|---|
-| **Carlos** | Pequeno comerciante, proprietário | Saber para onde foi cada parcela; entender o dinheiro disponível; acompanhar vendas e despesas | Pouco tempo, conhecimento financeiro/tributário limitado e dados complexos |
-| **Mariana** | Responsável financeira | Conferir operações de split; conciliar entradas e saídas líquidas; comparar períodos; projetar caixa e identificar riscos | Conciliação entre bruto e líquido e falta de rastreabilidade |
-| **João** | Operador do Smart POS | Registrar venda rapidamente; acompanhar confirmação; consultar histórico e evitar erros | Pressão durante o atendimento e risco de digitação |
-
-> Carlos: “Quero saber para onde foi cada parcela do tributo sem ter que fazer tudo manualmente.”
-
-> Mariana: “Preciso conseguir conferir cada operação e entender exatamente como os valores chegaram ao resultado líquido.”
-
-> João: “Preciso registrar a venda rapidamente e ter certeza de que o split foi concluído.”
-
-As necessidades das personas orientam o produto; não significam que todos os recursos, como projeção de caixa, já estejam implementados ou aprovados para o MVP.
-
-## 🚀 MVP e escopo
-
-O núcleo do MVP continua sendo **venda → identificação → separação → direcionamento → registro → consulta**. O objetivo inicial é validar esse fluxo com pagamentos e regras demonstrativos.
-
-| Recurso | Objetivo | Estado atual |
+| Área | Implementado | Limite atual |
 |---|---|---|
-| Registro de venda | Criar uma intenção de venda com revisão dos dados | Demonstrativo em web e Android |
-| Identificação e separação | Apresentar tributo, taxa e líquido de forma consistente | Cenário fictício; motor autoritativo depende do backend |
-| Direcionamento | Mostrar destino e estado das parcelas | Demonstrativo; não há transferência real |
-| Confirmação e recuperação | Distinguir sucesso, recusa, pendência, falha parcial e resposta perdida | Fluxos locais implementados; recuperação durável depende do servidor |
-| Histórico e detalhe | Consultar operações diferentes por ID, filtros e páginas | Demonstrativo e estrutura de consulta remota preparados |
-| Rastreabilidade | Conferir parcelas, composição e eventos | Histórico local; ledger persistente pendente |
-| Dashboard, despesas e caixa | Acompanhar indicadores e movimentos realizados | Complementos web demonstrativos |
-| Simulação | Comparar composição sem registrar venda | Implementada; não altera o caixa |
-| Explicações e tendências por IA | Interpretar informações e tendências temporais | Resumo demonstrativo preparado; análise de tendências do MVP pendente |
+| Acesso web | Login bearer, perfis, contexto de loja e logout | Contas provisionadas por seed; sem cadastro público/recuperação de senha |
+| Vendas | Registro, pagamento mock, parcelas, eventos e consulta | Pagamento pendente sem confirmação automática posterior |
+| Recuperação | Chave persistente no servidor, replay, conflito e retomada | Ponteiro web pertence à mesma aba; PSP externo não incluído |
+| Financeiro | Despesas pagas, categorias e caixa por período | Sem recorrência/ajuste manual de saldo |
+| Dashboard API | Abertura, entradas líquidas, despesas e saldo | Ainda não reproduz todos os gráficos e composição da demo |
+| Explicações | MockAIProvider com fatos consultados no servidor | Tendências e interpretação por IA externa pendentes |
+| Android | Kotlin demonstrativo, APK e testes JVM históricos | Contrato concreto, HTTPS e aceite em dispositivo pendentes |
+| Relatórios/configurações | Consultas, detalhes e exportações demo | Exportação API e módulos administrativos completos não entregues |
 
-Crédito simulado e cancelamento de operações/compra ficam na evolução futura, fora do MVP atual, conforme atualização comunicada pela equipe. **Análise de tendências por IA faz parte do MVP e ainda precisa ser implementada além do resumo textual atual.** Recorrência de despesas, projeções com regras não aprovadas, PWA, SDK de fabricante, impressão física e publicação em loja continuam condicionados à definição de escopo. Veja a [decisão de escopo](frontend/documentacao/DECISAO-ESCOPO-MVP.md).
+## Tecnologias e organização
 
-## ✅ O que já foi feito:
+- `frontend/`: React 19, TypeScript, Vite, CSS próprio, ícones Lucide e fontes locais. `src/telas` reúne telas; `src/componentes`, elementos compartilhados; `src/servicos`, transporte, sessão, adapters e intenções.
+- `backend/`: Java 21, Spring Boot 3.5.16, Maven Wrapper, PostgreSQL 17.11 e Flyway. Domínios `auth`, `core`, `finance`, `shared` e `config`. Controllers recebem entradas; serviços aplicam regras e persistem; clientes não acessam o banco diretamente.
+- `android-pos/`: Kotlin nativo e Gradle. Código de interface, estado, repositório demonstrativo e transporte HTTPS separado.
+- `entrega-para-backend/`: 152 critérios backend, 67 critérios banco, contratos e devolutiva.
+- `frontend/documentacao/`: 297 critérios frontend, evidências e guias.
+- `documentacao/revisao-2026-10-14/`: comparação entre entregas, matriz consolidada e resultados atuais.
 
-### Descoberta, pesquisa e planejamento
+## Banco, segurança e rastreabilidade
 
-Foram reunidos materiais de requisitos, pesquisa, personas, jornada do usuário, mapa de navegação e protótipo. A documentação original também registra análise de riscos, avaliação do uso da IA e uma entrevista com agente inteligente como apoio à descoberta. Essa atividade não substitui validação com comerciantes reais.
+Migrations V1–V3 criam 14 tabelas de domínio. O modelo separa venda, pagamento, operação, parcelas, eventos e movimento de caixa. O líquido entra no caixa ao concluir o split; despesa paga produz uma única saída. FKs compostas ajudam a impedir vínculos entre lojas diferentes.
 
-O checklist de frontend preserva **297 critérios** e diferencia implementação local, preparação para integração e aceite pendente. Também foi criado um pacote para orientar a implementação do backend e do banco.
+O servidor valida a sessão e as permissões. Senhas usam BCrypt; somente o hash do bearer fica no banco. Tokens do navegador ficam em memória. A idempotência combina chave por loja/ação, hash da entrada, lock e resposta persistida. A mesma intenção não deve gerar duas vendas. Trilha de eventos não equivale a contabilidade de partidas dobradas.
 
-### Frontend web
+IA não calcula imposto autoritativo, define alíquota ou executa movimentações. O backend atual utiliza um provedor textual determinístico, identificado como demonstrativo.
 
-- React/TypeScript com navegação por rotas hash e layout responsivo.
-- Entrada demonstrativa e formulário de login por perfil, expiração de sessão e saída com limpeza dos dados locais.
-- Dashboard com período, indicadores, gráfico e alternativa textual baseados na mesma massa de dados.
-- Operações com busca, status, datas, paginação, detalhe pelo identificador, parcelas e eventos.
-- Venda demonstrativa com revisão, bloqueio de clique duplo, recusa, pendência, falha parcial e recuperação da mesma tentativa após perda de resposta.
-- Cadastro e consulta de despesas pagas, validação de campos e atualização financeira.
-- Caixa realizado com saldo inicial, entradas líquidas, saídas e saldo final.
-- Simulação com e sem taxa, sem persistência financeira.
-- Explicações demonstrativas e estados de erro, indisponibilidade e ausência de dados.
-- Componentes reutilizáveis, foco e semântica acessível, estados de carregamento, erro e lista vazia.
-- Transporte HTTP centralizado, validação de respostas, cancelamento de consultas antigas e telas preparadas para capacidades remotas.
-- Exportação local e impressão demonstrativa como complementos de interface.
+## Executar no Windows
 
-### Aplicativo Android
+Requisitos: JDK 21, Node/npm e acesso às dependências na primeira instalação. Em um terminal PowerShell, a partir da raiz:
 
-- Cliente Kotlin nativo separado do site, com login demonstrativo, início, venda, revisão, histórico e detalhe.
-- Comunicação assíncrona separada da construção das telas e do estado visual.
-- Validação de valores em centavos, proteção contra toque duplo e recuperação usando a mesma tentativa.
-- Cenários de pagamento pendente, recusa, falha parcial, indisponibilidade e resposta perdida.
-- Preservação de tentativa e chaves durante recriação da Activity, sem envio automático ao reabrir.
-- Cliente de API e transporte HTTPS preparados para contrato e autenticação futuros.
-- Gradle wrapper, build debug, APK e testes locais disponíveis.
-
-**Persistência da demonstração:** o web utiliza dados em memória; recarregar ou sair restaura o cenário. O Android pode restaurar dados fictícios pelo estado da Activity, mas isso não é armazenamento financeiro durável. Nenhum dos clientes está conectado ao PostgreSQL.
-
-## 🧪 Validações executadas
-
-Resultados registrados na entrega de 10/10/2026:
-
-| Verificação | Resultado |
-|---|---|
-| Testes web | **59 aprovados, 0 falhas** |
-| Tipos e build web | Concluídos |
-| Testes Android unitários e Robolectric | **14 aprovados, 0 falhas** |
-| Build Android | APK debug gerado |
-| Análise estática Android | 0 erros e 0 avisos |
-| Consulta de dependências npm | 0 vulnerabilidades conhecidas no relatório daquela consulta |
-
-Os testes incluem consistência de valores, fluxos de interface, sessão, respostas fora de ordem, falhas de rede, recuperação demonstrativa e acessibilidade estrutural. No Android, incluem repositório e ciclo de vida com Robolectric.
-
-Esses resultados comprovam os cenários locais testados. Não comprovam persistência do backend, isolamento entre lojas no servidor, execução em maquineta, acessibilidade completa ou fidelidade integral ao Figma. A consulta de dependências também não é uma auditoria completa de segurança.
-
-Consulte o [relatório de validação e evidências](frontend/documentacao/RELATORIO-VALIDACAO-ATUAL.md) e o [estado individual do checklist](frontend/documentacao/STATUS-CHECKLIST.md).
-
-## 🤖 Uso da inteligência artificial
-
-A análise de tendências por IA integra o MVP. A implementação atual cobre resumo textual demonstrativo e preparação de integração; as comparações temporais e sua interpretação ainda estão pendentes. A IA deve apoiar a interpretação: explicar o split, resumir movimentações, responder dúvidas sobre dados apresentados e sinalizar padrões ou possíveis inconsistências. Atualmente, as explicações são demonstrativas; não há provedor externo conectado.
-
-O cálculo e a separação dos valores devem seguir regras determinísticas, versionadas e previamente estabelecidas pelo sistema. A IA não deve:
-
-- Definir sozinha alíquotas ou inventar regras tributárias.
-- Alterar valores financeiros ou decidir o destino de parcelas.
-- Executar transferências, reprocessamentos ou outras ações financeiras por meio do texto gerado.
-- Substituir validações do sistema.
-- Apresentar conclusões sem contexto ou esconder ausência de dados e incerteza.
-
-**Exemplo exclusivamente demonstrativo:** uma venda de R$150,00, com tributo fictício de 10% e taxa fictícia de 2%, resulta em R$15,00 de tributo, R$3,00 de taxa e R$132,00 líquidos. Sem essa taxa, seriam R$135,00 líquidos. Esses percentuais não representam legislação validada.
-
-## 🔐 Rastreabilidade e responsabilidades
-
-Cada operação deve permitir conferir identificadores, data, valor bruto, tributos, taxas, líquido, estado do pagamento, estado do split, parcelas, destinos e eventos relevantes.
-
-O frontend apresenta e valida o formato dos dados recebidos. O backend será responsável por autorização, regras de negócio, persistência, integridade e recuperação. Ocultar um botão não substitui autorização do servidor; impedir clique duplo não substitui idempotência persistente.
-
-Informações financeiras ausentes não devem ser inventadas como zero. Uma falha de API não deve mudar silenciosamente a aplicação para dados fictícios. Simulações não devem produzir lançamentos no caixa realizado.
-
-## 🏗️ Arquitetura
-
-```text
-Dashboard web (React/TypeScript)      POS Android (Kotlin)
-              │                              │
-              └──── interfaces de serviço ────┘
-                              │
-                 ┌────────────┴────────────┐
-                 │                        │
-          Modo demonstrativo       Integração preparada
-          Dados fictícios          Adapters + HTTPS
-          em memória                      │
-                                  API Java/Spring Boot
-                                  [a implementar/conectar]
-                                          │
-                    Autenticação e contexto de loja
-                    Vendas e pagamentos simulados
-                    TaxEngine / SplitEngine
-                    Idempotência e rastreabilidade
-                    Despesas, caixa e explicações
-                                          │
-                                  PostgreSQL
-                                  [a implementar]
+```powershell
+# Ajuste o caminho ao JDK 21 instalado neste computador.
+./scripts/iniciar-backend-local.ps1 -Jdk 'C:/Program Files/Eclipse Adoptium/jdk-21.0.4.7-hotspot'
 ```
 
-A camada de serviço permite desenvolver os clientes sem depender de uma API pronta. Na integração, os adapters deverão traduzir o contrato aprovado para os modelos internos. O frontend não deve acessar o banco diretamente nem carregar credenciais de banco ou de provedor de IA.
-
-## 🛠️ Tecnologias
-
-| Camada | Tecnologia | Situação |
-|---|---|---|
-| Web | React 19, TypeScript 5.7, Vite 6, CSS próprio, Lucide | Implementada |
-| Tipografia | DM Sans e Manrope, arquivos locais | Implementada |
-| Android | Kotlin 2.2.21, AGP 8.7.3, Gradle 8.9 | Implementada; compile/target SDK 35 e mínimo 24 |
-| Testes web | Vitest, Testing Library, jsdom e axe-core | Executados localmente |
-| Testes Android | JUnit e Robolectric | Executados em JVM |
-| Backend | Java/Spring Boot | Stack documentada; implementação e versões finais pendentes |
-| Banco | PostgreSQL | Planejado; migrations e instância da aplicação pendentes |
-| IA | Explicação demonstrativa; provedor futuro no backend | Integração externa pendente |
-| Contrato da API | Tipos internos e exemplos; OpenAPI solicitado ao backend | A ratificar e implementar |
-| Versionamento | Git/GitHub previstos para colaboração | Repositório desta entrega indicado abaixo; processo de revisão da equipe a definir |
-
-As tecnologias do backend que estavam “a definir” no README inicial foram conciliadas com a documentação de planejamento. Isso registra a direção técnica; não significa que o servidor já tenha sido desenvolvido.
-
-## 📋 Requisitos originais
-
-| ID | Requisito funcional |
-|---|---|
-| RF01 | Registrar uma venda |
-| RF02 | Identificar os valores tributários |
-| RF03 | Separar valores conforme regras definidas |
-| RF04 | Calcular o valor líquido |
-| RF05 | Registrar a operação |
-| RF06 | Exibir o status do split |
-| RF07 | Permitir consulta ao histórico |
-| RF08 | Permitir conferência dos valores |
-
-| ID | Requisito não funcional |
-|---|---|
-| RNF01 | Garantir rastreabilidade das operações |
-| RNF02 | Proteger informações financeiras |
-| RNF03 | Apresentar informações de forma simples |
-| RNF04 | Minimizar erros de operação |
-| RNF05 | Possibilitar evolução da solução |
-| RNF06 | Manter separação entre regras de negócio e IA |
-
-Esses IDs preservam o README inicial e não substituem a numeração da documentação V2 ou os critérios FE, BE e BD. A realização demonstrativa de um requisito não comprova sua execução integrada e persistente.
-
-## 📁 Estrutura atual
-
-```text
-README.md                         Visão geral do projeto e estado da entrega
-LEIA-ME-ENTREGA-FRONTEND.md         Índice rápido da entrega
-frontend/
-  README.md                       Instalação e funcionamento do web
-  src/
-    telas/                        Telas identificadas por finalidade
-    componentes/                  Elementos reutilizáveis de interface
-    servicos/                     Demonstração, sessão, contratos e transporte
-    dados/                        Cenário fictício
-    utilitarios/                  Formatação e funções compartilhadas
-    testes/                       Testes de fluxos; há outros *.test.* junto ao código
-  documentacao/                   Checklist, guias, evidências e histórico
-  dist/                           Build web gerado
-android-pos/
-  README.md                       Ambiente, execução e limites do Android
-  app/src/main/                   Código Kotlin, manifesto e recursos
-  app/src/test/                   Testes unitários e de Activity
-  gradle/                         Wrapper para compilação reproduzível
-entrega-para-backend/
-  LEIA-ME-PARA-O-RESPONSAVEL-BACKEND.md
-  01-CHECKLIST-BACKEND-COMPLETO.md
-  02-CHECKLIST-BANCO-DE-DADOS.md
-  03-CONTRATOS-E-EXEMPLOS-PARA-INTEGRACAO.md
-  04-DEVOLUTIVA-DO-BACKEND.md
-```
-
-A estrutura substitui a árvore conceitual do README inicial. Não há pastas de backend ou banco implementados nesta entrega. No ambiente local também existem fontes privadas em `auditoria/`, ferramentas e pacotes antigos; esses materiais não devem ser publicados junto ao código. Os pacotes compartilháveis excluem a auditoria privada e caches de ferramentas.
-
-## ▶️ Como executar
-
-### Web
-
-Com Node 22.12 ou superior da série 22 e npm, partindo da raiz:
+Em outro terminal:
 
 ```powershell
 cd frontend
-npm ci
-npm run dev
+npm.cmd ci
+npm.cmd run dev -- --port 5173 --strictPort
 ```
 
-Abra a URL apresentada no terminal. Para validar ou gerar a versão estática, dentro de `frontend/`:
+Abra http://127.0.0.1:5173. API em http://127.0.0.1:8080. O launcher utiliza PostgreSQL local em loopback, porta 54329, dados em `backend/.local/postgres`. Não apagar essa pasta para encerrar. O banco local usa autenticação trust de desenvolvimento; não utilizar em servidor compartilhado/produção.
+
+Contas: `gerente1@demo.local`, `financeiro1@demo.local`, `operador1@demo.local`; sufixo `2` para outra loja. A senha gerada fica em `backend/.local/demo-password`, privado e ignorado pelo Git. Não compartilhar esse arquivo. O seed não redefine senhas de contas existentes. Também é possível informar `DEMO_PASSWORD` no ambiente.
+
+Em Linux/macOS, permanece disponível `./scripts/dev.sh`. Docker Compose existe em `backend/`, mas não foi executado nesta revisão. A execução em produção requer configuração própria de HTTPS, banco, segredos e proxy; o proxy do Vite não acompanha os arquivos estáticos.
+
+## Modo demonstrativo e API
+
+O padrão web é `api`, com contrato concreto em `frontend/src/servicos/integracaoConfigurada.ts`. `VITE_API_URL` permite um endereço explícito; por padrão usa a origem atual e o proxy de desenvolvimento. Falhas não são substituídas por dados fictícios.
+
+Para abrir o cenário antigo sem backend, configure `VITE_MODO_DADOS=demo` em `frontend/.env.local` e inicie o Vite diretamente. Os dois modos têm capacidades diferentes. Exportação, gráficos e tendências da demo não provam recursos equivalentes no servidor.
+
+## Testes e evidências
 
 ```powershell
-npm test
-npm run build
-npm run preview
+# frontend
+npm.cmd test
+npm.cmd run build
+# com API e frontend locais ativos
+npm.cmd run test:e2e
+# backend, com JAVA_HOME apontando para JDK 21
+./mvnw.cmd -B verify
 ```
 
-O modo padrão é demonstrativo. É possível usar a entrada **Explorar demonstração**. No formulário, as contas fictícias são `gestor@exemplo.invalid`, `financeiro@exemplo.invalid` e `operador@exemplo.invalid`, com senha `demo`. Os perfis e a duração de sessão de 30 minutos são parâmetros demonstrativos a ratificar.
+Testes E2E criam operações sintéticas. Não executar contra produção. A revisão comprovou o fluxo web/HTTP/banco local, inclusive recuperação de resposta perdida. Não comprovou Figma, leitor de tela, Android integrado, PSP, IA externa ou implantação. Os testes Android antigos não foram repetidos porque o código não mudou funcionalmente.
 
-Consulte o [README web](frontend/README.md) e o [roteiro de demonstração](frontend/documentacao/ROTEIRO-DE-DEMONSTRACAO.md).
+## Próximas etapas
 
-### Android
+1. Entregar comparação de tendências no servidor e interpretação prevista no MVP.
+2. Completar agregados e apresentação do dashboard API conforme o escopo acordado.
+3. Mapear o contrato Android e validar HTTPS, dispositivo e recuperação.
+4. Conferir Figma e os módulos adicionais com a equipe, em revisão posterior.
+5. Concluir requisitos de infraestrutura e operação: Docker, carga, upgrade, backups e monitoramento.
 
-Configure Android SDK 35, JDK compatível e o caminho local do SDK em `local.properties`. A validação registrada usou Temurin 21.0.4. Partindo da raiz:
+Crédito simulado e cancelamento de operações permanecem evolução futura. Adiamento da implementação de tendências não significa retirada desse requisito do MVP. A matriz distingue implementação, demonstração, validação e aceite; não há declaração de conclusão integral.
 
-```powershell
-cd android-pos
-.\gradlew.bat assembleDebug testDebugUnitTest lintDebug
-```
+## Documentos
 
-O APK é gerado em `android-pos/app/build/outputs/apk/debug/app-debug.apk`. É uma compilação debug demonstrativa. Instalação no aparelho escolhido e homologação de maquineta permanecem pendentes. Detalhes no [README Android](android-pos/README.md).
+- [Revisão e diferenças entre as entregas](documentacao/revisao-2026-10-14/REVISAO-COMPLETA.md)
+- [Resultados executados nesta revisão](documentacao/revisao-2026-10-14/RESULTADOS-VALIDACAO.md)
+- [Matriz dos 516 critérios originais](documentacao/revisao-2026-10-14/MATRIZ-CONSOLIDADA.md)
+- [Guia da integração web](frontend/documentacao/INTEGRACAO-BACKEND.md)
+- [Contrato da API](backend/docs/API.md) e [modelo do banco](backend/docs/BANCO.md)
+- [Devolutiva do backend](entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md)
+- [README recebido, preservado como histórico](documentacao/historico/README-recebido-2026-10-14.md)
 
-### Modo integrado
+## Créditos e referências
 
-No web, `.env.example` documenta `VITE_MODO_DADOS` e `VITE_API_URL`. O modo `api` também exige preencher `contratoServidor` em `frontend/src/servicos/integracaoConfigurada.ts`, atualmente sem contrato configurado. Alterar somente a URL não conecta um backend desconhecido.
+Design, prototipação de alta fidelidade e pesquisa: Thayná Batista da Silva. Documentação de requisitos: Thayná Batista da Silva e Kleysson Teixeira, conforme os materiais fornecidos. O código desta entrega recebida acrescenta backend, banco e integração web; autoria individual de commits não é inferida de uma pasta sem Git.
 
-No Android, a composição ativa usa `ClientePosDemonstrativo`. A substituição por `ClientePosApi` exige contrato, autenticação, requisições e mapeamentos aprovados. A URL precisa ser alcançável pelo dispositivo; localhost no Android aponta para o próprio Android.
+[Protótipo Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design) · [Repositório informado](https://github.com/lucasandare490/Avanade)
 
-Veja [sessão e integração](frontend/documentacao/SESSAO-E-INTEGRACAO.md). A conexão com a API e seus testes conjuntos ainda envolverão trabalho nos dois clientes.
-
-## 🔧 Trabalho atual e próximas etapas
-
-| Etapa | Situação | Próxima ação |
-|---|---|---|
-| Descoberta e materiais de referência | Materiais reunidos | Complementar validação com usuários e registrar decisões |
-| Planejamento de produto | Base documentada | Ratificar permissões, regras financeiras e funcionalidades condicionais |
-| Desenvolvimento web | Demonstração implementada e testada localmente | Aceite visual/acessível e integração quando a API chegar |
-| Desenvolvimento Android | APK e testes JVM disponíveis | Executar no alvo escolhido e conectar o serviço real do projeto |
-| Backend e banco | Especificação de entrega preparada | Implementar API, persistência, regras e testes |
-| Integração ponta a ponta | Pendente | Validar clientes, servidor e banco no mesmo cenário |
-| Publicação | Pendente | Definir ambiente, processo de revisão e distribuição |
-
-### O backend e o banco precisam entregar
-
-- API executável e documentada com OpenAPI, exemplos de sucesso/erro e configuração reproduzível.
-- Autenticação, sessão, permissões e isolamento entre estabelecimentos.
-- Vendas e pagamentos simulados, regras determinísticas e estados de split.
-- Idempotência persistente: repetir a mesma tentativa deve recuperar o resultado, sem duplicar venda ou parcela.
-- Operações, parcelas, eventos e ledger consultáveis com filtros e paginação.
-- Despesas, agregações financeiras e simulação com regras e unidades explícitas.
-- Explicações associadas aos dados consultados, sem dar poder financeiro ao texto da IA.
-- Modelo de banco, migrations, restrições, índices, dados fictícios e estratégia de backup/restauração.
-- Testes de autorização, integridade, concorrência, recuperação e persistência após reinício.
-
-O pacote contém **152 critérios de backend e 67 de banco**. Comece pelo [guia para o responsável](entrega-para-backend/LEIA-ME-PARA-O-RESPONSAVEL-BACKEND.md) e devolva o [formulário preenchido](entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md) junto ao código e às evidências.
-
-### Aceites que não dependem somente do backend
-
-- Conferência integral das telas e estados com o Figma e registro das diferenças aceitas.
-- Execução em aparelho Android/maquineta escolhida: teclado, rotação, retorno ao app e TalkBack.
-- Fluxo web com leitor de tela real e revisão visual de contraste/zoom.
-- Definição de repositório, branch, revisão, hospedagem e publicação pela equipe.
-
-Essas verificações podem exigir novos ajustes de frontend. A lista detalhada está em [pendências objetivas](frontend/documentacao/PENDENCIAS-OBJETIVAS.md).
-
-## 👥 Autoria e colaboração
-
-| Material | Autoria informada |
-|---|---|
-| Design e prototipação de alta fidelidade | Thayná Batista da Silva |
-| Pesquisa e levantamento sobre Split Payment | Thayná Batista da Silva |
-| Documentação de requisitos | Thayná Batista da Silva e Kleysson Teixeira |
-| Responsáveis futuros por desenvolvimento/revisão de cada camada | A confirmar pela equipe |
-
-Conforme informado pela equipe, os materiais foram compartilhados no grupo de WhatsApp para consulta e discussão. O compartilhamento não é tratado como aceite formal de todas as decisões. A autoria dos materiais não implica atribuição automática de tarefas futuras nem autoria de todo o código desta entrega.
-
-O protótipo está no [Figma — Planner Comercial MVP Design](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design). Há também a [pesquisa compartilhada](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit) e a [documentação de requisitos compartilhada](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit). O acesso depende das permissões dos respectivos documentos.
-
-Repositório desta entrega: [lucasandare490/Avanade](https://github.com/lucasandare490/Avanade). Referência anterior informada pela equipe: [projeto-split-tributario](https://github.com/Kleyssonteixeirapf/projeto-split-tributario). Os dois repositórios são distintos; esta publicação não altera o repositório anterior.
-
-## 📚 Documentação de apoio
-
-- [Guia geral da entrega](LEIA-ME-ENTREGA-FRONTEND.md).
-- [Checklist completo de frontend](frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md) e [estado de cada critério](frontend/documentacao/STATUS-CHECKLIST.md).
-- [Relatório de testes e limites](frontend/documentacao/RELATORIO-VALIDACAO-ATUAL.md).
-- [Mapa de telas e arquivos](frontend/documentacao/GUIA-TELAS-E-ARQUIVOS.md).
-- [Escopo e referência visual](frontend/documentacao/ESCOPO-E-REFERENCIA-VISUAL.md).
-- [Checklist de backend](entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md).
-- [Checklist de banco de dados](entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md).
-- [Contratos e exemplos para integração](entrega-para-backend/03-CONTRATOS-E-EXEMPLOS-PARA-INTEGRACAO.md).
-- [Preparação da publicação web](frontend/documentacao/PUBLICACAO-WEB.md).
-
-Projeto desenvolvido para estudo, inovação e aplicação de tecnologia. O estado atual é de **demonstração local validada nos cenários registrados, com integração e aceites externos pendentes**.
+As versões anteriores e materiais privados permanecem na pasta antiga. Os PDFs anteriores que descrevem ausência de backend são históricos e não devem ser usados como status desta entrega.

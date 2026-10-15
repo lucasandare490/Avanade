@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Checklist — Banco de dados PostgreSQL
 
 Objetivo: persistir o domínio com consistência, isolamento por estabelecimento, recuperação de tentativas e rastreabilidade. Este é um desenho proposto para ratificação, não migrations executadas. O banco é responsabilidade do backend; web e Android não recebem usuário/senha do PostgreSQL.
@@ -111,7 +113,7 @@ Valores internos do cliente cabem em inteiros seguros de JavaScript. Se usar BIG
 - [ ] BD-064 — Monitorar locks, conexões, espaço, falhas de migration e tempo de consultas.
 - [ ] BD-065 — Entregar seeds sintéticas com duas lojas, três perfis, operações em todos os estados e despesas em períodos diferentes.
 - [x] BD-066 — Não considerar testes em banco em memória como evidência suficiente de constraints/transações PostgreSQL.
-- [ ] BD-067 — Entregar relatório de migrations, testes de concorrência e restore com versões e comandos executados.
+- [x] BD-067 — Entregar relatório de migrations, testes de concorrência e restore com versões e comandos executados.
 
 ## Referências técnicas
 
@@ -125,3 +127,7 @@ As regras financeiras e de negócio deste projeto precisam de ratificação pró
 Marcações deste incremento se referem ao backend demonstrativo. Veja [relatório de execução](../backend/docs/VALIDACAO.md), [contrato](../backend/docs/API.md), [decisões](../backend/docs/DECISOES.md) e [checklist de pendências](../backend/docs/CHECKLIST.md). Critérios não marcados permanecem pendentes ou parcialmente atendidos; Docker e integração dos clientes não foram declarados validados.
 
 Evidência adicional (13/10/2026): [incremento 0.2](../backend/docs/INCREMENTO-02.md), com consultas em lote, datas do caixa e recuperação após queda antes da resposta HTTP.
+
+## Reconciliação desta revisão
+
+BD-067: relatórios de migrations, concorrência e restore estão entregues em backend/docs; resultado local novo e limites constam da revisão. BD-031 permanece parcial: há rollback por exceção antes do commit e queda real após commit; não há ensaio de morte de processo em todos os pontos anteriores ao commit.

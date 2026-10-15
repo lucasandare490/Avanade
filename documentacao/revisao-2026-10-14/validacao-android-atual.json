@@ -1,0 +1,23 @@
+[
+  {
+    "name": "br.com.planner.pos.ContratoBackendPosTest",
+    "tests": "8",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "br.com.planner.pos.FluxoPosTest",
+    "tests": "5",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  },
+  {
+    "name": "br.com.planner.pos.RepositorioDemonstrativoTest",
+    "tests": "9",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0"
+  }
+]

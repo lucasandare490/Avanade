@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { ExportarOperacoesServidor } from '../componentes/ExportarOperacoesServidor';
 import type { ServicoPlanner } from '../tipos';
 import type { ConsultaOperacoes } from '../servicos/contratosConsultas';
 import { CabecalhoPagina, Estado, TabelaOperacoes } from '../componentes/ElementosInterface';
@@ -6,7 +7,7 @@ import { useConsultaRemota } from '../utilitarios/useConsultaRemota';
 import { moeda } from '../utilitarios/valoresFinanceiros';
 import { Status } from '../componentes/ElementosInterface';
 import { usePreferenciaSessao } from '../utilitarios/usePreferenciaSessao';
-export function TelaOperacoesRemotas({ servico }: { servico: ServicoPlanner }) {
+export function TelaOperacoesRemotas({ servico, permitirExportacao = false }: { servico: ServicoPlanner; permitirExportacao?: boolean }) {
   const [busca, setBusca] = usePreferenciaSessao('api-busca', ''),
     [inicio, setInicio] = usePreferenciaSessao('api-inicio', ''),
     [fim, setFim] = usePreferenciaSessao('api-fim', '');
@@ -104,6 +105,7 @@ export function TelaOperacoesRemotas({ servico }: { servico: ServicoPlanner }) {
             Limpar filtros
           </button>
         </form>
+        {permitirExportacao && servico.exportarOperacoes && <ExportarOperacoesServidor servico={servico} consulta={consulta} />}
         {estado.carregando ? (
           <Estado titulo="Consultando operações" carregando />
         ) : estado.erro ? (
@@ -149,7 +151,7 @@ export function TelaOperacoesRemotas({ servico }: { servico: ServicoPlanner }) {
           )
         )}
         <p className="nota">
-          Exportação completa depende do contrato do servidor e não é substituída por exportação
+          A exportação disponível acima consulta o filtro completo no servidor, em vez
           desta página.
         </p>
       </section>

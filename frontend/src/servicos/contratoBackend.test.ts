@@ -232,3 +232,34 @@ it('retomada preserva a chave após perda de resposta e valida a operação reto
   expect(f.mock.calls[1][0]).toContain(`/split-operations/${exemplo.operation.id}/reprocess`);
   expect(sessionStorage.length).toBe(0);
 });
+it('consulta tendências autenticadas e rejeita período anterior divergente', async () => {
+  const p = { inicio: '2026-10-14', fim: '2026-10-14' };
+  const r = { anterior: { inicio: '2026-10-13', fim: '2026-10-13' }, indicadores: [{ titulo: 'Entradas', atual: 13200, anterior: null }] };
+  const f = vi.fn().mockResolvedValueOnce(resposta(sessao())).mockResolvedValueOnce(resposta(r)).mockResolvedValueOnce(resposta({ ...r, anterior: p }));
+  const { servico } = await conectar(f);
+  expect(await servico.consultarTendencias!(p)).toEqual(r);
+  expect(String(f.mock.calls[1][0])).toContain('/api/v1/trends?from=2026-10-14&to=2026-10-14');
+  await expect(servico.consultarTendencias!(p)).rejects.toThrow();
+});
+it('valida composição e reconciliação da série diária recebida', async () => {
+  const p = { inicio: '2026-10-14', fim: '2026-10-14' };
+  const amounts = { grossCents: 15000, taxCents: 1500, feeCents: 300, netCents: 13200 };
+  const r = { period: { from: p.inicio, to: p.fim }, recognition: 'COMPLETED_AT_IN_MERCHANT_TIME_ZONE', totals: { ...amounts, count: 1 }, series: [{ ...amounts, date: p.inicio }] };
+  const f = vi.fn().mockResolvedValueOnce(resposta(sessao())).mockResolvedValueOnce(resposta(r)).mockResolvedValueOnce(resposta({ ...r, series: [] })).mockResolvedValueOnce(resposta({ ...r, totals: { ...r.totals, netCents: 1 } }));
+  const { servico } = await conectar(f);
+  expect(await servico.consultarComposicao!(p)).toMatchObject({ totais: { bruto: 15000, liquido: 13200 }, dias: [{ data: p.inicio }] });
+  await expect(servico.consultarComposicao!(p)).rejects.toThrow();
+  await expect(servico.consultarComposicao!(p)).rejects.toThrow();
+});
+
+it('exporta todo o filtro sem enviar página e rejeita arquivo truncado', async () => {
+  const conteudo={mode:'SIMULADO',total:1,columns:['id','data','status','meio','bruto','tributo','taxa','liquido'],rows:[['op-1','2026-10-14','CONCLUIDA','PIX','15000','1500','300','13200']]};
+  const f=vi.fn().mockResolvedValueOnce(resposta(sessao())).mockResolvedValueOnce(resposta(conteudo)).mockResolvedValueOnce(resposta({...conteudo,total:2}));
+  const {servico}=await conectar(f);
+  const consulta={...filtro,inicio:'2026-10-01',fim:'2026-10-14',pagina:3,status:'concluida' as const};
+  expect((await servico.exportarOperacoes!(consulta)).total).toBe(1);
+  const url=new URL(String(f.mock.calls[1][0]));
+  expect(url.searchParams.has('page')).toBe(false);expect(url.searchParams.has('size')).toBe(false);
+  expect(url.searchParams.get('status')).toBe('CONCLUIDA');
+  await expect(servico.exportarOperacoes!(consulta)).rejects.toThrow();
+});

@@ -1,4 +1,4 @@
-/** Exportação apenas do conjunto demonstrativo filtrado; neutraliza fórmulas de planilha. */
+/** CSV de dados simulados locais ou do servidor; neutraliza fórmulas de planilha. */
 export function exportarRelatorio(nome: string, colunas: string[], linhas: (string | number)[][]) {
   const escapar = (valor: string | number) => {
     let texto = String(valor);

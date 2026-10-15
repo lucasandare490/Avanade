@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Contratos e exemplos para integrar os clientes
 
 Este documento descreve o modelo interno já implementado e as decisões que o backend precisa devolver. As URLs da primeira tabela vêm da entrega parcial; as capacidades adicionais não têm URL aprovada. Os JSON abaixo são exemplos sintéticos de objetos internos do frontend, NÃO uma alegação de que a API já responde assim. O responsável pode propor outro DTO, acompanhado do mapeamento inequívoco.

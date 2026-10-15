@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 > **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A integração com dados e IA do servidor continua pendente. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](TENDENCIAS-IMPLEMENTADAS.md).
 
 > **Atualização de escopo:** análise de tendências por IA pertence ao MVP e está pendente além do resumo atual. Crédito simulado e cancelamento ficam na evolução futura. Esta decisão prevalece sobre classificações anteriores desses temas. Consulte [DECISAO-ESCOPO-MVP.md](DECISAO-ESCOPO-MVP.md).
@@ -50,3 +52,7 @@ A auditoria npm registrou zero vulnerabilidades conhecidas no momento da consult
 ## Material para integração
 
 `../../entrega-para-backend/` contém checklist de backend, checklist de banco, contratos internos/exemplos e formulário de devolutiva. O responsável deve devolver código reproduzível, OpenAPI, migrations, dados fictícios, testes, instruções e decisões preenchidas. A lista foi criada para orientar a implementação; não afirma que o backend já existe.
+
+## Validação desta revisão no Windows
+
+Em 14/10/2026 foram reexecutados e aprovados 89 testes web, 29 backend e 4 cenários de navegador com PostgreSQL real, além de ambos os builds. Android, Docker e restore não foram repetidos. Evidências consolidadas em `documentacao/revisao-2026-10-14/RESULTADOS-VALIDACAO.md` a partir da raiz.

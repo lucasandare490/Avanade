@@ -1,3 +1,5 @@
+> **Revisão de 14/10/2026:** web com contrato Spring/PostgreSQL implementado; Android ainda não integrado. Pagamentos e explicações continuam simulados. Tendências no servidor permanecem pendência do MVP. Consulte a [revisão consolidada](../documentacao/revisao-2026-10-14/REVISAO-COMPLETA.md) para diferenças entre modo demo/API, evidências atuais e pendências. Trechos datados de entregas anteriores são históricos.
+
 # Backend Split — incrementos 0.1 e 0.2
 
 Backend demonstrativo Java/Spring/PostgreSQL. Pagamentos, destinos e tributo são **simulados**. Frontend web conectado em 14/10/2026; Android permanece separado. [Guia da integração web](../frontend/documentacao/INTEGRACAO-BACKEND.md). Para iniciar o conjunto, execute `./scripts/dev.sh` na raiz do repositório.
@@ -63,3 +65,7 @@ JUnit usa PostgreSQL17.11 descartável, porta aleatória, sem Docker/H2. Testa c
 ## Limitações conhecidas
 
 Projeção/tendências mantidas pendentes pelo usuário. Sem provedor IA externo, PSP real, créditos, cancelamentos, exportação, cadastro público ou integração do cliente Android. Pagamento mock PENDING não possui confirmação posterior automática. Falta de regra permanece consultável, mas exige futuro fluxo operacional para nova avaliação. Não declarar aceite integral do MVP por esta entrega.
+
+## Validação desta revisão no Windows
+
+Em 14/10/2026 foram reexecutados e aprovados 89 testes web, 29 backend e 4 cenários de navegador com PostgreSQL real, além de ambos os builds. Android, Docker e restore não foram repetidos. Evidências consolidadas em `documentacao/revisao-2026-10-14/RESULTADOS-VALIDACAO.md` a partir da raiz.

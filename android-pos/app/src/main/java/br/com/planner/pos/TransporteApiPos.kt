@@ -10,7 +10,7 @@ import android.os.Handler
 import android.os.Looper
 
 /** Transporte HTTPS para integração futura; o cenário local não o instancia. */
-class TransporteApiPos(private val endereco: String) {
+class TransporteApiPos(private val endereco: String, private val token: () -> String? = { null }) {
     private val encerrado = AtomicBoolean(false)
     private val executor = Executors.newSingleThreadExecutor()
     private val interfacePrincipal = Handler(Looper.getMainLooper())
@@ -27,10 +27,16 @@ class TransporteApiPos(private val endereco: String) {
                     conexao.requestMethod = metodo; conexao.connectTimeout = 15000; conexao.readTimeout = 15000
                     conexao.instanceFollowRedirects = false
                     conexao.setRequestProperty("Accept","application/json")
+                    token()?.let { require(Regex("[A-Za-z0-9_-]{43}").matches(it)); conexao.setRequestProperty("Authorization", "Bearer $it") }
                     if(chave != null) conexao.setRequestProperty("Idempotency-Key",chave)
                     if(corpo != null) {conexao.doOutput = true;conexao.setRequestProperty("Content-Type","application/json");conexao.outputStream.use {it.write(corpo.toByteArray(Charsets.UTF_8))}}
                     when(conexao.responseCode) {
-                        in 200..299 -> conexao.inputStream.bufferedReader(Charsets.UTF_8).use {it.readText()}
+                        204 -> ""
+                        in 200..299 -> conexao.inputStream.bufferedReader(Charsets.UTF_8).use {
+                            val buffer = CharArray(8192); val out = StringBuilder()
+                            while (true) { val n = it.read(buffer); if (n < 0) break; require(out.length + n <= 2000000); out.append(buffer,0,n) }
+                            out.toString()
+                        }
                         401 -> throw FalhaApiPos(401,"Sessão expirada. Entre novamente.")
                         403 -> throw FalhaApiPos(403,"Seu perfil não tem acesso a esta operação.")
                         404 -> throw FalhaApiPos(404,"Operação não encontrada.")

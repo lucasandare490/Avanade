@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Incremento 0.2 — consultas, caixa e recuperação
 
 Validado em 13/10/2026 com `./mvnw clean verify`: **28 testes aprovados**, zero falhas/erros/ignorados. [Resultado por suíte](test-results.json). O número deste incremento documental não altera a versão do artefato (0.1.0-SNAPSHOT) nem o contrato `/api/v1`. Não houve nova migration, alteração de frontend ou Android.

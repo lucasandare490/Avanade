@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Checklist dos incrementos 0.1 e 0.2
 
 Data: 12/10/2026. Autorização de implementação recebida após auditoria. Evidências em [VALIDACAO.md](VALIDACAO.md); critérios originais preservados no pacote `entrega-para-backend`. Não equivale a aceite completo do MVP.

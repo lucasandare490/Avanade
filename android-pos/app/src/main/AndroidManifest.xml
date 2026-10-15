@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application android:label="Planner POS · Demo" android:theme="@style/TemaPlanner" android:allowBackup="false" android:fullBackupContent="@xml/regras_backup_legado" android:icon="@drawable/icone_planner" android:dataExtractionRules="@xml/regras_extracao" android:usesCleartextTraffic="false" android:supportsRtl="true">
+        <activity android:name=".TelaServidorActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".TelaPrincipalActivity" android:exported="true" android:windowSoftInputMode="adjustResize">
             <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
         </activity>

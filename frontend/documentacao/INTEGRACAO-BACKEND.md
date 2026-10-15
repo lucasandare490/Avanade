@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Integração web com o backend — 14/10/2026
 
 O frontend React está conectado ao backend Spring/PostgreSQL pelo contrato `/api/v1`. O modo padrão é `api`; não há substituição por dados locais quando uma chamada falha. Pagamentos, tributos e provedor de explicações continuam simulados. Android, implantação pública e tendências/projeções do servidor têm escopo separado.

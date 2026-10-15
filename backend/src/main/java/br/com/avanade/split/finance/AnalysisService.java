@@ -10,13 +10,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnalysisService {
   private final FinanceService finance;
+  private final AnalyticsService analytics;
   private final AIProvider provider;
   private final JdbcTemplate db;
   private final Clock clock;
 
   public AnalysisService(
-      FinanceService finance, AIProvider provider, JdbcTemplate db, Clock clock) {
+      FinanceService finance, AnalyticsService analytics, AIProvider provider, JdbcTemplate db, Clock clock) {
     this.finance = finance;
+    this.analytics = analytics;
     this.provider = provider;
     this.db = db;
     this.clock = clock;
@@ -67,6 +69,7 @@ public class AnalysisService {
         "status",
         status,
         "facts",
-        facts);
+        facts,
+        "tendencias", analytics.compare(actor,period));
   }
 }

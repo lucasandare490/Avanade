@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Sessão e integração — estado atual
 
 O modo padrão é demo. A sessão é demonstrativa e mantida em memória, com perfis ilustrativos e validade de 30 minutos. Ao sair, a aplicação limpa a base e filtros da sessão e retorna à rota inicial antes do próximo login.

@@ -1,0 +1,62 @@
+{
+  "data": "2026-10-14",
+  "ambiente": "Windows; Java 21.0.4; PostgreSQL 17.11; Maven Wrapper",
+  "frontend": {
+    "numTotalTests": 89,
+    "numPassedTests": 89,
+    "numFailedTests": 0,
+    "numPendingTests": 0
+  },
+  "backend": [
+    {
+      "name": "br.com.avanade.split.BackendIntegrationTest",
+      "tests": "16",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "60.743"
+    },
+    {
+      "name": "br.com.avanade.split.CrashRecoveryTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "24.055"
+    },
+    {
+      "name": "br.com.avanade.split.QueryAndCashIntegrationTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "4.446"
+    },
+    {
+      "name": "br.com.avanade.split.TaxEngineTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.035"
+    }
+  ],
+  "navegador": {
+    "startTime": "2026-10-14T18:21:38.909Z",
+    "duration": 16922.667,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "buildFrontend": "aprovado após correção de textos",
+  "buildBackend": "mvnw.cmd -B verify aprovado",
+  "android": "não reexecutado; fontes sem mudança funcional",
+  "limites": [
+    "Figma adiado",
+    "Docker não executado",
+    "Backup/restore não repetido nesta revisão",
+    "IA/PSP externos ausentes",
+    "Android integrado pendente"
+  ]
+}

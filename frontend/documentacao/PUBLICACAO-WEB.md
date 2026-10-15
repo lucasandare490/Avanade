@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Preparação de publicação web
 
 Não houve deploy ou push nesta rodada. O projeto é uma aplicação estática com rotas hash; o servidor distribui index.html e assets. O endereço local 127.0.0.1 só funciona no próprio computador enquanto o processo está ativo.

@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Contrato HTTP v1 — backend demonstrativo
 
 Base `/api/v1`. JSON UTF-8. Exceto login, todas as rotas exigem `Authorization: Bearer <accessToken>`. Corpo não admite propriedades desconhecidas, valores monetários fracionários ou tenant fornecido pelo cliente. Schemas de entrada e rotas no [OpenAPI](openapi.json); os schemas de resposta são publicados junto deste documento e dos [exemplos executados](examples/sale-confirmed.json).
@@ -90,3 +92,17 @@ Web integrado em 14/10/2026: criação extrai `sale.operation`; retomada recebe 
 ## Cenários mock controlados pelo servidor
 
 No launcher local, `APP_MOCK_PAYMENT=DECLINED` ou `PENDING` configura novas vendas sem split. `APP_MOCK_FAIL_PARCEL=TAX|FEE|NET` produz falha inicial nesse destino; retomada confirma as parcelas restantes. Defaults CONFIRMED/NONE. Variáveis são configuração do servidor, nunca campos HTTP. Reiniciar com cenário diferente não modifica vendas existentes. Resposta perdida é reproduzida consultando/repetindo a chave já gravada; a queda do processo após commit e antes do envio do corpo HTTP foi validada em [CrashRecoveryTest](INCREMENTO-02.md), com recuperação e replay sem duplicação.
+
+## Extensão atual: comparação e composição
+
+`GET /api/v1/trends?from=YYYY-MM-DD&to=YYYY-MM-DD` exige `financeiro`, compara o intervalo anterior de mesma duração, com valores centavos ou null quando não há registros.
+
+`GET /api/v1/dashboard/details?from=YYYY-MM-DD&to=YYYY-MM-DD` exige `financeiro`, retorna totais e série diária de operações concluídas no fuso da loja. O reconhecimento é `COMPLETED_AT_IN_MERCHANT_TIME_ZONE`.
+
+`POST /api/v1/ai/cash-analysis` inclui `tendencias`; o cliente também consulta `/trends` separadamente para preservar a comparação quando a explicação falhar. O provedor textual permanece demonstrativo. Consulte o OpenAPI exportado atual para os schemas.
+
+## Exportação de operações (14/10/2026)
+
+GET /api/v1/exports/operations?from=YYYY-MM-DD&to=YYYY-MM-DD
+
+Permissão: financeiro. Filtros opcionais: status, paymentMethod e search, iguais aos da lista de operações. Período obrigatório até 366 dias. Máximo 2.000 resultados, com 422 EXPORT_LIMIT acima disso. Retorno: columns (8 títulos), rows (linhas de 8 strings), total e mode SIMULADO. Valores monetários em centavos BRL e instantes UTC. Snapshot consistente de todas as páginas; isolamento por loja. A interface gera CSV identificado como simulado. Não é documento fiscal.

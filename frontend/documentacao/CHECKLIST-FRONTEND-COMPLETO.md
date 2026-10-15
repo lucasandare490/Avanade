@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Checklist completo — Frontend do Planner Comercial
 
 Versão de planejamento: 09/10/2026. Base: V2, entrega parcial, personas, mapa de navegação, protótipo de Thayná e auditoria das fontes. Este documento não atesta implementação nem atribui tarefas a integrantes sem aceite. O exemplo do “e aí, marcou?” foi usado apenas como referência de detalhamento.

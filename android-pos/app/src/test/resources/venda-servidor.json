@@ -1,0 +1,111 @@
+{
+  "id": "8b67110d-6cc8-4455-bb74-81ab84150e6b",
+  "amountCents": 15000,
+  "currency": "BRL",
+  "paymentMethod": "PIX",
+  "createdAt": "2026-10-12T23:59:52.218835Z",
+  "mode": "SIMULADO",
+  "payment": {
+    "status": "CONFIRMED",
+    "id": "3ef2b352-2e35-4455-898e-2838af6a8e54"
+  },
+  "failureCode": null,
+  "operation": {
+    "id": "def6bfb9-06d3-414e-b03c-ebb048c1a80e",
+    "saleId": "8b67110d-6cc8-4455-bb74-81ab84150e6b",
+    "createdAt": "2026-10-12T23:59:52.218835Z",
+    "completedAt": "2026-10-12T23:59:52.388638Z",
+    "grossCents": 15000,
+    "taxCents": 1500,
+    "feeCents": 300,
+    "netCents": 13200,
+    "status": "CONCLUIDA",
+    "paymentStatus": "CONFIRMED",
+    "paymentMethod": "PIX",
+    "mode": "SIMULADO",
+    "currency": "BRL",
+    "rule": {
+      "taxBps": 1000,
+      "feeBps": 200,
+      "version": "DEMO-v1",
+      "id": "10000000-0000-0000-0000-000000000001",
+      "rounding": "HALF_UP_TAX_FIRST_RESIDUAL_NET"
+    },
+    "parcels": [
+      {
+        "id": "70f48729-734d-4428-95fd-12c2fc072525",
+        "kind": "TAX",
+        "amountCents": 1500,
+        "destination": "Tributo demonstrativo",
+        "status": "CONFIRMADA",
+        "confirmedAt": "2026-10-12T23:59:52.380140Z"
+      },
+      {
+        "id": "9de50d4f-e6ee-4979-880b-9a1d368699c5",
+        "kind": "FEE",
+        "amountCents": 300,
+        "destination": "Processamento demonstrativo",
+        "status": "CONFIRMADA",
+        "confirmedAt": "2026-10-12T23:59:52.383584Z"
+      },
+      {
+        "id": "7d1e15eb-0a51-4f84-9b7c-fa9fd312306a",
+        "kind": "NET",
+        "amountCents": 13200,
+        "destination": "Estabelecimento demonstrativo",
+        "status": "CONFIRMADA",
+        "confirmedAt": "2026-10-12T23:59:52.385813Z"
+      }
+    ],
+    "events": [
+      {
+        "description": "Pagamento simulado confirmado. Split criado.",
+        "occurredAt": "2026-10-12T23:59:52.352498Z",
+        "hash": "ab85524e51c956f3fe0a4d6a016e60363f87ec714bef8102f0ce7880275ea089",
+        "id": "45eee15a-83c0-4f0e-bee9-9facb2d01a0a",
+        "sequence": 1,
+        "previousHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "description": "Parcelas separadas pela regra DEMO-v1.",
+        "occurredAt": "2026-10-12T23:59:52.374002Z",
+        "hash": "ad5b5e993ce99cf5bc5c4f1e9ffc94bdf6442df9ad97f0121073a410a4fbfcce",
+        "id": "3f3d48d1-09c3-4ef1-9d82-5a02bb688fcd",
+        "sequence": 2,
+        "previousHash": "ab85524e51c956f3fe0a4d6a016e60363f87ec714bef8102f0ce7880275ea089"
+      },
+      {
+        "description": "Parcela TAX confirmada em modo SIMULADO.",
+        "occurredAt": "2026-10-12T23:59:52.382483Z",
+        "hash": "7a2f6d26a5d94aca82e5d63d291131971b2632b35ddf92b6c1071b3f22d3ca62",
+        "id": "18828ce9-0662-4806-aca3-abc41a345706",
+        "sequence": 3,
+        "previousHash": "ad5b5e993ce99cf5bc5c4f1e9ffc94bdf6442df9ad97f0121073a410a4fbfcce"
+      },
+      {
+        "description": "Parcela FEE confirmada em modo SIMULADO.",
+        "occurredAt": "2026-10-12T23:59:52.384898Z",
+        "hash": "4af21eddb69036b50e1341be1e2ee34051c27997db6966d1eb0811da48a619dc",
+        "id": "b142d51a-05ba-4e8f-9183-883741b13752",
+        "sequence": 4,
+        "previousHash": "7a2f6d26a5d94aca82e5d63d291131971b2632b35ddf92b6c1071b3f22d3ca62"
+      },
+      {
+        "description": "Parcela NET confirmada em modo SIMULADO.",
+        "occurredAt": "2026-10-12T23:59:52.387116Z",
+        "hash": "9afa1f131d04dbb1c8b8f36a4d9697e310a6c5f3568bbb3a5ad5b3d4e652a6c8",
+        "id": "3e4940a1-e171-4369-bfb5-4361b8ae6f33",
+        "sequence": 5,
+        "previousHash": "4af21eddb69036b50e1341be1e2ee34051c27997db6966d1eb0811da48a619dc"
+      },
+      {
+        "description": "Split concluído; líquido reconhecido no caixa uma única vez.",
+        "occurredAt": "2026-10-12T23:59:52.396308Z",
+        "hash": "0bde8ed2a7a8719939c1a4270126756bcf06570d326543473aa3906e5b9037da",
+        "id": "60737b32-176a-4fe4-8eed-7247f05a4c00",
+        "sequence": 6,
+        "previousHash": "9afa1f131d04dbb1c8b8f36a4d9697e310a6c5f3568bbb3a5ad5b3d4e652a6c8"
+      }
+    ]
+  }
+}

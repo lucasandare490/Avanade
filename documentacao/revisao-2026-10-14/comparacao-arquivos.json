@@ -1,0 +1,842 @@
+[
+  {
+    "arquivo": ".gitattributes",
+    "estado": "igual"
+  },
+  {
+    "arquivo": ".gitignore",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "LEIA-ME-ENTREGA-FRONTEND.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "README.md",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "android-pos/.gitignore",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/build.gradle.kts",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/gradle.properties",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/gradlew",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "android-pos/gradlew.bat",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "android-pos/README.md",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "android-pos/settings.gradle.kts",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "backend/.dockerignore",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/.env.example",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/.gitignore",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/compose.yml",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/Dockerfile",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/mvnw",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/mvnw.cmd",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/pom.xml",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/README.md",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "entrega-para-backend/01-CHECKLIST-BACKEND-COMPLETO.md",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "entrega-para-backend/02-CHECKLIST-BANCO-DE-DADOS.md",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "entrega-para-backend/03-CONTRATOS-E-EXEMPLOS-PARA-INTEGRACAO.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "entrega-para-backend/04-DEVOLUTIVA-DO-BACKEND.md",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "entrega-para-backend/LEIA-ME-PARA-O-RESPONSAVEL-BACKEND.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/.env.example",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/.gitignore",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/.prettierrc.json",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/index.html",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/package-lock.json",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/package.json",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/playwright.config.ts",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "frontend/README.md",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/tsconfig.json",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/vite.config.ts",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/vitest.config.ts",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "scripts/dev.sh",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "android-pos/app/build.gradle.kts",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/AndroidManifest.xml",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/ClientePos.kt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/EstadoTelaPos.kt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/ModelosVenda.kt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/RepositorioDemonstrativo.kt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/ServicoPosIntegrado.kt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/TelaPrincipalActivity.kt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/java/br/com/planner/pos/TransporteApiPos.kt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/res/drawable/icone_planner.xml",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/res/values/styles.xml",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/res/xml/regras_backup_legado.xml",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "android-pos/app/src/main/res/xml/regras_extracao.xml",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "android-pos/app/src/test/java/br/com/planner/pos/FluxoPosTest.kt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/app/src/test/java/br/com/planner/pos/RepositorioDemonstrativoTest.kt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "android-pos/gradle/wrapper/gradle-wrapper.jar",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "android-pos/gradle/wrapper/gradle-wrapper.properties",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "backend/docker/init-runtime.sh",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/API.md",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/BANCO-DICIONARIO.md",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/BANCO.md",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/CHECKLIST.md",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/crash-recovery.json",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/DECISOES.md",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/INCREMENTO-02.md",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/openapi.json",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/query-plans.json",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/restart-evidence.json",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/restore-evidence.json",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/test-results.json",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/VALIDACAO.md",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/scripts/backup.sh",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/scripts/check.sh",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/scripts/restore.sh",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/scripts/run-local.sh",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/scripts/smoke.py",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/.mvn/wrapper/maven-wrapper.properties",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/docs/examples/sale-confirmed.json",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/resources/application-demo.yml",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/resources/application.yml",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/SplitApplication.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/auth/Actor.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/auth/AuthController.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/ApiSchemas.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/DemoSeed.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/LimitedBody.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/OpenApiConfig.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/SecurityConfig.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/config/SessionFilter.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/CoreController.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/Ledger.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/MockAdapters.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/Operation.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/OperationRepository.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/SaleService.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/TaxEngine.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/core/Views.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/AIProvider.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/AnalysisService.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/FinanceController.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/FinanceService.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/finance/MockAIProvider.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/shared/ApiErrors.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/shared/ApiException.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/shared/Hashes.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/shared/Idempotency.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/java/br/com/avanade/split/shared/Period.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/resources/db/migration/V1__initial_schema.sql",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/resources/db/migration/V2__financial_guards.sql",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/main/resources/db/migration/V3__runtime_privileges.sql",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/BackendIntegrationTest.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/CrashRecoveryTest.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/CrashTestServer.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/DatabaseReport.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/LocalDemo.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/PostgresSupport.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/QueryAndCashIntegrationTest.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/QueryPerformanceFixture.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/QueryProbe.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "backend/src/test/java/br/com/avanade/split/TaxEngineTest.java",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "frontend/documentacao/AMPLIACAO-FRONTEND.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/auditoria-dependencias-atualizada.json",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/auditoria-dependencias.json",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/build-tendencias.txt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/CHECKLIST-FRONTEND-COMPLETO.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/CONTINUACAO-CONSULTAS-WEB-ANDROID.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/CONTRATO-PARA-BACKEND.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/dashboard-celular.png",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/documentacao/dashboard-demonstrativo.png",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/documentacao/DECISAO-ESCOPO-MVP.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/ENTREGA-FRONTEND.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/ESCOPO-E-REFERENCIA-VISUAL.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/formatacao.txt",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/documentacao/GUIA-TELAS-E-ARQUIVOS.md",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/documentacao/integracao-backend-resultados.json",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "frontend/documentacao/INTEGRACAO-BACKEND.md",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "frontend/documentacao/PENDENCIAS-OBJETIVAS.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/PUBLICACAO-WEB.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/RELATORIO-VALIDACAO-ATUAL.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/resultado-build-atual.txt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/resultado-build.txt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/resultado-testes-completos.txt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/resultado-testes-interface.txt",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/ROTEIRO-DE-DEMONSTRACAO.md",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/documentacao/SESSAO-E-INTEGRACAO.md",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/documentacao/STATUS-CHECKLIST.md",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/TENDENCIAS-IMPLEMENTADAS.md",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/documentacao/testes-atualizados.json",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/documentacao/testes-tendencias.json",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/documentacao/verificacao-navegador.json",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/e2e/integracao.spec.ts",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "frontend/src/ambiente.d.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/Aplicacao.tsx",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/estilos.css",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/inicializar.tsx",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/tipos.ts",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/documentacao/evidencias-android/lint-results-debug.xml",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/documentacao/evidencias-android/TEST-br.com.planner.pos.FluxoPosTest.xml",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/evidencias-android/TEST-br.com.planner.pos.RepositorioDemonstrativoTest.xml",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/documentacao/evidencias-android/validacao-android-final.log",
+    "estado": "somente quebra de linha/BOM"
+  },
+  {
+    "arquivo": "frontend/src/componentes/AvisoConexao.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/componentes/Botao.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/componentes/DialogoConfirmacao.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/componentes/ElementosInterface.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/componentes/EstruturaPainel.tsx",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/componentes/PainelTendencias.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/dados/cenarioDemonstrativo.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/servicos/adapterApi.ts",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/servicos/capacidadesApi.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/servicos/clienteHttp.test.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/servicos/clienteHttp.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/servicos/configuracaoAmbiente.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/servicos/contratoBackend.test.ts",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "frontend/src/servicos/contratosConsultas.ts",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/servicos/integracaoApi.test.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/servicos/integracaoConfigurada.ts",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/servicos/intencoesApi.ts",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "frontend/src/servicos/servicoDemonstrativo.test.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/servicos/servicoDemonstrativo.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/servicos/sessaoUsuario.ts",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/servicos/transporteApi.ts",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/servicos/validarContratoInterno.ts",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaAjuda.tsx",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaAnalise.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaAnaliseIntegrada.tsx",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaConfiguracoes.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaDashboard.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaDespesas.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaDespesasIntegrada.tsx",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaEntrada.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaEstadosAcesso.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaFluxoCaixa.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaLogin.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaOperacoes.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaOperacoesRemotas.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaResumoIntegrado.tsx",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaSimulacao.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaSimulacaoIntegrada.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaVendaDemonstrativa.tsx",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/telas/TelaVendasIntegrada.tsx",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "frontend/src/testes/configurarTestes.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/testes/consultasESessao.test.tsx",
+    "estado": "alterado"
+  },
+  {
+    "arquivo": "frontend/src/testes/fluxosInterface.test.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/testes/tendencias.test.tsx",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/testes/vendasIntegradas.test.tsx",
+    "estado": "adicionado"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/exportarRelatorio.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/tendencias.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/useConsultaRemota.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/usePreferenciaSessao.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/validarDespesa.test.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/validarDespesa.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/valoresFinanceiros.test.ts",
+    "estado": "igual"
+  },
+  {
+    "arquivo": "frontend/src/utilitarios/valoresFinanceiros.ts",
+    "estado": "igual"
+  }
+]

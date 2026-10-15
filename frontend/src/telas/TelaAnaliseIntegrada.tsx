@@ -12,6 +12,10 @@ export function TelaAnaliseIntegrada({ servico }: { servico: ServicoPlanner }) {
     if (!servico.explicar) throw new Error('A explicação ainda não foi conectada ao servidor.');
     return servico.explicar(pedido, sinal);
   });
+  const tendencias = useConsultaRemota(JSON.stringify(pedido), async (sinal) => {
+    if (!pedido || !servico.consultarTendencias) return null;
+    return servico.consultarTendencias(pedido, sinal);
+  });
   const alterar = (acao: () => void) => {
     setPedido(null);
     acao();
@@ -38,7 +42,7 @@ export function TelaAnaliseIntegrada({ servico }: { servico: ServicoPlanner }) {
             onSubmit={(e) => {
               e.preventDefault();
               if (inicio && fim && inicio <= fim) {
-                if (pedido?.inicio === inicio && pedido.fim === fim) consulta.recarregar();
+                if (pedido?.inicio === inicio && pedido.fim === fim) { consulta.recarregar(); tendencias.recarregar(); }
                 else setPedido({ inicio, fim });
               }
             }}
@@ -68,10 +72,17 @@ export function TelaAnaliseIntegrada({ servico }: { servico: ServicoPlanner }) {
           </form>
         </section>
       )}
-      {pedido && !consulta.carregando && !consulta.erro && consulta.dados?.tendencias && (
+      {pedido && servico.consultarTendencias && (
+        tendencias.carregando ? <Estado titulo="Consultando tendências" carregando /> :
+        tendencias.erro ? <Estado titulo="Comparação indisponível" descricao={tendencias.erro}
+          acao={<button className="botao secundario" onClick={tendencias.recarregar}>Tentar comparação novamente</button>} /> :
+        tendencias.dados ? <PainelTendencias comparacao={tendencias.dados} /> : null
+      )}
+      {pedido && !servico.consultarTendencias && !consulta.carregando && !consulta.erro && consulta.dados?.tendencias && (
         <PainelTendencias comparacao={consulta.dados.tendencias} />
       )}
       {pedido &&
+        !servico.consultarTendencias &&
         !consulta.carregando &&
         !consulta.erro &&
         consulta.dados &&

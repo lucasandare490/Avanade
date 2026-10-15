@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ComposicaoServidor } from '../componentes/ComposicaoServidor';
 import type { ServicoPlanner } from '../tipos';
 import { CabecalhoPagina, Estado, Indicador } from '../componentes/ElementosInterface';
 import { useConsultaRemota } from '../utilitarios/useConsultaRemota';
@@ -12,6 +13,7 @@ export function TelaResumoIntegrado({
   area: 'dashboard' | 'fluxo-caixa';
   fusoHorario?: string;
 }) {
+  const [revisao, setRevisao] = useState(0);
   const hoje = new Intl.DateTimeFormat('en-CA', {
     timeZone: fusoHorario,
     year: 'numeric',
@@ -48,6 +50,7 @@ export function TelaResumoIntegrado({
             className="filtros"
             onSubmit={(e) => {
               e.preventDefault();
+              setRevisao(v => v + 1);
               if (inicio && fim && inicio <= fim) {
                 if (periodo?.inicio === inicio && periodo.fim === fim) estado.recarregar();
                 else setPeriodo({ inicio, fim });
@@ -114,7 +117,8 @@ export function TelaResumoIntegrado({
               ) : (
                 <Estado titulo="Sem indicadores disponíveis neste período" />
               )}
-            </>
+              {periodo && area === 'dashboard' && servico.consultarComposicao && <ComposicaoServidor servico={servico} periodo={periodo} revisao={revisao} />}
+    </>
           )
         ))}
     </>

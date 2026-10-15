@@ -1,3 +1,5 @@
+> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+
 # Decisões do incremento 0.1
 
 Autorização: instrução de continuidade recebida em 12/10/2026; frontend e Android preservados. Fontes: PDFs V2 em `../../dados` (na raiz da área de trabalho), matriz e plano em `../../analise-backend` (também fora deste repositório), pacote `entrega-para-backend`. Estas referências externas descrevem a origem; a execução não depende delas.

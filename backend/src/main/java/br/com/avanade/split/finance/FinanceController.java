@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class FinanceController {
   private final FinanceService finance;
+  private final AnalyticsService analytics;
   private final Idempotency intents;
   private final TaxEngine tax;
   private final Clock clock;
@@ -20,11 +21,13 @@ public class FinanceController {
 
   public FinanceController(
       FinanceService finance,
+      AnalyticsService analytics,
       Idempotency intents,
       TaxEngine tax,
       Clock clock,
       AnalysisService analysis) {
     this.finance = finance;
+    this.analytics = analytics;
     this.intents = intents;
     this.tax = tax;
     this.clock = clock;
@@ -70,6 +73,17 @@ public class FinanceController {
       @RequestAttribute Actor actor, @RequestParam LocalDate from, @RequestParam LocalDate to) {
     actor.require("financeiro");
     return finance.cash(actor, new br.com.avanade.split.shared.Period(from, to));
+  }
+
+  @GetMapping("/dashboard/details")
+  public Object dashboardDetails(@RequestAttribute Actor actor,@RequestParam LocalDate from,@RequestParam LocalDate to) {
+    actor.require("financeiro");
+    return analytics.dashboard(actor,new br.com.avanade.split.shared.Period(from,to));
+  }
+  @GetMapping("/trends")
+  public Object trends(@RequestAttribute Actor actor,@RequestParam LocalDate from,@RequestParam LocalDate to) {
+    actor.require("financeiro");
+    return analytics.compare(actor,new br.com.avanade.split.shared.Period(from,to));
   }
 
   public record SimulationInput(

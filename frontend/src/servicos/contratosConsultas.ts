@@ -59,7 +59,14 @@ export interface PaginaDespesas {
   pagina: number;
   tamanho: number;
 }
+export interface ComposicaoPeriodo {
+  totais: { quantidade: number; bruto: number; tributo: number; taxa: number; liquido: number };
+  dias: { data: string; bruto: number; tributo: number; taxa: number; liquido: number }[];
+}
 export interface ConsultasPlanner {
+  exportarOperacoes?: (consulta: ConsultaOperacoes, sinal?: AbortSignal) => Promise<{ colunas: string[]; linhas: string[][]; total: number }>;
+  consultarComposicao?: (periodo: PeriodoConsulta, sinal?: AbortSignal) => Promise<ComposicaoPeriodo>;
+  consultarTendencias?: (periodo: PeriodoConsulta, sinal?: AbortSignal) => Promise<import('../utilitarios/tendencias').ComparacaoTendencias>;
   consultarVendas?: (
     consulta: Omit<ConsultaOperacoes, 'status'>,
     sinal?: AbortSignal,

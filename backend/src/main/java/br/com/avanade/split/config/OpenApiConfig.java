@@ -20,7 +20,7 @@ public class OpenApiConfig {
                     .title("Split demonstrativo")
                     .version("1.0.0")
                     .description(
-                        "Centavos BRL. Pagamentos simulados. Projeção/tendências pendentes; ver"
+                        "Centavos BRL. Pagamentos simulados. Comparação histórica disponível; projeções pendentes; ver"
                             + " docs/API.md."));
     var components =
         new Components()
@@ -46,6 +46,9 @@ public class OpenApiConfig {
             ApiSchemas.Category.class,
             ApiSchemas.Simulation.class,
             ApiSchemas.Analysis.class,
+            br.com.avanade.split.finance.OperationExport.ExportFile.class,
+            br.com.avanade.split.finance.AnalyticsService.Dashboard.class,
+            br.com.avanade.split.finance.AnalyticsService.Comparison.class,
             br.com.avanade.split.shared.ApiErrors.Error.class
           })
         SpringDocAnnotationsUtils.extractSchema(
@@ -73,7 +76,10 @@ public class OpenApiConfig {
                               operation.addSecurityItem(
                                   new SecurityRequirement().addList("bearerSession"));
                             String schema;
-                            if (login) schema = "Session";
+                            if (path.endsWith("/exports/operations")) schema = "ExportFile";
+                            else if (path.endsWith("/trends")) schema = "Comparison";
+                            else if (path.endsWith("/dashboard/details")) schema = "Dashboard";
+                            else if (login) schema = "Session";
                             else if (path.endsWith("/auth/logout")) {
                               operation.setResponses(
                                   new ApiResponses()
