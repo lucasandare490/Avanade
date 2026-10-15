@@ -1,8 +1,10 @@
+> Atualização vigente: [capacidades de 15/10](INCREMENTO-FUNCIONAL-2026-10-15.md), incluindo cadastro, relatórios, recuperação, explicações e caixa semanal.
+
 > **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
 
 # Contrato HTTP v1 — backend demonstrativo
 
-Base `/api/v1`. JSON UTF-8. Exceto login, todas as rotas exigem `Authorization: Bearer <accessToken>`. Corpo não admite propriedades desconhecidas, valores monetários fracionários ou tenant fornecido pelo cliente. Schemas de entrada e rotas no [OpenAPI](openapi.json); os schemas de resposta são publicados junto deste documento e dos [exemplos executados](examples/sale-confirmed.json).
+Base `/api/v1`. JSON UTF-8. Exceto login e cadastro (`POST /auth/register`), todas as rotas exigem `Authorization: Bearer <accessToken>`. Corpo não admite propriedades desconhecidas, valores monetários fracionários ou tenant fornecido pelo cliente. Schemas de entrada e rotas no [OpenAPI](openapi.json); os schemas de resposta são publicados junto deste documento e dos [exemplos executados](examples/sale-confirmed.json).
 
 | Método/rota | Permissão | Entrada / resultado |
 |---|---|---|

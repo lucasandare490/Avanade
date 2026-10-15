@@ -1,0 +1,13 @@
+
+> planner-comercial-frontend@0.1.0 test
+> vitest run --pool=threads --maxWorkers=1 --no-isolate
+
+
+ RUN  v5.0.3 C:/Avanade-main/frontend
+
+
+ Test Files  12 passed (12)
+      Tests  98 passed (98)
+   Start at  17:24:44
+   Duration  15.42s (tests 73%, environment 16%, setup 4%, transform 4%, import 3%)
+

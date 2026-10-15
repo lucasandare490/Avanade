@@ -1,0 +1,8 @@
+{
+  "docker": true,
+  "restart": true,
+  "restoredTables": 15,
+  "allTableContentsIdentical": true,
+  "run": "https://github.com/lucasandare490/Avanade/actions/runs/38800015378",
+  "commit": "9cc6d99c1c86ac352e5f2899e042f4af4767f076"
+}

@@ -4709,6 +4709,41 @@
           },
           "recognition": {
             "type": "string"
+          },
+          "weeks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CashWeek"
+            }
+          }
+        }
+      },
+      "CashWeek": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "format": "date"
+          },
+          "to": {
+            "type": "string",
+            "format": "date"
+          },
+          "openingCents": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "inflowCents": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "expenseCents": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "closingCents": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },

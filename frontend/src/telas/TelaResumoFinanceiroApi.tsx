@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { moeda } from '../utilitarios/valoresFinanceiros';
 import { PainelProjecaoCaixa } from '../componentes/PainelProjecaoCaixa';
 import { ComposicaoServidor } from '../componentes/ComposicaoServidor';
 import type { ServicoPlanner } from '../tipos';
@@ -52,7 +53,7 @@ export function TelaResumoFinanceiroApi({
             className="filtros"
             onSubmit={(e) => {
               e.preventDefault();
-              setRevisao(v => v + 1);
+              setRevisao((v) => v + 1);
               if (inicio && fim && inicio <= fim) {
                 if (periodo?.inicio === inicio && periodo.fim === fim) estado.recarregar();
                 else setPeriodo({ inicio, fim });
@@ -119,8 +120,56 @@ export function TelaResumoFinanceiroApi({
               ) : (
                 <Estado titulo="Sem indicadores disponíveis neste período" />
               )}
-              {periodo && area === 'dashboard' && servico.consultarComposicao && <ComposicaoServidor servico={servico} periodo={periodo} revisao={revisao} />}
-    </>
+              {area === 'fluxo-caixa' && estado.dados.semanas && (
+                <section className="painel">
+                  <h2>Caixa por semana</h2>
+                  <p>
+                    Semanas de segunda a domingo, limitadas ao período escolhido. Datas sem
+                    movimento mantêm o saldo anterior.
+                  </p>
+                  <div
+                    className="tabela-rolavel"
+                    role="region"
+                    aria-label="Caixa semanal"
+                    tabIndex={0}
+                  >
+                    <table>
+                      <thead>
+                        <tr>
+                          {[
+                            'Período',
+                            'Saldo inicial',
+                            'Entradas líquidas',
+                            'Despesas pagas',
+                            'Saldo final',
+                          ].map((t) => (
+                            <th key={t} scope="col">
+                              {t}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {estado.dados.semanas.map((w) => (
+                          <tr key={w.inicio}>
+                            <th scope="row">
+                              {w.inicio} a {w.fim}
+                            </th>
+                            <td>{moeda(w.abertura)}</td>
+                            <td>{moeda(w.entradas)}</td>
+                            <td>{moeda(w.saidas)}</td>
+                            <td>{moeda(w.saldo)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              )}
+              {periodo && area === 'dashboard' && servico.consultarComposicao && (
+                <ComposicaoServidor servico={servico} periodo={periodo} revisao={revisao} />
+              )}
+            </>
           )
         ))}
     </>

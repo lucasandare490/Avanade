@@ -32,3 +32,7 @@ Backups operacionais, política de retenção, destinatário dos alertas e aceit
 ## Validação
 
 Executar por último, após implementação e organização. Não confundir este contrato com resultado de teste. Relatórios finais e pipeline devem registrar o código efetivamente executado.
+
+## Caixa semanal
+
+`GET /cash-flow?from=&to=` acrescenta `weeks`: cada item tem `from`, `to`, `openingCents`, `inflowCents`, `expenseCents`, `closingCents`. Semanas começam segunda-feira e terminam domingo, limitadas pelo filtro inclusivo. Semanas vazias aparecem com movimento zero e saldo preservado. Abertura e fechamento conciliam com o total no mesmo snapshot. Valores são centavos; saldos podem ser negativos.

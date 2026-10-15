@@ -1,14 +1,6 @@
-> **Atualização vigente - 15/10/2026:** [funcionalidades e resultados](../documentacao/plano-de-finalizacao-2026-10-15/06-RESULTADOS-DA-VALIDACAO.md) e [mapa dos arquivos](../ONDE-ENCONTRAR-CADA-PARTE.md). Cadastro, projeção manual, relatórios e explicações de tendências/split foram acrescentados. As seções datadas abaixo registram entregas anteriores; não use suas pendências antigas como estado atual.
-
-> **Estado atual:** consulte o [incremento de integração e validação](../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
-
-> **Integração web — 14/10/2026:** modo API ativo por padrão, com backend Spring/PostgreSQL. Execute `../scripts/dev.sh` a partir desta pasta ou `./scripts/dev.sh` na raiz. [Guia atual de integração](documentacao/INTEGRACAO-BACKEND.md).
-
-> **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. Tendências/projeções e IA externa continuam pendentes; consultas e explicação mock já usam o backend. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](documentacao/TENDENCIAS-IMPLEMENTADAS.md).
-
 # Planner Comercial — frontend web
 
-React 19, TypeScript e Vite; CSS próprio, ícones Lucide e fontes locais DM Sans/Manrope. Revisão de 10/10/2026 com build e testes: [evidências](documentacao/RELATORIO-VALIDACAO-ATUAL.md). Referência de design e pesquisa: Thayná Batista da Silva; requisitos: Thayná e Kleysson.
+React 19, TypeScript e Vite; CSS próprio, ícones Lucide e fontes locais DM Sans/Manrope. Revisão de 15/10/2026: [evidências atuais](../documentacao/plano-de-finalizacao-2026-10-15/06-RESULTADOS-DA-VALIDACAO.md). Referência de design e pesquisa: Thayná Batista da Silva; requisitos: Thayná e Kleysson.
 
 ## Executar
 
@@ -22,7 +14,7 @@ npm test
 npm run preview
 ```
 
-Para a porta usada na demonstração: `node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 5175`. Abra a URL exibida pelo terminal. A versão compilada fica em dist. Não abra index.html diretamente pelo sistema de arquivos; use um servidor HTTP.
+A porta padrão é 5173; o proxy local encaminha `/api` para a API na porta 8080. Abra a URL exibida pelo terminal. A versão compilada fica em dist. Não abra index.html diretamente pelo sistema de arquivos; use um servidor HTTP.
 
 ## Uso demonstrativo (VITE_MODO_DADOS=demo)
 
@@ -51,9 +43,9 @@ Tributo de 10% e taxa de 2% são exclusivamente fictícios. A operação de R$15
 | src/telas | Telas por finalidade; nomes TelaOperacoes, TelaDespesas, TelaFluxoCaixa etc. |
 | src/componentes | Botão, indicador, tabela, estrutura, estados e diálogo reutilizáveis |
 | src/servicos/servicoDemonstrativo.ts | Cenários em memória e recuperação simulada |
-| src/servicos/adapterApi.ts | Tradução e validação das respostas externas para os tipos internos |
+| src/servicos/adaptarEValidarRespostasApi.ts | Tradução e validação das respostas externas para os tipos internos |
 | src/servicos/transporteApi.ts | HTTP, prazo, cancelamento, erros e cabeçalhos centralizados |
-| src/servicos/integracaoConfigurada.ts | Contrato /api/v1: autenticação, DTOs, consultas e intenções |
+| src/servicos/contratoBackendPlanner.ts | Contrato /api/v1: autenticação, DTOs, consultas e intenções |
 | src/servicos/contratosConsultas.ts | Consultas por capacidade e tipos paginados |
 | src/testes e demais *.test.* | Testes de fluxos, serviços, valores e acessibilidade estrutural |
 | documentacao | Checklist, guias, evidências e limites da entrega |
@@ -62,7 +54,7 @@ Tributo de 10% e taxa de 2% são exclusivamente fictícios. A operação de R$15
 
 O modo padrão é `api`, usando a mesma origem do frontend e o proxy `/api` para `http://127.0.0.1:8080`. A configuração está em `.env.example`; `demo` é uma opção explícita para o cenário em memória.
 
-Login, sessão bearer, logout, vendas, despesas, operações, caixa, simulação e explicação mock estão conectados. As respostas são validadas e nunca substituídas por dados fictícios após falha. Categorias vêm da API; totais financeiros vêm dos agregados do servidor. Intenções sem confirmação são preservadas por aba e conta para recuperação idempotente.
+Cadastro de loja/gerente, login, sessão bearer, logout, vendas, despesas, operações, caixa com semanas, simulação, projeção manual, relatórios, explicação de split e interpretação demonstrativa de tendências estão conectados. As respostas são validadas e nunca substituídas por dados fictícios após falha. Categorias vêm da API; totais financeiros vêm dos agregados do servidor. Intenções sem confirmação são preservadas por aba e conta para recuperação idempotente.
 
 Veja [execução, recuperação e testes E2E](documentacao/INTEGRACAO-BACKEND.md).
 
@@ -72,4 +64,4 @@ Os testes unitários usam fixtures; a suíte `npm run test:e2e` executa os fluxo
 
 ## Atualização de escopo do MVP
 
-Análise de tendências por IA faz parte do MVP, mas não está concluída pelo resumo textual atual. Crédito simulado e cancelamento de operações/compra ficam na evolução futura. Veja a [decisão e critérios de aceite](documentacao/DECISAO-ESCOPO-MVP.md).
+Análise de tendências faz parte do MVP. O servidor compara períodos e oferece interpretação demonstrativa dos indicadores; valores nulos ou base zero não produzem percentuais inventados. Não há provedor de IA externo contratado nem previsão estatística. A projeção usa premissas informadas pelo usuário. Crédito simulado e cancelamento de operações/compra ficam na evolução futura. Veja a [decisão e critérios de aceite](documentacao/DECISAO-ESCOPO-MVP.md).

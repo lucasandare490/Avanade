@@ -6,7 +6,11 @@ import { FalhaTransporte } from './transporteApi';
 import { validarOperacao, validarDespesaRecebida } from './validarContratoInterno';
 import { criarIntencoes } from './intencoesApi';
 
-function loja(v:unknown) {const o=objeto(v);if(typeof o.canEdit!=='boolean')throw new Error('Permissão de loja inválida.');return {nome:texto(o.name),fuso:texto(o.timeZone),podeEditar:o.canEdit};}
+function loja(v: unknown) {
+  const o = objeto(v);
+  if (typeof o.canEdit !== 'boolean') throw new Error('Permissão de loja inválida.');
+  return { nome: texto(o.name), fuso: texto(o.timeZone), podeEditar: o.canEdit };
+}
 function objeto(v: unknown): Record<string, unknown> {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new Error('Objeto inválido.');
   return v as Record<string, unknown>;
@@ -228,53 +232,130 @@ export const contratoServidor: ContratoServidor = {
   }),
   consultas: (enviar) => ({
     exportarOperacoes: (f, sinal) => {
-      const p = filtros(f); p.delete('page'); p.delete('size');
-      Object.entries(periodo(f)).forEach(([k,v]) => p.set(k,v));
-      if (f.status) p.set('status', {concluida:'CONCLUIDA',falha:'FALHA',pendente:'PENDENTE'}[f.status]);
-      return enviar(`/api/v1/exports/operations?${p}`, v => {
-        const r=objeto(v), total=inteiro(r.total);
-        const colunas=lista(r.columns).map(texto);
-        const linhas=lista(r.rows).map(row => lista(row).map(texto));
-        if(r.mode!=='SIMULADO' || total>2000 || linhas.length!==total || colunas.length!==8 || colunas.some(c=>c.length>100) || linhas.some(l=>l.length!==8 || l.some(c=>c.length>200)) || new Set(linhas.map(l=>l[0])).size!==total) throw new Error('Exportação incompleta ou inválida.');
-        return {colunas,linhas,total};
-      }, {sinal});
+      const p = filtros(f);
+      p.delete('page');
+      p.delete('size');
+      Object.entries(periodo(f)).forEach(([k, v]) => p.set(k, v));
+      if (f.status)
+        p.set('status', { concluida: 'CONCLUIDA', falha: 'FALHA', pendente: 'PENDENTE' }[f.status]);
+      return enviar(
+        `/api/v1/exports/operations?${p}`,
+        (v) => {
+          const r = objeto(v),
+            total = inteiro(r.total);
+          const colunas = lista(r.columns).map(texto);
+          const linhas = lista(r.rows).map((row) => lista(row).map(texto));
+          if (
+            r.mode !== 'SIMULADO' ||
+            total > 2000 ||
+            linhas.length !== total ||
+            colunas.length !== 8 ||
+            colunas.some((c) => c.length > 100) ||
+            linhas.some((l) => l.length !== 8 || l.some((c) => c.length > 200)) ||
+            new Set(linhas.map((l) => l[0])).size !== total
+          )
+            throw new Error('Exportação incompleta ou inválida.');
+          return { colunas, linhas, total };
+        },
+        { sinal },
+      );
     },
-    consultarComposicao: (p, sinal) => enviar(
-      `/api/v1/dashboard/details?${new URLSearchParams(periodo(p))}`, v => {
-        const r = objeto(v); periodoRecebido(r.period, p);
-        if (r.recognition !== 'COMPLETED_AT_IN_MERCHANT_TIME_ZONE') throw new Error('Reconhecimento desconhecido.');
-        const valores = (v: unknown) => {
-          const a = objeto(v);
-          const bruto = inteiro(a.grossCents), tributo = inteiro(a.taxCents), taxa = inteiro(a.feeCents), liquido = inteiro(a.netCents);
-          if (bruto !== tributo + taxa + liquido) throw new Error('Composição divergente.');
-          return { bruto, tributo, taxa, liquido };
-        };
-        const totais = { ...valores(r.totals), quantidade: inteiro(objeto(r.totals).count) };
-        const dias = lista(r.series).map(v => ({ ...valores(v), data: texto(objeto(v).date) }));
-        const primeiro = Date.parse(p.inicio + 'T00:00:00Z'), ultimo = Date.parse(p.fim + 'T00:00:00Z');
-        if (dias.length !== (ultimo - primeiro) / 86400000 + 1 || dias.some((d,i) => d.data !== new Date(primeiro + i*86400000).toISOString().slice(0,10))) throw new Error('Série diária incompleta.');
-        for (const campo of ['bruto','tributo','taxa','liquido'] as const) {
-          const soma = dias.reduce((n,d) => n + d[campo],0);
-          if (!Number.isSafeInteger(soma) || soma !== totais[campo]) throw new Error('Série e totais divergentes.');
-        }
-        return { totais, dias };
-      }, { sinal }),
-    consultarLoja: sinal=>enviar('/api/v1/merchant',loja,{sinal}),
-    salvarNomeLoja: nome=>enviar('/api/v1/merchant',loja,{metodo:'POST',dados:{name:nome}}),
-    sugerirCategoria: (descricao,sinal)=>enviar('/api/v1/ai/expense-category',v=>{
-      const o=objeto(v);if(o.origin!=='MOCK'||o.requiresConfirmation!==true)throw new Error('Sugestão inválida.');
-      return {categorias:lista(o.suggestions).map(c=>texto(objeto(c).name)),explicacao:texto(o.explanation)};
-    },{metodo:'POST',dados:{description:descricao},sinal}),
-    projetarCaixa: (entrada,sinal) => enviar('/api/v1/planning/projection',v=>{
-      const o=objeto(v);
-      const openingCents=inteiro(o.openingCents,Number.MIN_SAFE_INTEGER), projectedCents=inteiro(o.projectedCents,Number.MIN_SAFE_INTEGER);
-      const incomeCents=inteiro(o.incomeCents),expenseCents=inteiro(o.expenseCents);
-      if(o.until!==entrada.until || incomeCents!==entrada.incomeCents || expenseCents!==entrada.expenseCents || openingCents+incomeCents-expenseCents!==projectedCents || o.origin!=='MOCK') throw new Error('Projeção inconsistente.');
-      return {asOf:texto(o.asOf),until:texto(o.until),openingCents,incomeCents,expenseCents,projectedCents,attention:opcao(o.attention,{DEFICIT:'DEFICIT',SEM_MARGEM:'SEM_MARGEM',POSITIVO:'POSITIVO'}),explanation:texto(o.explanation),assumption:texto(o.assumption),origin:'MOCK'};
-    },{metodo:'POST',dados:entrada,sinal}),
-    consultarTendencias: (p, sinal) => enviar(
-      `/api/v1/trends?${new URLSearchParams(periodo(p))}`,
-      v => validarTendencias(v as ComparacaoTendencias, p), { sinal }),
+    consultarComposicao: (p, sinal) =>
+      enviar(
+        `/api/v1/dashboard/details?${new URLSearchParams(periodo(p))}`,
+        (v) => {
+          const r = objeto(v);
+          periodoRecebido(r.period, p);
+          if (r.recognition !== 'COMPLETED_AT_IN_MERCHANT_TIME_ZONE')
+            throw new Error('Reconhecimento desconhecido.');
+          const valores = (v: unknown) => {
+            const a = objeto(v);
+            const bruto = inteiro(a.grossCents),
+              tributo = inteiro(a.taxCents),
+              taxa = inteiro(a.feeCents),
+              liquido = inteiro(a.netCents);
+            if (bruto !== tributo + taxa + liquido) throw new Error('Composição divergente.');
+            return { bruto, tributo, taxa, liquido };
+          };
+          const totais = { ...valores(r.totals), quantidade: inteiro(objeto(r.totals).count) };
+          const dias = lista(r.series).map((v) => ({ ...valores(v), data: texto(objeto(v).date) }));
+          const primeiro = Date.parse(p.inicio + 'T00:00:00Z'),
+            ultimo = Date.parse(p.fim + 'T00:00:00Z');
+          if (
+            dias.length !== (ultimo - primeiro) / 86400000 + 1 ||
+            dias.some(
+              (d, i) => d.data !== new Date(primeiro + i * 86400000).toISOString().slice(0, 10),
+            )
+          )
+            throw new Error('Série diária incompleta.');
+          for (const campo of ['bruto', 'tributo', 'taxa', 'liquido'] as const) {
+            const soma = dias.reduce((n, d) => n + d[campo], 0);
+            if (!Number.isSafeInteger(soma) || soma !== totais[campo])
+              throw new Error('Série e totais divergentes.');
+          }
+          return { totais, dias };
+        },
+        { sinal },
+      ),
+    consultarLoja: (sinal) => enviar('/api/v1/merchant', loja, { sinal }),
+    salvarNomeLoja: (nome) =>
+      enviar('/api/v1/merchant', loja, { metodo: 'POST', dados: { name: nome } }),
+    sugerirCategoria: (descricao, sinal) =>
+      enviar(
+        '/api/v1/ai/expense-category',
+        (v) => {
+          const o = objeto(v);
+          if (o.origin !== 'MOCK' || o.requiresConfirmation !== true)
+            throw new Error('Sugestão inválida.');
+          return {
+            categorias: lista(o.suggestions).map((c) => texto(objeto(c).name)),
+            explicacao: texto(o.explanation),
+          };
+        },
+        { metodo: 'POST', dados: { description: descricao }, sinal },
+      ),
+    projetarCaixa: (entrada, sinal) =>
+      enviar(
+        '/api/v1/planning/projection',
+        (v) => {
+          const o = objeto(v);
+          const openingCents = inteiro(o.openingCents, Number.MIN_SAFE_INTEGER),
+            projectedCents = inteiro(o.projectedCents, Number.MIN_SAFE_INTEGER);
+          const incomeCents = inteiro(o.incomeCents),
+            expenseCents = inteiro(o.expenseCents);
+          if (
+            o.until !== entrada.until ||
+            incomeCents !== entrada.incomeCents ||
+            expenseCents !== entrada.expenseCents ||
+            openingCents + incomeCents - expenseCents !== projectedCents ||
+            o.origin !== 'MOCK'
+          )
+            throw new Error('Projeção inconsistente.');
+          return {
+            asOf: texto(o.asOf),
+            until: texto(o.until),
+            openingCents,
+            incomeCents,
+            expenseCents,
+            projectedCents,
+            attention: opcao(o.attention, {
+              DEFICIT: 'DEFICIT',
+              SEM_MARGEM: 'SEM_MARGEM',
+              POSITIVO: 'POSITIVO',
+            }),
+            explanation: texto(o.explanation),
+            assumption: texto(o.assumption),
+            origin: 'MOCK',
+          };
+        },
+        { metodo: 'POST', dados: entrada, sinal },
+      ),
+    consultarTendencias: (p, sinal) =>
+      enviar(
+        `/api/v1/trends?${new URLSearchParams(periodo(p))}`,
+        (v) => validarTendencias(v as ComparacaoTendencias, p),
+        { sinal },
+      ),
     async consultarOperacoes(f, sinal) {
       const p = filtros(f);
       if (f.status)
@@ -297,9 +378,50 @@ export const contratoServidor: ContratoServidor = {
             despesas = inteiro(r.expenseCents),
             saldo = inteiro(r.closingCents, Number.MIN_SAFE_INTEGER);
           if (saldo !== abertura + entradas - despesas) throw new Error('Saldo inconsistente.');
+          let semanas: import('./contratosConsultas').SemanaCaixa[] | undefined;
+          if (r.weeks !== undefined) {
+            let esperado = p.inicio,
+              anterior = abertura,
+              totalEntradas = 0,
+              totalSaidas = 0;
+            semanas = lista(r.weeks).map((value) => {
+              const w = objeto(value),
+                inicio = texto(w.from),
+                fim = texto(w.to);
+              const a = inteiro(w.openingCents, Number.MIN_SAFE_INTEGER),
+                e = inteiro(w.inflowCents),
+                s = inteiro(w.expenseCents),
+                f = inteiro(w.closingCents, Number.MIN_SAFE_INTEGER);
+              if (
+                inicio !== esperado ||
+                !/^\d{4}-\d{2}-\d{2}$/.test(fim) ||
+                fim < inicio ||
+                fim > p.fim ||
+                a !== anterior ||
+                f !== a + e - s
+              )
+                throw new Error('Semana de caixa inconsistente.');
+              const next = new Date(fim + 'T12:00:00Z');
+              next.setUTCDate(next.getUTCDate() + 1);
+              esperado = next.toISOString().slice(0, 10);
+              anterior = f;
+              totalEntradas += e;
+              totalSaidas += s;
+              return { inicio, fim, abertura: a, entradas: e, saidas: s, saldo: f };
+            });
+            if (
+              !semanas.length ||
+              semanas.at(-1)?.fim !== p.fim ||
+              anterior !== saldo ||
+              totalEntradas !== entradas ||
+              totalSaidas !== despesas
+            )
+              throw new Error('Semanas não conciliam com o período.');
+          }
           return {
             periodo: periodoRecebido(r.period, p),
             atualizadoEm: texto(r.updatedAt),
+            semanas,
             indicadores: [
               {
                 id: 'abertura',
@@ -349,7 +471,14 @@ export const contratoServidor: ContratoServidor = {
         },
         {
           metodo: 'POST',
-          dados: { amountCents: e.bruto, includeFee: e.incluirTaxa, taxCategory: 'GENERAL', ...(e.percentualHipoteticoBps === undefined ? {} : {simulatedTaxBps:e.percentualHipoteticoBps}) },
+          dados: {
+            amountCents: e.bruto,
+            includeFee: e.incluirTaxa,
+            taxCategory: 'GENERAL',
+            ...(e.percentualHipoteticoBps === undefined
+              ? {}
+              : { simulatedTaxBps: e.percentualHipoteticoBps }),
+          },
           sinal,
         },
       ),
@@ -360,13 +489,29 @@ export const contratoServidor: ContratoServidor = {
           const r = objeto(v);
           return {
             periodo: periodoRecebido(r.period, p),
-            tendencias: r.tendencias === undefined ? undefined : validarTendencias(r.tendencias as ComparacaoTendencias, p),
+            tendencias:
+              r.tendencias === undefined
+                ? undefined
+                : validarTendencias(r.tendencias as ComparacaoTendencias, p),
             texto: texto(r.text),
-            detalhes: r.structured === undefined ? undefined : (() => {
-              const d=objeto(r.structured);
-              if (texto(d.summary)!==texto(r.text)) throw new Error('Resumo da explicação divergente.');
-              return {atencao:opcao(d.attention,{NEGATIVE_BALANCE:'saldo-negativo',ZERO_BALANCE:'saldo-zero',POSITIVE_BALANCE:'saldo-positivo'} as const),recomendacoes:lista(d.recommendations).map(texto),limitacoes:lista(d.limitations).map(texto),versao:texto(d.templateVersion)};
-            })(),
+            detalhes:
+              r.structured === undefined
+                ? undefined
+                : (() => {
+                    const d = objeto(r.structured);
+                    if (texto(d.summary) !== texto(r.text))
+                      throw new Error('Resumo da explicação divergente.');
+                    return {
+                      atencao: opcao(d.attention, {
+                        NEGATIVE_BALANCE: 'saldo-negativo',
+                        ZERO_BALANCE: 'saldo-zero',
+                        POSITIVE_BALANCE: 'saldo-positivo',
+                      } as const),
+                      recomendacoes: lista(d.recommendations).map(texto),
+                      limitacoes: lista(d.limitations).map(texto),
+                      versao: texto(d.templateVersion),
+                    };
+                  })(),
             origem: opcao(r.origin, {
               demonstrativa: 'demonstrativa',
               servidor: 'servidor',
@@ -380,16 +525,35 @@ export const contratoServidor: ContratoServidor = {
     const intencoes = criarIntencoes(sessao.identidade ?? sessao.id, enviar);
     const categorias = new Map<string, string>();
     return {
-      consultarRelatorio: (tipo,p,sinal)=>enviar(`/api/v1/reports/${tipo}?${new URLSearchParams({from:p.inicio,to:p.fim})}`,v=>{
-        const r=objeto(v); if(r.mode!=='SIMULADO') throw new Error('Modo de relatório divergente.');
-        const colunas=lista(r.columns).map(texto),linhas=lista(r.rows).map(row=>lista(row).map(texto));
-        if(!Number.isSafeInteger(r.total)||r.total!==linhas.length||linhas.some(row=>row.length!==colunas.length)) throw new Error('Relatório incompleto.');
-        return {colunas,linhas,total:linhas.length};
-      },{sinal}),
-      explicarSplit: (id,sinal) => enviar(`/api/v1/ai/split-explanation/${encodeURIComponent(id)}`,v=>{
-        const r=objeto(v); if(texto(r.operationId)!==id || r.origin!=='MOCK') throw new Error('Explicação divergente.');
-        return {texto:texto(r.text),limitacoes:lista(r.limitations).map(texto)};
-      },{sinal}),
+      consultarRelatorio: (tipo, p, sinal) =>
+        enviar(
+          `/api/v1/reports/${tipo}?${new URLSearchParams({ from: p.inicio, to: p.fim })}`,
+          (v) => {
+            const r = objeto(v);
+            if (r.mode !== 'SIMULADO') throw new Error('Modo de relatório divergente.');
+            const colunas = lista(r.columns).map(texto),
+              linhas = lista(r.rows).map((row) => lista(row).map(texto));
+            if (
+              !Number.isSafeInteger(r.total) ||
+              r.total !== linhas.length ||
+              linhas.some((row) => row.length !== colunas.length)
+            )
+              throw new Error('Relatório incompleto.');
+            return { colunas, linhas, total: linhas.length };
+          },
+          { sinal },
+        ),
+      explicarSplit: (id, sinal) =>
+        enviar(
+          `/api/v1/ai/split-explanation/${encodeURIComponent(id)}`,
+          (v) => {
+            const r = objeto(v);
+            if (texto(r.operationId) !== id || r.origin !== 'MOCK')
+              throw new Error('Explicação divergente.');
+            return { texto: texto(r.text), limitacoes: lista(r.limitations).map(texto) };
+          },
+          { sinal },
+        ),
       async consultarCategoriasDespesa(sinal) {
         const registros = await enviar(
           '/api/v1/expense-categories',
@@ -436,7 +600,12 @@ export const contratoServidor: ContratoServidor = {
         );
       },
       async recuperarSplitVenda(id) {
-        await intencoes.enviar(`RECOVER_SPLIT:${id}`, `/api/v1/sales/${encodeURIComponent(id)}/recover-split`, undefined, mapearVenda);
+        await intencoes.enviar(
+          `RECOVER_SPLIT:${id}`,
+          `/api/v1/sales/${encodeURIComponent(id)}/recover-split`,
+          undefined,
+          mapearVenda,
+        );
       },
       consultarVendas: (f, sinal) =>
         enviar(`/api/v1/sales?${filtros(f)}`, (v) => pagina(v, f, mapearVenda), { sinal }),

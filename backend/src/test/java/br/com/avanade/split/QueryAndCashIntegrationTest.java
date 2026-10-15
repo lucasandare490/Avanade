@@ -444,4 +444,22 @@ class QueryAndCashIntegrationTest extends PostgresSupport {
       throw new AssertionError(e);
     }
   }
+
+  @Test void weeklyCashReconcilesPartialEmptyWeeksAndOpening() {
+    clock.at("2026-09-08T15:00:00Z"); sale(actor);
+    clock.at("2026-09-09T15:00:00Z"); sale(actor); sale(other);
+    clock.at("2026-09-15T15:00:00Z");
+    expense(actor,5000,LocalDate.parse("2026-09-14"),"Despesa semanal");
+    var result=finance.cash(actor,new Period(LocalDate.parse("2026-09-09"),LocalDate.parse("2026-09-22")));
+    assertThat(result.weeks()).hasSize(3);
+    assertThat(result.weeks().get(0).from()).isEqualTo(LocalDate.parse("2026-09-09"));
+    assertThat(result.weeks().get(0).to()).isEqualTo(LocalDate.parse("2026-09-13"));
+    assertThat(result.weeks().get(0).openingCents()).isEqualTo(13200);
+    assertThat(result.weeks().get(2).inflowCents()).isZero();
+    assertThat(result.weeks().get(2).expenseCents()).isZero();
+    assertThat(result.weeks().get(2).to()).isEqualTo(LocalDate.parse("2026-09-22"));
+    assertThat(result.weeks().stream().mapToLong(FinanceService.CashWeek::inflowCents).sum()).isEqualTo(result.inflowCents());
+    assertThat(result.weeks().stream().mapToLong(FinanceService.CashWeek::expenseCents).sum()).isEqualTo(result.expenseCents());
+    assertThat(result.weeks().getLast().closingCents()).isEqualTo(result.closingCents()).isEqualTo(21400);
+  }
 }

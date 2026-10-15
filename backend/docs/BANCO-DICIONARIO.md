@@ -1,5 +1,3 @@
-> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
-
 # Dicionário extraído do PostgreSQL
 
 Gerado por `DatabaseReport`; schema public após migrations. Sem dados de usuários.
@@ -370,6 +368,7 @@ Constraints:
 | tax_bps | integer | NO | — |
 | fee_bps | integer | NO | — |
 | valid_from | timestamp with time zone | NO | — |
+| valid_to | timestamp with time zone | YES | — |
 
 Constraints:
 
@@ -378,6 +377,7 @@ Constraints:
 - `tax_rule_fee_bps_check`: CHECK (((fee_bps >= 0) AND (fee_bps <= 10000)))
 - `tax_rule_pkey`: PRIMARY KEY (id)
 - `tax_rule_tax_bps_check`: CHECK (((tax_bps >= 0) AND (tax_bps <= 10000)))
+- `tax_rule_valid_interval`: CHECK (((valid_to IS NULL) OR (valid_to > valid_from)))
 - `tax_rule_version_key`: UNIQUE (version)
 
 Índices:

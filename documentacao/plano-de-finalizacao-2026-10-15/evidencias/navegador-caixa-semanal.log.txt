@@ -1,0 +1,6 @@
+
+Running 1 test using 1 worker
+
+  ok 1 e2e\caixa-semanal.spec.ts:5:1 › caixa semanal integrado: período sem movimento e acessibilidade (4.3s)
+
+  1 passed (9.7s)

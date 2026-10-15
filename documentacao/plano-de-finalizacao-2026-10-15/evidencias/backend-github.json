@@ -1,0 +1,99 @@
+{
+  "suites": [
+    {
+      "name": "br.com.avanade.split.BackendIntegrationTest",
+      "tests": "19",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.ConsultaExplicacaoLimitadaTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.CadastroIntegrationTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.CrashRecoveryTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.EstabelecimentoIntegrationTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.InterpretacaoTendenciasTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.MigrationUpgradeTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.OperationExportLimitTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.PlanejamentoIntegrationTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.QueryAndCashIntegrationTest",
+      "tests": "13",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.TaxEngineTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.ValidacaoExplicacaoFinanceiraTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    },
+    {
+      "name": "br.com.avanade.split.VigenciaRegraIntegrationTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "tests": 54,
+  "failures": 0,
+  "run": "https://github.com/lucasandare490/Avanade/actions/runs/38800015378",
+  "commit": "9cc6d99c1c86ac352e5f2899e042f4af4767f076"
+}

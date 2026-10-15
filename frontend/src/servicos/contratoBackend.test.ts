@@ -263,3 +263,14 @@ it('exporta todo o filtro sem enviar página e rejeita arquivo truncado', async 
   expect(url.searchParams.get('status')).toBe('CONCLUIDA');
   await expect(servico.exportarOperacoes!(consulta)).rejects.toThrow();
 });
+it('valida continuidade e conciliação das semanas do caixa', async () => {
+  const p={inicio:'2026-10-01',fim:'2026-10-06'};
+  const cash={period:{from:p.inicio,to:p.fim},openingCents:100,inflowCents:200,expenseCents:400,closingCents:-100,updatedAt:new Date().toISOString(),weeks:[
+    {from:'2026-10-01',to:'2026-10-04',openingCents:100,inflowCents:200,expenseCents:0,closingCents:300},
+    {from:'2026-10-05',to:'2026-10-06',openingCents:300,inflowCents:0,expenseCents:400,closingCents:-100}]};
+  const f=vi.fn().mockResolvedValueOnce(resposta(sessao())).mockResolvedValueOnce(resposta(cash)).mockResolvedValueOnce(resposta({...cash,weeks:cash.weeks.slice(1)})).mockResolvedValueOnce(resposta({...cash,weeks:[cash.weeks[0],{...cash.weeks[1],openingCents:0}]}));
+  const {servico}=await conectar(f);
+  expect((await servico.consultarResumo!('fluxo-caixa',p)).semanas?.at(-1)?.saldo).toBe(-100);
+  await expect(servico.consultarResumo!('fluxo-caixa',p)).rejects.toMatchObject({codigo:502});
+  await expect(servico.consultarResumo!('fluxo-caixa',p)).rejects.toMatchObject({codigo:502});
+});

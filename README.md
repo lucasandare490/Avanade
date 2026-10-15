@@ -70,7 +70,7 @@ A IA não escolhe alíquota, não calcula valores autoritativos e não movimenta
 
 ## Validação e publicação
 
-Os testes locais foram executados após as alterações funcionais. O relatório registra resultados, correções e limitações. Docker/restauração remota, homologação física e revisão individual completa dos 516 critérios ainda não estão encerrados.
+Os testes locais foram executados após as alterações funcionais. O relatório registra resultados, correções e limitações. Docker e restauração foram verificados no GitHub, com 15 tabelas conferidas. Os 516 critérios têm revisão individual, com pendências e limites explícitos. Homologação física, aceite visual e implantação continuam abertos. O caixa semanal recebeu testes adicionais locais; consulte o relatório para identificar o commit de cada evidência.
 
 A publicação autorizada usa https://github.com/lucasandare490/Avanade. Esta pasta de trabalho é uma cópia sem `.git`; a publicação deve comparar o remoto para preservar contribuições dos colegas. Excluir `.local`, senhas, banco, caches, conversas e fontes privadas.
 
