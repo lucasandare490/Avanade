@@ -1,0 +1,95 @@
+{
+  "id": "50892cec-7047-43cc-9bbe-4cbac0d8503f",
+  "amountCents": 15000,
+  "currency": "BRL",
+  "paymentMethod": "PIX",
+  "createdAt": "2026-10-15T21:12:03.349084Z",
+  "mode": "SIMULADO",
+  "payment": {
+    "status": "CONFIRMED",
+    "id": "98b2bd28-13bf-41e9-b509-cbcfb8477d6f"
+  },
+  "failureCode": null,
+  "operation": {
+    "id": "c0d2b565-39f1-497e-9fdb-8d2cc4c867f6",
+    "saleId": "50892cec-7047-43cc-9bbe-4cbac0d8503f",
+    "createdAt": "2026-10-15T21:12:03.349084Z",
+    "completedAt": null,
+    "grossCents": 15000,
+    "taxCents": 1500,
+    "feeCents": 300,
+    "netCents": 13200,
+    "status": "FALHA",
+    "paymentStatus": "CONFIRMED",
+    "paymentMethod": "PIX",
+    "mode": "SIMULADO",
+    "currency": "BRL",
+    "rule": {
+      "taxBps": 1000,
+      "feeBps": 200,
+      "version": "DEMO-v1",
+      "id": "10000000-0000-0000-0000-000000000001",
+      "rounding": "HALF_UP_TAX_FIRST_RESIDUAL_NET"
+    },
+    "parcels": [
+      {
+        "id": "2f1bfb67-0b87-461c-a6d6-a8dc94a95f64",
+        "kind": "TAX",
+        "amountCents": 1500,
+        "destination": "Tributo demonstrativo",
+        "status": "CONFIRMADA",
+        "confirmedAt": "2026-10-15T21:12:03.356532Z"
+      },
+      {
+        "id": "7554a055-9a2f-4e01-804f-081af0a8993d",
+        "kind": "FEE",
+        "amountCents": 300,
+        "destination": "Processamento demonstrativo",
+        "status": "FALHA",
+        "confirmedAt": null
+      },
+      {
+        "id": "9a2b55f3-8484-47a0-8003-c4156df683fc",
+        "kind": "NET",
+        "amountCents": 13200,
+        "destination": "Estabelecimento demonstrativo",
+        "status": "PENDENTE",
+        "confirmedAt": null
+      }
+    ],
+    "events": [
+      {
+        "description": "Pagamento simulado confirmado. Split criado.",
+        "occurredAt": "2026-10-15T21:12:03.352219Z",
+        "hash": "f3094e47c99df0c8a59fb8d4d099ac3a19409124a20d71f68e34dea6e428c33b",
+        "id": "a780ee92-ca76-4493-93d9-81d906c1fa5d",
+        "sequence": 1,
+        "previousHash": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "description": "Parcelas separadas pela regra DEMO-v1.",
+        "occurredAt": "2026-10-15T21:12:03.355280Z",
+        "hash": "0e6dc0cd00e2f6dea37349e13866dab15e86a544edef38e9d198ab04188ed594",
+        "id": "389dad27-7e1d-49c6-91bc-23ef94383c15",
+        "sequence": 2,
+        "previousHash": "f3094e47c99df0c8a59fb8d4d099ac3a19409124a20d71f68e34dea6e428c33b"
+      },
+      {
+        "description": "Parcela TAX confirmada em modo SIMULADO.",
+        "occurredAt": "2026-10-15T21:12:03.357558Z",
+        "hash": "cd26de2a6d6fa1d0b23f95f8d699c368cc21aef7dee1749316cfb70c6714e68e",
+        "id": "d83680d7-998b-4c3e-b052-437f1bfd7d14",
+        "sequence": 3,
+        "previousHash": "0e6dc0cd00e2f6dea37349e13866dab15e86a544edef38e9d198ab04188ed594"
+      },
+      {
+        "description": "Falha simulada no destino FEE. Demais parcelas aguardam retomada.",
+        "occurredAt": "2026-10-15T21:12:03.359061Z",
+        "hash": "a006bb76a4847f11a59794cdf7036b1614c6cd8db1e5a7f13b85c9933188c80d",
+        "id": "33c96e37-a29e-4297-820a-b08856eee24b",
+        "sequence": 4,
+        "previousHash": "cd26de2a6d6fa1d0b23f95f8d699c368cc21aef7dee1749316cfb70c6714e68e"
+      }
+    ]
+  }
+}

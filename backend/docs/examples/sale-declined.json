@@ -1,0 +1,14 @@
+{
+  "id": "255a988c-fd55-436a-ab33-72416846ebcb",
+  "amountCents": 15000,
+  "currency": "BRL",
+  "paymentMethod": "PIX",
+  "createdAt": "2026-10-15T21:12:03.331746Z",
+  "mode": "SIMULADO",
+  "payment": {
+    "status": "DECLINED",
+    "id": "57721119-7960-4210-a5c6-984c173fb9ce"
+  },
+  "failureCode": null,
+  "operation": null
+}

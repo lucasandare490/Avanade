@@ -561,4 +561,33 @@ class BackendIntegrationTest extends PostgresSupport {
     getAs(manager,"/api/v1/reports/sales?from=2026-02-02&to=2026-01-01").andExpect(status().isBadRequest()).andExpect(jsonPath("code").value("INVALID_PERIOD"));
     assertThat(count("cash_entry")).isEqualTo(before);
   }
+
+  @Test
+  void exportSyntheticContractExamplesWithVerifiedStates() throws Exception {
+    var output = java.nio.file.Path.of("target", "contract-examples");
+    java.nio.file.Files.createDirectories(output);
+    String intention = key();
+    var confirmed = body(sale(manager, intention, input).andExpect(status().isCreated()).andReturn());
+    assertThat(confirmed.path("operation").path("status").asText()).isEqualTo("CONCLUIDA");
+    json.writerWithDefaultPrettyPrinter().writeValue(output.resolve("sale-confirmed.json").toFile(), confirmed);
+    var conflict = body(sale(manager, intention, input.replace("15000", "16000")).andExpect(status().isConflict()).andReturn());
+    assertThat(conflict.hasNonNull("code")).isTrue();
+    json.writerWithDefaultPrettyPrinter().writeValue(output.resolve("idempotency-conflict.json").toFile(), conflict);
+    for (String state : List.of("DECLINED", "PENDING")) {
+      when(mocks.confirmPayment()).thenReturn(state);
+      var response = body(sale(manager, key(), input).andExpect(status().isCreated()).andReturn());
+      assertThat(response.path("payment").path("status").asText()).isEqualTo(state);
+      assertThat(response.path("operation").isNull()).isTrue();
+      json.writerWithDefaultPrettyPrinter().writeValue(output.resolve("sale-" + state.toLowerCase(Locale.ROOT) + ".json").toFile(), response);
+    }
+    when(mocks.confirmPayment()).thenReturn("CONFIRMED");
+    when(mocks.route("FEE", false)).thenReturn(false);
+    var partial = body(sale(manager, key(), input).andExpect(status().isCreated()).andReturn());
+    assertThat(partial.path("operation").path("status").asText()).isEqualTo("FALHA");
+    json.writerWithDefaultPrettyPrinter().writeValue(output.resolve("sale-partial-failure.json").toFile(), partial);
+    var empty = body(getAs(other, "/api/v1/split-operations?search=" + confirmed.path("operation").path("id").asText()).andExpect(status().isOk()).andReturn());
+    assertThat(empty.path("total").asInt()).isZero();
+    assertThat(empty.path("items").size()).isZero();
+    json.writerWithDefaultPrettyPrinter().writeValue(output.resolve("operations-empty.json").toFile(), empty);
+  }
 }

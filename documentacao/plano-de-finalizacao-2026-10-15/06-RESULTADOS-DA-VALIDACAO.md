@@ -35,3 +35,7 @@ Commits publicados: `36c84ef` e `9cc6d99`. [CI 38800015378](https://github.com/l
 ## Limites de entrega
 
 Não há homologação de carga sustentada, banco em nuvem, Android por HTTPS em aparelho nem uso financeiro real. IA externa é opcional. Crédito, cancelamento e integração real com adquirente permanecem evolução futura. Responsáveis e prazos operacionais dependem da equipe; não foram presumidos.
+
+## Complemento de exemplos de integração
+
+Seis exemplos HTTP sintéticos foram gerados por teste aprovado em PostgreSQL descartável: sucesso, recusa, pendência, falha parcial, lista vazia e conflito. Consulte `backend/docs/examples/README.md`. O novo teste não altera regras de produção nem cria dados na base de demonstração local.

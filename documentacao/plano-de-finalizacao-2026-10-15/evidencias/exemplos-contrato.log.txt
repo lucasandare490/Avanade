@@ -1,0 +1,136 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< br.com.avanade:split-backend >--------------------
+[INFO] Building split-backend 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ split-backend ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 5 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ split-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ split-backend ---
+[INFO] skip non existing resourceDirectory C:\Avanade-main\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ split-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 19 source files with javac [debug parameters release 21] to target\test-classes
+[INFO] /C:/Avanade-main/backend/src/test/java/br/com/avanade/split/QueryAndCashIntegrationTest.java: C:\Avanade-main\backend\src\test\java\br\com\avanade\split\QueryAndCashIntegrationTest.java uses unchecked or unsafe operations.
+[INFO] /C:/Avanade-main/backend/src/test/java/br/com/avanade/split/QueryAndCashIntegrationTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ split-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running br.com.avanade.split.BackendIntegrationTest
+18:11:44.007 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [br.com.avanade.split.BackendIntegrationTest]: BackendIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+18:11:44.164 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration br.com.avanade.split.SplitApplication for test class br.com.avanade.split.BackendIntegrationTest
+18:11:44.360 [main] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- Detected a Windows x86_64 system
+18:11:44.362 [main] INFO io.zonky.test.db.postgres.embedded.DefaultPostgresBinaryResolver -- Detected distribution: 'Unknown'
+18:11:44.364 [main] INFO io.zonky.test.db.postgres.embedded.DefaultPostgresBinaryResolver -- System specific postgres binaries found: 'postgres-windows-x86_64.txz'
+18:11:44.492 [main] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- Postgres binaries at C:\Users\lucas\AppData\Local\Temp\embedded-pg\PG-8924db7749885a572758b45038ccbf89
+18:11:44.718 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- The files belonging to this database system will be owned by user "lucas".
+18:11:44.718 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- This user must also own the server process.
+18:11:44.718 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 
+18:11:44.718 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- The database cluster will be initialized with locale "Portuguese_Brazil.1252".
+18:11:44.718 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- The default text search configuration will be set to "portuguese".
+18:11:44.719 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 
+18:11:44.719 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- Data page checksums are disabled.
+18:11:44.719 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 
+18:11:44.719 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- fixing permissions on existing directory C:/Users/lucas/AppData/Local/Temp/epg4630755651435203175 ... ok
+18:11:44.723 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- creating subdirectories ... ok
+18:11:44.724 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- selecting dynamic shared memory implementation ... windows
+18:11:44.778 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- selecting default "max_connections" ... 100
+18:11:44.834 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- selecting default "shared_buffers" ... 128MB
+18:11:44.838 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- selecting default time zone ... America/Cayenne
+18:11:44.842 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- creating configuration files ... ok
+18:11:45.371 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- running bootstrap script ... ok
+18:11:47.321 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- performing post-bootstrap initialization ... ok
+18:11:51.867 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- syncing data to disk ... ok
+18:11:51.867 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 
+18:11:51.867 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- Success. You can now start the database server using:
+18:11:51.867 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 
+18:11:51.867 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres --     ^"C^:^\Users^\lucas^\AppData^\Local^\Temp^\embedded^-pg^\PG^-8924db7749885a572758b45038ccbf89^\bin^\pg^_ctl^" -D ^"C^:^\Users^\lucas^\AppData^\Local^\Temp^\epg4630755651435203175^" -l logfile start
+18:11:51.867 [initdb:pid(55792)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 
+18:11:51.873 [main] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- e73981e2-db87-47fd-bd7f-5d03174c8fcd initdb completed in 00:00:07.377
+18:11:51.888 [main] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- e73981e2-db87-47fd-bd7f-5d03174c8fcd postmaster started as Process[pid=55204, exitValue="not exited"] on port 57477.  Waiting up to PT10S for server startup to finish.
+18:11:52.088 [postgres:pid(55204)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- waiting for server to start....2026-10-15 18:11:52.089 -03 [42232] LOG:  iniciando PostgreSQL 17.11 on x86_64-windows, compiled by msvc-19.44.35228, 64-bit
+18:11:52.094 [postgres:pid(55204)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 2026-10-15 18:11:52.094 -03 [42232] LOG:  escutando no endere?o IPv6 "::1", porta 57477
+18:11:52.095 [postgres:pid(55204)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 2026-10-15 18:11:52.095 -03 [42232] LOG:  escutando no endere?o IPv4 "127.0.0.1", porta 57477
+18:11:52.182 [postgres:pid(55204)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 2026-10-15 18:11:52.182 -03 [35896] LOG:  sistema de banco de dados foi desligado em 2026-10-15 18:11:47 -03
+18:11:52.209 [postgres:pid(55204)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 2026-10-15 18:11:52.209 -03 [42232] LOG:  sistema de banco de dados est? pronto para aceitar conex?es
+18:11:52.303 [postgres:pid(55204)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres --  done
+18:11:52.303 [postgres:pid(55204)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- server started
+18:11:52.335 [postgres:pid(55204)] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- 2026-10-15 18:11:52.336 -03 [52008] FATAL:  o sistema de banco de dados est? iniciando
+18:11:52.560 [main] INFO io.zonky.test.db.postgres.embedded.EmbeddedPostgres -- e73981e2-db87-47fd-bd7f-5d03174c8fcd postmaster startup finished in 00:00:00.683
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.16)
+
+2026-10-15T18:11:53.021-03:00  INFO 49396 --- [split-backend] [           main] b.c.a.split.BackendIntegrationTest       : Starting BackendIntegrationTest using Java 21.0.4 with PID 49396 (started by lucas in C:\Avanade-main\backend)
+2026-10-15T18:11:53.022-03:00  INFO 49396 --- [split-backend] [           main] b.c.a.split.BackendIntegrationTest       : No active profile set, falling back to 1 default profile: "default"
+2026-10-15T18:11:54.156-03:00  INFO 49396 --- [split-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-15T18:11:54.244-03:00  INFO 49396 --- [split-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 1 JPA repository interface.
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\lucas\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.8\byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+2026-10-15T18:11:56.075-03:00  INFO 49396 --- [split-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://127.0.0.1:57477/postgres (PostgreSQL 17.11)
+2026-10-15T18:11:56.122-03:00  INFO 49396 --- [split-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "public"."flyway_schema_history" does not exist yet
+2026-10-15T18:11:56.127-03:00  INFO 49396 --- [split-backend] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 5 migrations (execution time 00:00.026s)
+2026-10-15T18:11:56.141-03:00  INFO 49396 --- [split-backend] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "public"."flyway_schema_history" ...
+2026-10-15T18:11:56.257-03:00  INFO 49396 --- [split-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": << Empty Schema >>
+2026-10-15T18:11:56.279-03:00  INFO 49396 --- [split-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "1 - initial schema"
+2026-10-15T18:11:56.429-03:00  INFO 49396 --- [split-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "2 - financial guards"
+2026-10-15T18:11:56.440-03:00  INFO 49396 --- [split-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "3 - runtime privileges"
+2026-10-15T18:11:56.450-03:00  INFO 49396 --- [split-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "4 - tax rule validity"
+2026-10-15T18:11:56.458-03:00  INFO 49396 --- [split-backend] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "public" to version "5 - merchant name permission"
+2026-10-15T18:11:56.464-03:00  INFO 49396 --- [split-backend] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 5 migrations to schema "public", now at version v5 (execution time 00:00.145s)
+2026-10-15T18:11:56.594-03:00  INFO 49396 --- [split-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-15T18:11:56.680-03:00  INFO 49396 --- [split-backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.53.Final
+2026-10-15T18:11:56.728-03:00  INFO 49396 --- [split-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-10-15T18:11:56.899-03:00  INFO 49396 --- [split-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-15T18:11:56.941-03:00  INFO 49396 --- [split-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-15T18:11:57.016-03:00  INFO 49396 --- [split-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7da6d695
+2026-10-15T18:11:57.018-03:00  INFO 49396 --- [split-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-15T18:11:57.110-03:00  INFO 49396 --- [split-backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.11
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-15T18:11:57.963-03:00  INFO 49396 --- [split-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-15T18:11:58.025-03:00  INFO 49396 --- [split-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-15T18:11:58.686-03:00  INFO 49396 --- [split-backend] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-15T18:12:00.223-03:00  INFO 49396 --- [split-backend] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-15T18:12:00.308-03:00  INFO 49396 --- [split-backend] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-15T18:12:00.308-03:00  INFO 49396 --- [split-backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-15T18:12:00.309-03:00  INFO 49396 --- [split-backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-10-15T18:12:00.383-03:00  INFO 49396 --- [split-backend] [           main] b.c.a.split.BackendIntegrationTest       : Started BackendIntegrationTest in 7.7 seconds (process running for 17.138)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.56 s -- in br.com.avanade.split.BackendIntegrationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  26.385 s
+[INFO] Finished at: 2026-10-15T18:12:04-03:00
+[INFO] ------------------------------------------------------------------------

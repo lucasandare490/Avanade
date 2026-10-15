@@ -1,0 +1,14 @@
+{
+  "id": "ebeffaaf-785a-4ad4-8848-ddbab90b9c48",
+  "amountCents": 15000,
+  "currency": "BRL",
+  "paymentMethod": "PIX",
+  "createdAt": "2026-10-15T21:12:03.341003Z",
+  "mode": "SIMULADO",
+  "payment": {
+    "status": "PENDING",
+    "id": "2cf8d718-eefe-47a8-881e-5040b1719a87"
+  },
+  "failureCode": null,
+  "operation": null
+}
