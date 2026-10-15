@@ -30,7 +30,7 @@ Revisão completa da lista não equivale a aceite completo do produto. Permanece
 
 ## Publicação conferida
 
-Commits publicados: `36c84ef` e `9cc6d99`. [CI 38800015378](https://github.com/lucasandare490/Avanade/actions/runs/38800015378): web, backend, Android e Docker aprovados. Essa execução precede o caixa semanal e a revisão individual da matriz; estes precisam de nova publicação/verificação.
+Commits publicados: `36c84ef` e `9cc6d99`. [CI 38800015378](https://github.com/lucasandare490/Avanade/actions/runs/38800015378): web, backend, Android e Docker aprovados. Essa execução precede o caixa semanal. O commit `8c2c9eb` publicou caixa semanal, matriz e PDF; [CI 38807674173](https://github.com/lucasandare490/Avanade/actions/runs/38807674173) concluiu web, backend, Android e Docker com sucesso. O complemento de exemplos foi publicado em `535fa86`; sua execução deve ser consultada separadamente.
 
 ## Limites de entrega
 
