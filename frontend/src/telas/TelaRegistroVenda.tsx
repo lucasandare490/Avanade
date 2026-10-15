@@ -4,7 +4,7 @@ import { Smartphone } from 'lucide-react';
 import { Aviso, CabecalhoPagina, SeloSimulado } from '../componentes/ElementosInterface';
 import type { MeioPagamento, NovaVenda, ResultadoVenda } from '../tipos';
 import { lerCentavos, moeda } from '../utilitarios/valoresFinanceiros';
-export function TelaVendaDemonstrativa({
+export function TelaRegistroVenda({
   registrar,
   recuperar,
   pendente = false,

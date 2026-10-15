@@ -47,7 +47,7 @@ public class SessionFilter extends OncePerRequestFilter {
     try {
       String path = req.getRequestURI();
       if (path.startsWith("/api/") && !req.getMethod().equals("OPTIONS")) {
-        boolean login = path.equals("/api/v1/auth/login") && req.getMethod().equals("POST");
+        boolean login = (path.equals("/api/v1/auth/login") || path.equals("/api/v1/auth/register")) && req.getMethod().equals("POST");
         if (!allow((login ? "login:" : "api:") + req.getRemoteAddr(), login ? 20 : 600)) {
           res.setHeader("Retry-After", "60");
           throw new ApiException(429, "RATE_LIMITED", "Aguarde antes de tentar novamente.");

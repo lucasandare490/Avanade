@@ -1,3 +1,5 @@
+> **Atualização vigente - 15/10/2026:** [funcionalidades e resultados](../documentacao/plano-de-finalizacao-2026-10-15/06-RESULTADOS-DA-VALIDACAO.md) e [mapa dos arquivos](../ONDE-ENCONTRAR-CADA-PARTE.md). Cadastro, projeção manual, relatórios e explicações de tendências/split foram acrescentados. As seções datadas abaixo registram entregas anteriores; não use suas pendências antigas como estado atual.
+
 > **Revisão de 14/10/2026:** web com contrato Spring/PostgreSQL implementado; Android ainda não integrado. Pagamentos e explicações continuam simulados. Tendências no servidor permanecem pendência do MVP. Consulte a [revisão consolidada](../documentacao/revisao-2026-10-14/REVISAO-COMPLETA.md) para diferenças entre modo demo/API, evidências atuais e pendências. Trechos datados de entregas anteriores são históricos.
 
 # Backend Split — incrementos 0.1 e 0.2

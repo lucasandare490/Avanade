@@ -17,6 +17,7 @@ export interface PaginaOperacoes {
 export interface EntradaSimulacao {
   bruto: number;
   incluirTaxa: boolean;
+  percentualHipoteticoBps?: number;
 }
 export interface ResultadoSimulacao {
   bruto: number;
@@ -30,6 +31,7 @@ export interface PeriodoConsulta {
   fim: string;
 }
 export interface ExplicacaoPeriodo {
+  detalhes?: { atencao: 'saldo-negativo' | 'saldo-zero' | 'saldo-positivo'; recomendacoes: string[]; limitacoes: string[]; versao: string };
   tendencias?: import('../utilitarios/tendencias').ComparacaoTendencias;
   periodo: PeriodoConsulta;
   texto: string;
@@ -63,7 +65,14 @@ export interface ComposicaoPeriodo {
   totais: { quantidade: number; bruto: number; tributo: number; taxa: number; liquido: number };
   dias: { data: string; bruto: number; tributo: number; taxa: number; liquido: number }[];
 }
+export interface ProjecaoCaixa { asOf:string; until:string; openingCents:number; incomeCents:number; expenseCents:number; projectedCents:number; attention:string; explanation:string; assumption:string; origin:string }
 export interface ConsultasPlanner {
+  consultarRelatorio?: (tipo:"sales"|"expenses"|"taxes",periodo:PeriodoConsulta,sinal?:AbortSignal)=>Promise<{colunas:string[];linhas:string[][];total:number}>;
+  explicarSplit?: (id:string,sinal?:AbortSignal)=>Promise<{texto:string;limitacoes:string[]}>;
+  consultarLoja?: (sinal?:AbortSignal)=>Promise<{nome:string;fuso:string;podeEditar:boolean}>;
+  salvarNomeLoja?: (nome:string)=>Promise<{nome:string;fuso:string;podeEditar:boolean}>;
+  sugerirCategoria?: (descricao:string,sinal?:AbortSignal)=>Promise<{categorias:string[];explicacao:string}>;
+  projetarCaixa?: (entrada:{until:string;incomeCents:number;expenseCents:number},sinal?:AbortSignal)=>Promise<ProjecaoCaixa>;
   exportarOperacoes?: (consulta: ConsultaOperacoes, sinal?: AbortSignal) => Promise<{ colunas: string[]; linhas: string[][]; total: number }>;
   consultarComposicao?: (periodo: PeriodoConsulta, sinal?: AbortSignal) => Promise<ComposicaoPeriodo>;
   consultarTendencias?: (periodo: PeriodoConsulta, sinal?: AbortSignal) => Promise<import('../utilitarios/tendencias').ComparacaoTendencias>;
@@ -71,6 +80,7 @@ export interface ConsultasPlanner {
     consulta: Omit<ConsultaOperacoes, 'status'>,
     sinal?: AbortSignal,
   ) => Promise<{ itens: Venda[]; total: number; pagina: number; tamanho: number }>;
+  recuperarSplitVenda?: (id: string) => Promise<void>;
   consultarVenda?: (id: string, sinal?: AbortSignal) => Promise<Venda>;
   consultarCategoriasDespesa?: (sinal?: AbortSignal) => Promise<string[]>;
   recuperarDespesa?: () => Promise<void>;

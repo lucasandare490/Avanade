@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.*;
 
 /** Aggregates persisted simulated operations; never extrapolates missing periods. */
 @Service
-public class AnalyticsService {
+public class ServicoIndicadoresETendencias {
   private final JdbcTemplate db;
-  public AnalyticsService(JdbcTemplate db) { this.db=db; }
+  public ServicoIndicadoresETendencias(JdbcTemplate db) { this.db=db; }
   public record Totals(long count,long grossCents,long taxCents,long feeCents,long netCents) {}
   public record Day(LocalDate date,long grossCents,long taxCents,long feeCents,long netCents) {}
   public record Metric(String titulo,Long atual,Long anterior) {}

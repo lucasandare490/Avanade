@@ -1,12 +1,17 @@
+import {PainelEstabelecimento} from '../componentes/PainelEstabelecimento';
+import type {ServicoPlanner} from '../tipos';
 import type { SessaoUsuario } from '../servicos/sessaoUsuario';
 import { CabecalhoPagina } from '../componentes/ElementosInterface';
 export function TelaConfiguracoes({
+  servico, atualizarLoja,
   demonstrativo = true,
   cenario = 'normal',
   mudarCenario,
   sessao,
   expirar,
 }: {
+  servico?:ServicoPlanner;
+  atualizarLoja?:(nome:string)=>void;
   demonstrativo?: boolean;
   cenario?: string;
   sessao?: SessaoUsuario;
@@ -44,8 +49,9 @@ export function TelaConfiguracoes({
           </label>
         </section>
       )}
+      {servico?.consultarLoja && <PainelEstabelecimento servico={servico} atualizar={atualizarLoja} />}
       <section className="painel">
-        <h2>Estabelecimento</h2>
+        <h2>Contexto da sessão</h2>
         <dl className="lista-configuracoes">
           <div>
             <dt>Nome</dt>

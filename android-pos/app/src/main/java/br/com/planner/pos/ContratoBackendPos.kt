@@ -10,7 +10,7 @@ import java.util.TimeZone
 data class SessaoServidor(val token: String, val nome: String, val loja: String, val identidade: String, val permissoes: Set<String>, val expiraEm: Long)
 data class ParcelaServidor(val id: String, val tipo: String, val valor: Long, val destino: String, val estado: String)
 data class SplitServidor(val id: String, val vendaId: String, val bruto: Long, val tributo: Long, val taxa: Long, val liquido: Long, val estado: String, val regra: String, val parcelas: List<ParcelaServidor>, val eventos: List<String>)
-data class VendaServidor(val id: String, val bruto: Long, val meio: String, val pagamento: String, val data: String, val split: SplitServidor?)
+data class VendaServidor(val id: String, val bruto: Long, val meio: String, val pagamento: String, val data: String, val split: SplitServidor?, val motivo: String? = null)
 data class PaginaVendasServidor(val itens: List<VendaServidor>, val pagina: Int, val total: Int)
 
 /** Contrato Spring v1. Nenhum cálculo tributário ou confirmação é fabricado no POS. */
@@ -49,7 +49,7 @@ object ContratoBackendPos {
         val pagamento=estado(o.getJSONObject("payment"),"status",setOf("CONFIRMED","PENDING","DECLINED"))
         require(o.has("operation")); val split=if(o.isNull("operation")) null else split(o.getJSONObject("operation"))
         if(split!=null) require(pagamento=="CONFIRMED" && split.vendaId==id && split.bruto==bruto && o.getJSONObject("operation").getString("paymentMethod")==o.getString("paymentMethod"))
-        return VendaServidor(id,bruto,estado(o,"paymentMethod",setOf("PIX","DEBIT","CREDIT")),pagamento,texto(o,"createdAt"),split)
+        return VendaServidor(id,bruto,estado(o,"paymentMethod",setOf("PIX","DEBIT","CREDIT")),pagamento,texto(o,"createdAt"),split,if(o.isNull("failureCode")) null else texto(o,"failureCode"))
     }
     fun pagina(json: String, esperada: Int): PaginaVendasServidor {
         val o=JSONObject(json); val pagina=numero(o,"page"); val total=numero(o,"total"); val tamanho=numero(o,"size")

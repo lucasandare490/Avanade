@@ -97,11 +97,18 @@ public final class ApiSchemas {
       boolean includeFee,
       br.com.avanade.split.core.TaxEngine.Amounts amounts) {}
 
+  public record Registration(boolean created) {}
+  public record MerchantProfile(String name,String timeZone,boolean canEdit) {}
+  public record StructuredExplanation(String summary,String attention,List<String> recommendations,List<String> limitations,String templateVersion) {}
+  public record SplitExplanation(UUID operationId,String text,String origin,String templateVersion,RuleSnapshot rule,List<Parcel> parcels,List<String> limitations) {}
+  public record CategorySuggestion(String origin,String version,List<Category> suggestions,boolean requiresConfirmation,String explanation) {}
+  public record Projection(LocalDate asOf,LocalDate until,long openingCents,long incomeCents,long expenseCents,long projectedCents,String attention,String explanation,String assumption,String origin) {}
   public record Analysis(
+      StructuredExplanation structured,
       br.com.avanade.split.shared.Period period,
       String text,
       String origin,
       String provider,
       String status,
-      br.com.avanade.split.finance.FinanceService.CashFlow facts, br.com.avanade.split.finance.AnalyticsService.Comparison tendencias) {}
+      br.com.avanade.split.finance.FinanceService.CashFlow facts, br.com.avanade.split.finance.ServicoIndicadoresETendencias.Comparison tendencias) {}
 }

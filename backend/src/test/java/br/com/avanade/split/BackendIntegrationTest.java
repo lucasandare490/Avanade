@@ -442,7 +442,7 @@ class BackendIntegrationTest extends PostgresSupport {
     String category = "HISTORICAL";
     UUID oldRule = UUID.randomUUID();
     db.update(
-        "INSERT INTO tax_rule VALUES (?,?,?,?,?,?)",
+        "INSERT INTO tax_rule(id,version,category,tax_bps,fee_bps,valid_from) VALUES (?,?,?,?,?,?)",
         oldRule,
         "test-old-" + key(),
         category,
@@ -456,7 +456,7 @@ class BackendIntegrationTest extends PostgresSupport {
                 .andReturn())
             .get("operation");
     db.update(
-        "INSERT INTO tax_rule VALUES (?,?,?,?,?,?)",
+        "INSERT INTO tax_rule(id,version,category,tax_bps,fee_bps,valid_from) VALUES (?,?,?,?,?,?)",
         UUID.randomUUID(),
         "test-new-" + key(),
         category,
@@ -505,5 +505,60 @@ class BackendIntegrationTest extends PostgresSupport {
       assertThat(root.at(ref.substring(1)).isMissingNode()).as(ref).isFalse();
     }
     if (node.isContainerNode()) node.forEach(child -> assertReferences(root, child));
+  }
+
+  @Test void missingRuleRecoveryKeepsPaymentAndCreatesOnlyOneSplit() throws Exception {
+    String category="RECOVERY_"+UUID.randomUUID().toString().replace("-", "").replaceAll("[0-9]", "A").substring(0,20).toUpperCase();
+    var created=body(sale(manager,key(),input.replace("GENERAL",category)).andExpect(status().isCreated()).andReturn());
+    String id=created.get("id").asText();
+    assertThat(created.get("failureCode").asText()).isEqualTo("TAX_RULE_UNAVAILABLE");
+    assertThat(created.get("operation").isNull()).isTrue();
+    String path="/api/v1/sales/"+id+"/recover-split";
+    mvc.perform(post(path).header("Authorization","Bearer "+operator).header("Idempotency-Key",key())).andExpect(status().isForbidden());
+    mvc.perform(post(path).header("Authorization","Bearer "+other).header("Idempotency-Key",key())).andExpect(status().isNotFound());
+    mvc.perform(post(path).header("Authorization","Bearer "+manager).header("Idempotency-Key",key())).andExpect(status().isConflict());
+    db.update("INSERT INTO tax_rule(id,category,version,tax_bps,fee_bps,valid_from) VALUES (?,?,?,?,?,?)", UUID.randomUUID(),category,"RECOVERY-v1",1000,200,java.sql.Timestamp.from(Instant.parse("2020-01-01T00:00:00Z")));
+    var executor=Executors.newFixedThreadPool(2);
+    try {
+      Callable<JsonNode> retry=()->body(mvc.perform(post(path).header("Authorization","Bearer "+manager).header("Idempotency-Key",key())).andExpect(status().isOk()).andReturn());
+      var one=executor.submit(retry);var two=executor.submit(retry);
+      assertThat(one.get().get("operation").get("id")).isEqualTo(two.get().get("operation").get("id"));
+    } finally {executor.shutdownNow();}
+    UUID saleId=UUID.fromString(id);
+    assertThat(db.queryForObject("SELECT count(*) FROM payment WHERE sale_id=?",Long.class,saleId)).isEqualTo(1);
+    assertThat(db.queryForObject("SELECT count(*) FROM split_operation WHERE sale_id=?",Long.class,saleId)).isEqualTo(1);
+    assertThat(db.queryForObject("SELECT count(*) FROM cash_entry c JOIN split_operation o ON o.id=c.operation_id WHERE o.sale_id=?",Long.class,saleId)).isEqualTo(1);
+    verify(mocks,times(1)).confirmPayment();
+  }
+
+  @Test void invalidExplanationFallsBackWithStructuredFacts() throws Exception {
+    when(ai.explain(any())).thenReturn("Saldo R$ 999999999999,00");
+    mvc.perform(post("/api/v1/ai/cash-analysis").header("Authorization","Bearer "+manager)
+      .contentType("application/json").content("{\"from\":\"2026-01-01\",\"to\":\"2026-01-31\"}"))
+      .andExpect(status().isOk()).andExpect(jsonPath("status").value("FALLBACK"))
+      .andExpect(jsonPath("structured.templateVersion").value("cash-explanation-v2"))
+      .andExpect(jsonPath("facts").exists()).andExpect(jsonPath("tendencias").exists());
+  }
+
+  @Test void reportsAndSplitExplanationRespectStoreAndDoNotWrite() throws Exception {
+    var created=body(sale(manager,key(),input).andExpect(status().isCreated()).andReturn());
+    String id=created.get("operation").get("id").asText();
+    long before=count("cash_entry");
+    getAs(manager,"/api/v1/ai/split-explanation/"+id).andExpect(status().isOk())
+      .andExpect(jsonPath("operationId").value(id)).andExpect(jsonPath("origin").value("MOCK"))
+      .andExpect(jsonPath("parcels.length()").value(3));
+    getAs(other,"/api/v1/ai/split-explanation/"+id).andExpect(status().isNotFound());
+    String day=created.get("createdAt").asText().substring(0,10);
+    String query="?from="+LocalDate.parse(day).minusDays(1)+"&to="+LocalDate.parse(day).plusDays(1);
+    for(String kind:List.of("sales","expenses","taxes")) {
+      getAs(manager,"/api/v1/reports/"+kind+query).andExpect(status().isOk()).andExpect(jsonPath("mode").value("SIMULADO"));
+      getAs(operator,"/api/v1/reports/"+kind+query).andExpect(status().isForbidden());
+    }
+    var own=body(getAs(manager,"/api/v1/reports/taxes"+query).andReturn());
+    var others=body(getAs(other,"/api/v1/reports/taxes"+query).andReturn());
+    assertThat(own.toString()).contains(id);
+    assertThat(others.toString()).doesNotContain(id);
+    getAs(manager,"/api/v1/reports/sales?from=2026-02-02&to=2026-01-01").andExpect(status().isBadRequest()).andExpect(jsonPath("code").value("INVALID_PERIOD"));
+    assertThat(count("cash_entry")).isEqualTo(before);
   }
 }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MockAdapters {
+public class MockAdapters implements PaymentAdapter, SplitPaymentAdapter {
   private final String payment;
   private final String failParcel;
 

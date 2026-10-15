@@ -1,0 +1,2 @@
+  ok 1 e2e\responsividade.spec.ts:6:2 › telas integradas sem transbordamento em 390px (2.6s)
+  1 passed (4.1s)

@@ -22,7 +22,7 @@ public class TaxEngine {
   public Rule rule(String category, Instant at) {
     return db
         .query(
-            "SELECT * FROM tax_rule WHERE category=? AND valid_from<=? ORDER BY valid_from DESC"
+            "SELECT * FROM tax_rule WHERE category=? AND valid_from<=? AND (valid_to IS NULL OR valid_to>?) ORDER BY valid_from DESC"
                 + " LIMIT 1",
             (r, n) ->
                 new Rule(
@@ -31,7 +31,7 @@ public class TaxEngine {
                     r.getInt("tax_bps"),
                     r.getInt("fee_bps")),
             category,
-            java.sql.Timestamp.from(at))
+            java.sql.Timestamp.from(at), java.sql.Timestamp.from(at))
         .stream()
         .findFirst()
         .orElseThrow(

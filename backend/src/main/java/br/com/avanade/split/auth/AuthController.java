@@ -42,6 +42,32 @@ public class AuthController {
     }
   }
 
+  public record Cadastro(
+      @NotBlank @Size(max=120) String name,
+      @NotBlank @Size(max=120) String merchantName,
+      @NotBlank @Email @Size(max=254) String email,
+      @NotBlank @Size(min=12,max=72) String password) {
+    @Override public String toString() { return "Cadastro[REDACTED]"; }
+  }
+
+  @PostMapping("/register")
+  @org.springframework.transaction.annotation.Transactional
+  public ResponseEntity<?> cadastrar(@Valid @RequestBody Cadastro input) {
+    if (input.password().getBytes(java.nio.charset.StandardCharsets.UTF_8).length > 72)
+      throw new ApiException(422,"VALIDATION_ERROR","A senha deve ter no máximo 72 bytes UTF-8.");
+    UUID merchant = UUID.randomUUID();
+    try {
+      db.update("INSERT INTO merchant(id,name,time_zone) VALUES (?,?,?)",
+          merchant,input.merchantName().strip(),"America/Fortaleza");
+      db.update("INSERT INTO app_user(id,merchant_id,email,display_name,password_hash,role) VALUES (?,?,?,?,?,?)",
+          UUID.randomUUID(),merchant,input.email().strip().toLowerCase(Locale.ROOT),
+          input.name().strip(),passwords.encode(input.password()),"GERENTE");
+    } catch (org.springframework.dao.DuplicateKeyException e) {
+      throw new ApiException(409,"REGISTRATION_CONFLICT","Não foi possível criar a conta com os dados informados. Entre com sua conta existente ou revise o cadastro.");
+    }
+    return ResponseEntity.status(201).body(Map.of("created",true));
+  }
+
   @PostMapping("/login")
   public Map<String, Object> login(@Valid @RequestBody Login input) {
     if (input.password().getBytes(java.nio.charset.StandardCharsets.UTF_8).length > 72)

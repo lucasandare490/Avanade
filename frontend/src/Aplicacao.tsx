@@ -1,9 +1,10 @@
+import {TelaRelatoriosIntegrados} from './telas/TelaRelatoriosIntegrados';
 import { TelaVendasIntegrada, TelaDetalheVenda } from './telas/TelaVendasIntegrada';
 import { TelaDespesasIntegrada } from './telas/TelaDespesasIntegrada';
-import { TelaResumoIntegrado } from './telas/TelaResumoIntegrado';
+import { TelaResumoFinanceiroApi } from './telas/TelaResumoFinanceiroApi';
 import { TelaAnaliseIntegrada } from './telas/TelaAnaliseIntegrada';
 import { TelaSimulacaoIntegrada } from './telas/TelaSimulacaoIntegrada';
-import { TelaOperacoesRemotas, TelaDetalheRemoto } from './telas/TelaOperacoesRemotas';
+import { TelaOperacoesApi, TelaDetalheRemoto } from './telas/TelaOperacoesApi';
 import { DialogoConfirmacao } from './componentes/DialogoConfirmacao';
 import { TelaLogin } from './telas/TelaLogin';
 import {
@@ -15,7 +16,7 @@ import {
 } from './servicos/sessaoUsuario';
 import { FalhaTransporte } from './servicos/transporteApi';
 import { TelaAjuda } from './telas/TelaAjuda';
-import { TelaEstadosAcesso } from './telas/TelaEstadosAcesso';
+import { TelaPreviaAcessoDemonstrativo } from './telas/TelaPreviaAcessoDemonstrativo';
 import { useEffect, useState, useRef, Component, type ReactNode, type ErrorInfo } from 'react';
 import { AvisoConexao } from './componentes/AvisoConexao';
 import { EstruturaPainel } from './componentes/EstruturaPainel';
@@ -26,7 +27,7 @@ import { TelaOperacoes, TelaDetalheOperacao } from './telas/TelaOperacoes';
 import { TelaDespesas } from './telas/TelaDespesas';
 import { TelaFluxoCaixa } from './telas/TelaFluxoCaixa';
 import { TelaSimulacao } from './telas/TelaSimulacao';
-import { TelaVendaDemonstrativa } from './telas/TelaVendaDemonstrativa';
+import { TelaRegistroVenda } from './telas/TelaRegistroVenda';
 import { TelaAnalise } from './telas/TelaAnalise';
 import { TelaConfiguracoes } from './telas/TelaConfiguracoes';
 import { criarServicoDemonstrativo } from './servicos/servicoDemonstrativo';
@@ -210,6 +211,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
   if (!entrou || !sessao)
     return login ? (
       <TelaLogin
+        cadastrar={integracao?.autenticacao.cadastrar}
         demonstrativo={!integracao}
         mensagem={mensagemSessao}
         autenticar={async (dados) => {
@@ -234,7 +236,9 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         : base;
   let conteudo: ReactNode;
   if (integracao && rota.startsWith('vendas/'))
-    conteudo = <TelaDetalheVenda key={rota} id={rota.split('/')[1]} servico={servicoPlanner} />;
+    conteudo = <TelaDetalheVenda permitirRetomada={sessao.permissoes.includes("retomar")} key={rota} id={rota.split('/')[1]} servico={servicoPlanner} />;
+  else if (integracao && rota === 'relatorios')
+    conteudo = <TelaRelatoriosIntegrados servico={servicoPlanner} />;
   else if (integracao && rota === 'vendas')
     conteudo = <TelaVendasIntegrada servico={servicoPlanner} />;
   else if (integracao && rota.startsWith('operacoes/'))
@@ -248,14 +252,14 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
       />
     );
   else if (integracao && rota === 'operacoes')
-    conteudo = <TelaOperacoesRemotas servico={servicoPlanner} permitirExportacao={sessao.permissoes.includes("financeiro")} />;
+    conteudo = <TelaOperacoesApi servico={servicoPlanner} permitirExportacao={sessao.permissoes.includes("financeiro")} />;
   else if (integracao && rota === 'simulacao')
     conteudo = <TelaSimulacaoIntegrada servico={servicoPlanner} />;
   else if (integracao && rota === 'analise')
     conteudo = <TelaAnaliseIntegrada servico={servicoPlanner} />;
   else if (integracao && (rota === 'dashboard' || rota === 'fluxo-caixa'))
     conteudo = (
-      <TelaResumoIntegrado
+      <TelaResumoFinanceiroApi
         key={rota}
         servico={servicoPlanner}
         area={rota}
@@ -352,11 +356,13 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         conteudo = <TelaAjuda demonstrativo={!integracao} />;
         break;
       case 'previa-acesso':
-        conteudo = <TelaEstadosAcesso />;
+        conteudo = <TelaPreviaAcessoDemonstrativo />;
         break;
       case 'configuracoes':
         conteudo = (
           <TelaConfiguracoes
+            servico={integracao ? servicoPlanner : undefined}
+            atualizarLoja={nome=>setSessao(s=>s?{...s,loja:nome}:s)}
             demonstrativo={!integracao}
             cenario={cenarioConsulta}
             mudarCenario={integracao ? undefined : setCenarioConsulta}
@@ -471,7 +477,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
           ['carregando', 'erro', 'negado'].includes(cenarioConsulta)
         }
       >
-        <TelaVendaDemonstrativa
+        <TelaRegistroVenda
           key={sessao.id}
           pendente={servicoPlanner.vendaPendente?.()}
           recuperar={

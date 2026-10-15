@@ -70,7 +70,7 @@ public class Idempotency {
     validateKey(key);
     if (action.equals("SALE")) actor.require("vender");
     else if (action.equals("EXPENSE")) actor.require("despesa");
-    else if (action.startsWith("REPROCESS:")) actor.require("retomar");
+    else if ((action.startsWith("REPROCESS:") || action.startsWith("RECOVER_SPLIT:"))) actor.require("retomar");
     else throw ApiException.missing();
     return db
         .query(

@@ -18,9 +18,9 @@ public class OpenApiConfig {
             .info(
                 new Info()
                     .title("Split demonstrativo")
-                    .version("1.0.0")
+                    .version("1.1.0")
                     .description(
-                        "Centavos BRL. Pagamentos simulados. Comparação histórica disponível; projeções pendentes; ver"
+                        "Centavos BRL. Pagamentos simulados. Comparação histórica e projeção manual disponíveis; ver"
                             + " docs/API.md."));
     var components =
         new Components()
@@ -39,6 +39,11 @@ public class OpenApiConfig {
       for (Class<?> type :
           new Class<?>[] {
             ApiSchemas.Session.class,
+            ApiSchemas.Registration.class,
+            ApiSchemas.MerchantProfile.class,
+            ApiSchemas.SplitExplanation.class,
+            ApiSchemas.CategorySuggestion.class,
+            ApiSchemas.Projection.class,
             ApiSchemas.SalePage.class,
             ApiSchemas.OperationPage.class,
             ApiSchemas.ExpensePage.class,
@@ -47,8 +52,8 @@ public class OpenApiConfig {
             ApiSchemas.Simulation.class,
             ApiSchemas.Analysis.class,
             br.com.avanade.split.finance.OperationExport.ExportFile.class,
-            br.com.avanade.split.finance.AnalyticsService.Dashboard.class,
-            br.com.avanade.split.finance.AnalyticsService.Comparison.class,
+            br.com.avanade.split.finance.ServicoIndicadoresETendencias.Dashboard.class,
+            br.com.avanade.split.finance.ServicoIndicadoresETendencias.Comparison.class,
             br.com.avanade.split.shared.ApiErrors.Error.class
           })
         SpringDocAnnotationsUtils.extractSchema(
@@ -72,11 +77,17 @@ public class OpenApiConfig {
                             if (!path.startsWith("/api/v1/")) return;
                             boolean post = method == PathItem.HttpMethod.POST;
                             boolean login = path.endsWith("/auth/login");
-                            if (!login)
+                            boolean register = path.endsWith("/auth/register");
+                            if (!login && !register)
                               operation.addSecurityItem(
                                   new SecurityRequirement().addList("bearerSession"));
                             String schema;
-                            if (path.endsWith("/exports/operations")) schema = "ExportFile";
+                            if (register) schema = "Registration";
+                            else if (path.endsWith("/merchant")) schema = "MerchantProfile";
+                            else if (path.contains("/ai/split-explanation/")) schema = "SplitExplanation";
+                            else if (path.endsWith("/ai/expense-category")) schema = "CategorySuggestion";
+                            else if (path.endsWith("/planning/projection")) schema = "Projection";
+                            else if (path.contains("/reports/") || path.endsWith("/exports/operations")) schema = "ExportFile";
                             else if (path.endsWith("/trends")) schema = "Comparison";
                             else if (path.endsWith("/dashboard/details")) schema = "Dashboard";
                             else if (login) schema = "Session";
@@ -119,7 +130,7 @@ public class OpenApiConfig {
                                 new ApiResponses()
                                     .addApiResponse(
                                         "200", response("Sucesso / repetição idempotente", body));
-                            if (post && (path.endsWith("/sales") || path.endsWith("/expenses")))
+                            if (post && (path.endsWith("/sales") || path.endsWith("/expenses") || register))
                               responses.addApiResponse("201", response("Criado", body));
                             for (String status :
                                 new String[] {

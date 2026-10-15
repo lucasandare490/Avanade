@@ -858,7 +858,7 @@ tbody tr:hover {
 .estado {
   text-align: center;
   padding: 65px 25px;
-  color: #698097;
+  color: #52657d;
 }
 .estado > svg {
   height: 34px;
@@ -1573,4 +1573,12 @@ tbody tr:hover {
   .acoes-dialogo > button {
     flex: 1 1 100%;
   }
+}
+/* Conteúdo novo de relatórios, explicações e formulários deve refluir com zoom. */
+.painel p, .painel li, .painel dd { overflow-wrap: anywhere; }
+.formulario-vertical, .campo, .filtros > * { min-width: 0; }
+.painel nav[aria-label="Páginas do relatório"] { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:16px; }
+@media (max-height:500px) and (orientation:landscape) {
+  .tela-entrada { align-items:flex-start; padding-block:16px; }
+  .cartao-entrada { margin-block:0; }
 }

@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-15T16:47:59.728015",
+  "scope": "120 consultas locais concorrentes; nao representa carga sustentada de producao",
+  "concurrency": 8,
+  "requests": 120,
+  "failures": 0,
+  "elapsedSeconds": 0.17,
+  "p50Ms": 7.41,
+  "p95Ms": 17.13,
+  "maxMs": 32.57,
+  "errors": []
+}

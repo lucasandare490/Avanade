@@ -31,3 +31,7 @@
 # Relatórios locais de navegador
 /frontend/test-results/
 /frontend/playwright-report/
+
+# Logs temporários locais de validação
+/tmp-*.log
+/tmp/

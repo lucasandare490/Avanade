@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { criarIntegracaoApi, type ContratoServidor } from './adapterApi';
+import { criarIntegracaoApi, type ContratoServidor } from './adaptarEValidarRespostasApi';
 import { criarTransporteApi } from './transporteApi';
 import { criarCenario } from '../dados/cenarioDemonstrativo';
 import { validarOperacao } from './validarContratoInterno';

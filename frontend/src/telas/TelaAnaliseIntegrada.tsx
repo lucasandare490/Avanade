@@ -108,6 +108,11 @@ export function TelaAnaliseIntegrada({ servico }: { servico: ServicoPlanner }) {
               Período: {pedido.inicio} a {pedido.fim}
             </h2>
             <p className="texto-preservado">{consulta.dados.texto}</p>
+            {consulta.dados.detalhes && <>
+              <p><strong>{consulta.dados.detalhes.atencao === 'saldo-negativo' ? 'Atenção: saldo realizado negativo' : consulta.dados.detalhes.atencao === 'saldo-zero' ? 'Saldo realizado zerado' : 'Saldo realizado positivo'}</strong></p>
+              <ul>{consulta.dados.detalhes.recomendacoes.map((item,i)=><li key={i}>{item}</li>)}</ul>
+              {consulta.dados.detalhes.limitacoes.map((item,i)=><p className="nota" key={i}>{item}</p>)}
+            </>}
             <p className="nota">
               Origem:{' '}
               {consulta.dados.origem === 'demonstrativa'

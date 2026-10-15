@@ -51,7 +51,7 @@ public class DemoSeed implements ApplicationRunner {
       }
     }
     db.update(
-        "INSERT INTO tax_rule VALUES (?,?,?,?,?,?) ON CONFLICT(version) DO NOTHING",
+        "INSERT INTO tax_rule(id,version,category,tax_bps,fee_bps,valid_from) VALUES (?,?,?,?,?,?) ON CONFLICT(version) DO NOTHING",
         UUID.fromString("10000000-0000-0000-0000-000000000001"),
         "DEMO-v1",
         "GENERAL",

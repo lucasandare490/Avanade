@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
-import { criarIntegracaoApi } from './adapterApi';
-import { contratoServidor, mapearResultadoVenda, mapearOperacao } from './integracaoConfigurada';
+import { criarIntegracaoApi } from './adaptarEValidarRespostasApi';
+import { contratoServidor, mapearResultadoVenda, mapearOperacao } from './contratoBackendPlanner';
 import exemplo from '../../../backend/docs/examples/sale-confirmed.json';
 const resposta = (v: unknown, status = 200) => new Response(JSON.stringify(v), { status });
 function sessao(token = 'a'.repeat(43), loja = 'loja-1') {

@@ -20,6 +20,7 @@ export interface RequisicaoMapeada extends OpcoesRequisicao {
 }
 export interface ContratoServidor {
   versao: string;
+  cadastro?: string;
   extrairToken?: (resposta: unknown) => string;
   mapearVenda?: (resposta: unknown) => ResultadoVenda;
   prepararServico?: (
@@ -54,6 +55,12 @@ export function criarIntegracaoApi(
     enviar(pedido.caminho, validar, pedido);
   return {
     autenticacao: {
+      cadastrar: contrato.cadastro ? async (dados) => {
+        await enviar(contrato.cadastro!, (v) => {
+          if (!v || typeof v !== 'object' || !('created' in v) || v.created !== true)
+            throw new Error('Confirmação de cadastro inválida. Tente entrar antes de repetir o cadastro.');
+        }, {metodo:'POST',dados});
+      } : undefined,
       async entrar(dados) {
         token = undefined;
         const resultado = await executar(contrato.login(dados), (v) => ({
@@ -78,6 +85,10 @@ export function criarIntegracaoApi(
       const chavesRetomada = new Map<string, string>();
       const consultas = contrato.consultas?.(autenticado);
       const seguras: ConsultasPlanner = {};
+      if(consultas?.consultarLoja) seguras.consultarLoja=consultas.consultarLoja;
+      if(consultas?.salvarNomeLoja) seguras.salvarNomeLoja=consultas.salvarNomeLoja;
+      if(consultas?.sugerirCategoria) seguras.sugerirCategoria=consultas.sugerirCategoria;
+      if (consultas?.projetarCaixa) seguras.projetarCaixa = consultas.projetarCaixa;
       if (consultas?.exportarOperacoes) seguras.exportarOperacoes = consultas.exportarOperacoes;
       if (consultas?.consultarComposicao) seguras.consultarComposicao = consultas.consultarComposicao;
       if (consultas?.consultarTendencias)

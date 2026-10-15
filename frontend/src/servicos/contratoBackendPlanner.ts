@@ -1,11 +1,12 @@
 import { validarTendencias, type ComparacaoTendencias } from '../utilitarios/tendencias';
-import type { ContratoServidor } from './adapterApi';
+import type { ContratoServidor } from './adaptarEValidarRespostasApi';
 import type { ConsultaOperacoes, ConsultaDespesas, PeriodoConsulta } from './contratosConsultas';
 import type { MeioPagamento, Operacao, Venda, ResultadoVenda } from '../tipos';
 import { FalhaTransporte } from './transporteApi';
 import { validarOperacao, validarDespesaRecebida } from './validarContratoInterno';
 import { criarIntencoes } from './intencoesApi';
 
+function loja(v:unknown) {const o=objeto(v);if(typeof o.canEdit!=='boolean')throw new Error('Permissão de loja inválida.');return {nome:texto(o.name),fuso:texto(o.timeZone),podeEditar:o.canEdit};}
 function objeto(v: unknown): Record<string, unknown> {
   if (!v || typeof v !== 'object' || Array.isArray(v)) throw new Error('Objeto inválido.');
   return v as Record<string, unknown>;
@@ -156,6 +157,7 @@ function periodoRecebido(v: unknown, esperado: PeriodoConsulta) {
 
 /** Contrato concreto do backend Spring /api/v1; token somente em memória. */
 export const contratoServidor: ContratoServidor = {
+  cadastro: '/api/v1/auth/register',
   versao: 'split-v1',
   credenciais: 'omit',
   login: (d) => ({
@@ -257,6 +259,19 @@ export const contratoServidor: ContratoServidor = {
         }
         return { totais, dias };
       }, { sinal }),
+    consultarLoja: sinal=>enviar('/api/v1/merchant',loja,{sinal}),
+    salvarNomeLoja: nome=>enviar('/api/v1/merchant',loja,{metodo:'POST',dados:{name:nome}}),
+    sugerirCategoria: (descricao,sinal)=>enviar('/api/v1/ai/expense-category',v=>{
+      const o=objeto(v);if(o.origin!=='MOCK'||o.requiresConfirmation!==true)throw new Error('Sugestão inválida.');
+      return {categorias:lista(o.suggestions).map(c=>texto(objeto(c).name)),explicacao:texto(o.explanation)};
+    },{metodo:'POST',dados:{description:descricao},sinal}),
+    projetarCaixa: (entrada,sinal) => enviar('/api/v1/planning/projection',v=>{
+      const o=objeto(v);
+      const openingCents=inteiro(o.openingCents,Number.MIN_SAFE_INTEGER), projectedCents=inteiro(o.projectedCents,Number.MIN_SAFE_INTEGER);
+      const incomeCents=inteiro(o.incomeCents),expenseCents=inteiro(o.expenseCents);
+      if(o.until!==entrada.until || incomeCents!==entrada.incomeCents || expenseCents!==entrada.expenseCents || openingCents+incomeCents-expenseCents!==projectedCents || o.origin!=='MOCK') throw new Error('Projeção inconsistente.');
+      return {asOf:texto(o.asOf),until:texto(o.until),openingCents,incomeCents,expenseCents,projectedCents,attention:opcao(o.attention,{DEFICIT:'DEFICIT',SEM_MARGEM:'SEM_MARGEM',POSITIVO:'POSITIVO'}),explanation:texto(o.explanation),assumption:texto(o.assumption),origin:'MOCK'};
+    },{metodo:'POST',dados:entrada,sinal}),
     consultarTendencias: (p, sinal) => enviar(
       `/api/v1/trends?${new URLSearchParams(periodo(p))}`,
       v => validarTendencias(v as ComparacaoTendencias, p), { sinal }),
@@ -334,7 +349,7 @@ export const contratoServidor: ContratoServidor = {
         },
         {
           metodo: 'POST',
-          dados: { amountCents: e.bruto, includeFee: e.incluirTaxa, taxCategory: 'GENERAL' },
+          dados: { amountCents: e.bruto, includeFee: e.incluirTaxa, taxCategory: 'GENERAL', ...(e.percentualHipoteticoBps === undefined ? {} : {simulatedTaxBps:e.percentualHipoteticoBps}) },
           sinal,
         },
       ),
@@ -347,6 +362,11 @@ export const contratoServidor: ContratoServidor = {
             periodo: periodoRecebido(r.period, p),
             tendencias: r.tendencias === undefined ? undefined : validarTendencias(r.tendencias as ComparacaoTendencias, p),
             texto: texto(r.text),
+            detalhes: r.structured === undefined ? undefined : (() => {
+              const d=objeto(r.structured);
+              if (texto(d.summary)!==texto(r.text)) throw new Error('Resumo da explicação divergente.');
+              return {atencao:opcao(d.attention,{NEGATIVE_BALANCE:'saldo-negativo',ZERO_BALANCE:'saldo-zero',POSITIVE_BALANCE:'saldo-positivo'} as const),recomendacoes:lista(d.recommendations).map(texto),limitacoes:lista(d.limitations).map(texto),versao:texto(d.templateVersion)};
+            })(),
             origem: opcao(r.origin, {
               demonstrativa: 'demonstrativa',
               servidor: 'servidor',
@@ -360,6 +380,16 @@ export const contratoServidor: ContratoServidor = {
     const intencoes = criarIntencoes(sessao.identidade ?? sessao.id, enviar);
     const categorias = new Map<string, string>();
     return {
+      consultarRelatorio: (tipo,p,sinal)=>enviar(`/api/v1/reports/${tipo}?${new URLSearchParams({from:p.inicio,to:p.fim})}`,v=>{
+        const r=objeto(v); if(r.mode!=='SIMULADO') throw new Error('Modo de relatório divergente.');
+        const colunas=lista(r.columns).map(texto),linhas=lista(r.rows).map(row=>lista(row).map(texto));
+        if(!Number.isSafeInteger(r.total)||r.total!==linhas.length||linhas.some(row=>row.length!==colunas.length)) throw new Error('Relatório incompleto.');
+        return {colunas,linhas,total:linhas.length};
+      },{sinal}),
+      explicarSplit: (id,sinal) => enviar(`/api/v1/ai/split-explanation/${encodeURIComponent(id)}`,v=>{
+        const r=objeto(v); if(texto(r.operationId)!==id || r.origin!=='MOCK') throw new Error('Explicação divergente.');
+        return {texto:texto(r.text),limitacoes:lista(r.limitations).map(texto)};
+      },{sinal}),
       async consultarCategoriasDespesa(sinal) {
         const registros = await enviar(
           '/api/v1/expense-categories',
@@ -404,6 +434,9 @@ export const contratoServidor: ContratoServidor = {
           undefined,
           mapearOperacao,
         );
+      },
+      async recuperarSplitVenda(id) {
+        await intencoes.enviar(`RECOVER_SPLIT:${id}`, `/api/v1/sales/${encodeURIComponent(id)}/recover-split`, undefined, mapearVenda);
       },
       consultarVendas: (f, sinal) =>
         enviar(`/api/v1/sales?${filtros(f)}`, (v) => pagina(v, f, mapearVenda), { sinal }),

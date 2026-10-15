@@ -24,10 +24,10 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 class QueryAndCashIntegrationTest extends PostgresSupport {
   @Autowired JdbcTemplate db;
   @Autowired Views views;
-  @Autowired SaleService sales;
+  @Autowired ServicoRegistroVenda sales;
   @Autowired FinanceService finance;
   @Autowired br.com.avanade.split.finance.OperationExport exports;
-  @Autowired br.com.avanade.split.finance.AnalyticsService analytics;
+  @Autowired br.com.avanade.split.finance.ServicoIndicadoresETendencias analytics;
   @Autowired MutableClock clock;
   @Autowired org.springframework.transaction.PlatformTransactionManager transactions;
   @Autowired com.fasterxml.jackson.databind.ObjectMapper json;
@@ -157,8 +157,8 @@ class QueryAndCashIntegrationTest extends PostgresSupport {
     return (Map<String, Object>)
         sales.create(
             actor,
-            new SaleService.SaleInput(
-                15000L, "BRL", SaleService.PaymentMethod.PIX, "GENERAL", null));
+            new ServicoRegistroVenda.SaleInput(
+                15000L, "BRL", ServicoRegistroVenda.PaymentMethod.PIX, "GENERAL", null));
   }
 
   @SuppressWarnings("unchecked")

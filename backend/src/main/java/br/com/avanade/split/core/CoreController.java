@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1")
 public class CoreController {
-  private final SaleService sales;
+  private final ServicoRegistroVenda sales;
   private final Views views;
   private final Idempotency intents;
 
-  public CoreController(SaleService sales, Views views, Idempotency intents) {
+  public CoreController(ServicoRegistroVenda sales, Views views, Idempotency intents) {
     this.sales = sales;
     this.views = views;
     this.intents = intents;
@@ -25,10 +25,18 @@ public class CoreController {
   public ResponseEntity<?> create(
       @RequestAttribute Actor actor,
       @RequestHeader("Idempotency-Key") String key,
-      @Valid @RequestBody SaleService.SaleInput input) {
+      @Valid @RequestBody ServicoRegistroVenda.SaleInput input) {
     actor.require("vender");
     var r = intents.execute(actor, "SALE", key, input, () -> sales.create(actor, input));
     return response(r, 201);
+  }
+
+  @PostMapping("/sales/{id}/recover-split")
+  public ResponseEntity<?> recoverSplit(@RequestAttribute Actor actor, @PathVariable UUID id,
+      @RequestHeader("Idempotency-Key") String key) {
+    actor.require("retomar");
+    return response(intents.execute(actor, "RECOVER_SPLIT:" + id, key, Map.of("saleId", id),
+        () -> sales.recoverMissingRule(actor, id)), 200);
   }
 
   @GetMapping("/sales/{id}")

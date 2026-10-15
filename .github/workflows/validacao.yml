@@ -62,3 +62,24 @@ jobs:
           path: |
             android-pos/app/build/reports
             android-pos/app/build/outputs/apk/debug/app-debug.apk
+
+  docker-restauracao:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configurar credenciais descartáveis
+        shell: bash
+        run: |
+          for key in DEMO_PASSWORD MIGRATION_PASSWORD DATABASE_PASSWORD; do
+            value=$(openssl rand -hex 24)
+            echo "::add-mask::$value"
+            echo "$key=$value" >> "$GITHUB_ENV"
+          done
+      - name: Validar Docker, reinício e restauração
+        run: bash backend/scripts/verificar-docker-e-restauracao.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: resultado-docker-restauracao
+          path: backend/.local/resultado-docker-restauracao.json

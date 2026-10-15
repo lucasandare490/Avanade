@@ -19,7 +19,9 @@ export function criarIntencoes(
         ? '/api/v1/sales'
         : acao === 'EXPENSE'
           ? '/api/v1/expenses'
-          : `/api/v1/split-operations/${encodeURIComponent(acao.slice(10))}/reprocess`;
+          : acao.startsWith('RECOVER_SPLIT:')
+            ? `/api/v1/sales/${encodeURIComponent(acao.slice(14))}/recover-split`
+            : `/api/v1/split-operations/${encodeURIComponent(acao.slice(10))}/reprocess`;
     if (!i || !/^[A-Za-z0-9_-]{8,128}$/.test(i.chave) || i.caminho !== caminho)
       throw new Error('Intenção armazenada inválida.');
     return i;

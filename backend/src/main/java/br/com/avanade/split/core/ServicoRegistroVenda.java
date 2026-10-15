@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class SaleService {
+public class ServicoRegistroVenda {
   public enum PaymentMethod {
     PIX,
     DEBIT,
@@ -28,23 +28,26 @@ public class SaleService {
   private final OperationRepository operations;
   private final TaxEngine tax;
   private final Ledger ledger;
-  private final MockAdapters adapters;
+  private final PaymentAdapter payments;
+  private final SplitPaymentAdapter routing;
   private final Clock clock;
   private final Views views;
 
-  public SaleService(
+  public ServicoRegistroVenda(
       JdbcTemplate db,
       OperationRepository operations,
       TaxEngine tax,
       Ledger ledger,
-      MockAdapters adapters,
+      PaymentAdapter payments,
+      SplitPaymentAdapter routing,
       Clock clock,
       Views views) {
     this.db = db;
     this.operations = operations;
     this.tax = tax;
     this.ledger = ledger;
-    this.adapters = adapters;
+    this.payments = payments;
+    this.routing = routing;
     this.clock = clock;
     this.views = views;
   }
@@ -66,7 +69,7 @@ public class SaleService {
         input.taxCategory(),
         input.posDeviceId(),
         java.sql.Timestamp.from(now));
-    String payment = adapters.confirmPayment();
+    String payment = payments.confirmPayment();
     db.update(
         "INSERT INTO payment VALUES (?,?,?,?,?)",
         UUID.randomUUID(),
@@ -82,12 +85,18 @@ public class SaleService {
         db.update("UPDATE sale SET failure_code=? WHERE id=?", e.code, sale);
         return views.sale(actor, sale);
       }
+      createSplit(actor, sale, input.amountCents(), rule, now);
+    }
+    return views.sale(actor, sale);
+  }
+
+  private void createSplit(Actor actor, UUID sale, long amount, TaxEngine.Rule rule, Instant now) {
       var o =
           Operation.create(
               sale,
               actor.merchantId(),
               rule,
-              TaxEngine.calculate(input.amountCents(), rule.taxBps(), rule.feeBps()),
+              TaxEngine.calculate(amount, rule.taxBps(), rule.feeBps()),
               now);
       o = operations.saveAndFlush(o);
       ledger.append(o, "Pagamento simulado confirmado. Split criado.");
@@ -98,8 +107,25 @@ public class SaleService {
       operations.flush();
       ledger.append(o, "Parcelas separadas pela regra " + o.ruleVersion + ".");
       route(actor, o, false);
-    }
-    return views.sale(actor, sale);
+  }
+
+  /** Recover the original confirmed payment; never request payment a second time. */
+  @Transactional
+  public Object recoverMissingRule(Actor actor, UUID id) {
+    var rows = db.queryForList("SELECT * FROM sale WHERE id=? AND merchant_id=? FOR UPDATE", id, actor.merchantId());
+    if (rows.isEmpty()) throw ApiException.missing();
+    var sale = rows.getFirst();
+    if (db.queryForObject("SELECT count(*) FROM split_operation WHERE sale_id=? AND merchant_id=?", Long.class, id, actor.merchantId()) > 0)
+      return views.sale(actor, id);
+    String payment = db.queryForObject("SELECT status FROM payment WHERE sale_id=? AND merchant_id=?", String.class, id, actor.merchantId());
+    if (!"CONFIRMED".equals(payment) || !"TAX_RULE_UNAVAILABLE".equals(sale.get("failure_code")))
+      throw new ApiException(409, "INVALID_STATE", "Esta venda não está elegível para recuperar o split.");
+    Instant originalDate = ((java.sql.Timestamp)sale.get("created_at")).toInstant();
+    // A rule must cover the original sale date, not simply be valid at retry time.
+    var rule = tax.rule((String)sale.get("tax_category"), originalDate);
+    createSplit(actor, id, ((Number)sale.get("amount_cents")).longValue(), rule, clock.instant());
+    // Preserve failure_code as the historical reason; the new operation is the current outcome.
+    return views.sale(actor, id);
   }
 
   private void parcel(Operation o, String kind, long amount, String destination) {
@@ -137,7 +163,7 @@ public class SaleService {
     for (var parcel : parcels) {
       if (parcel.get("status").equals("CONFIRMADA")) continue;
       String kind = (String) parcel.get("kind");
-      if (!adapters.route(kind, retry)) {
+      if (!routing.route(kind, retry)) {
         db.update("UPDATE parcel SET status='FALHA' WHERE id=?", parcel.get("id"));
         o.status = "FALHA";
         operations.flush();

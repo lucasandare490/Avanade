@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
+import axe from 'axe-core';
 const senha = process.env.DEMO_PASSWORD || readFileSync('../backend/.local/demo-password','utf8').trim();
 for (const largura of [320,390,768,1024,1440]) {
  test(`telas integradas sem transbordamento em ${largura}px`, async ({page}) => {
@@ -9,8 +10,9 @@ for (const largura of [320,390,768,1024,1440]) {
   await page.getByLabel('Senha',{exact:true}).fill(senha);
   await page.getByRole('button',{name:'Entrar',exact:true}).click();
   await expect(page.locator('main#conteudo')).toBeVisible();
+  await page.addScriptTag({content:axe.source});
   const problemas:string[]=[];
-  for (const [rota, titulo] of Object.entries({dashboard:'Dashboard',operacoes:'Operações',vendas:'Vendas',despesas:'Despesas','fluxo-caixa':'Fluxo de caixa',simulacao:'Simulação Split',analise:'Análise com IA',configuracoes:'Configurações e sessão'})) {
+  for (const [rota, titulo] of Object.entries({dashboard:'Dashboard',operacoes:'Operações',vendas:'Vendas',despesas:'Despesas','fluxo-caixa':'Fluxo de caixa',simulacao:'Simulação Split',analise:'Análise com IA',configuracoes:'Configurações e sessão',relatorios:'Relatórios'})) {
    await page.evaluate(r=>{location.hash='/'+r},rota);
    await expect(page.getByRole('heading', {name:titulo,exact:true})).toBeVisible();
    await page.waitForLoadState('networkidle');
@@ -32,6 +34,7 @@ for (const largura of [320,390,768,1024,1440]) {
     }).map(e=>`${e.tagName}.${e.className}`).slice(0,8);
     return {pagina:document.documentElement.scrollWidth>w+1,elementos};
    });
+   if(largura===390){const acessibilidade=await page.evaluate(async()=>await (window as any).axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}})); if(acessibilidade.violations.length)problemas.push(`${rota}: acessibilidade ${JSON.stringify(acessibilidade.violations.map((v:any)=>({id:v.id,nodes:v.nodes.map((n:any)=>n.target)})))}`);}
    if(erro.pagina||erro.elementos.length) problemas.push(`${rota}: ${JSON.stringify(erro)}`);
   }
   if (largura < 720) {

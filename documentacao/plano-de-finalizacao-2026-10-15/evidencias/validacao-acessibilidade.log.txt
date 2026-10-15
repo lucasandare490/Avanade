@@ -1,0 +1,8 @@
+  ok 1 e2e\relatorios-acessibilidade.spec.ts:5:1 › relatórios: vazio, erro recuperável, dados, CSV e acessibilidade (1.6s)
+  ok 2 e2e\responsividade.spec.ts:6:2 › telas integradas sem transbordamento em 320px (1.9s)
+  ok 4 e2e\responsividade.spec.ts:6:2 › telas integradas sem transbordamento em 768px (2.5s)
+  ok 5 e2e\responsividade.spec.ts:6:2 › telas integradas sem transbordamento em 1024px (1.9s)
+  ok 6 e2e\responsividade.spec.ts:6:2 › telas integradas sem transbordamento em 1440px (1.8s)
+    test-results\responsividade-telas-integradas-sem-transbordamento-em-390px\test-failed-1.png
+  1 failed
+  5 passed (15.5s)

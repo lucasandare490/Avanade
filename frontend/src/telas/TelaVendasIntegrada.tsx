@@ -147,11 +147,20 @@ export function TelaVendasIntegrada({ servico }: { servico: ServicoPlanner }) {
     </>
   );
 }
-export function TelaDetalheVenda({ id, servico }: { id: string; servico: ServicoPlanner }) {
+export function TelaDetalheVenda({ id, servico, permitirRetomada = false }: { id: string; servico: ServicoPlanner; permitirRetomada?: boolean }) {
   const consulta = useConsultaRemota(id, async (sinal) => {
     if (!servico.consultarVenda) throw new Error('Consulta de venda indisponível.');
     return servico.consultarVenda(id, sinal);
   });
+  const [recuperando, setRecuperando] = useState(false);
+  const [mensagem, setMensagem] = useState('');
+  async function recuperar() {
+    if (recuperando || !servico.recuperarSplitVenda) return;
+    setRecuperando(true); setMensagem('');
+    try { await servico.recuperarSplitVenda(id); consulta.recarregar(); setMensagem('Recuperação consultada. Confira o estado da operação.'); }
+    catch { setMensagem('Não foi possível confirmar a recuperação. Atualize a venda antes de tentar novamente. A regra precisa cobrir a data original da venda.'); }
+    finally { setRecuperando(false); }
+  }
   const v = consulta.dados;
   return (
     <>
@@ -184,6 +193,7 @@ export function TelaDetalheVenda({ id, servico }: { id: string; servico: Servico
                       : 'Pagamento confirmado, mas o split não foi criado. A venda permanece registrada para acompanhamento.'}
                 </p>
                 {v.motivo && <p>Referência: {v.motivo}</p>}
+                {permitirRetomada && servico.recuperarSplitVenda && v.pagamento === 'confirmado' && v.motivo === 'TAX_RULE_UNAVAILABLE' && <button className="botao primario" disabled={recuperando} onClick={recuperar}>{recuperando ? 'Recuperando…' : 'Recuperar split da mesma venda'}</button>}
                 <p className="nota">
                   Esta venda não gera entrada no caixa enquanto o split não estiver concluído.
                 </p>
@@ -192,9 +202,10 @@ export function TelaDetalheVenda({ id, servico }: { id: string; servico: Servico
           </section>
         )
       )}
+      {mensagem && <p role="status">{mensagem}</p>}
       <button
         className="botao secundario"
-        disabled={consulta.carregando}
+        disabled={consulta.carregando || recuperando}
         onClick={consulta.recarregar}
       >
         Atualizar venda

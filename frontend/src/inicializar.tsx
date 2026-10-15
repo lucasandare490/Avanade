@@ -1,5 +1,5 @@
-import { criarIntegracaoApi } from './servicos/adapterApi';
-import { contratoServidor } from './servicos/integracaoConfigurada';
+import { criarIntegracaoApi } from './servicos/adaptarEValidarRespostasApi';
+import { contratoServidor } from './servicos/contratoBackendPlanner';
 import { lerUrlApi } from './servicos/configuracaoAmbiente';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';

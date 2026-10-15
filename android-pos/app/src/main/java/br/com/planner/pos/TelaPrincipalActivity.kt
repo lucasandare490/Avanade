@@ -116,7 +116,7 @@ class TelaPrincipalActivity : Activity() {
                 texto("Explore o POS com dados fictícios. Este aplicativo não autentica contas nem acessa uma maquineta.")
                 botao("Explorar demonstração") { perfil="gestor"; expiraEm=System.currentTimeMillis()+1800000; navegar("inicio") }
                 botao("Entrar com perfil demonstrativo") { navegar("login") }
-                botao("Conectar ao servidor HTTPS") { startActivity(android.content.Intent(this, TelaServidorActivity::class.java)) }
+                botao("Conectar ao servidor HTTPS") { startActivity(android.content.Intent(this, TelaPosIntegradoActivity::class.java)) }
             }
             "login" -> login()
             "expirada" -> {texto("Sessão expirada",24f);texto("A sessão local foi limpa. Entre novamente para continuar a demonstração.");botao("Voltar à entrada") {navegar("entrada")} }

@@ -1,6 +1,8 @@
+> **Atualização:** evidências atuais no [relatório 06](06-RESULTADOS-DA-VALIDACAO.md). As constatações iniciais abaixo são históricas. Marcações atualizadas somente onde a entrega foi verificada.
+
 # Checklist de finalização do Planner Comercial
 
-Revisão de 15/10/2026. Pasta do código atual: `C:/Avanade-main`. Publicação suspensa enquanto esta revisão é consolidada.
+Revisão de 15/10/2026. Pasta do código atual: `C:/Avanade-main`. Publicação autorizada; resultado remoto será registrado após os checks.
 
 ## Resultado da análise
 
@@ -23,10 +25,10 @@ Referências: documentação V2 e entrega parcial fornecidas, fontes extraídas 
 
 **Constatação:** `AuthController.java` oferece login/logout. `TelaEstadosAcesso.tsx` é explicitamente uma prévia sem criação de conta; `TelaConfiguracoes.tsx` apenas exibe dados. Não existe cadastro completo conectado. Referências: FE-042, FE-052, BE-027 a BE-040, V2 §5.1.
 
-- [ ] FIN-005 — Definir contrato mínimo de criação de comerciante: dados da pessoa responsável, estabelecimento, e-mail e senha; distinguir nova loja de usuário vinculado a loja existente. Não permitir escolher arbitrariamente papel ou loja alheia.
-- [ ] FIN-006 — Implementar criação atômica da loja e primeiro responsável, validações de campos e duplicidade, hash de senha e tratamento seguro de erro. Evitar loja órfã se houver falha.
-- [ ] FIN-007 — Criar tela de cadastro real, confirmação, estados de envio e retorno ao login; remover a dependência de contas seed para iniciar uma loja vazia.
-- [ ] FIN-008 — Implementar consulta e atualização autorizada dos dados básicos do estabelecimento; limitar campos alteráveis e preservar histórico das operações.
+- [x] FIN-005 — Definir contrato mínimo de criação de comerciante: dados da pessoa responsável, estabelecimento, e-mail e senha; distinguir nova loja de usuário vinculado a loja existente. Não permitir escolher arbitrariamente papel ou loja alheia.
+- [x] FIN-006 — Implementar criação atômica da loja e primeiro responsável, validações de campos e duplicidade, hash de senha e tratamento seguro de erro. Evitar loja órfã se houver falha.
+- [x] FIN-007 — Criar tela de cadastro real, confirmação, estados de envio e retorno ao login; remover a dependência de contas seed para iniciar uma loja vazia.
+- [x] FIN-008 — Implementar consulta e atualização autorizada dos dados básicos do estabelecimento; limitar campos alteráveis e preservar histórico das operações.
 - [ ] FIN-009 — Testar cadastro → login → loja vazia → primeira venda → despesa → caixa; testar e-mail repetido, validação, concorrência e isolamento entre duas lojas.
 - [ ] FIN-010 — Classificar recuperação de senha, convite, troca de senha e gestão de usuários do protótipo. Se incluídos, entregar contrato e fluxo completo; se não incluídos, registrar o limite e não apresentar botões como funcionais. Envio de e-mail depende de infraestrutura própria.
 
@@ -34,9 +36,9 @@ Referências: documentação V2 e entrega parcial fornecidas, fontes extraídas 
 
 **Já existe:** pagamento e split separados, regra histórica, parcelas, idempotência e retomada parcial. `SaleService` usa `MockAdapters` concreto; ausência de regra grava `failure_code` e retorna venda sem operação. `TaxEngine.rule` filtra apenas `valid_from`; não há término de vigência. V2 prevê falha rastreável e tratamento de regra vigente.
 
-- [ ] FIN-011 — Resolver o estado de venda com pagamento confirmado e regra ausente: exibir motivo, manter rastreabilidade e definir recuperação autorizada sem gerar outra venda ou presumir tributo zero.
-- [ ] FIN-012 — Implementar término de vigência e validação de intervalo por nova migration; preservar V1–V3 aplicadas e snapshots históricos. Cobrir fronteira temporal, ausência de regra e sobreposição/precedência explícita.
-- [ ] FIN-013 — Separar interfaces de pagamento e roteamento dos mocks concretos conforme arquitetura documentada. Manter comportamento demonstrativo e testes existentes.
+- [x] FIN-011 — Resolver o estado de venda com pagamento confirmado e regra ausente: exibir motivo, manter rastreabilidade e definir recuperação autorizada sem gerar outra venda ou presumir tributo zero.
+- [x] FIN-012 — Implementar término de vigência e validação de intervalo por nova migration; preservar V1–V3 aplicadas e snapshots históricos. Cobrir fronteira temporal, ausência de regra e sobreposição/precedência explícita.
+- [x] FIN-013 — Separar interfaces de pagamento e roteamento dos mocks concretos conforme arquitetura documentada. Manter comportamento demonstrativo e testes existentes.
 - [ ] FIN-014 — Formalizar estados e transições de pagamento, operação e parcela; verificar todos os estados nas duas interfaces, inclusive venda sem operação e pagamento pendente.
 - [ ] FIN-015 — Reexecutar recuperação de resposta perdida e retomada concorrente nos clientes; comprovar no banco efeito único e preservação de parcelas confirmadas.
 - [ ] FIN-016 — Revisar trilha de eventos de recusas e erros anteriores à criação do split. A tela deve explicar a tentativa sem chamar pagamento recusado de split concluído.
@@ -46,14 +48,14 @@ Referências: documentação V2 e entrega parcial fornecidas, fontes extraídas 
 
 **Constatação:** simulação usa regra do banco e opção de taxa, mas não aceita percentual hipotético editável. Caixa realizado e comparação histórica estão implementados; projeção futura não. Exportação integrada cobre operações, não todos os relatórios do mapa visual.
 
-- [ ] FIN-018 — Adicionar percentual hipotético à simulação com unidade explícita e validação no servidor. Separar parâmetro de simulação da regra aplicada a vendas. Manter zero gravações financeiras.
-- [ ] FIN-019 — Testar exemplos 150/15/135 sem taxa e 150/15/3/132 com taxa, limites, arredondamento, valores inválidos e atualização do resultado ao editar entradas.
+- [x] FIN-018 — Adicionar percentual hipotético à simulação com unidade explícita e validação no servidor. Separar parâmetro de simulação da regra aplicada a vendas. Manter zero gravações financeiras.
+- [x] FIN-019 — Testar exemplos 150/15/135 sem taxa e 150/15/3/132 com taxa, limites, arredondamento, valores inválidos e atualização do resultado ao editar entradas.
 - [ ] FIN-020 — Definir e implementar projeção simples: período de base, horizonte, entradas/despesas previstas, saldo projetado, premissas e indicação de dados insuficientes. Cálculo determinístico no backend; proposta numérica deve ser explícita para ratificação da equipe.
-- [ ] FIN-021 — Exibir realizado e projetado separadamente, com datas e origem. Não somar previsão ao saldo disponível nem confundir comparação histórica com previsão.
-- [ ] FIN-022 — Implementar sugestão revisável de categoria de despesa com mock; usuário confirma antes da gravação. Tratar dúvida, ausência de sugestão e indisponibilidade.
+- [x] FIN-021 — Exibir realizado e projetado separadamente, com datas e origem. Não somar previsão ao saldo disponível nem confundir comparação histórica com previsão.
+- [x] FIN-022 — Implementar sugestão revisável de categoria de despesa com mock; usuário confirma antes da gravação. Tratar dúvida, ausência de sugestão e indisponibilidade.
 - [ ] FIN-023 — Implementar alerta determinístico de pressão no caixa com limiar/premissa identificados e explicação simples. Definir atualização, resolução e ausência de dados; não inventar benchmark comercial.
 - [ ] FIN-024 — Ratificar despesas pendentes, vencidas, recorrência, edição e exclusão mostradas no protótipo. O contrato atual trabalha com despesas pagas; não deduzir novos estados apenas pela data.
-- [ ] FIN-025 — Conferir relatórios de vendas, despesas e tributos do mapa de navegação. Entregar os aprovados com filtro completo, autorização e identificação demonstrativa; distinguir do CSV de operações já existente.
+- [x] FIN-025 — Conferir relatórios de vendas, despesas e tributos do mapa de navegação. Entregar os aprovados com filtro completo, autorização e identificação demonstrativa; distinguir do CSV de operações já existente.
 - [ ] FIN-026 — Conferir reconciliação entre painel, caixa, histórico, detalhe e exportação, inclusive saldo negativo, mudança de dia/fuso, base vazia, filtros e paginação.
 
 ## 4. IA demonstrativa — parte do MVP, sem obrigação de serviço pago
@@ -61,11 +63,11 @@ Referências: documentação V2 e entrega parcial fornecidas, fontes extraídas 
 **Constatação:** `MockAIProvider.explain` explica apenas um período de caixa. `AnalysisService` valida texto nulo/vazio/tamanho, registra interação e faz fallback; não estabelece deadline do provedor nem saída estruturada completa. A comparação é produzida por `AnalyticsService`, mas não é entrada da explicação atual. V2 §§17, 21–25 permite mock padrão e exige controles de saída e Prompt Ops.
 
 - [ ] FIN-027 — Completar explicação de split, análise de caixa/projeção, comparação de tendências, sugestão de categoria e explicação de alertas conforme escopo. Dados sempre buscados no servidor por loja autorizada.
-- [ ] FIN-028 — Definir saída estruturada com resumo, nível de atenção, recomendações, origem, período e limitações. Validar tipos e relação com fatos; nunca delegar cálculo ou movimentação ao texto gerado.
-- [ ] FIN-029 — Implementar limite de tempo, falha controlada, dados insuficientes, resposta inválida e fallback. Manter consulta financeira disponível quando explicação falhar.
+- [x] FIN-028 — Definir saída estruturada com resumo, nível de atenção, recomendações, origem, período e limitações. Validar tipos e relação com fatos; nunca delegar cálculo ou movimentação ao texto gerado.
+- [x] FIN-029 — Implementar limite de tempo, falha controlada, dados insuficientes, resposta inválida e fallback. Manter consulta financeira disponível quando explicação falhar.
 - [ ] FIN-030 — Versionar modelos de explicação/prompts com objetivo, entrada, saída, restrições e exemplos de avaliação. O identificador `cash-explanation-v1` no log sozinho não completa Prompt Ops.
-- [ ] FIN-031 — Testar números divergentes, texto inseguro, base zero, valores ausentes, falha/timeout e isolamento entre lojas. Sugestão nunca grava categoria sem confirmação.
-- [ ] FIN-032 — Documentar provedor externo como extensão opcional. Se adotado posteriormente, guardar segredo só no servidor e validar privacidade, custo e qualidade; não bloquear MVP por falta de chave externa.
+- [x] FIN-031 — Testar números divergentes, texto inseguro, base zero, valores ausentes, falha/timeout e isolamento entre lojas. Sugestão nunca grava categoria sem confirmação.
+- [x] FIN-032 — Documentar provedor externo como extensão opcional. Se adotado posteriormente, guardar segredo só no servidor e validar privacidade, custo e qualidade; não bloquear MVP por falta de chave externa.
 
 ## 5. Web: equivalência, responsividade e acessibilidade
 
@@ -95,7 +97,7 @@ Referências: documentação V2 e entrega parcial fornecidas, fontes extraídas 
 - [ ] FIN-044 — Conferir por critério constraints, índices, FKs de loja, imutabilidade, conservação de parcelas e unicidade de efeitos; vincular BD-001 a BD-067 aos arquivos e testes atuais.
 - [ ] FIN-045 — Repetir backup/restore atual em banco descartável, comparando conteúdo e relações das 14 tabelas, sessões/eventos/intenção; definir acesso, retenção e responsável operacional.
 - [ ] FIN-046 — Revisar seeds e privilégios de bootstrap/migration/runtime. Cadastro novo não deve depender de credenciais ou registros demonstrativos preexistentes.
-- [ ] FIN-047 — Testar criação e atualização de banco com dados após as próximas migrations. Nunca modificar migration já aplicada.
+- [x] FIN-047 — Testar criação e atualização de banco com dados após as próximas migrations. Nunca modificar migration já aplicada.
 - [ ] FIN-048 — Revisar retenção de idempotência, janela de recuperação e comportamento após expiração; impedir duplicação por reaproveitamento de chave.
 - [ ] FIN-049 — Verificar timeout de integrações, transações, contenção e retries limitados. Outbox/inbox ficam condicionados à introdução de fila/provedor externo; não são automaticamente falta do mock síncrono.
 - [ ] FIN-050 — Executar Docker/Compose com banco vazio, reinício e volume persistente; conferir saúde, configuração e portas. Não expor o banco à internet.
@@ -108,7 +110,7 @@ Referências: documentação V2 e entrega parcial fornecidas, fontes extraídas 
 
 - [ ] FIN-055 — Aplicar plano de nomes do documento 02 em etapas, com mapa de antes/depois; atualizar imports, comandos, testes, CI e referências. Preservar nomes obrigatórios das ferramentas.
 - [ ] FIN-056 — Dividir arquivos que misturam muitos assuntos em módulos de responsabilidade clara; priorizar Activity integrada, controllers/serviços financeiros e composição da aplicação web.
-- [ ] FIN-057 — Criar entrada única para iniciantes: onde executar, onde ficam telas, API, banco, testes e pendências. Separar documentos atuais de relatórios históricos sem apagar autoria/evidências.
+- [x] FIN-057 — Criar entrada única para iniciantes: onde executar, onde ficam telas, API, banco, testes e pendências. Separar documentos atuais de relatórios históricos sem apagar autoria/evidências.
 - [ ] FIN-058 — Corrigir contradições nos checklists/README: Android implementado versus não homologado; tendências existentes versus projeção ausente; IA externa opcional; cadastro incompleto; exportação disponível apenas no escopo entregue.
 - [ ] FIN-059 — Tornar testes reproduzíveis a partir de clone limpo, com preparação de banco e segredo de teste por configuração. Não publicar arquivo privado `demo-password` para fazer teste passar.
 - [ ] FIN-060 — Reexecutar build e testes relevantes após funcionalidades e renomeações; depois roteiro integrado completo web e Android. Não substituir aceite por contagem de testes.

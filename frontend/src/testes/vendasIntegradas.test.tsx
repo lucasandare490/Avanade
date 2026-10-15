@@ -2,10 +2,10 @@
 import '@testing-library/jest-dom/vitest';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { TelaVendaDemonstrativa } from '../telas/TelaVendaDemonstrativa';
+import { TelaRegistroVenda } from '../telas/TelaRegistroVenda';
 import { TelaDetalheVenda } from '../telas/TelaVendasIntegrada';
 import { criarServicoDemonstrativo } from '../servicos/servicoDemonstrativo';
-import { mapearResultadoVenda, mapearVenda } from '../servicos/integracaoConfigurada';
+import { mapearResultadoVenda, mapearVenda } from '../servicos/contratoBackendPlanner';
 import exemplo from '../../../backend/docs/examples/sale-confirmed.json';
 beforeEach(() => {
   location.hash = '';
@@ -16,7 +16,7 @@ it.each(['PENDING', 'DECLINED', 'CONFIRMED'])(
   async (status) => {
     const resposta = { ...exemplo, operation: null, payment: { status } };
     const registrar = vi.fn().mockResolvedValue(mapearResultadoVenda(resposta));
-    const tela = render(<TelaVendaDemonstrativa demonstrativo={false} registrar={registrar} />);
+    const tela = render(<TelaRegistroVenda demonstrativo={false} registrar={registrar} />);
     fireEvent.click(screen.getByRole('button', { name: 'Revisar venda' }));
     fireEvent.click(screen.getByRole('button', { name: 'Confirmar venda' }));
     await waitFor(() => expect(location.hash).toBe(`#/vendas/${exemplo.id}`));

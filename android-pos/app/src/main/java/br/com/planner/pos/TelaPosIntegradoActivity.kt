@@ -12,7 +12,7 @@ import java.net.URLEncoder
 import java.security.MessageDigest
 
 /** Fluxos do servidor separados da demonstração em memória, com intenção durável por conta. */
-class TelaServidorActivity : Activity() {
+class TelaPosIntegradoActivity : Activity() {
     private lateinit var coluna: LinearLayout
     private lateinit var aviso: TextView
     private var transporte: TransporteApiPos? = null
@@ -23,23 +23,24 @@ class TelaServidorActivity : Activity() {
     private val preferencias by lazy { getSharedPreferences("intencoes-servidor", MODE_PRIVATE) }
     override fun onCreate(state: Bundle?) { super.onCreate(state); login() }
     override fun onDestroy() { transporte?.encerrar(); sessao=null; super.onDestroy() }
+    private fun dp(valor: Int) = (valor * resources.displayMetrics.density + 0.5f).toInt()
     private fun texto(s: String, titulo: Boolean=false): TextView = TextView(this).also {
-        it.text=s; it.textSize=if(titulo) 23f else 17f; it.setPadding(0,16,0,16)
+        it.text=s; it.textSize=if(titulo) 23f else 17f; it.setPadding(0,dp(16),0,dp(16))
         if(android.os.Build.VERSION.SDK_INT>=28) it.isAccessibilityHeading=titulo
         coluna.addView(it)
     }
     private fun tela(titulo: String) {
-        coluna=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL; setPadding(24,32,24,32) }
-        setContentView(ScrollView(this).apply { fitsSystemWindows=true; addView(coluna) })
+        coluna=LinearLayout(this).apply { orientation=LinearLayout.VERTICAL; setPadding(dp(24),dp(32),dp(24),dp(32)) }
+        setContentView(ScrollView(this).apply { fitsSystemWindows=true; isFillViewport=true; addView(coluna) })
         texto(titulo,true); texto("SIMULADO · registros no servidor · sem recolhimento fiscal real")
         aviso=texto("").apply { accessibilityLiveRegion=View.ACCESSIBILITY_LIVE_REGION_POLITE }
     }
     private fun campo(rotulo: String, tipo: Int=InputType.TYPE_CLASS_TEXT): EditText {
         val label=texto(rotulo)
-        return EditText(this).also { it.id=View.generateViewId(); label.labelFor=it.id; it.inputType=tipo; it.setSingleLine(); coluna.addView(it) }
+        return EditText(this).also { it.id=View.generateViewId(); label.labelFor=it.id; it.inputType=tipo; it.setSingleLine(); it.minHeight=dp(56); it.textSize=18f; coluna.addView(it,LinearLayout.LayoutParams(-1,-2)) }
     }
     private fun botao(s: String, acao: () -> Unit) = Button(this).also {
-        it.text=s; it.isAllCaps=false; it.minHeight=(56*resources.displayMetrics.density).toInt(); coluna.addView(it)
+        it.text=s; it.isAllCaps=false; it.minHeight=dp(56); coluna.addView(it,LinearLayout.LayoutParams(-1,-2))
         it.setOnClickListener { if(!ocupado) acao() }
     }
     private fun habilitar(v: View, valor: Boolean) {
@@ -159,7 +160,22 @@ class TelaServidorActivity : Activity() {
         tela("Detalhe da venda")
         texto("Referência: ${v.id}\n${v.data}\nBruto: ${moeda(v.bruto)}\n${pagamento(v.pagamento)}")
         val split=v.split
-        if(split==null) texto("Esta venda não possui operação de split. Não há confirmação de parcelas nem de entrada no caixa.")
+        if(split==null) {
+            texto("Esta venda não possui operação de split. Não há confirmação de parcelas nem de entrada no caixa.")
+            v.motivo?.let { texto("Referência da falha: $it") }
+            if(v.pagamento=="CONFIRMED" && v.motivo=="TAX_RULE_UNAVAILABLE" && "retomar" in sessao!!.permissoes) {
+                texto("A recuperação usa o pagamento original e exige regra válida na data da venda.")
+                botao("Recuperar split da mesma venda") {
+                    val nome="$escopo:RECOVER_SPLIT:${v.id}"
+                    val chave=preferencias.getString(nome,null) ?: UUID.randomUUID().toString()
+                    if(!preferencias.edit().putString(nome,chave).commit()) { aviso.text="Não foi possível preservar a tentativa."; return@botao }
+                    pedir("/api/v1/sales/${v.id}/recover-split","POST",chave=chave,sucesso={
+                        val resposta=ContratoBackendPos.venda(it); require(resposta.id==v.id)
+                        preferencias.edit().remove(nome).commit(); detalhe(resposta)
+                    })
+                }
+            }
+        }
         else {
             texto("Split: ${split.estado}\nRegra: ${split.regra}\nTributos: ${moeda(split.tributo)}\nTaxas: ${moeda(split.taxa)}\nLíquido: ${moeda(split.liquido)}")
             split.parcelas.forEach { texto("${it.tipo} · ${moeda(it.valor)} · ${it.estado}\nDestino: ${it.destino}") }
@@ -177,3 +193,4 @@ class TelaServidorActivity : Activity() {
         botao("Início") { inicio() }
     }
 }
+

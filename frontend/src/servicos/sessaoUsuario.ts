@@ -13,6 +13,7 @@ export interface Credenciais {
   senha: string;
 }
 export interface ServicoSessao {
+  cadastrar?(dados: { name: string; merchantName: string; email: string; password: string }): Promise<void>;
   entrar(dados: Credenciais): Promise<SessaoUsuario>;
   sair(): Promise<void>;
 }
@@ -69,6 +70,7 @@ export function podeAcessarRota(rota: string, sessao: SessaoUsuario) {
     despesas: 'financeiro',
     'fluxo-caixa': 'financeiro',
     analise: 'financeiro',
+    relatorios: 'financeiro',
     simulacao: 'financeiro',
     'venda-demonstrativa': 'vender',
   };

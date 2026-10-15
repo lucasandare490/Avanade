@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Aviso, CabecalhoPagina, Estado } from '../componentes/ElementosInterface';
 /** Prévia de UX; não recebe nem transmite credenciais reais. */
-export function TelaEstadosAcesso() {
+export function TelaPreviaAcessoDemonstrativo() {
   const [estado, definir] = useState('login');
   const [email, setEmail] = useState('maria@exemplo.invalid');
   const [senha, setSenha] = useState('');

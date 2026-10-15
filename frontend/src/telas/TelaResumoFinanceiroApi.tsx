@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { PainelProjecaoCaixa } from '../componentes/PainelProjecaoCaixa';
 import { ComposicaoServidor } from '../componentes/ComposicaoServidor';
 import type { ServicoPlanner } from '../tipos';
 import { CabecalhoPagina, Estado, Indicador } from '../componentes/ElementosInterface';
 import { useConsultaRemota } from '../utilitarios/useConsultaRemota';
 /** Totais pertencem ao servidor, nunca à soma da página de histórico. */
-export function TelaResumoIntegrado({
+export function TelaResumoFinanceiroApi({
   servico,
   area,
   fusoHorario = 'America/Recife',
@@ -39,6 +40,7 @@ export function TelaResumoIntegrado({
         titulo={area === 'dashboard' ? 'Dashboard' : 'Fluxo de caixa'}
         descricao="Valores consolidados informados pelo serviço financeiro."
       />
+      {area === 'fluxo-caixa' && servico.projetarCaixa && <PainelProjecaoCaixa servico={servico} />}
       {!servico.consultarResumo ? (
         <Estado
           titulo="Resumo financeiro ainda não conectado"

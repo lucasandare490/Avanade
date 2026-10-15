@@ -31,6 +31,7 @@ const grupos = [
     nome: 'FINANCEIRO',
     itens: [
       { rota: 'fluxo-caixa', nome: 'Fluxo de Caixa', icone: Wallet },
+      { rota: 'relatorios', nome: 'Relatórios', icone: Receipt },
       { rota: 'simulacao', nome: 'Simulação Split', icone: Percent },
     ],
   },
@@ -172,7 +173,7 @@ export function EstruturaPainel({
               {g.itens
                 .filter(
                   (item) =>
-                    (!demonstrativo || item.rota !== 'vendas') &&
+                    (!demonstrativo || !['vendas','relatorios'].includes(item.rota)) &&
                     (!sessao || podeAcessarRota(item.rota, sessao)),
                 )
                 .map(({ rota: r, nome, icone: Icone }) => (

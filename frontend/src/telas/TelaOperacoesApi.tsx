@@ -1,3 +1,4 @@
+import {PainelExplicacaoSplit} from '../componentes/PainelExplicacaoSplit';
 import { useRef, useState } from 'react';
 import { ExportarOperacoesServidor } from '../componentes/ExportarOperacoesServidor';
 import type { ServicoPlanner } from '../tipos';
@@ -7,7 +8,7 @@ import { useConsultaRemota } from '../utilitarios/useConsultaRemota';
 import { moeda } from '../utilitarios/valoresFinanceiros';
 import { Status } from '../componentes/ElementosInterface';
 import { usePreferenciaSessao } from '../utilitarios/usePreferenciaSessao';
-export function TelaOperacoesRemotas({ servico, permitirExportacao = false }: { servico: ServicoPlanner; permitirExportacao?: boolean }) {
+export function TelaOperacoesApi({ servico, permitirExportacao = false }: { servico: ServicoPlanner; permitirExportacao?: boolean }) {
   const [busca, setBusca] = usePreferenciaSessao('api-busca', ''),
     [inicio, setInicio] = usePreferenciaSessao('api-inicio', ''),
     [fim, setFim] = usePreferenciaSessao('api-fim', '');
@@ -273,6 +274,7 @@ export function TelaDetalheRemoto({
           <p>Nenhum evento disponibilizado.</p>
         )}
       </section>
+      {servico.explicarSplit && <PainelExplicacaoSplit key={`${id}:${o.status}`} id={id} servico={servico}/>}
       {o.status === 'falha' && permitirRetomada && (
         <button className="botao primario" disabled={ocupado} onClick={() => void retomar()}>
           {ocupado ? 'Solicitando retomada…' : 'Solicitar retomada'}
@@ -286,3 +288,4 @@ export function TelaDetalheRemoto({
     </>
   );
 }
+

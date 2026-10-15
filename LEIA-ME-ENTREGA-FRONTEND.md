@@ -1,3 +1,5 @@
+> **Atualização vigente - 15/10/2026:** [funcionalidades e resultados](documentacao/plano-de-finalizacao-2026-10-15/06-RESULTADOS-DA-VALIDACAO.md) e [mapa dos arquivos](ONDE-ENCONTRAR-CADA-PARTE.md). Cadastro, projeção manual, relatórios e explicações de tendências/split foram acrescentados. As seções datadas abaixo registram entregas anteriores; não use suas pendências antigas como estado atual.
+
 > **Estado atual:** consulte o [incremento de integração e validação](documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
 
 > **Atualização de implementação:** comparação de tendências demonstrativa e apresentação de comparações remotas implementadas. A integração com dados e IA do servidor continua pendente. Esta atualização substitui os trechos anteriores sobre ausência da interface de comparação. Veja [implementação de tendências](frontend/documentacao/TENDENCIAS-IMPLEMENTADAS.md).

@@ -1,0 +1,18 @@
+2026-10-15T16:38:03.319-03:00 ERROR 46424 --- [split-backend] [           main] br.com.avanade.split.shared.ApiErrors    : request_failed correlationId=93cf08a4-1c55-4e9c-a6a6-6a1864383ea0 type=IllegalStateException
+[ERROR] Tests run: 19, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 58.06 s <<< FAILURE! -- in br.com.avanade.split.BackendIntegrationTest
+java.lang.AssertionError: Status expected:<422> but was:<400>
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.899 s -- in br.com.avanade.split.CadastroIntegrationTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.120 s -- in br.com.avanade.split.ConsultaExplicacaoLimitadaTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.30 s -- in br.com.avanade.split.CrashRecoveryTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.026 s -- in br.com.avanade.split.EstabelecimentoIntegrationTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in br.com.avanade.split.InterpretacaoTendenciasTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.446 s -- in br.com.avanade.split.MigrationUpgradeTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s -- in br.com.avanade.split.OperationExportLimitTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.805 s -- in br.com.avanade.split.PlanejamentoIntegrationTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.518 s -- in br.com.avanade.split.QueryAndCashIntegrationTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.049 s -- in br.com.avanade.split.TaxEngineTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in br.com.avanade.split.ValidacaoExplicacaoFinanceiraTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.052 s -- in br.com.avanade.split.VigenciaRegraIntegrationTest
+[ERROR]   BackendIntegrationTest.reportsAndSplitExplanationRespectStoreAndDoNotWrite:561 Status expected:<422> but was:<400>
+[ERROR] Tests run: 54, Failures: 1, Errors: 0, Skipped: 0
+[INFO] BUILD FAILURE

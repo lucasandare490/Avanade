@@ -4,6 +4,7 @@ import type { ResultadoSimulacao } from '../servicos/contratosConsultas';
 import { Aviso, CabecalhoPagina, Estado, Indicador } from '../componentes/ElementosInterface';
 import { lerCentavos } from '../utilitarios/valoresFinanceiros';
 export function TelaSimulacaoIntegrada({ servico }: { servico: ServicoPlanner }) {
+  const [percentual, setPercentual] = useState('');
   const [valor, setValor] = useState(''),
     [taxa, setTaxa] = useState(true),
     [erro, setErro] = useState('');
@@ -32,6 +33,11 @@ export function TelaSimulacaoIntegrada({ servico }: { servico: ServicoPlanner })
       setErro('Informe um valor positivo em reais, como 150,00.');
       return;
     }
+    const normalizado = percentual.trim().replace(',', '.');
+    const bps = normalizado === '' ? undefined : Math.round(Number(normalizado) * 100);
+    if (bps !== undefined && (!/^\d{1,3}(\.\d{1,2})?$/.test(normalizado) || bps > 10000)) {
+      setErro('Informe um percentual entre 0 e 100, com até duas casas decimais.'); return;
+    }
     if (!servico.simular) return;
     consulta.current?.abort();
     const controle = new AbortController();
@@ -41,7 +47,7 @@ export function TelaSimulacaoIntegrada({ servico }: { servico: ServicoPlanner })
     setOcupado(true);
     setErro('');
     try {
-      const r = await servico.simular({ bruto, incluirTaxa: taxa }, controle.signal);
+      const r = await servico.simular({ bruto, incluirTaxa: taxa, ...(bps === undefined ? {} : {percentualHipoteticoBps:bps}) }, controle.signal);
       if (id === sequencia.current) setResultado(r);
     } catch (e) {
       if (id === sequencia.current && !controle.signal.aborted)
@@ -81,6 +87,11 @@ export function TelaSimulacaoIntegrada({ servico }: { servico: ServicoPlanner })
                   setValor(e.target.value);
                 }}
               />
+            </label>
+            <label className="campo">
+              <span>Percentual hipotético de tributo (%)</span>
+              <input inputMode="decimal" value={percentual} onChange={e=>{invalidar();setPercentual(e.target.value);}} aria-describedby="nota-percentual" />
+              <small id="nota-percentual">Opcional. Vazio usa a regra demonstrativa. Não altera regras de vendas nem representa alíquota oficial.</small>
             </label>
             <label className="check">
               <input

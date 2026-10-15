@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class FinanceController {
   private final FinanceService finance;
-  private final AnalyticsService analytics;
+  private final ServicoIndicadoresETendencias analytics;
   private final Idempotency intents;
   private final TaxEngine tax;
   private final Clock clock;
-  private final AnalysisService analysis;
+  private final ServicoExplicacaoFinanceira analysis;
 
   public FinanceController(
       FinanceService finance,
-      AnalyticsService analytics,
+      ServicoIndicadoresETendencias analytics,
       Idempotency intents,
       TaxEngine tax,
       Clock clock,
-      AnalysisService analysis) {
+      ServicoExplicacaoFinanceira analysis) {
     this.finance = finance;
     this.analytics = analytics;
     this.intents = intents;
@@ -89,12 +89,18 @@ public class FinanceController {
   public record SimulationInput(
       @NotNull @Min(1) @Max(100000000) Long amountCents,
       @NotNull Boolean includeFee,
-      @NotBlank @Pattern(regexp = "[A-Z_]{1,40}") String taxCategory) {}
+      @NotBlank @Pattern(regexp = "[A-Z_]{1,40}") String taxCategory,
+      @Min(0) @Max(10000) Integer simulatedTaxBps) {}
 
   @PostMapping("/split-payment/simulate")
   public Object simulate(@RequestAttribute Actor actor, @Valid @RequestBody SimulationInput input) {
     actor.require("consultar");
-    var rule = tax.rule(input.taxCategory(), clock.instant());
+    var original = tax.rule(input.taxCategory(), clock.instant());
+    int rate = input.simulatedTaxBps() == null ? original.taxBps() : input.simulatedTaxBps();
+    int fee = input.includeFee() ? original.feeBps() : 0;
+    if (rate + fee > 10000) throw new ApiException(422,"VALIDATION_ERROR","A soma do percentual e da taxa não pode superar 100%.");
+    var rule = input.simulatedTaxBps() == null ? original :
+        new TaxEngine.Rule(original.id(),"HIPOTESE-"+original.version(),rate,original.feeBps());
     return Map.of(
         "simulation",
         true,

@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import type { ServicoPlanner } from '../tipos';
 import { CabecalhoPagina, Estado } from '../componentes/ElementosInterface';
 import { useConsultaRemota } from '../utilitarios/useConsultaRemota';
@@ -11,6 +11,11 @@ export function TelaDespesasIntegrada({
   servico: ServicoPlanner;
   permitirRegistro: boolean;
 }) {
+  const [sugestao,setSugestao]=useState<{categorias:string[];explicacao:string}|null>(null);
+  const [sugerindo,setSugerindo]=useState(false);
+  const pedidoSugestao=useRef<AbortController|null>(null);
+  useEffect(()=>()=>pedidoSugestao.current?.abort(),[]);
+  function invalidarSugestao(){pedidoSugestao.current?.abort();setSugestao(null);setSugerindo(false);}
   const [busca, setBusca] = useState(''),
     [inicio, setInicio] = useState(''),
     [fim, setFim] = useState(''),
@@ -62,6 +67,7 @@ export function TelaDespesasIntegrada({
         categoria,
         data: String(dados.get('data')),
       });
+      invalidarSugestao();
       setAberto(false);
       setMensagem('Despesa registrada. A consulta será atualizada.');
       consulta.recarregar();
@@ -154,7 +160,7 @@ export function TelaDespesasIntegrada({
       {aberto && (
         <section className="painel">
           <h2>Nova despesa paga</h2>
-          <form onSubmit={salvar}>
+          <form onSubmit={salvar} onChange={invalidarSugestao}>
             <fieldset disabled={ocupado || incerta} className="grade-formulario campos-sem-borda">
               <legend className="somente-leitor">Dados da despesa</legend>
               {(['descricao', 'valor', 'data'] as const).map((nome) => (
@@ -201,6 +207,16 @@ export function TelaDespesasIntegrada({
                 )}
               </label>
             </fieldset>
+            {servico.sugerirCategoria && <button type="button" className="botao secundario" disabled={ocupado||incerta||sugerindo} onClick={async e=>{
+              const form=e.currentTarget.form!;
+              const descricao=String(new FormData(form).get('descricao')??'').trim();
+              if(!descricao){setMensagem('Preencha a descrição antes de pedir uma sugestão.');return;}
+              const c=new AbortController();pedidoSugestao.current?.abort();pedidoSugestao.current=c;setSugerindo(true);setSugestao(null);
+              try{const r=await servico.sugerirCategoria!(descricao,c.signal);if(!c.signal.aborted)setSugestao(r);}
+              catch{if(!c.signal.aborted)setMensagem('Sugestão indisponível. Você pode escolher a categoria e salvar normalmente.');}
+              finally{if(!c.signal.aborted)setSugerindo(false);}
+            }}>{sugerindo?'Consultando sugestão…':'Sugerir categoria'}</button>}
+            {sugestao&&<div role="status"><p>{sugestao.explicacao}</p>{sugestao.categorias.filter(c=>categorias.includes(c)).map(c=><button type="button" className="botao secundario" key={c} disabled={ocupado||incerta} onClick={e=>{const select=e.currentTarget.form?.elements.namedItem('categoria') as HTMLSelectElement;select.value=c;setSugestao(null);}}>Usar categoria {c}</button>)}</div>}
             <button className="botao primario" disabled={ocupado || incerta}>
               {ocupado ? 'Salvando…' : 'Salvar despesa'}
             </button>
@@ -209,6 +225,7 @@ export function TelaDespesasIntegrada({
               className="botao secundario"
               disabled={ocupado}
               onClick={() => {
+                invalidarSugestao();
                 setAberto(false);
                 botaoAbrir.current?.focus();
               }}
