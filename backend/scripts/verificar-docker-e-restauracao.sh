@@ -22,15 +22,17 @@ docker compose exec -T db pg_dump -U split_owner -d split --format=custom --no-o
 restore_db="verificacao_restore_${GITHUB_RUN_ID:-$(date +%s)}"
 docker compose exec -T db createdb -U split_owner "$restore_db"
 docker compose exec -T db pg_restore -U split_owner --single-transaction --exit-on-error --no-owner --no-acl -d "$restore_db" < "$backup"
-tables=$(docker compose exec -T db psql -U split_owner -d split -Atc "SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename")
+mapfile -t tables < <(docker compose exec -T db psql -U split_owner -d split -Atc "SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename")
+[[ ${#tables[@]} -ge 15 ]] || { echo "Inventario de tabelas incompleto" >&2; exit 5; }
 count=0
-while IFS= read -r table; do
+for table in "${tables[@]}"; do
   [[ "$table" =~ ^[a-z_][a-z_0-9]*$ ]] || exit 3
   query="SELECT count(*)::text || ':' || md5(COALESCE(string_agg(row_to_json(t)::text, E'\n' ORDER BY row_to_json(t)::text),'')) FROM \"$table\" t"
   original=$(docker compose exec -T db psql -U split_owner -d split -Atc "$query")
   restored=$(docker compose exec -T db psql -U split_owner -d "$restore_db" -Atc "$query")
   [[ "$original" == "$restored" ]] || { echo "Divergencia na tabela $table" >&2; exit 4; }
   count=$((count+1))
-done <<< "$tables"
+done
+[[ "$count" == "${#tables[@]}" ]] || exit 6
 printf '{"docker":true,"restart":true,"restoredTables":%s,"allTableContentsIdentical":true}\n' "$count" > .local/resultado-docker-restauracao.json
 cat .local/resultado-docker-restauracao.json
