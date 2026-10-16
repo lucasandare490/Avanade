@@ -83,3 +83,7 @@ Design, prototipação de alta fidelidade e pesquisa: **Thayná Batista da Silva
 ## Revisão operacional de 16/10/2026
 
 Logs JSON, métricas locais e recuperação de falhas temporárias foram reforçados. [Auditoria Java/Android e alertas remanescentes](documentacao/plano-de-finalizacao-2026-10-15/07-AUDITORIA-DE-DEPENDENCIAS.md). Testes web atuais: 100 aprovados; consulte o relatório para backend, Android e limites de cada ambiente. Não confundir resultado verde do CI com ausência de avisos de segurança.
+
+## Dados para apresentação local
+
+Há uma opção explícita para carregar vendas e despesas sintéticas em duas lojas, sem duplicar registros ao repetir. Consulte o [guia do cenário de apresentação](backend/docs/CENARIO-DE-APRESENTACAO.md).

@@ -59,3 +59,12 @@ No cadastro, a divergência de senhas agora associa a mensagem à confirmação 
 - Login/cadastro: três testes de navegador passaram em 320/768/1440 px, incluindo erro e ordem de foco. A análise axe foi restrita ao main da aplicação devido a iframe injetado pelo antivírus, sem desabilitar regras.
 
 As verificações não cobrem TalkBack/aparelho físico, zoom nativo de todos os estados, comparação integral com Figma ou infraestrutura em nuvem. O seed inicial ainda contém contas/regras; os demais estados financeiros são cenários de teste e demonstração, não povoamento automático de qualquer base real.
+
+
+## Cenário de apresentação — 16/10
+
+O cenário persistente opcional está implementado em `ConfiguracaoCenarioCompleto`, acionado com `-PopularCenario` no launcher Windows. Duas lojas, três perfis por loja, pagamentos confirmado/recusado/pendente, split concluído/falha parcial e despesas em dois períodos. Repetição sem duplicação verificada. O horário e os resultados temporários da carga são isolados por thread e restaurados; fontes excluídas do JAR distribuído. Não executado na base pessoal do usuário durante esta revisão.
+
+A execução final `mvnw.cmd -q verify` passou: **61 testes, zero falhas/erros**, PostgreSQL real descartável; pacote gerado. Evidência resumida: `evidencias/cenario-completo-validacao.json`. Este resultado substitui a contagem parcial anterior de 59 mais diagnóstico.
+
+Tentativa adicional de conferir o protótipo pelo conector Figma: acesso negado por ausência da permissão exigida no arquivo. A equivalência integral continua sem aceite; nenhum design foi alterado.

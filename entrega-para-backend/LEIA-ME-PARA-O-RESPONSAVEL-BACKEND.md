@@ -1,20 +1,23 @@
-> **Atualização vigente - 15/10/2026:** [funcionalidades e resultados](../documentacao/plano-de-finalizacao-2026-10-15/06-RESULTADOS-DA-VALIDACAO.md) e [mapa dos arquivos](../ONDE-ENCONTRAR-CADA-PARTE.md). Cadastro, projeção manual, relatórios e explicações de tendências/split foram acrescentados. As seções datadas abaixo registram entregas anteriores; não use suas pendências antigas como estado atual.
+# Backend e banco — guia de continuidade
 
-> **Estado atual:** consulte o [incremento de integração e validação](../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
+Atualizado em 16/10/2026. O backend já existe em `backend`; o dashboard web consome a API e o cliente Android tem contrato implementado. O banco é PostgreSQL real; pagamentos, tributos e explicações são demonstrativos.
 
-# Pacote para o responsável pelo backend e banco
+## Leia primeiro
 
-Leia nesta ordem:
+1. [Estado e evidências vigentes](../documentacao/plano-de-finalizacao-2026-10-15/06-RESULTADOS-DA-VALIDACAO.md).
+2. [Matriz individual dos 516 critérios](../documentacao/plano-de-finalizacao-2026-10-15/05-REVISAO-DOS-516-CRITERIOS.csv): filtre BE e BD para os 219 critérios do servidor/banco.
+3. [Execução backend](../backend/README.md), [API](../backend/docs/API.md) e [exemplos executados](../backend/docs/examples/README.md).
+4. [Operação e recuperação](../backend/docs/OPERACAO-E-RECUPERACAO.md) e [auditoria de dependências](../documentacao/plano-de-finalizacao-2026-10-15/07-AUDITORIA-DE-DEPENDENCIAS.md).
+5. [Mapa de arquivos](../ONDE-ENCONTRAR-CADA-PARTE.md).
 
-1. **01-CHECKLIST-BACKEND-COMPLETO.md** — 152 critérios; estado dos clientes e responsabilidades do servidor.
-2. **02-CHECKLIST-BANCO-DE-DADOS.md** — 67 critérios; modelo lógico, integridade, transações, índices, backup e operação.
-3. **03-CONTRATOS-E-EXEMPLOS-PARA-INTEGRACAO.md** — capacidades, tipos internos, exemplos JSON e roteiro de aceite.
-4. **04-DEVOLUTIVA-DO-BACKEND.md** — formulário e arquivos que devem voltar junto ao código.
+## Documentos originais preservados
 
-Total: **219 critérios de backend e banco**, além da ficha de devolutiva. São especificações propostas para desenvolvimento e ratificação, não uma declaração de backend implementado. As rotas de referência são distinguíveis das capacidades ainda sem URL acordada.
+01-CHECKLIST-BACKEND-COMPLETO.md e 02-CHECKLIST-BANCO-DE-DADOS.md mantêm os 152 e 67 critérios originais. O documento 03 registra o contrato proposto à época; o contrato implementado vigente é backend/docs/API.md e openapi.json. O documento 04 registra devolutivas históricas. Não interpretar afirmações antigas como “backend não conectado” ou “tendências pendentes” como estado vigente: consultar a matriz e evidências acima.
 
-O frontend web e o Android acompanham o pacote de código principal. Testes de frontend e a compilação do APK não comprovam persistência, autorização ou processamento do backend. Manter os pagamentos demonstrativos e não tratar percentuais de exemplo como legislação.
+## Continuidade sem quebrar os clientes
 
-## Atualização obrigatória: tendências no MVP
+Preservar valores inteiros em centavos, contexto de loja derivado da sessão, separação pagamento/split, snapshots históricos e chaves idempotentes. Nunca usar fixtures para ocultar falha de API. Mudança de DTO exige atualização coordenada dos adapters web/Kotlin e testes. Tendências pertencem ao MVP; crédito/cancelamento são futuros. Projeção atual é cenário manual, não previsão estatística.
 
-Análise de tendências por IA faz parte do MVP. Crédito simulado e cancelamento ficam na evolução futura. O resumo textual de um período disponível hoje não encerra esse requisito. Incluir na implementação/devolutiva as séries de origem, períodos comparados, indicadores, tratamento de base zero/insuficiente, interpretação segura e contrato para a tela. As definições específicas precisam de alinhamento. Ver [decisão e critérios de aceite](../frontend/documentacao/DECISAO-ESCOPO-MVP.md). Os 219 critérios anteriores permanecem; este adendo acrescenta os critérios específicos da decisão.
+Restam homologação Android HTTPS/aparelho, aceite visual/assistivo e implantação operacional. Dois avisos Spring WebMVC permanecem registrados na auditoria; CI verde não significa ausência de vulnerabilidades. Responsáveis e prazos precisam de acordo da equipe.
+
+Design/protótipo e pesquisa: Thayná Batista da Silva. Requisitos: Thayná Batista da Silva e Kleysson Teixeira, conforme materiais fornecidos.

@@ -75,3 +75,7 @@ JUnit usa PostgreSQL17.11 descartável, porta aleatória, sem Docker/H2. Testa c
 Cadastro, edição do nome da loja, recuperação de split sem regra, relatórios, interpretação de tendências, explicação específica, projeção manual, sugestão revisável de categoria e caixa semanal estão implementados. [Contrato dessas capacidades](docs/INCREMENTO-FUNCIONAL-2026-10-15.md).
 
 Pagamentos permanecem simulados. Pagamento pendente não é confirmado automaticamente pelo tempo. Não há PSP real, crédito ou cancelamento. IA externa é opcional; o padrão é MockAIProvider identificado. Faltam homologação física Android, implantação HTTPS, carga sustentada e decisões operacionais de retenção/monitoramento. Testes locais e pipeline não são aceite de produção.
+
+## Dados para apresentação local
+
+Há uma opção explícita para carregar vendas e despesas sintéticas em duas lojas, sem duplicar registros ao repetir. Consulte o [guia do cenário de apresentação](docs/CENARIO-DE-APRESENTACAO.md).

@@ -43,7 +43,10 @@ public final class LocalDemo {
           "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT,INSERT,UPDATE ON TABLES TO"
               + " split_app");
     }
-    var app = new SpringApplication(SplitApplication.class);
+    boolean completeScenario = Arrays.asList(args).contains("--cenario-completo");
+    var app = completeScenario
+        ? new SpringApplication(SplitApplication.class, br.com.avanade.split.demo.ConfiguracaoCenarioCompleto.class)
+        : new SpringApplication(SplitApplication.class);
     app.setAdditionalProfiles("demo");
     app.setDefaultProperties(
         Map.of("spring.datasource.url", "jdbc:postgresql://127.0.0.1:54329/postgres"));

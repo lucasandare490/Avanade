@@ -1,0 +1,76 @@
+{
+  "tests": 61,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "command": "mvnw.cmd -q verify",
+  "date": "2026-10-16",
+  "database": "PostgreSQL real descartável",
+  "suites": [
+    {
+      "name": "br.com.avanade.split.BackendIntegrationTest",
+      "tests": 21
+    },
+    {
+      "name": "br.com.avanade.split.CadastroIntegrationTest",
+      "tests": 3
+    },
+    {
+      "name": "br.com.avanade.split.CenarioCompletoTest",
+      "tests": 1
+    },
+    {
+      "name": "br.com.avanade.split.ConsultaExplicacaoLimitadaTest",
+      "tests": 2
+    },
+    {
+      "name": "br.com.avanade.split.CrashRecoveryTest",
+      "tests": 1
+    },
+    {
+      "name": "br.com.avanade.split.EstabelecimentoIntegrationTest",
+      "tests": 2
+    },
+    {
+      "name": "br.com.avanade.split.InterpretacaoTendenciasTest",
+      "tests": 3
+    },
+    {
+      "name": "br.com.avanade.split.MigrationUpgradeTest",
+      "tests": 1
+    },
+    {
+      "name": "br.com.avanade.split.OperacaoSeguraTest",
+      "tests": 2
+    },
+    {
+      "name": "br.com.avanade.split.OperationExportLimitTest",
+      "tests": 1
+    },
+    {
+      "name": "br.com.avanade.split.PlanejamentoIntegrationTest",
+      "tests": 2
+    },
+    {
+      "name": "br.com.avanade.split.QueryAndCashIntegrationTest",
+      "tests": 14
+    },
+    {
+      "name": "br.com.avanade.split.shared.ApiErrorsTest",
+      "tests": 1
+    },
+    {
+      "name": "br.com.avanade.split.TaxEngineTest",
+      "tests": 4
+    },
+    {
+      "name": "br.com.avanade.split.ValidacaoExplicacaoFinanceiraTest",
+      "tests": 2
+    },
+    {
+      "name": "br.com.avanade.split.VigenciaRegraIntegrationTest",
+      "tests": 1
+    }
+  ],
+  "demoLoaderExcludedFromJar": true
+}
