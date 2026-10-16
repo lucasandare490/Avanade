@@ -76,3 +76,5 @@ Tentativa adicional de conferir o protótipo pelo conector Figma: acesso negado 
 - 100 testes frontend passaram; build concluído.
 - Pacote `scripts/hospedagem` criado com frontend compilado, Caddy, API/banco sem portas públicas, conexão remota opcional e métricas em porta interna separada. Job próprio no CI; implantação pública não realizada.
 - Reconsulta do Maven Central: nenhuma versão Spring 6.2 posterior à 6.2.19 disponível. Alertas continuam registrados; sem migração principal improvisada.
+
+A configuração de hospedagem passou no job hospedagem da execução 38871000579: build das imagens, Caddy válido, frontend servido, login pelo proxy, rotas administrativas não públicas, métricas internas e ausência de portas publicadas da API/banco. O healthcheck agora usa readinessState e banco para aguardar a inicialização completa antes do aceite HTTP. Fonte: https://github.com/lucasandare490/Avanade/actions/runs/38871000579 . O teste usa HTTP em loopback; não declara TLS público ou banco remoto homologados.
