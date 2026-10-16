@@ -42,7 +42,7 @@ Há também `financeiro1@demo.local` e `operador1@demo.local`, com permissões d
 4. Registrar uma despesa paga e conferir a alteração no caixa.
 5. Mostrar a simulação sem criação de venda.
 6. Abrir análise e escolher um período que contenha os registros demonstrados. Mostrar comparação histórica e eventual ausência de base anterior.
-7. Explicar as próximas etapas: homologação Android/HTTPS, escolha da IA externa e aceite da equipe.
+7. Explicar as próximas etapas: homologação Android/HTTPS, eventual escolha de IA externa (opcional) e aceite da equipe.
 
 Os registros são persistidos no banco, mas pagamento, tributos e roteamento são SIMULADOS. O texto explicativo vem de MockAIProvider, sem modelo externo. Não apresentar a demonstração como recolhimento fiscal real ou IA externa já conectada.
 
@@ -57,3 +57,9 @@ A equipe informou que ainda não existe endereço público HTTPS e ainda não es
 ## Quando a porta já estiver em uso
 
 O launcher verifica se a API demonstrativa do Planner já está ativa. Se estiver, informa o endereço e encerra o comando sem iniciar uma segunda API. O serviço existente continua funcionando. Se a porta pertencer a outro serviço ou a identificação falhar, o comando para com uma mensagem; não encerra processos automaticamente. Para carregar alterações Java, encerre primeiro a API no terminal de origem e depois execute o launcher novamente.
+
+## Apresentar falha e retomada sem alterar pagamentos normais
+
+Para acrescentar os casos persistentes, encerre a API no próprio terminal e inicie com `-PopularCenario`, conforme o [guia do cenário completo](backend/docs/CENARIO-DE-APRESENTACAO.md). Entre como gerente da loja 1 e filtre 01 a 15/10/2026. Mostre o histórico, abra a operação com falha parcial, confira a parcela já confirmada e use a retomada disponível. Depois consulte o detalhe e o caixa. A retomada deve preservar as parcelas anteriores; repetir a carga não desfaz uma retomada já realizada. Os pagamentos recusados e pendentes devem ser consultados como vendas, sem afirmar que existe split concluído para eles.
+
+Para demonstrar o conjunto inicial novamente, use uma base descartável separada. Não apague o banco pessoal nem registros anteriores para preparar a apresentação.

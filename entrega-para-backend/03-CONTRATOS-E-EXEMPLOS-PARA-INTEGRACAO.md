@@ -1,3 +1,5 @@
+> Registro histórico preservado. Para o estado vigente em 16/10/2026, consulte o README geral, `backend/docs/API.md` e `documentacao/plano-de-finalizacao-2026-10-15/06-RESULTADOS-DA-VALIDACAO.md`. Propostas e contagens antigas abaixo não substituem a implementação atual.
+
 > **Estado atual:** consulte o [incremento de integração e validação](../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
 
 # Contratos e exemplos para integrar os clientes
