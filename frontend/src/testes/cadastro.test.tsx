@@ -22,5 +22,8 @@ it('impede envio de senhas divergentes',async()=>{
  fireEvent.submit(screen.getByRole('button',{name:'Criar conta'}).closest('form')!);
  await waitFor(()=>expect(screen.getByRole('alert')).toHaveTextContent('As senhas precisam ser iguais'));
  expect(cadastrar).not.toHaveBeenCalled();
+ expect(screen.getByLabelText('Confirmar senha',{exact:true})).toHaveAttribute('aria-invalid','true');
+ expect(screen.getByLabelText('Confirmar senha',{exact:true})).toHaveAccessibleDescription('As senhas precisam ser iguais.');
+ expect(screen.getByLabelText('E-mail',{exact:true})).toHaveAttribute('aria-invalid','false');
 });
 

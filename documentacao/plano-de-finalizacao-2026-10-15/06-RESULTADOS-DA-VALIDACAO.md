@@ -39,3 +39,11 @@ Não há homologação de carga sustentada, banco em nuvem, Android por HTTPS em
 ## Complemento de exemplos de integração
 
 Seis exemplos HTTP sintéticos foram gerados por teste aprovado em PostgreSQL descartável: sucesso, recusa, pendência, falha parcial, lista vazia e conflito. Consulte `backend/docs/examples/README.md`. O novo teste não altera regras de produção nem cria dados na base de demonstração local.
+
+## Estados de interface e cadastro — continuação de 15/10
+
+Os commits `535fa86` e `8e8374a` passaram nas quatro verificações remotas. [Execução 38808590422](https://github.com/lucasandare490/Avanade/actions/runs/38808590422).
+
+Dois testes adicionais de navegador verificaram operações, despesas e caixa em 320 e 768 px, incluindo carregamento bloqueado, erro HTTP 503, tentativa posterior e recuperação. Operações/despesas usam lista vazia sintética; recuperação de caixa usa API local. Cada etapa recebeu verificação de transbordamento e axe. Não equivalem a teste de indisponibilidade real da infraestrutura nem a leitor de tela.
+
+No cadastro, a divergência de senhas agora associa a mensagem à confirmação e deixa de marcar e-mail como inválido por esse motivo. Os dois testes específicos de cadastro e o build passaram. Evidências: `estados-consulta.log.txt`, `cadastro-acessivel.log.txt` e `build-acessibilidade.log.txt` nesta pasta de evidências. As suítes anteriores não foram repetidas localmente nesta correção pontual.

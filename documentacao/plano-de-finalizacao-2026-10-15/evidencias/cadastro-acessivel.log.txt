@@ -1,0 +1,9 @@
+
+ RUN  v5.0.3 C:/Avanade-main/frontend
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  21:09:53
+   Duration  12.97s (environment 63%, setup 32%, tests 2%, import 2%, transform 1%)
+

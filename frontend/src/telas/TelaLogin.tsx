@@ -24,6 +24,7 @@ export function TelaLogin({
   const [email, setEmail] = useState(demonstrativo ? 'gestor@exemplo.invalid' : '');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
+  const [confirmacaoInvalida, setConfirmacaoInvalida] = useState(false);
   const [ocupado, setOcupado] = useState(false);
   const bloqueio = useRef(false);
   async function enviar(e: FormEvent) {
@@ -32,9 +33,13 @@ export function TelaLogin({
     bloqueio.current = true;
     setOcupado(true);
     setErro('');
+    setConfirmacaoInvalida(false);
     try {
       if (criando && cadastrar) {
-        if (senha !== confirmacao) throw new Error('As senhas precisam ser iguais.');
+        if (senha !== confirmacao) {
+          setConfirmacaoInvalida(true);
+          throw new Error('As senhas precisam ser iguais.');
+        }
         await cadastrar({name:nome.trim(),merchantName:loja.trim(),email:email.trim(),password:senha});
         setCriando(false);
         setSucesso('Conta e estabelecimento criados. Entre com seu e-mail e senha.');
@@ -81,8 +86,8 @@ export function TelaLogin({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete={demonstrativo ? 'off' : 'username'}
-                aria-invalid={Boolean(erro)}
-                aria-describedby={erro ? 'erro-login' : undefined}
+                aria-invalid={Boolean(erro) && !confirmacaoInvalida}
+                aria-describedby={erro && !confirmacaoInvalida ? 'erro-login' : undefined}
               />
             </label>
             <label className="campo">
@@ -99,13 +104,13 @@ export function TelaLogin({
                 aria-describedby={erro ? 'erro-login' : undefined}
               />
             </label>
-            {criando && <label className="campo"><span id="rotulo-confirmar-senha">Confirmar senha</span><input aria-labelledby="rotulo-confirmar-senha" type="password" required minLength={12} maxLength={72} autoComplete="new-password" value={confirmacao} onChange={e=>setConfirmacao(e.target.value)} /><small>Use pelo menos 12 caracteres; limite de 72 bytes UTF-8.</small></label>}
+            {criando && <label className="campo"><span id="rotulo-confirmar-senha">Confirmar senha</span><input aria-labelledby="rotulo-confirmar-senha" aria-invalid={confirmacaoInvalida} aria-describedby={confirmacaoInvalida ? "erro-login" : undefined} type="password" required minLength={12} maxLength={72} autoComplete="new-password" value={confirmacao} onChange={e=>setConfirmacao(e.target.value)} /><small>Use pelo menos 12 caracteres; limite de 72 bytes UTF-8.</small></label>}
             <button className="botao primario">
               {ocupado ? 'Aguarde…' : criando ? 'Criar conta' : demonstrativo ? 'Entrar no cenário simulado' : 'Entrar'}
             </button>
           </fieldset>
         </form>
-        {cadastrar && <button type="button" className="botao secundario" disabled={ocupado} onClick={()=>{setCriando(!criando);setErro('');setSucesso('');setSenha('');setConfirmacao('');}}>{criando ? 'Já tenho conta' : 'Criar minha conta'}</button>}
+        {cadastrar && <button type="button" className="botao secundario" disabled={ocupado} onClick={()=>{setCriando(!criando);setConfirmacaoInvalida(false);setErro('');setSucesso('');setSenha('');setConfirmacao('');}}>{criando ? 'Já tenho conta' : 'Criar minha conta'}</button>}
         {erro && (
           <p role="alert" className="erro" id="erro-login">
             {erro}

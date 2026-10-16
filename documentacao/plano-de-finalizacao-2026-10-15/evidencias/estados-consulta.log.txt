@@ -1,0 +1,7 @@
+
+Running 2 tests using 1 worker
+
+  ok 1 e2e\estados-consulta.spec.ts:6:2 › estados de consulta: carregamento, erro e recuperação em 320px (4.1s)
+  ok 2 e2e\estados-consulta.spec.ts:6:2 › estados de consulta: carregamento, erro e recuperação em 768px (1.8s)
+
+  2 passed (9.5s)
