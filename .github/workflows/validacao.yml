@@ -1,4 +1,4 @@
-name: Validação do Planner Comercial
+name: ValidaÃ§Ã£o do Planner Comercial
 on:
   push:
   pull_request:
@@ -35,7 +35,15 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - run: chmod +x mvnw && ./mvnw -B verify
+      - run: chmod +x mvnw && ./mvnw -B verify dependency:tree -DoutputType=json -DoutputFile=target/dependency-tree.json
+      - name: Consultar alertas OSV (relatório, não aceite de segurança)
+        continue-on-error: true
+        run: python3 ../scripts/auditar-dependencias.py --maven-tree target/dependency-tree.json --output target/auditoria-osv.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: auditoria-dependencias-backend
+          path: backend/target/auditoria-osv.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -54,7 +62,10 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: gradle
-      - run: chmod +x gradlew && ./gradlew --no-daemon assembleDebug testDebugUnitTest lintDebug
+      - run: chmod +x gradlew && ./gradlew --no-daemon assembleDebug testDebugUnitTest lintDebug :app:inventariarDependencias
+      - name: Consultar alertas OSV Android
+        continue-on-error: true
+        run: python3 ../scripts/auditar-dependencias.py --gradle-list app/build/reports/dependencias-resolvidas.txt --output app/build/reports/auditoria-osv.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -68,7 +79,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - name: Configurar credenciais descartáveis
+      - name: Configurar credenciais descartÃ¡veis
         shell: bash
         run: |
           for key in DEMO_PASSWORD MIGRATION_PASSWORD DATABASE_PASSWORD; do
@@ -76,7 +87,7 @@ jobs:
             echo "::add-mask::$value"
             echo "$key=$value" >> "$GITHUB_ENV"
           done
-      - name: Validar Docker, reinício e restauração
+      - name: Validar Docker, reinÃ­cio e restauraÃ§Ã£o
         run: bash backend/scripts/verificar-docker-e-restauracao.sh
       - uses: actions/upload-artifact@v4
         if: always()

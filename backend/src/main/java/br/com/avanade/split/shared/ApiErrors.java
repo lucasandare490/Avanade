@@ -55,6 +55,13 @@ public class ApiErrors {
     return body(415, "UNSUPPORTED_MEDIA_TYPE", "Use application/json.", Map.of(), r);
   }
 
+  @ExceptionHandler(org.springframework.dao.TransientDataAccessException.class)
+  ResponseEntity<Error> transientDatabase(Exception e, HttpServletRequest r) {
+    LoggerFactory.getLogger(getClass()).warn("database_temporarily_unavailable correlationId={} type={}",
+        r.getAttribute("correlationId"), e.getClass().getSimpleName());
+    return body(503, "DATABASE_BUSY", "Serviço temporariamente ocupado. Consulte a intenção antes de reenviar com a mesma chave.", Map.of(), r);
+  }
+
   @ExceptionHandler(Exception.class)
   ResponseEntity<Error> unexpected(Exception e, HttpServletRequest r) {
     LoggerFactory.getLogger(getClass())

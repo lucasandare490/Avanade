@@ -1,0 +1,33 @@
+import {test,expect} from '@playwright/test';
+import axe from 'axe-core';
+for(const width of [320,768,1440]) test(`acesso e cadastro: erro, teclado e layout em ${width}px`,async({page})=>{
+ await page.setViewportSize({width,height:900});
+ await page.goto('/');
+ await page.addScriptTag({content:axe.source});
+ const check=async()=>{
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBeTruthy();
+  const result=await page.evaluate(async()=>await (window as any).axe.run(document.querySelector("main"),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));
+  expect(result.violations.map((x:any)=>({id:x.id,nodes:x.nodes.map((n:any)=>n.target)}))).toEqual([]);
+ };
+ await check();
+ await page.route('**/api/v1/auth/login',r=>r.fulfill({status:401,contentType:'application/json',body:JSON.stringify({code:'UNAUTHORIZED',message:'Credenciais inválidas.'})}));
+ await page.getByLabel('E-mail',{exact:true}).fill('sintetico@example.invalid');
+ await page.getByLabel('Senha',{exact:true}).fill('Senha-sintetica-123');
+ await page.getByRole('button',{name:'Entrar',exact:true}).click();
+ await expect(page.getByRole('alert')).toBeVisible();
+ await check();
+ await page.getByRole('button',{name:'Criar minha conta'}).click();
+ await page.getByLabel('Seu nome',{exact:true}).fill('Pessoa sintética');
+ await page.getByLabel('Nome do estabelecimento',{exact:true}).fill('Loja sintética');
+ await page.getByLabel('Senha',{exact:true}).fill('Senha-sintetica-123');
+ await page.getByLabel('Confirmar senha',{exact:true}).fill('Outra-senha-456');
+ await page.getByRole('button',{name:'Criar conta',exact:true}).click();
+ await expect(page.getByRole('alert')).toHaveText('As senhas precisam ser iguais.');
+ await expect(page.getByLabel('Confirmar senha',{exact:true})).toHaveAttribute('aria-describedby','erro-login');
+ await check();
+ await page.getByLabel('Seu nome',{exact:true}).focus();
+ await page.keyboard.press('Tab');
+ await expect(page.getByLabel('Nome do estabelecimento',{exact:true})).toBeFocused();
+ await page.keyboard.press('Tab');
+ await expect(page.getByLabel('E-mail',{exact:true})).toBeFocused();
+});

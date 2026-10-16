@@ -79,3 +79,7 @@ A publicação autorizada usa https://github.com/lucasandare490/Avanade. Esta pa
 Design, prototipação de alta fidelidade e pesquisa: **Thayná Batista da Silva**. Documentação de requisitos: **Thayná Batista da Silva e Kleysson Teixeira**, conforme materiais fornecidos. Autoria de commits não é inferida a partir do nome de uma pasta.
 
 [Protótipo Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design). [README anterior preservado](documentacao/historico/README-antes-da-consolidacao-2026-10-15.md).
+
+## Revisão operacional de 16/10/2026
+
+Logs JSON, métricas locais e recuperação de falhas temporárias foram reforçados. [Auditoria Java/Android e alertas remanescentes](documentacao/plano-de-finalizacao-2026-10-15/07-AUDITORIA-DE-DEPENDENCIAS.md). Testes web atuais: 100 aprovados; consulte o relatório para backend, Android e limites de cada ambiente. Não confundir resultado verde do CI com ausência de avisos de segurança.

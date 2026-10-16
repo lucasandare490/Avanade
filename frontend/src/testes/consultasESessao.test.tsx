@@ -42,7 +42,9 @@ it('descarta resposta antiga e cancela ao trocar filtros', async () => {
       }),
     { initialProps: { chave: 'a' } },
   );
+  await waitFor(() => expect(sinais.a).toBeDefined());
   rerender({ chave: 'b' });
+  await waitFor(() => expect(sinais.b).toBeDefined());
   expect(sinais.a.aborted).toBe(true);
   await act(async () => {
     resolver.b('novo');

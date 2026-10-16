@@ -1,0 +1,8 @@
+
+Running 3 tests using 1 worker
+
+  ok 1 e2e\acesso-acessibilidade.spec.ts:3:36 › acesso e cadastro: erro, teclado e layout em 320px (1.0s)
+  ok 2 e2e\acesso-acessibilidade.spec.ts:3:36 › acesso e cadastro: erro, teclado e layout em 768px (939ms)
+  ok 3 e2e\acesso-acessibilidade.spec.ts:3:36 › acesso e cadastro: erro, teclado e layout em 1440px (937ms)
+
+  3 passed (4.8s)

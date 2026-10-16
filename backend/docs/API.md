@@ -1,13 +1,10 @@
-> Atualização vigente: [capacidades de 15/10](INCREMENTO-FUNCIONAL-2026-10-15.md), incluindo cadastro, relatórios, recuperação, explicações e caixa semanal.
-
-> **Estado atual:** consulte o [incremento de integração e validação](../../documentacao/revisao-2026-10-14/ESTADO-ATUAL.md). Web e contrato Android implementados; Android ainda depende de homologação HTTPS/dispositivo, e IA externa não foi escolhida. Trechos datados abaixo preservam entregas anteriores.
-
 # Contrato HTTP v1 — backend demonstrativo
 
 Base `/api/v1`. JSON UTF-8. Exceto login e cadastro (`POST /auth/register`), todas as rotas exigem `Authorization: Bearer <accessToken>`. Corpo não admite propriedades desconhecidas, valores monetários fracionários ou tenant fornecido pelo cliente. Schemas de entrada e rotas no [OpenAPI](openapi.json); os schemas de resposta são publicados junto deste documento e dos [exemplos executados](examples/sale-confirmed.json).
 
 | Método/rota | Permissão | Entrada / resultado |
 |---|---|---|
+| POST auth/register | Pública | name, merchantName, email, password → 201; nova loja e gerente |
 | POST auth/login | Pública | email/password → sessionId, user{id,name}, merchant{id,name,timeZone}, permissions, expiresAt ISO, accessToken, tokenType |
 | POST auth/logout | Sessão | 204; repetição com token revogado retorna401 |
 | POST sales | vender | Idempotency-Key + SaleInput →201 nova /200 replay; venda com pagamento e operation completa ou null |
@@ -16,16 +13,26 @@ Base `/api/v1`. JSON UTF-8. Exceto login e cadastro (`POST /auth/register`), tod
 | GET split-operations | consultar | Lista paginada de operações calculadas |
 | GET split-operations/{id} | consultar | Composição, pagamento, regra congelada, parcelas, eventos |
 | POST split-operations/{id}/reprocess | retomar | Idempotency-Key, sem corpo →200 operação JSON; preserva parcelas confirmadas |
-| GET requests/{action}/{key} | Ação correspondente | SALE, EXPENSE ou REPROCESS:{UUID}; snapshot original da intenção |
+| GET requests/{action}/{key} | Ação correspondente | SALE, EXPENSE, REPROCESS:{UUID} ou RECOVER_SPLIT:{UUID}; snapshot original da intenção |
 | GET ledger?saleId={UUID} | consultar | Eventos em sequência crescente; venda sem operação retorna lista vazia |
 | GET expense-categories | despesa | Array de {id,name}; STOCK/Estoque, SERVICES/Serviços, OPERATING/Operacional |
 | POST expenses | despesa | Idempotency-Key + descrição/valor/categoria/data →201/200, despesa com ID |
 | GET expenses | financeiro | Lista paginada de despesas pagas |
 | GET expenses/{id} | financeiro | Despesa autorizada |
-| GET cash-flow?from=&to= | financeiro | Caixa realizado, saldo inicial, entradas, despesas, saldo final |
+| GET cash-flow?from=&to= | financeiro | Caixa realizado, saldo inicial, entradas, despesas, saldo final e weeks (semanas parciais/vazias) |
 | GET dashboard?from=&to= | financeiro | Mesmo contrato de caixa; sem séries gráficas inventadas |
 | POST split-payment/simulate | consultar | Cálculo sem escrita financeira |
-| POST ai/cash-analysis | financeiro | from/to → period,text,origin,provider,status,facts; sem tendências/projeção |
+| POST ai/cash-analysis | financeiro | from/to → period,text,origin,provider,status,facts,tendencias,structured; projeção manual em rota própria |
+
+| GET /merchant | Sessão | Nome, fuso e possibilidade de edição da loja |
+| POST /merchant | GERENTE | name → perfil atualizado |
+| POST /sales/{id}/recover-split | retomar | Idempotency-Key → venda recuperada sem repetir pagamento |
+| GET /ai/split-explanation/{id} | consultar | Composição e regra histórica explicadas |
+| POST /ai/expense-category | despesa | description → sugestão revisável |
+| POST /planning/projection | financeiro | until, incomeCents, expenseCents → cenário manual |
+| GET /reports/{kind}?from=&to= | financeiro | sales/expenses/taxes → columns, rows, total, mode; limite 2000 |
+
+Detalhes de cada extensão: [capacidades](INCREMENTO-FUNCIONAL-2026-10-15.md). Falhas temporárias: [operação e recuperação](OPERACAO-E-RECUPERACAO.md).
 
 ## Entradas
 
@@ -89,7 +96,7 @@ Erro `{code,message,fieldErrors,correlationId}` e header `X-Correlation-Id`. 400
 | items/total/page/size | itens/total/pagina/tamanho |
 | sessionId/expiresAt/user.name/merchant.name | id/expiraEm(ms)/nome/loja |
 
-Web integrado em 14/10/2026: criação extrai `sale.operation`; retomada recebe operação direta. `operation:null` usa resultado de venda sem split e rota própria `#/vendas/{id}`. Bearer, categorias, idempotência e consultas foram conectados; veja [guia web](../../frontend/documentacao/INTEGRACAO-BACKEND.md). O cliente Android continua com integração separada.
+Web integrado em 14/10/2026: criação extrai `sale.operation`; retomada recebe operação direta. `operation:null` usa resultado de venda sem split e rota própria `#/vendas/{id}`. Bearer, categorias, idempotência e consultas foram conectados; veja [guia web](../../frontend/documentacao/INTEGRACAO-BACKEND.md). O cliente Android tem contrato implementado; homologação em aparelho com HTTPS permanece pendente.
 
 ## Cenários mock controlados pelo servidor
 

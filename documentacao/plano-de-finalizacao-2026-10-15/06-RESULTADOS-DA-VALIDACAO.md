@@ -47,3 +47,15 @@ Os commits `535fa86` e `8e8374a` passaram nas quatro verificações remotas. [Ex
 Dois testes adicionais de navegador verificaram operações, despesas e caixa em 320 e 768 px, incluindo carregamento bloqueado, erro HTTP 503, tentativa posterior e recuperação. Operações/despesas usam lista vazia sintética; recuperação de caixa usa API local. Cada etapa recebeu verificação de transbordamento e axe. Não equivalem a teste de indisponibilidade real da infraestrutura nem a leitor de tela.
 
 No cadastro, a divergência de senhas agora associa a mensagem à confirmação e deixa de marcar e-mail como inválido por esse motivo. Os dois testes específicos de cadastro e o build passaram. Evidências: `estados-consulta.log.txt`, `cadastro-acessivel.log.txt` e `build-acessibilidade.log.txt` nesta pasta de evidências. As suítes anteriores não foram repetidas localmente nesta correção pontual.
+
+## Continuação de 16/10 — operação e segurança
+
+- Backend com logs JSON ECS, correlação, rota normalizada, duração e resultado, sem registrar corpo/query/token; métricas Micrometer sem identificação financeira.
+- Falhas transitórias do banco retornam 503 e orientam recuperação da intenção; falha de banco na autenticação não vira credencial inválida. Sem retry financeiro automático.
+- 59 testes backend passaram após atualização de bibliotecas; depois, um teste adicional do diagnóstico somente leitura passou separadamente. Não somar repetições como testes novos.
+- 168 dependências Java/Android consultadas no OSV. Correções reduziram alertas de oito bibliotecas para uma; dois avisos Spring WebMVC permanecem sobre XSLT/SSE não encontrados no código atual. [Análise e limites](07-AUDITORIA-DE-DEPENDENCIAS.md). Os passos OSV do CI são informativos e preservam alertas nos artefatos: pipeline verde não significa zero vulnerabilidades.
+- Android: testes, APK e lint passaram após atualizar dependência transitiva de testes.
+- Web: 100 testes passaram e build concluído. A consulta descartada pelo StrictMode não inicia requisição; resposta antiga continua sendo descartada e recarregar inicia nova consulta. Não há cache global de dados financeiros.
+- Login/cadastro: três testes de navegador passaram em 320/768/1440 px, incluindo erro e ordem de foco. A análise axe foi restrita ao main da aplicação devido a iframe injetado pelo antivírus, sem desabilitar regras.
+
+As verificações não cobrem TalkBack/aparelho físico, zoom nativo de todos os estados, comparação integral com Figma ou infraestrutura em nuvem. O seed inicial ainda contém contas/regras; os demais estados financeiros são cenários de teste e demonstração, não povoamento automático de qualquer base real.

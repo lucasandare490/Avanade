@@ -590,4 +590,24 @@ class BackendIntegrationTest extends PostgresSupport {
     assertThat(empty.path("items").size()).isZero();
     json.writerWithDefaultPrettyPrinter().writeValue(output.resolve("operations-empty.json").toFile(), empty);
   }
+
+  @Test
+  void operationalDiagnosticsRunReadOnlyWithoutFinancialDetails() throws Exception {
+    long before = count("sale");
+    String sql = java.nio.file.Files.readString(java.nio.file.Path.of("scripts/diagnosticar-banco.sql"));
+    int results = 0;
+    try (var connection = PG.getPostgresDatabase().getConnection(); var statement = connection.createStatement()) {
+      for (String part : sql.split(";")) {
+        if (part.isBlank()) continue;
+        if (statement.execute(part)) {
+          try (var result = statement.getResultSet()) {
+            results++;
+            assertThat(result.getMetaData().getColumnCount()).isBetween(1, 3);
+          }
+        }
+      }
+    }
+    assertThat(results).isEqualTo(5);
+    assertThat(count("sale")).isEqualTo(before);
+  }
 }

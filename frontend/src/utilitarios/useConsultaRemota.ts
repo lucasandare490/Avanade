@@ -14,8 +14,13 @@ export function useConsultaRemota<T>(chave: string, consultar: (sinal: AbortSign
     const controle = new AbortController();
     let ativo = true;
     definir({ chave, dados: null, erro: '', carregando: true });
-    consultarRef
-      .current(controle.signal)
+    // React StrictMode monta e limpa o efeito antes de repetir a montagem.
+    // Aguarda essa limpeza para não iniciar a primeira consulta descartada.
+    Promise.resolve()
+      .then(() => {
+        if (controle.signal.aborted) throw new DOMException('Consulta cancelada', 'AbortError');
+        return consultarRef.current(controle.signal);
+      })
       .then((dados) => {
         if (ativo) definir({ chave, dados, erro: '', carregando: false });
       })
