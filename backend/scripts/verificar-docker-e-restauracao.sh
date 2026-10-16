@@ -11,7 +11,7 @@ docker compose up --build --wait --wait-timeout 180
 python3 scripts/smoke.py
 docker compose restart api
 for attempt in {1..60}; do
-  if curl -fsS http://127.0.0.1:8080/actuator/health >/dev/null; then break; fi
+  if curl -fsS http://127.0.0.1:8080/actuator/health/readiness >/dev/null; then break; fi
   sleep 2
 done
 python3 scripts/smoke.py --recover

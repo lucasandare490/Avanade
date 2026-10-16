@@ -33,6 +33,8 @@ server:
 management:
   endpoints.web.exposure.include: health
   endpoint.health.show-details: never
+  endpoint.health.probes.enabled: true
+  endpoint.health.group.readiness.include: readinessState,db
 springdoc:
   remove-broken-reference-definitions: false
   api-docs.version: OPENAPI_3_0
