@@ -1,0 +1,13 @@
+# Somente para o Compose de scripts/hospedagem: proxy com endereço fixo.
+server:
+  forward-headers-strategy: native
+  tomcat:
+    remoteip:
+      internal-proxies: '172\.30\.19\.10'
+      remote-ip-header: X-Forwarded-For
+      protocol-header: X-Forwarded-Proto
+management:
+  server:
+    port: 9090
+    address: 0.0.0.0
+  endpoints.web.exposure.include: health,metrics

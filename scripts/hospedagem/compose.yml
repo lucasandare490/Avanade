@@ -28,11 +28,7 @@ services:
       DEMO_PASSWORD: ${DEMO_PASSWORD:?Configure a senha demonstrativa}
       API_DOCS_ENABLED: "false"
       CORS_ORIGINS: ${PUBLIC_ORIGIN:?Informe a origem HTTPS}
-      SERVER_FORWARD_HEADERS_STRATEGY: native
-      SERVER_TOMCAT_REMOTEIP_INTERNAL_PROXIES: '172\.30\.19\.10'
-      MANAGEMENT_SERVER_PORT: "9090"
-      MANAGEMENT_SERVER_ADDRESS: 0.0.0.0
-      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,metrics
+      SPRING_PROFILES_ACTIVE: hospedagem
     networks: [privada]
     restart: unless-stopped
     healthcheck:
