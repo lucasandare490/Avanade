@@ -27,6 +27,17 @@ export function DialogoConfirmacao({
       className="dialogo-confirmacao"
       aria-labelledby="titulo-confirmacao"
       aria-describedby="descricao-confirmacao"
+      onKeyDown={(e) => {
+        if (e.key !== 'Tab') return;
+        const controles = [...e.currentTarget.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')];
+        const primeiro = controles[0];
+        const ultimo = controles[controles.length - 1];
+        if (e.shiftKey && document.activeElement === primeiro) {
+          e.preventDefault(); ultimo?.focus();
+        } else if (!e.shiftKey && document.activeElement === ultimo) {
+          e.preventDefault(); primeiro?.focus();
+        }
+      }}
       onCancel={(e) => {
         e.preventDefault();
         cancelar();

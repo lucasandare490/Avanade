@@ -94,3 +94,19 @@ jobs:
         with:
           name: resultado-docker-restauracao
           path: backend/.local/resultado-docker-restauracao.json
+
+  hospedagem:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Credenciais descartaveis
+        shell: bash
+        run: |
+          for key in DEMO_PASSWORD MIGRATION_PASSWORD DATABASE_PASSWORD; do
+            value=$(openssl rand -hex 24)
+            echo "::add-mask::$value"
+            echo "$key=$value" >> "$GITHUB_ENV"
+          done
+      - name: Validar pacote de hospedagem sem publicar dominio
+        run: bash scripts/hospedagem/verificar.sh

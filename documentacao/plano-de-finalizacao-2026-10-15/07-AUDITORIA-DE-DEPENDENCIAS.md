@@ -30,3 +30,7 @@ Na raiz: `python scripts/auditar-dependencias.py --maven-tree backend/target/dep
 Ausência de alerta não garante ausência de vulnerabilidade desconhecida. Inventário de runtime/testes não cobre automaticamente todas as ferramentas de build, sistema operacional ou infraestrutura.
 
 Fontes: https://google.github.io/osv.dev/post-v1-querybatch/ e os IDs dos avisos em `evidencias/detalhes-alertas-dependencias.json`.
+
+## Reconsulta em 16/10/2026
+
+O metadata oficial de `org.springframework:spring-webmvc` no Maven Central ainda lista 6.2.19 como a versão mais recente da série 6.2. Não foi aplicada atualização principal sem migração e validação próprias. Os dois alertas permanecem explícitos; esta reconsulta não encerra o risco nem substitui nova análise ao ativar XSLT/SSE.

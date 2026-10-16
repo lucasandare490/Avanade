@@ -1582,3 +1582,13 @@ tbody tr:hover {
   .tela-entrada { align-items:flex-start; padding-block:16px; }
   .cartao-entrada { margin-block:0; }
 }
+
+/* Ampliação de texto: controles se reorganizam sem ampliar a página. */
+.seletor-periodo { flex-wrap: wrap; max-width: 100%; flex-shrink: 1; }
+.paginacao { flex-wrap: wrap; }
+
+.paginacao > div { flex-wrap: wrap; min-width: 0; }
+.dados-grafico { min-width: 0; max-width: 100%; }
+
+.acoes-rapidas a { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .acoes-rapidas > div { grid-template-columns: minmax(0, 1fr); } }

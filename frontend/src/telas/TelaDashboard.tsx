@@ -210,6 +210,7 @@ export function TelaDashboard({ base, nome = 'Maria' }: { base: BaseDemonstracao
           </div>
           <details className="dados-grafico">
             <summary>Ver valores do gráfico em tabela</summary>
+            <div className="tabela-rolavel" tabIndex={0} role="region" aria-label="Entradas líquidas por intervalo">
             <table>
               <caption className="somente-leitor">Entradas líquidas por intervalo</caption>
               <thead>
@@ -227,6 +228,7 @@ export function TelaDashboard({ base, nome = 'Maria' }: { base: BaseDemonstracao
                 ))}
               </tbody>
             </table>
+            </div>
           </details>
         </section>
         <section className="painel painel-ia">
