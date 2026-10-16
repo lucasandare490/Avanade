@@ -12,6 +12,7 @@ for (const width of [320,1280]) test(`teclado, espaçamento e ampliação em ${w
  for(const route of ['dashboard','operacoes','despesas','fluxo-caixa','simulacao','analise','configuracoes','ajuda','venda-demonstrativa']) {
   await page.evaluate(r=>location.hash='/'+r,route);
   await page.waitForTimeout(150);
+  await page.locator("main details").evaluateAll(nodes=>nodes.forEach(n=>n.setAttribute("open","")));
   // Espaçamento WCAG 1.4.12 e texto ampliado: não equivale a zoom nativo/TalkBack.
   await page.locator('main').evaluate(el=>{
    const sizes=[...el.querySelectorAll<HTMLElement>('*')].map(node=>({node,size:parseFloat(getComputedStyle(node).fontSize)}));

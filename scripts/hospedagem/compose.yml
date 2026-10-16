@@ -24,8 +24,8 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD:?Configure a senha de runtime}
       MIGRATION_USER: ${MIGRATION_USER:-split_owner}
       MIGRATION_PASSWORD: ${MIGRATION_PASSWORD:?Configure a senha de migration}
-      APP_DEMO_SEED: "true"
-      APP_DEMO_PASSWORD: ${DEMO_PASSWORD:?Configure a senha demonstrativa}
+      DEMO_SEED_ENABLED: "true"
+      DEMO_PASSWORD: ${DEMO_PASSWORD:?Configure a senha demonstrativa}
       API_DOCS_ENABLED: "false"
       CORS_ORIGINS: ${PUBLIC_ORIGIN:?Informe a origem HTTPS}
       SERVER_FORWARD_HEADERS_STRATEGY: native
