@@ -1,8 +1,8 @@
 services:
   web:
     build:
-      context: ../../frontend
-      dockerfile: Dockerfile.hospedagem
+      context: ../..
+      dockerfile: frontend/Dockerfile.hospedagem
     environment:
       SITE_ADDRESS: ${SITE_ADDRESS:?Informe o dominio HTTPS}
     ports:

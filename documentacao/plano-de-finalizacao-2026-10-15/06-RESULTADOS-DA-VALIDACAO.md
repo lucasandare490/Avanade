@@ -68,3 +68,11 @@ O cenário persistente opcional está implementado em `ConfiguracaoCenarioComple
 A execução final `mvnw.cmd -q verify` passou: **61 testes, zero falhas/erros**, PostgreSQL real descartável; pacote gerado. Evidência resumida: `evidencias/cenario-completo-validacao.json`. Este resultado substitui a contagem parcial anterior de 59 mais diagnóstico.
 
 Tentativa adicional de conferir o protótipo pelo conector Figma: acesso negado por ausência da permissão exigida no arquivo. A equivalência integral continua sem aceite; nenhum design foi alterado.
+
+## Teclado, ampliação e preparação de hospedagem — 16/10
+
+- Corrigidos ciclo de foco do diálogo de intenção pendente e transbordamentos de período, paginação, tabela do gráfico e atalhos.
+- Três testes adicionais de navegador aprovados: nove rotas em 320/1280 px com texto 2x e espaçamento ampliado, skip-link, foco circular do menu, diálogo, Escape e restauração do foco sem perder a intenção. Não equivale a TalkBack ou zoom nativo.
+- 100 testes frontend passaram; build concluído.
+- Pacote `scripts/hospedagem` criado com frontend compilado, Caddy, API/banco sem portas públicas, conexão remota opcional e métricas em porta interna separada. Job próprio no CI; implantação pública não realizada.
+- Reconsulta do Maven Central: nenhuma versão Spring 6.2 posterior à 6.2.19 disponível. Alertas continuam registrados; sem migração principal improvisada.

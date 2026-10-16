@@ -18,3 +18,5 @@
 | Comandos para iniciar | scripts/iniciar-backend-local.ps1 e package.json da raiz |
 
 As pastas técnicas frontend, backend e android-pos continuam identificando as três aplicações. Os módulos com nomes ambíguos foram renomeados; o mapa de antes/depois está em documentacao/plano-de-finalizacao-2026-10-15/04-MAPA-DE-NOMES-APLICADOS.md. Documentos antigos podem mencionar nomes históricos.
+
+Preparação para servidor compartilhado: [guia de hospedagem](scripts/hospedagem/README.md). Inclui configuração e teste isolado; domínio, certificado público e banco remoto precisam do ambiente escolhido.

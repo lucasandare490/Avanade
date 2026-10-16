@@ -87,3 +87,5 @@ Logs JSON, métricas locais e recuperação de falhas temporárias foram reforç
 ## Dados para apresentação local
 
 Há uma opção explícita para carregar vendas e despesas sintéticas em duas lojas, sem duplicar registros ao repetir. Consulte o [guia do cenário de apresentação](backend/docs/CENARIO-DE-APRESENTACAO.md).
+
+Preparação para servidor compartilhado: [guia de hospedagem](scripts/hospedagem/README.md). Inclui configuração e teste isolado; domínio, certificado público e banco remoto precisam do ambiente escolhido.

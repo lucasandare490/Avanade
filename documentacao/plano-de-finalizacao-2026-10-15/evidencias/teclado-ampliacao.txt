@@ -1,0 +1,8 @@
+
+Running 3 tests using 1 worker
+
+  ok 1 e2e\teclado-e-ampliacao.spec.ts:3:33 › teclado, espaçamento e ampliação em 320px (4.0s)
+  ok 2 e2e\teclado-e-ampliacao.spec.ts:3:33 › teclado, espaçamento e ampliação em 1280px (2.5s)
+  ok 3 e2e\teclado-e-ampliacao.spec.ts:38:1 › diálogo de intenção pendente conserva foco e Escape cancela saída (1.2s)
+
+  3 passed (9.9s)
