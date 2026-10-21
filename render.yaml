@@ -3,7 +3,7 @@ services:
     name: planner-api
     runtime: docker
     region: oregon
-    plan: starter
+    plan: free
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     healthCheckPath: /actuator/health/readiness
