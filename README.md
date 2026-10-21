@@ -6,7 +6,9 @@ Projeto acadêmico da Squad 19, GrowUp/Senac com Avanade. O comerciante acompanh
 
 ## Comece aqui
 
-- Para executar: [Como apresentar](COMO-APRESENTAR.md).
+- Para executar e apresentar: [material para o mentor](documentacao/APRESENTACAO-MENTOR-2026-10-21.md).
+- Para usar o banco do Supabase: [configuração e execução](scripts/supabase/README.md).
+- Para comunicar essa mudança à equipe: [registro da integração Supabase](documentacao/INTEGRACAO-SUPABASE-2026-10-19.md).
 - Para localizar código: [mapa de nomes](documentacao/plano-de-finalizacao-2026-10-15/04-MAPA-DE-NOMES-APLICADOS.md).
 - Para acompanhar entrega: [estado e pendências](documentacao/plano-de-finalizacao-2026-10-15/03-INCREMENTO-IMPLEMENTADO.md).
 - Para revisar requisitos: [516 critérios, com ressalvas de aceite](documentacao/plano-de-finalizacao-2026-10-15/05-REVISAO-DOS-516-CRITERIOS.csv).
@@ -35,7 +37,7 @@ As mudanças passaram pelas verificações locais descritas no [relatório de va
 - `frontend/`: painel React 19, TypeScript, Vite, CSS e fontes locais. Telas em `src/telas`; partes reutilizáveis em `src/componentes`; comunicação com servidor em `src/servicos`.
 - `backend/`: Java 21, Spring Boot, Maven Wrapper, PostgreSQL e Flyway. `auth` cuida de acesso; `core`, de vendas e split; `finance`, de despesas/caixa/relatórios/explicações; `shared`, de erros e idempotência.
 - `android-pos/`: aplicativo Kotlin. `TelaPosIntegradoActivity.kt` é a tela ligada ao servidor; `TelaPrincipalActivity.kt` é a demonstração local.
-- `scripts/`: comandos de execução. `entrega-para-backend/`: requisitos e devolutiva. `documentacao/`: estado, decisões e histórico.
+- `scripts/`: comandos de execução. `documentacao/`: estado, decisões, operação e material de apresentação.
 
 Nomes técnicos obrigatórios das ferramentas, como package.json, pom.xml e AndroidManifest.xml, são preservados. O mapa de nomes mostra os módulos internos renomeados.
 
@@ -58,7 +60,7 @@ Abra http://127.0.0.1:5173. API: http://127.0.0.1:8080. Se já houver serviço r
 
 Clique em **Criar minha conta** para iniciar uma loja vazia. Contas seed de demonstração também existem; sua senha é configuração local e nunca deve ser publicada. O token permanece em memória e recarregar a página exige novo login.
 
-O banco fica em `backend/.local/postgres`, preservado ao reiniciar. É ambiente local, não hospedagem de produção. O frontend não recebe credenciais PostgreSQL. Para compartilhar o projeto, ainda é necessário hospedar backend e banco, configurar HTTPS e segredos e validar esse ambiente. Supabase é uma possibilidade de hospedagem do PostgreSQL, não substitui automaticamente o backend Java.
+No modo local, o banco fica em `backend/.local/postgres`, preservado ao reiniciar. É ambiente local, não hospedagem de produção. O frontend não recebe credenciais PostgreSQL. A [integração com Supabase](scripts/supabase/README.md) também permite usar PostgreSQL remoto mantendo o backend Java; conexão, migrations e verificações básicas da API foram validadas em 19/10/2026. Para compartilhar o projeto, ainda é necessário hospedar frontend/backend, configurar HTTPS e segredos e homologar os fluxos completos. Consulte o [registro para a equipe](documentacao/INTEGRACAO-SUPABASE-2026-10-19.md).
 
 ## Contratos e segurança
 
