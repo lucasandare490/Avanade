@@ -1,5 +1,21 @@
 # Hospedagem do demonstrador
 
+## Publicação simples com Render e Vercel
+
+O repositório também contém `render.yaml` e `vercel.json` para publicar a API
+Java no Render e o frontend Vite na Vercel. O backend continua neste repositório;
+não é necessário criar uma cópia ou mover arquivos.
+
+No Render, crie o serviço a partir do Blueprint e adicione o certificado CA do
+Supabase como Secret File com o nome `supabase-ca.crt`. Em seguida, configure as
+variáveis marcadas como `sync: false`, principalmente as duas senhas e
+`CORS_ORIGINS`. O caminho do certificado já está definido como
+`/etc/secrets/supabase-ca.crt`.
+
+Na Vercel, importe o repositório, mantenha a raiz do projeto e configure
+`VITE_API_URL` com a URL HTTPS do serviço Render. Depois de obter o domínio final
+do frontend, atualize `CORS_ORIGINS` no Render com essa origem exata.
+
 Pacote opcional para servidor Linux com Docker Compose. Não contrata serviços, não cria domínio e não publica automaticamente. Pagamentos e tributos continuam simulados. Contas demonstrativas exigem senha própria do ambiente.
 
 ## Preparar
