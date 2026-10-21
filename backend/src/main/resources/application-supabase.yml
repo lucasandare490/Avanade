@@ -1,0 +1,24 @@
+# PostgreSQL gerenciado; autenticação e autorização continuam na API Java.
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    hikari:
+      maximum-pool-size: ${DATABASE_POOL_SIZE:3}
+      minimum-idle: 0
+      connection-timeout: 30000
+      data-source-properties:
+        sslmode: verify-full
+        sslrootcert: ${SUPABASE_SSL_ROOT_CERT}
+  flyway:
+    url: ${MIGRATION_URL:${DATABASE_URL}}
+    user: ${MIGRATION_USER}
+    password: ${MIGRATION_PASSWORD}
+    default-schema: public
+    # O bootstrap exige public vazio; nunca ignorar migrations existentes.
+    baseline-on-migrate: false
+    clean-disabled: true
+    jdbc-properties:
+      sslmode: verify-full
+      sslrootcert: ${SUPABASE_SSL_ROOT_CERT}
