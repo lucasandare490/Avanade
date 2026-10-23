@@ -163,6 +163,23 @@ VITE_API_URL=https://planner-api-tvmg.onrender.com
 - O ambiente atual é uma demonstração funcional, não um aceite de produção,
   carga ou conformidade fiscal.
 
+## Operação pós-publicação
+
+O workflow `Monitoramento público` verifica a cada 30 minutos a saúde da API,
+o carregamento do frontend e o CORS entre os dois serviços. Também pode ser
+executado manualmente no GitHub Actions.
+
+O backup de dados continua sendo uma operação controlada: usar
+`backend/scripts/backup.sh` com `pg_dump`, `.pgpass` e destino novo com permissão
+restrita. O backup deve ser armazenado fora do repositório e sua restauração
+deve ser testada em banco separado. Não colocar senhas no workflow nem executar
+rotinas de limpeza automática sem uma política aprovada.
+
+Para agendar em um servidor seguro, usar `scripts/operacao/backup-agendado.sh`
+com `BACKUP_DIR` apontando para armazenamento protegido. O script não apaga
+backups antigos nem sobrescreve destinos; retenção e cópia externa devem ser
+definidas pelo responsável operacional.
+
 ## Commits relacionados
 
 ```text
