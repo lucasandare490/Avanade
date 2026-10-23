@@ -68,6 +68,8 @@ export function criarTransporteApi(
           409: 'O registro mudou ou esta tentativa possui dados diferentes. Consulte seu estado.',
           422: 'Revise os dados antes de continuar.',
           429: 'Muitas solicitações. Aguarde antes de tentar novamente.',
+          503: 'O serviço está acordando após um período de inatividade. Aguarde alguns segundos e tente novamente.',
+          502: 'O serviço respondeu de forma incompleta. Aguarde alguns segundos e tente novamente.',
         };
         let campos: Record<string, string> = {};
         if (interpretarCampos && [400, 422].includes(resposta.status)) {
@@ -96,7 +98,7 @@ export function criarTransporteApi(
           0,
           opcoes.sinal?.aborted
             ? 'Consulta cancelada.'
-            : 'Não recebemos confirmação a tempo. Uma gravação pode ter ocorrido; consulte a mesma tentativa antes de repetir.',
+            : 'O serviço pode estar acordando após um período de inatividade. Aguarde alguns segundos e tente novamente. Se a operação já foi enviada, consulte o resultado antes de repetir.',
         );
       throw new FalhaTransporte(0, 'Não foi possível alcançar o serviço. Verifique sua conexão.');
     } finally {
