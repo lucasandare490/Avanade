@@ -125,15 +125,17 @@ export function TelaLogin({
           </fieldset>
         </form>
         {cadastrar && <button type="button" className="botao secundario largo" disabled={ocupado} onClick={()=>{setCriando(!criando);setConfirmacaoInvalida(false);setErro('');setSucesso('');setSenha('');setConfirmacao('');}}>{criando ? 'Já tenho conta' : 'Criar minha conta'}</button>}
-        {solicitarRedefinicao && !criando && <button type="button" className="botao texto" disabled={ocupado} onClick={()=>{setRecuperando(!recuperando);setErro('');setSucesso('');}}>{recuperando ? 'Voltar para entrar' : 'Esqueci minha senha'}</button>}
+        <div className="acoes-entrada">
+          {solicitarRedefinicao && !criando && <button type="button" className="botao texto" disabled={ocupado} onClick={()=>{setRecuperando(!recuperando);setErro('');setSucesso('');}}>{recuperando ? 'Voltar para entrar' : 'Esqueci minha senha'}</button>}
+          <button type="button" className="botao texto" disabled={ocupado} onClick={voltar}>
+            Voltar
+          </button>
+        </div>
         {erro && (
           <p role="alert" className="erro" id="erro-login">
             {erro}
           </p>
         )}
-        <button type="button" className="botao texto" disabled={ocupado} onClick={voltar}>
-          Voltar
-        </button>
       </section>
     </main>
   );
