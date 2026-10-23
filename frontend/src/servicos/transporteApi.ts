@@ -42,7 +42,10 @@ export function criarTransporteApi(
     const cancelar = () => controlador.abort();
     opcoes.sinal?.addEventListener('abort', cancelar, { once: true });
     if (opcoes.sinal?.aborted) cancelar();
-    const tempo = setTimeout(cancelar, 15000);
+    // O Render Free pode levar mais de 50 s para acordar. Autenticação precisa
+    // aguardar esse primeiro retorno; operações de negócio continuam limitadas.
+    const limiteMs = caminho.startsWith('/api/v1/auth/') ? 60000 : 15000;
+    const tempo = setTimeout(cancelar, limiteMs);
     try {
       const headers: Record<string, string> = { Accept: 'application/json' };
       if (opcoes.dados !== undefined) headers['Content-Type'] = 'application/json';
@@ -98,7 +101,9 @@ export function criarTransporteApi(
           0,
           opcoes.sinal?.aborted
             ? 'Consulta cancelada.'
-            : 'O serviço pode estar acordando após um período de inatividade. Aguarde alguns segundos e tente novamente. Se a operação já foi enviada, consulte o resultado antes de repetir.',
+            : caminho.startsWith('/api/v1/auth/')
+              ? 'O serviço está acordando após um período de inatividade. Aguarde até um minuto e tente entrar novamente.'
+              : 'O serviço pode estar acordando após um período de inatividade. Aguarde alguns segundos e tente novamente. Se a operação já foi enviada, consulte o resultado antes de repetir.',
         );
       throw new FalhaTransporte(0, 'Não foi possível alcançar o serviço. Verifique sua conexão.');
     } finally {
