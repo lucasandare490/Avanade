@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-/** Isolated database: exercises the actual V1 -> V5 upgrade, not a clean install. */
+/** Isolated database: exercises the actual V1 -> V6 upgrade, not a clean install. */
 class MigrationUpgradeTest extends PostgresSupport {
   @Test void upgradePreservesExistingFinancialDataAndAddsGuards() throws Exception {
     String name="upgrade_"+UUID.randomUUID().toString().replace("-","");
@@ -30,7 +30,7 @@ class MigrationUpgradeTest extends PostgresSupport {
     Map<String,String> before=new LinkedHashMap<>();
     for(String table:tables) before.put(table,snapshot(db,table));
     var flyway=Flyway.configure().dataSource(url,"postgres","").load();
-    assertThat(flyway.migrate().migrationsExecuted).isEqualTo(4);
+    assertThat(flyway.migrate().migrationsExecuted).isEqualTo(5);
     for(String table:tables) assertThat(snapshot(db,table)).as(table).isEqualTo(before.get(table));
     assertThat(flyway.migrate().migrationsExecuted).isZero();
     assertThatThrownBy(()->db.update("UPDATE request_intent SET response_json='{}' WHERE request_key='upgrade-key'")).isInstanceOf(org.springframework.dao.DataAccessException.class);
