@@ -70,6 +70,7 @@ it('modo API não carrega toda a base nem consulta rota sem permissão', async (
       }}
     />,
   );
+  fireEvent.click(screen.getByRole('button', { name: /^Entrar$/ }));
   fireEvent.change(screen.getByLabelText(/E-mail/), {
     target: { value: 'operador@exemplo.invalid' },
   });
@@ -148,6 +149,7 @@ it('sessão 401 do serviço volta ao login sem fallback demonstrativo', async ()
       }}
     />,
   );
+  fireEvent.click(screen.getByRole('button', { name: /^Entrar$/ }));
   fireEvent.change(screen.getByLabelText('E-mail'), {
     target: { value: 'gestor@exemplo.invalid' },
   });
@@ -188,6 +190,7 @@ it('preserva verificações síncronas de intenção sem bloquear nova venda ou 
       }}
     />,
   );
+  fireEvent.click(screen.getByRole('button', { name: /^Entrar$/ }));
   fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'gerente@demo.local' } });
   fireEvent.change(screen.getByLabelText('Senha'), { target: { value: 'demo' } });
   fireEvent.click(screen.getByRole('button', { name: /^Entrar$/ }));

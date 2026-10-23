@@ -67,7 +67,9 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
   if (!servicoRef.current) servicoRef.current = criarServicoDemonstrativo();
   const servicoPlanner = servicoRef.current;
   const [sessao, setSessao] = useState<SessaoUsuario | null>(null);
-  const [login, setLogin] = useState(Boolean(integracao));
+  // A apresentação pública é a primeira tela também no modo API. O login
+  // real continua disponível pelo botão "Entrar" da tela de entrada.
+  const [login, setLogin] = useState(false);
   const [mensagemSessao, setMensagemSessao] = useState('');
   const [atualizando, setAtualizando] = useState(false);
   const [tentativaAtiva, setTentativaAtiva] = useState(false);
