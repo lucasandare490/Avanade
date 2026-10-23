@@ -19,6 +19,8 @@ public class AuthController {
   private final PasswordEncoder passwords;
   private final Clock clock;
   private final int minutes;
+  private final int resetMinutes;
+  private final boolean exposeResetToken;
   private final String dummy;
   private final SecureRandom random = new SecureRandom();
 
@@ -26,11 +28,16 @@ public class AuthController {
       JdbcTemplate db,
       PasswordEncoder passwords,
       Clock clock,
-      @Value("${app.session-minutes}") int minutes) {
+      @Value("${app.session-minutes}") int minutes,
+      @Value("${app.password-reset-minutes:30}") int resetMinutes,
+      @Value("${app.password-reset-dev-token:false}") boolean exposeResetToken) {
     this.db = db;
     this.passwords = passwords;
     this.clock = clock;
     this.minutes = minutes;
+    if (resetMinutes < 12 || resetMinutes > 72) throw new IllegalArgumentException("Password reset expiry must be between 12 and 72 minutes.");
+    this.resetMinutes = resetMinutes;
+    this.exposeResetToken = exposeResetToken;
     this.dummy = passwords.encode(UUID.randomUUID().toString());
   }
 
@@ -49,6 +56,12 @@ public class AuthController {
       @NotBlank @Size(min=12,max=72) String password) {
     @Override public String toString() { return "Cadastro[REDACTED]"; }
   }
+
+  public record SolicitarRedefinicao(@NotBlank @Email @Size(max = 254) String email) {}
+
+  public record RedefinirSenha(
+      @NotBlank @Size(max = 200) String token,
+      @NotBlank @Size(min = 12, max = 72) String password) {}
 
   @PostMapping("/register")
   @org.springframework.transaction.annotation.Transactional
@@ -125,6 +138,46 @@ public class AuthController {
   @PostMapping("/logout")
   public ResponseEntity<Void> logout(@RequestAttribute Actor actor) {
     db.update("UPDATE auth_session SET revoked=true WHERE id=?", actor.sessionId());
+    return ResponseEntity.noContent().build();
+  }
+
+  @PostMapping("/password-reset/request")
+  @org.springframework.transaction.annotation.Transactional
+  public ResponseEntity<?> solicitarRedefinicao(@Valid @RequestBody SolicitarRedefinicao input) {
+    String email = input.email().trim().toLowerCase(Locale.ROOT);
+    var users = db.queryForList("SELECT id FROM app_user WHERE email=?", email);
+    Map<String, Object> resposta = new LinkedHashMap<>();
+    resposta.put("accepted", true);
+    if (!users.isEmpty()) {
+      byte[] bytes = new byte[32];
+      random.nextBytes(bytes);
+      String raw = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+      Instant created = clock.instant();
+      db.update("UPDATE password_reset_token SET used_at=? WHERE user_id=? AND used_at IS NULL",
+          java.sql.Timestamp.from(created), users.getFirst().get("id"));
+      db.update("INSERT INTO password_reset_token(id,user_id,token_hash,expires_at,created_at) VALUES (?,?,?,?,?)",
+          UUID.randomUUID(), users.getFirst().get("id"), Hashes.sha256(raw),
+          java.sql.Timestamp.from(created.plusSeconds(resetMinutes * 60L)), java.sql.Timestamp.from(created));
+      // SMTP/e-mail delivery can consume this event later. Never log the raw token.
+      if (exposeResetToken) resposta.put("developmentToken", raw);
+    }
+    return ResponseEntity.accepted().body(resposta);
+  }
+
+  @PostMapping("/password-reset/complete")
+  @org.springframework.transaction.annotation.Transactional
+  public ResponseEntity<?> redefinirSenha(@Valid @RequestBody RedefinirSenha input) {
+    if (input.password().getBytes(java.nio.charset.StandardCharsets.UTF_8).length > 72)
+      throw new ApiException(422, "VALIDATION_ERROR", "A senha deve ter no máximo 72 bytes UTF-8.");
+    Instant now = clock.instant();
+    var rows = db.queryForList("SELECT id,user_id FROM password_reset_token WHERE token_hash=? AND used_at IS NULL AND expires_at>? FOR UPDATE",
+        Hashes.sha256(input.token()), java.sql.Timestamp.from(now));
+    if (rows.isEmpty()) throw new ApiException(400, "INVALID_RESET_TOKEN", "O link de recuperação é inválido ou expirou.");
+    Object id = rows.getFirst().get("id");
+    Object userId = rows.getFirst().get("user_id");
+    db.update("UPDATE app_user SET password_hash=? WHERE id=?", passwords.encode(input.password()), userId);
+    db.update("UPDATE password_reset_token SET used_at=? WHERE id=?", java.sql.Timestamp.from(now), id);
+    db.update("UPDATE auth_session SET revoked=true WHERE user_id=? AND revoked=false", userId);
     return ResponseEntity.noContent().build();
   }
 }

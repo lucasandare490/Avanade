@@ -212,6 +212,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
     return login ? (
       <TelaLogin
         cadastrar={integracao?.autenticacao.cadastrar}
+        solicitarRedefinicao={integracao?.autenticacao.solicitarRedefinicao}
         demonstrativo={!integracao}
         mensagem={mensagemSessao}
         autenticar={async (dados) => {

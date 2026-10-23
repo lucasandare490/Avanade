@@ -162,6 +162,8 @@ function periodoRecebido(v: unknown, esperado: PeriodoConsulta) {
 /** Contrato concreto do backend Spring /api/v1; token somente em memória. */
 export const contratoServidor: ContratoServidor = {
   cadastro: '/api/v1/auth/register',
+  solicitarRedefinicao: '/api/v1/auth/password-reset/request',
+  redefinirSenha: '/api/v1/auth/password-reset/complete',
   versao: 'split-v1',
   credenciais: 'omit',
   login: (d) => ({

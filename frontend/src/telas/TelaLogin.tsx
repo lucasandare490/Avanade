@@ -4,12 +4,14 @@ import type { Credenciais, SessaoUsuario } from '../servicos/sessaoUsuario';
 export function TelaLogin({
   autenticar,
   cadastrar,
+  solicitarRedefinicao,
   concluir,
   voltar,
   mensagem,
   demonstrativo = true,
 }: {
   cadastrar?: (dados: {name:string;merchantName:string;email:string;password:string}) => Promise<void>;
+  solicitarRedefinicao?: (email: string) => Promise<void>;
   autenticar: (dados: Credenciais) => Promise<SessaoUsuario>;
   concluir: (sessao: SessaoUsuario) => void;
   voltar: () => void;
@@ -26,6 +28,7 @@ export function TelaLogin({
   const [erro, setErro] = useState('');
   const [confirmacaoInvalida, setConfirmacaoInvalida] = useState(false);
   const [ocupado, setOcupado] = useState(false);
+  const [recuperando, setRecuperando] = useState(false);
   const bloqueio = useRef(false);
   async function enviar(e: FormEvent) {
     e.preventDefault();
@@ -35,7 +38,10 @@ export function TelaLogin({
     setErro('');
     setConfirmacaoInvalida(false);
     try {
-      if (criando && cadastrar) {
+      if (recuperando && solicitarRedefinicao) {
+        await solicitarRedefinicao(email.trim());
+        setSucesso('Se o e-mail estiver cadastrado, enviaremos instruções de recuperação.');
+      } else if (criando && cadastrar) {
         if (senha !== confirmacao) {
           setConfirmacaoInvalida(true);
           throw new Error('As senhas precisam ser iguais.');
@@ -57,7 +63,15 @@ export function TelaLogin({
     <main className="tela-entrada">
       <section className="cartao-entrada">
         <Marca />
-        <h1>{criando ? 'Criar conta e estabelecimento' : 'Entrar no Planner'}</h1>
+        <div className="entrada-cabecalho">
+          <div className="etiqueta">ACESSO AO PLANNER</div>
+          <h1>{criando ? 'Criar conta e estabelecimento' : 'Entrar no Planner'}</h1>
+          <p>
+            {criando
+              ? 'Configure seu acesso e comece com um estabelecimento vazio.'
+              : 'Acesse seus dados e acompanhe o resultado do seu estabelecimento.'}
+          </p>
+        </div>
         {sucesso && <p role="status" className="aviso">{sucesso}</p>}
         {mensagem && (
           <p role="status" className="aviso">
@@ -73,12 +87,12 @@ export function TelaLogin({
         <form className="formulario-vertical" onSubmit={enviar}>
           <fieldset className="campos-sem-borda formulario-vertical" disabled={ocupado}>
             <legend className="somente-leitor">Acesso ao Planner</legend>
-            {criando && <>
+            {criando && !recuperando && <>
               <label className="campo"><span>Seu nome</span><input required maxLength={120} value={nome} onChange={e=>setNome(e.target.value)} autoComplete="name" /></label>
               <label className="campo"><span>Nome do estabelecimento</span><input required maxLength={120} value={loja} onChange={e=>setLoja(e.target.value)} autoComplete="organization" /></label>
               <p>Você será responsável por uma nova loja, inicialmente sem vendas ou despesas. O processamento financeiro continua simulado.</p>
             </>}
-            <label className="campo">
+            {!recuperando && <label className="campo">
               <span>E-mail</span>
               <input
                 type="email"
@@ -89,8 +103,8 @@ export function TelaLogin({
                 aria-invalid={Boolean(erro) && !confirmacaoInvalida}
                 aria-describedby={erro && !confirmacaoInvalida ? 'erro-login' : undefined}
               />
-            </label>
-            <label className="campo">
+            </label>}
+            {!recuperando && <label className="campo">
               <span>Senha</span>
               <input
                 type="password"
@@ -103,20 +117,21 @@ export function TelaLogin({
                 aria-invalid={Boolean(erro)}
                 aria-describedby={erro ? 'erro-login' : undefined}
               />
-            </label>
-            {criando && <label className="campo"><span id="rotulo-confirmar-senha">Confirmar senha</span><input aria-labelledby="rotulo-confirmar-senha" aria-invalid={confirmacaoInvalida} aria-describedby={confirmacaoInvalida ? "erro-login" : undefined} type="password" required minLength={12} maxLength={72} autoComplete="new-password" value={confirmacao} onChange={e=>setConfirmacao(e.target.value)} /><small>Use pelo menos 12 caracteres; limite de 72 bytes UTF-8.</small></label>}
-            <button className="botao primario">
-              {ocupado ? 'Aguarde…' : criando ? 'Criar conta' : demonstrativo ? 'Entrar no cenário simulado' : 'Entrar'}
+            </label>}
+            {criando && !recuperando && <label className="campo"><span id="rotulo-confirmar-senha">Confirmar senha</span><input aria-labelledby="rotulo-confirmar-senha" aria-invalid={confirmacaoInvalida} aria-describedby={confirmacaoInvalida ? "erro-login" : undefined} type="password" required minLength={12} maxLength={72} autoComplete="new-password" value={confirmacao} onChange={e=>setConfirmacao(e.target.value)} /><small>Use pelo menos 12 caracteres; limite de 72 bytes UTF-8.</small></label>}
+            <button className="botao primario largo" type="submit">
+              {ocupado ? 'Aguarde…' : recuperando ? 'Enviar instruções' : criando ? 'Criar conta' : demonstrativo ? 'Entrar no cenário simulado' : 'Entrar'}
             </button>
           </fieldset>
         </form>
-        {cadastrar && <button type="button" className="botao secundario" disabled={ocupado} onClick={()=>{setCriando(!criando);setConfirmacaoInvalida(false);setErro('');setSucesso('');setSenha('');setConfirmacao('');}}>{criando ? 'Já tenho conta' : 'Criar minha conta'}</button>}
+        {cadastrar && <button type="button" className="botao secundario largo" disabled={ocupado} onClick={()=>{setCriando(!criando);setConfirmacaoInvalida(false);setErro('');setSucesso('');setSenha('');setConfirmacao('');}}>{criando ? 'Já tenho conta' : 'Criar minha conta'}</button>}
+        {solicitarRedefinicao && !criando && <button type="button" className="botao texto" disabled={ocupado} onClick={()=>{setRecuperando(!recuperando);setErro('');setSucesso('');}}>{recuperando ? 'Voltar para entrar' : 'Esqueci minha senha'}</button>}
         {erro && (
           <p role="alert" className="erro" id="erro-login">
             {erro}
           </p>
         )}
-        <button className="botao secundario" disabled={ocupado} onClick={voltar}>
+        <button type="button" className="botao texto" disabled={ocupado} onClick={voltar}>
           Voltar
         </button>
       </section>

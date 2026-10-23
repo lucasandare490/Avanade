@@ -21,6 +21,8 @@ export interface RequisicaoMapeada extends OpcoesRequisicao {
 export interface ContratoServidor {
   versao: string;
   cadastro?: string;
+  solicitarRedefinicao?: string;
+  redefinirSenha?: string;
   extrairToken?: (resposta: unknown) => string;
   mapearVenda?: (resposta: unknown) => ResultadoVenda;
   prepararServico?: (
@@ -60,6 +62,12 @@ export function criarIntegracaoApi(
           if (!v || typeof v !== 'object' || !('created' in v) || v.created !== true)
             throw new Error('Confirmação de cadastro inválida. Tente entrar antes de repetir o cadastro.');
         }, {metodo:'POST',dados});
+      } : undefined,
+      solicitarRedefinicao: contrato.solicitarRedefinicao ? async (email) => {
+        await enviar(contrato.solicitarRedefinicao!, () => undefined, { metodo: 'POST', dados: { email } });
+      } : undefined,
+      redefinirSenha: contrato.redefinirSenha ? async (token, senha) => {
+        await enviar(contrato.redefinirSenha!, () => undefined, { metodo: 'POST', dados: { token, password: senha } });
       } : undefined,
       async entrar(dados) {
         token = undefined;

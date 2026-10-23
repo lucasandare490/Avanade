@@ -14,6 +14,8 @@ export interface Credenciais {
 }
 export interface ServicoSessao {
   cadastrar?(dados: { name: string; merchantName: string; email: string; password: string }): Promise<void>;
+  solicitarRedefinicao?(email: string): Promise<void>;
+  redefinirSenha?(token: string, senha: string): Promise<void>;
   entrar(dados: Credenciais): Promise<SessaoUsuario>;
   sair(): Promise<void>;
 }
