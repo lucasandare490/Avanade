@@ -60,7 +60,22 @@ export function TelaLogin({
     }
   }
   return (
-    <main className="tela-entrada">
+    <main className={`tela-entrada tela-autenticacao ${criando ? 'cadastro' : ''}`}>
+      {!criando && (
+        <aside className="painel-marca-entrada" aria-label="Apresentação do Planner Comercial">
+          <Marca />
+          <div className="mensagem-marca-entrada">
+            <h2>Controle suas vendas.<br />Entenda seu caixa.<br /><span>Planeje melhor.</span></h2>
+            <div className="beneficios-entrada">
+              <p><b>01</b> Fluxo de caixa em tempo real</p>
+              <p><b>02</b> Simulação de Split Payment</p>
+              <p><b>03</b> Análise inteligente</p>
+            </div>
+          </div>
+          <small>Planner Comercial · MVP demonstrativo · Dados simulados</small>
+        </aside>
+      )}
+      <div className="coluna-autenticacao">
       <section className="cartao-entrada">
         <Marca />
         <div className="entrada-cabecalho">
@@ -137,6 +152,7 @@ export function TelaLogin({
           </p>
         )}
       </section>
+      </div>
     </main>
   );
 }

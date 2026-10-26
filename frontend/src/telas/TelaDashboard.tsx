@@ -41,6 +41,14 @@ export function TelaDashboard({ base, nome = 'Maria' }: { base: BaseDemonstracao
       };
     });
   const max = Math.max(1, ...series.map((s) => s.valor));
+  const saldoProjetado = Math.round(r.saldo + (r.saldo / quantidadeDias) * 7);
+  const pontos = series.map((s, i) => ({
+    x: series.length === 1 ? 0 : (i / (series.length - 1)) * 600,
+    y: 160 - (s.valor / max) * 140,
+  }));
+  if (pontos.length === 1) pontos.push({ x: 600, y: pontos[0].y });
+  const pontosLinha = pontos.map((p) => `${p.x},${p.y}`).join(' ');
+  const pontosArea = `0,160 ${pontosLinha} 600,160`;
   return (
     <>
       <CabecalhoPagina
@@ -167,16 +175,23 @@ export function TelaDashboard({ base, nome = 'Maria' }: { base: BaseDemonstracao
           Ver fluxo de caixa <ArrowRight size={15} />
         </a>
       </div>
-      <div className="grade-indicadores tres">
+      <div className="grade-indicadores">
         <Indicador
-          titulo="SALDO DO PERÍODO"
+          titulo="SALDO ATUAL"
           valor={r.saldo}
           detalhe="Entradas líquidas menos despesas"
+          tom="azul"
+        />
+        <Indicador
+          titulo="SALDO PROJETADO"
+          valor={saldoProjetado}
+          detalhe="Estimativa para mais 7 dias no ritmo do período"
         />
         <Indicador
           titulo="ENTRADAS LÍQUIDAS"
           valor={r.liquido}
           detalhe="Somente operações concluídas"
+          tom="verde"
         />
         <Indicador
           titulo="DESPESAS PAGAS"
@@ -193,20 +208,15 @@ export function TelaDashboard({ base, nome = 'Maria' }: { base: BaseDemonstracao
             </div>
             <TrendingUp size={20} className="texto-verde" />
           </div>
-          <div
-            className="grafico-barras"
-            role="img"
-            aria-label={series.map((s) => `${s.rotulo}: ${moeda(s.valor)}`).join('; ')}
-          >
-            {series.map((s) => (
-              <div className="coluna-grafico" key={s.data}>
-                <span className="valor-coluna">{moeda(s.valor)}</span>
-                <div className="trilho-coluna">
-                  <div style={{ height: `${Math.max(s.valor ? 3 : 0, (s.valor / max) * 100)}%` }} />
-                </div>
-                <small>{s.rotulo}</small>
-              </div>
-            ))}
+          <div className="grafico-area" role="img" aria-label={series.map((s) => `${s.rotulo}: ${moeda(s.valor)}`).join('; ')}>
+            <svg viewBox="0 0 600 180" preserveAspectRatio="none" aria-hidden="true">
+              {[20, 55, 90, 125, 160].map(y => <line key={y} className="grade-grafico" x1="0" y1={y} x2="600" y2={y} />)}
+              <polygon className="area-preenchida" points={pontosArea} />
+              <polyline className="linha-saldo" points={pontosLinha} />
+            </svg>
+            <div className="rotulos-grafico" aria-hidden="true">
+              {series.map(s => <span key={s.data}>{s.rotulo}</span>)}
+            </div>
           </div>
           <details className="dados-grafico">
             <summary>Ver valores do gráfico em tabela</summary>

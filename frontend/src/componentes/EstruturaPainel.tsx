@@ -1,7 +1,6 @@
 import { podeAcessarRota, type SessaoUsuario } from '../servicos/sessaoUsuario';
 import {
   ArrowLeftRight,
-  ChartNoAxesCombined,
   ChevronRight,
   CircleHelp,
   LayoutDashboard,
@@ -42,6 +41,7 @@ const grupos = [
       { rota: 'configuracoes', nome: 'Configurações', icone: Settings },
       { rota: 'ajuda', nome: 'Ajuda', icone: CircleHelp },
       { rota: 'venda-demonstrativa', nome: 'Modo POS · demo web', icone: Smartphone },
+      { rota: 'pos-prototipo', nome: 'Smart POS · protótipo', icone: Smartphone },
     ],
   },
 ];
@@ -49,7 +49,10 @@ export function Marca() {
   return (
     <div className="marca">
       <span className="marca-icone">
-        <ChartNoAxesCombined size={23} />
+        <svg viewBox="0 0 20 20" width="20" height="20" fill="none" aria-hidden="true">
+          <path d="M3 14.5a7 7 0 0 1 14 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          <circle cx="10" cy="14.5" r="1.5" fill="currentColor" />
+        </svg>
       </span>
       <div>
         Planner Comercial<small>Mais controle. Mais resultado.</small>
@@ -111,7 +114,7 @@ export function EstruturaPainel({
         }
       }
     };
-    const tela = window.matchMedia('(max-width: 720px)');
+    const tela = window.matchMedia('(max-width: 1023px)');
     const mudou = () => {
       if (!tela.matches) setMenu(false);
     };
@@ -124,7 +127,7 @@ export function EstruturaPainel({
     };
   }, [menu]);
   return (
-    <div className="aplicacao">
+    <div className={`aplicacao rota-${rota.split('/')[0]}`}>
       <a
         href="#conteudo"
         className="pular-conteudo"
@@ -228,6 +231,9 @@ export function EstruturaPainel({
             <strong>Visão do negócio</strong>
           </div>
           <div className="acoes-topo">
+            <time className="data-topo" dateTime={new Date().toISOString().slice(0, 10)}>
+              {new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date())}
+            </time>
             <span className="modo-demo">
               <i />
               {demonstrativo ? 'Demonstração local' : 'Servidor conectado · simulado'}
@@ -242,6 +248,7 @@ export function EstruturaPainel({
             >
               {sessao?.nome.slice(0, 2).toUpperCase() ?? 'MS'}
             </span>
+            <span className="nome-topo">{sessao?.nome ?? 'Maria Silva'}</span>
           </div>
         </header>
         <main id="conteudo" tabIndex={-1}>

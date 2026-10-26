@@ -75,6 +75,7 @@ export function podeAcessarRota(rota: string, sessao: SessaoUsuario) {
     relatorios: 'financeiro',
     simulacao: 'financeiro',
     'venda-demonstrativa': 'vender',
+    'pos-prototipo': 'consultar',
   };
   return !requisito[inicio] || sessao.permissoes.includes(requisito[inicio]!);
 }

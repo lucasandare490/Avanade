@@ -28,6 +28,7 @@ import { TelaDespesas } from './telas/TelaDespesas';
 import { TelaFluxoCaixa } from './telas/TelaFluxoCaixa';
 import { TelaSimulacao } from './telas/TelaSimulacao';
 import { TelaRegistroVenda } from './telas/TelaRegistroVenda';
+import { TelaPosDesign } from './telas/TelaPosDesign';
 import { TelaAnalise } from './telas/TelaAnalise';
 import { TelaConfiguracoes } from './telas/TelaConfiguracoes';
 import { criarServicoDemonstrativo } from './servicos/servicoDemonstrativo';
@@ -231,6 +232,8 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         permitirDemo={!integracao}
       />
     );
+  if (rota === 'pos-prototipo' && podeAcessarRota(rota, sessao))
+    return <TelaPosDesign voltar={() => { location.hash = '/dashboard'; setRota('dashboard'); }} />;
   const baseVisivel =
     cenarioConsulta === 'vazio'
       ? { operacoes: [], despesas: [] }

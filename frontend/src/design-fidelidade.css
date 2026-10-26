@@ -1,0 +1,179 @@
+/* Tradução dos valores medidos no protótipo Figma Make (raiz de 14px). */
+:root {
+  font-family: 'Inter', sans-serif;
+  color: #0f172a;
+  background: #f0f4f8;
+  --azul: #0f2544;
+  --borda: #e2e8f0;
+  --muted: #64748b;
+  --verde: #16a34a;
+  --fundo: #f0f4f8;
+  --action: #1e54b7;
+  --action-hover: #1844a0;
+  --accent: #2563eb;
+  --sidebar: #0f2544;
+}
+
+body { background: #f0f4f8; line-height: 1.6; }
+h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 600; line-height: 1.25; letter-spacing: 0; }
+h1 { font-size: 17.5px; margin-bottom: 0; }
+h2 { font-size: 14px; margin-bottom: 0; }
+h3 { font-size: 12.25px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Shell W3–W13. Apenas o conteúdo principal rola. */
+.aplicacao { height: 100dvh; min-height: 0; overflow: hidden; }
+.barra-lateral {
+  width: 210px;
+  padding: 18px 12px 14px;
+  background: var(--sidebar);
+  color: #fff;
+  border: 0;
+}
+.barra-lateral .marca { color: #fff; font-size: 12.25px; font-weight: 600; }
+.barra-lateral .marca small { color: #93c5fd; font-size: 10px; }
+.barra-lateral .marca-icone { width: 32px; height: 32px; background: var(--accent); border-radius: 10px; }
+.barra-lateral .loja { margin-top: 20px; padding: 13px 9px; border: 1px solid #ffffff20; background: #ffffff0d; border-radius: 20px; }
+.barra-lateral .loja strong { color: #fff; }
+.barra-lateral .loja small { color: #93c5fd; }
+.barra-lateral .avatar { background: #1e3a5f; color: #fff; }
+.grupo-menu { margin-top: 18px; }
+.grupo-menu > p { color: #4e7298; font-size: 10px; letter-spacing: 1px; }
+.grupo-menu a { min-height: 34px; padding: 8px 10px; margin: 2px 0; color: #93c5fd; font-size: 12.25px; border-radius: 10px; }
+.grupo-menu a:hover { background: #ffffff12; color: #fff; }
+.grupo-menu a[aria-current='page'] { background: var(--accent); color: #fff; }
+.grupo-menu a[aria-current='page'] .mini-selo { background: #fff; color: var(--accent); }
+.rodape-menu { padding-top: 18px; }
+.rodape-menu > div { background: #ffffff0d; border-color: #ffffff20; color: #dbeafe; }
+.rodape-menu small { color: #93c5fd; }
+.rodape-menu button { color: #93c5fd; }
+.area-principal { height: 100dvh; margin-left: 210px; display: flex; flex-direction: column; min-width: 0; }
+.barra-superior { flex: none; height: 49px; padding: 0 21px; }
+.data-topo { font-size: 10.5px; color: #64748b; white-space: nowrap; }
+.nome-topo { font-size: 12.25px; font-weight: 500; color: #334155; white-space: nowrap; }
+.acoes-topo { gap: 12px; }
+.rodape-pagina { display: none; }
+main#conteudo { width: min(100%, 938px); max-width: none; margin: 0; padding: 21px; overflow-y: auto; flex: 1; }
+.rota-operacoes main#conteudo, .rota-despesas main#conteudo, .rota-vendas main#conteudo { width: min(100%, 826px); }
+.rota-configuracoes main#conteudo { width: min(100%, 630px); }
+.rota-simulacao main#conteudo { width: min(100%, 490px); }
+.rota-dashboard .grade-dupla:not(.grafico-analise) { grid-template-columns: 2fr 3fr; }
+.cabecalho-pagina { margin-bottom: 21px; }
+.cabecalho-pagina h1 { font-size: 17.5px; font-weight: 600; }
+.cabecalho-pagina p { font-size: 12.25px; }
+
+/* Superfícies, semântica financeira e componentes compartilhados. */
+.painel, .indicador { border-color: #e2e8f0; border-radius: 20px; box-shadow: none; }
+.painel { padding: 17.5px; }
+.indicador { padding: 17.5px; min-height: 108px; }
+.indicador strong, .numero, .preview-split strong, .preview-split b, .legenda-composicao strong {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+.indicador strong { font-size: 21px; font-weight: 600; letter-spacing: -.03em; white-space: normal; overflow-wrap: anywhere; }
+.indicador > span { font-size: 10.5px; font-weight: 500; letter-spacing: .025em; }
+.indicador.azul { background: #0f2544; border-color: #0f2544; }
+.indicador.azul > span, .indicador.azul small { color: #93c5fd; }
+.indicador.amarelo { background: #fffbeb; border-color: #fde68a; }
+.indicador.verde { background: #f0fdf4; border-color: #bbf7d0; }
+.titulo-secao h2, .titulo-painel h2 { font-size: 12.25px; color: #0f172a; }
+.selo-simulado { background: #e0f2fe; color: #075985; font-size: 10px; padding: 3.5px 8.75px; border-radius: 14px; letter-spacing: .025em; }
+.barra-composicao { height: 14px; }
+.tributo { background: #f59e0b; }
+.taxa { background: #94a3b8; }
+.liquido { background: #16a34a; }
+.seletor-periodo { background: #f1f5f9; border-radius: 14px; padding: 3.5px; }
+.seletor-periodo button { padding: 5.25px 10.5px; border-radius: 10px; font-size: 10.5px; }
+.seletor-periodo button[aria-pressed='true'] { color: #0f172a; }
+.mini-selo { background: #dbeafe; color: #1d4ed8; }
+
+.botao { min-height: 35px; padding: 8.75px 17.5px; border-radius: 14px; font-size: 12.25px; font-weight: 500; }
+.primario, .botao.primario { background: var(--action); border-color: var(--action); color: #fff; }
+.primario:hover:not(:disabled), .botao.primario:hover:not(:disabled) { background: var(--action-hover); border-color: var(--action-hover); }
+.botao-icone { min-width: 28px; min-height: 28px; border-radius: 14px; }
+.campo > span { font-size: 12.25px; font-weight: 500; color: #334155; }
+.campo input, .campo select { min-height: 37px; padding: 8.75px 12.25px; border-color: #e2e8f0; border-radius: 14px; color: #0f172a; font-size: 12.25px; }
+.campo input:focus-visible, .campo select:focus-visible { border-color: var(--action); box-shadow: 0 0 0 2px #1e54b726; }
+.campo input::placeholder { color: #94a3b8; }
+.link, .link-operacao { color: var(--action); }
+
+/* Login W1 e cadastro W2: painel de marca só no desktop. */
+.tela-entrada { background: #f0f4f8; }
+.tela-autenticacao { min-height: 100dvh; display: flex; padding: 0; place-items: initial; }
+.painel-marca-entrada {
+  flex: none;
+  width: 420px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 42px;
+  background: #0f2544;
+  color: #fff;
+  overflow: hidden;
+}
+.painel-marca-entrada .marca { color: #fff; }
+.painel-marca-entrada .marca small { color: #93c5fd; }
+.painel-marca-entrada .marca-icone { background: #1e54b7; }
+.mensagem-marca-entrada h2 { display: block; color: #fff; font-size: 21px; line-height: 1.25; }
+.mensagem-marca-entrada h2 span { color: #93c5fd; }
+.beneficios-entrada { margin-top: 35px; display: grid; gap: 17px; }
+.beneficios-entrada p { display: flex; align-items: center; gap: 12px; color: #dbeafe; font-size: 12.25px; margin: 0; }
+.beneficios-entrada b { display: grid; place-items: center; flex: none; width: 31.5px; height: 31.5px; border-radius: 20px; background: #ffffff14; color: #fff; font-size: 11px; }
+.painel-marca-entrada > small { color: #93c5fd; font-size: 10px; }
+.coluna-autenticacao { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; min-width: 0; padding: 28px 21px; }
+.tela-autenticacao .cartao-entrada { width: 360px; max-width: 100%; padding: 0; border: 0; box-shadow: none; border-radius: 0; background: transparent; }
+.tela-autenticacao .cartao-entrada > .marca { display: none; }
+.tela-autenticacao .cartao-entrada h1 { font-size: 21px; line-height: 1.25; }
+.tela-autenticacao .entrada-cabecalho { margin-top: 0; }
+.tela-autenticacao .entrada-cabecalho .etiqueta { margin: 0 0 8px; }
+.tela-autenticacao .formulario-vertical { gap: 18px; }
+.tela-autenticacao .acoes-entrada { border-top-color: #e2e8f0; }
+.tela-autenticacao.cadastro .cartao-entrada { width: 380px; }
+.tela-autenticacao.cadastro .cartao-entrada > .marca { display: flex; }
+.tela-autenticacao.cadastro .entrada-cabecalho { margin-top: 24px; }
+
+/* A apresentação pública existe além das telas W1–W13 e usa os mesmos tokens. */
+.tela-entrada:not(.tela-autenticacao) { background: #f0f4f8; }
+.tela-entrada:not(.tela-autenticacao) .cartao-entrada { box-shadow: none; border-color: #e2e8f0; }
+.tela-entrada:not(.tela-autenticacao) .cartao-entrada h1 { font-family: 'Outfit', sans-serif; }
+
+/* O gráfico de área mantém a tabela de valores para leitura acessível. */
+.grafico-area { margin-top: 18px; }
+.grafico-area svg { display: block; width: 100%; height: 180px; overflow: visible; }
+.grafico-area .grade-grafico { stroke: #e2e8f0; stroke-width: 1; }
+.grafico-area .area-preenchida { fill: #dbeafe; }
+.grafico-area .linha-saldo { fill: none; stroke: #1e54b7; stroke-width: 3; vector-effect: non-scaling-stroke; }
+.rotulos-grafico { display: flex; justify-content: space-between; gap: 6px; margin-top: 5px; color: #64748b; font-size: 9px; }
+.rotulos-grafico span { min-width: 0; text-align: center; overflow-wrap: anywhere; }
+.grafico-analise { grid-template-columns: minmax(0, 1fr); }
+
+@media (max-width: 1023px) {
+  .barra-lateral { visibility: hidden; transform: translateX(-100%); transition: transform 200ms ease-out; width: 210px; }
+  .barra-lateral.aberta { visibility: visible; transform: translateX(0); }
+  .area-principal { margin-left: 0; }
+  .somente-mobile { display: inline-flex; }
+  .fundo-menu { display: block; position: fixed; inset: 0; background: #0006; border: 0; z-index: 25; }
+  .grade-indicadores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  main#conteudo { padding: 14px; }
+  .barra-superior { padding: 0 14px; }
+  .painel-marca-entrada { display: none; }
+  .tela-autenticacao .cartao-entrada > .marca { display: flex; margin-bottom: 28px; }
+}
+@media (max-width: 639px) {
+  .data-topo { display: none; }
+  .nome-topo { display: none; }
+  .barra-superior { height: 49px; }
+  .grade-indicadores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tela-autenticacao .coluna-autenticacao { padding: 21px; }
+  .tela-autenticacao .cartao-entrada h1 { font-size: 21px; }
+  .botao, .botao-icone, .campo input, .campo select { min-height: 44px; }
+}
+@media (max-width: 480px) {
+  /* O próprio relatório do protótipo registra KPIs cortados em duas colunas. */
+  .grade-indicadores, .grade-indicadores.tres { grid-template-columns: minmax(0, 1fr); }
+  .indicador strong { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .barra-lateral { transition: none; }
+}

@@ -137,6 +137,25 @@ describe('fluxos de interface', () => {
     expect(within(tabela).getAllByRole('row')).toHaveLength(2);
     expect(within(tabela).getByText('R$ 561,00')).toBeInTheDocument();
   });
+  it('projeta saldo a partir do período selecionado, sem valores fixos', async () => {
+    const user = userEvent.setup();
+    render(<TelaDashboard base={{ operacoes: [{
+      id: 'OP-TESTE', data: '2026-10-09', bruto: 12000, tributo: 1000, taxa: 1000,
+      liquido: 10000, meio: 'PIX', status: 'concluida', eventos: [],
+    }], despesas: [] }} />);
+    const indicador = screen.getByText('SALDO PROJETADO').closest('.indicador')!;
+    expect(indicador).toHaveTextContent('R$ 123,33');
+    await user.click(screen.getByRole('button', { name: 'Hoje' }));
+    expect(indicador).toHaveTextContent('R$ 800,00');
+  });
+  it('abre o Smart POS demonstrativo e volta ao dashboard sem gravar uma venda', async () => {
+    const user = await abrir();
+    await user.click(screen.getByRole('link', { name: 'Smart POS · protótipo' }));
+    expect(await screen.findByRole('heading', { name: 'Acesse o Smart POS' })).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Dashboard web' }));
+    expect(await screen.findByRole('heading', { name: 'Olá, Maria' })).toBeInTheDocument();
+    expect(screen.getByText('16 operações concluídas no período')).toBeInTheDocument();
+  });
   it('não apresenta violações estruturais de acessibilidade nas telas principais', async () => {
     const user = await abrir();
     for (const [nome, titulo] of [
