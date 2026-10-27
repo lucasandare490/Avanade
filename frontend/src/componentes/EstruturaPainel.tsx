@@ -204,7 +204,8 @@ export function EstruturaPainel({
           <div>
             <ShieldCheck size={16} />
             <span>
-              Ambiente demonstrativo<small>Sem movimentação real</small>
+              {demonstrativo ? 'Ambiente demonstrativo' : 'Processamento simulado'}
+              <small>Sem movimentação real</small>
             </span>
           </div>
           <button onClick={sair}>
