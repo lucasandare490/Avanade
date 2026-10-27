@@ -83,13 +83,15 @@ export function TelaRegistroVenda({
     <>
       <CabecalhoPagina
         titulo={demonstrativo ? 'Nova venda demonstrativa' : 'Nova venda'}
-        descricao="Explore o fluxo de venda e acompanhe a separação das parcelas."
+        descricao={demonstrativo
+          ? 'Explore o fluxo de venda e acompanhe a separação das parcelas.'
+          : 'Registre a venda e acompanhe a separação simulada das parcelas.'}
         acao={demonstrativo ? <SeloSimulado /> : undefined}
       />
       <Aviso>
         {demonstrativo
           ? 'Demonstração web do fluxo POS, sem movimentação real.'
-          : 'Vendas persistidas no servidor de demonstração. Pagamentos e tributos são simulados, sem movimentação real.'}
+          : 'Vendas confirmadas ficam no servidor. Pagamentos e tributos são simulados, sem movimentação real.'}
       </Aviso>
       <section className="painel formulario-venda">
         <div className="icone-destaque">

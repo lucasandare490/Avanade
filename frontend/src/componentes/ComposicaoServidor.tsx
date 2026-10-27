@@ -11,7 +11,7 @@ export function ComposicaoServidor({servico, periodo, revisao}: {servico: Servic
   const {totais,dias} = consulta.dados;
   return <section className="painel" aria-label="Composição das vendas concluídas">
     <h2>Composição das vendas concluídas</h2>
-    <p>{totais.quantidade} vendas concluídas no período. Pagamentos e tributos demonstrativos.</p>
+    <p>{totais.quantidade} vendas concluídas no período. Pagamentos e tributos simulados.</p>
     <div className="grade-indicadores">{([['bruto','Valor bruto'],['tributo','Tributos'],['taxa','Taxas'],['liquido','Valor líquido']] as const).map(([chave,titulo]) => <Indicador key={chave} titulo={titulo} valor={totais[chave]} detalhe="Agregado do banco por data de conclusão." />)}</div>
     <div style={{overflowX:'auto'}} tabIndex={0} role="region" aria-label="Composição diária">
       <table><caption>Valores por dia de conclusão no fuso da loja</caption>

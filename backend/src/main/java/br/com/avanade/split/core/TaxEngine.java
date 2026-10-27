@@ -39,7 +39,7 @@ public class TaxEngine {
                 new ApiException(
                     409,
                     "TAX_RULE_UNAVAILABLE",
-                    "Não há regra demonstrativa vigente para esta categoria."));
+                    "Não há regra de tributo simulada vigente para esta categoria."));
   }
 
   public static Amounts calculate(long gross, int taxBps, int feeBps) {

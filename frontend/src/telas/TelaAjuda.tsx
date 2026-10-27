@@ -4,7 +4,9 @@ export function TelaAjuda({ demonstrativo = true }: { demonstrativo?: boolean })
     ['O que é o valor bruto?', 'É o total da venda antes de separar as parcelas.'],
     [
       'Tributo e taxa são a mesma coisa?',
-      'Não. A demonstração separa 10% de tributo e 2% de processamento. São parâmetros fictícios, não alíquotas oficiais.',
+      demonstrativo
+        ? 'Não. A demonstração separa 10% de tributo e 2% de processamento. São parâmetros fictícios, não alíquotas oficiais.'
+        : 'Não. Tributos e taxas são parcelas distintas. O processamento é simulado; os percentuais usados não são alíquotas oficiais.',
     ],
     [
       'Por que uma venda não aparece no caixa?',
@@ -34,7 +36,9 @@ export function TelaAjuda({ demonstrativo = true }: { demonstrativo?: boolean })
     ],
     [
       'Posso usar o comprovante para fins fiscais?',
-      'Não. O comprovante e a exportação são demonstrativos e estão identificados como simulados.',
+      demonstrativo
+        ? 'Não. O comprovante e a exportação são demonstrativos e estão identificados como simulados.'
+        : 'Não. O comprovante e a exportação são registros operacionais do MVP, sem validade fiscal ou comprovação de recolhimento.',
     ],
     [
       'Como navegar sem mouse?',
@@ -45,7 +49,9 @@ export function TelaAjuda({ demonstrativo = true }: { demonstrativo?: boolean })
     <>
       <CabecalhoPagina
         titulo="Ajuda e guia de uso"
-        descricao="Entenda os valores e saiba como usar a demonstração."
+        descricao={demonstrativo
+          ? 'Entenda os valores e saiba como usar a demonstração.'
+          : 'Entenda os valores e saiba como usar o Planner Comercial.'}
       />
       <section className="painel">
         {itens.map(([titulo, texto]) => (

@@ -125,7 +125,7 @@ export function PainelProjecaoCaixa({ servico }: { servico: ServicoPlanner }) {
                 : 'Cenário positivo'}
           </h3>
           <p>{resultado.explanation}</p>
-          <small>Explicação demonstrativa por regras. Nenhuma garantia de resultado futuro.</small>
+          <small>Estimativa por regras. Nenhuma garantia de resultado futuro.</small>
         </div>
       )}
     </section>

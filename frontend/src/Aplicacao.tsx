@@ -232,7 +232,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         permitirDemo={!integracao}
       />
     );
-  if (rota === 'pos-prototipo' && podeAcessarRota(rota, sessao))
+  if (!integracao && rota === 'pos-prototipo' && podeAcessarRota(rota, sessao))
     return <TelaPosDesign voltar={() => { location.hash = '/dashboard'; setRota('dashboard'); }} />;
   const baseVisivel =
     cenarioConsulta === 'vazio'
@@ -362,7 +362,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         conteudo = <TelaAjuda demonstrativo={!integracao} />;
         break;
       case 'previa-acesso':
-        conteudo = <TelaPreviaAcessoDemonstrativo />;
+        conteudo = integracao ? <Estado titulo="Página não encontrada" /> : <TelaPreviaAcessoDemonstrativo />;
         break;
       case 'configuracoes':
         conteudo = (
@@ -438,6 +438,8 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
           }
           confirmar={sair}
           cancelar={() => setConfirmarSaida(false)}
+          rotuloCancelar={integracao ? 'Continuar no Planner' : undefined}
+          rotuloConfirmar={integracao ? 'Encerrar sessão' : undefined}
         />
       )}
       <AvisoConexao />

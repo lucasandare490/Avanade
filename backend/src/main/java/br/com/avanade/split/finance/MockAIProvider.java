@@ -9,7 +9,7 @@ public class MockAIProvider implements AIProvider {
   }
 
   public String explain(FinanceService.CashFlow f) {
-    return "Explicação demonstrativa: no período de "
+    return "Explicação por regras: no período de "
         + f.period().from()
         + " a "
         + f.period().to()

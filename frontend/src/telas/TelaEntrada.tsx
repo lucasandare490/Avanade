@@ -25,7 +25,7 @@ export function TelaEntrada({
         </p>
         <div className="preview-split">
           <span>
-            Venda demonstrativa<strong>R$ 150,00</strong>
+            {permitirDemo ? 'Venda demonstrativa' : 'Exemplo de venda'}<strong>R$ 150,00</strong>
           </span>
           <div>
             <span>
@@ -49,11 +49,14 @@ export function TelaEntrada({
         )}
         <p className="nota">
           <ShieldCheck size={16} />
-          Sem cadastro ou senha. Dados fictícios, sem movimentação real.
+          {permitirDemo
+            ? 'Sem cadastro ou senha. Dados fictícios, sem movimentação real.'
+            : 'Crie sua conta ou entre para consultar os dados do seu estabelecimento.'}
         </p>
         <small>
-          O acesso autenticado será conectado à API do projeto. Não informe dados pessoais nesta
-          demonstração.
+          {permitirDemo
+            ? 'O acesso autenticado será conectado à API do projeto. Não informe dados pessoais nesta demonstração.'
+            : 'Planner Comercial MVP. Os registros são salvos no servidor; pagamentos e tributos são simulados, sem movimentação real.'}
         </small>
       </section>
     </main>

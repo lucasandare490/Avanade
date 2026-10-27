@@ -5,11 +5,15 @@ export function DialogoConfirmacao({
   descricao,
   confirmar,
   cancelar,
+  rotuloCancelar = 'Continuar na demonstração',
+  rotuloConfirmar = 'Encerrar e limpar cenário',
 }: {
   titulo: string;
   descricao: string;
   confirmar: () => void;
   cancelar: () => void;
+  rotuloCancelar?: string;
+  rotuloConfirmar?: string;
 }) {
   const dialogo = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -47,10 +51,10 @@ export function DialogoConfirmacao({
       <p id="descricao-confirmacao">{descricao}</p>
       <div className="acoes-dialogo">
         <Botao autoFocus variante="secundario" onClick={cancelar}>
-          Continuar na demonstração
+          {rotuloCancelar}
         </Botao>
         <Botao variante="destrutivo" onClick={confirmar}>
-          Encerrar e limpar cenário
+          {rotuloConfirmar}
         </Botao>
       </div>
     </dialog>

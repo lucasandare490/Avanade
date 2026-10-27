@@ -22,7 +22,9 @@ export function TelaConfiguracoes({
     <>
       <CabecalhoPagina
         titulo={demonstrativo ? 'Sobre esta demonstração' : 'Configurações e sessão'}
-        descricao="Saiba o que está funcionando e o que depende da integração."
+        descricao={demonstrativo
+          ? 'Saiba o que está funcionando e o que depende da integração.'
+          : 'Consulte os dados da sua conta e os recursos disponíveis no MVP.'}
       />
       {expirar && (
         <button className="botao secundario" onClick={expirar}>
@@ -69,7 +71,7 @@ export function TelaConfiguracoes({
             <dd>
               {demonstrativo
                 ? 'Simulado, sem movimentação financeira'
-                : 'Conectado ao serviço configurado'}
+                : 'MVP conectado ao servidor; pagamentos simulados'}
             </dd>
           </div>
           <div>
@@ -105,15 +107,15 @@ export function TelaConfiguracoes({
         </section>
       )}
       <section className="painel">
-        <h2>Recursos de demonstração</h2>
+        <h2>{demonstrativo ? 'Recursos de demonstração' : 'Recursos e limites do MVP'}</h2>
         <p>
           {demonstrativo
             ? 'No modo demonstrativo, a consulta de operações permite exportar o filtro em CSV e o detalhe oferece impressão sem valor fiscal.'
             : 'No modo integrado, contas com acesso financeiro podem exportar operações filtradas em CSV, até 2.000 registros. Os valores estão em centavos BRL; não é comprovante fiscal.'}
         </p>
-        <a className="botao secundario" href="#/previa-acesso">
+        {demonstrativo && <><a className="botao secundario" href="#/previa-acesso">
           Conhecer as telas de acesso
-        </a>{' '}
+        </a>{' '}</>}
         <a className="botao secundario" href="#/ajuda">
           Abrir guia de uso
         </a>

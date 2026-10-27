@@ -75,7 +75,7 @@ export function TelaRelatoriosIntegrados({ servico }: { servico: ServicoPlanner 
         </form>
         <p className="nota">
           Vendas usam a data de criação; despesas, a data de pagamento; tributos, a conclusão do
-          split. O filtro segue o fuso da loja. Separação demonstrativa, sem comprovação de
+          split. O filtro segue o fuso da loja. Separação simulada, sem comprovação de
           recolhimento fiscal.
         </p>
       </section>

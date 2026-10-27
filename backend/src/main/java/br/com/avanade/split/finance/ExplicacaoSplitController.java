@@ -18,7 +18,7 @@ public class ExplicacaoSplitController {
   actor.require("consultar");
   var operation=views.operation(actor,id);
   String status=operation.get("status").toString();
-  String summary="Nesta venda de "+money(operation.get("grossCents"))+", a composição demonstrativa separa "+money(operation.get("taxCents"))+" para tributo, "+money(operation.get("feeCents"))+" para taxa e "+money(operation.get("netCents"))+" para o estabelecimento. ";
+  String summary="Nesta venda de "+money(operation.get("grossCents"))+", a composição simulada separa "+money(operation.get("taxCents"))+" para tributo, "+money(operation.get("feeCents"))+" para taxa e "+money(operation.get("netCents"))+" para o estabelecimento. ";
   summary+=status.equals("CONCLUIDA")?"Todas as parcelas foram confirmadas no simulador; o líquido foi reconhecido no caixa.":"O split ainda não foi concluído. O líquido desta operação ainda não foi reconhecido no caixa.";
   return Map.of("operationId",id,"text",summary,"origin","MOCK","templateVersion","split-explanation-v1",
     "rule",operation.get("rule"),"parcels",operation.get("parcels"),"limitations",List.of("Separação simulada; não comprova transferência nem recolhimento fiscal.","A regra histórica desta operação é preservada mesmo quando a configuração muda."));

@@ -166,7 +166,7 @@ export function EstruturaPainel({
           <span className="avatar">MS</span>
           <div>
             <strong>{sessao?.loja ?? 'Mercadinho São João'}</strong>
-            <small>Estabelecimento demonstrativo</small>
+            <small>{demonstrativo ? 'Estabelecimento demonstrativo' : 'Estabelecimento cadastrado'}</small>
           </div>
         </div>
         <nav>
@@ -177,6 +177,7 @@ export function EstruturaPainel({
                 .filter(
                   (item) =>
                     (!demonstrativo || !['vendas','relatorios'].includes(item.rota)) &&
+                    (demonstrativo || item.rota !== 'pos-prototipo') &&
                     (!sessao || podeAcessarRota(item.rota, sessao)),
                 )
                 .map(({ rota: r, nome, icone: Icone }) => (
@@ -189,8 +190,12 @@ export function EstruturaPainel({
                     aria-current={rota.split('/')[0] === r ? 'page' : undefined}
                   >
                     <Icone size={18} />
-                    {r === 'venda-demonstrativa' && !demonstrativo ? 'Nova venda · POS web' : nome}
-                    {r === 'analise' && (
+                    {r === 'venda-demonstrativa' && !demonstrativo
+                      ? 'Nova venda · POS web'
+                      : r === 'analise' && !demonstrativo
+                        ? 'Análise financeira'
+                        : nome}
+                    {r === 'analise' && demonstrativo && (
                       <span className="mini-selo" aria-hidden="true">
                         IA
                       </span>
@@ -237,9 +242,9 @@ export function EstruturaPainel({
             </time>
             <span className="modo-demo">
               <i />
-              {demonstrativo ? 'Demonstração local' : 'Servidor conectado · simulado'}
+              {demonstrativo ? 'Demonstração local' : 'MVP online · pagamentos simulados'}
             </span>
-            <a href="#/configuracoes" className="botao-icone" aria-label="Sobre esta demonstração">
+            <a href="#/configuracoes" className="botao-icone" aria-label={demonstrativo ? 'Sobre esta demonstração' : 'Configurações e sessão'}>
               <CircleHelp size={19} />
             </a>
             <span

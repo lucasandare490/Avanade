@@ -100,9 +100,9 @@ public class ServicoRegistroVenda {
               now);
       o = operations.saveAndFlush(o);
       ledger.append(o, "Pagamento simulado confirmado. Split criado.");
-      parcel(o, "TAX", o.taxCents, "Tributo demonstrativo");
-      parcel(o, "FEE", o.feeCents, "Processamento demonstrativo");
-      parcel(o, "NET", o.netCents, "Estabelecimento demonstrativo");
+      parcel(o, "TAX", o.taxCents, "Tributo simulado");
+      parcel(o, "FEE", o.feeCents, "Taxa de processamento simulada");
+      parcel(o, "NET", o.netCents, "Valor líquido do estabelecimento");
       o.status = "SEPARADA";
       operations.flush();
       ledger.append(o, "Parcelas separadas pela regra " + o.ruleVersion + ".");

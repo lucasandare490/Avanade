@@ -10,13 +10,14 @@ const hoje = new Intl.DateTimeFormat('en-CA', {
 }).format(new Date());
 async function entrar(page: Page, perfil = 'gerente1') {
   await page.goto('/');
+  await page.getByRole('button', { name: 'Entrar', exact: true }).click();
   await page.getByLabel('E-mail', { exact: true }).fill(`${perfil}@demo.local`);
   await page.getByLabel('Senha', { exact: true }).fill(senha);
   const resposta = page.waitForResponse((r) => r.url().endsWith('/api/v1/auth/login'));
   await page.getByRole('button', { name: 'Entrar', exact: true }).click();
   const r = await resposta;
   expect(r.status()).toBe(200);
-  await expect(page.getByText('Servidor conectado · simulado')).toBeVisible();
+  await expect(page.getByText('MVP online · pagamentos simulados')).toBeVisible();
   return (await r.json()).accessToken as string;
 }
 async function novaVenda(page: Page, valor = '150,00') {
@@ -73,11 +74,11 @@ test('venda, despesas, totais, simulação, análise, consulta e logout contra P
   await page.getByLabel('Valor bruto (R$)').fill('150,00');
   await page.getByRole('button', { name: 'Calcular simulação' }).click();
   await expect(page.getByText('R$ 132,00', { exact: true })).toBeVisible();
-  await page.getByRole('link', { name: /Análise com IA/ }).click();
+  await page.getByRole('link', { name: 'Análise financeira' }).click();
   await page.getByLabel('Análise de').fill(hoje);
   await page.getByLabel('Análise até').fill(hoje);
   await page.getByRole('button', { name: 'Solicitar explicação' }).click();
-  await expect(page.getByText(/provedor demonstrativo do servidor/)).toBeVisible();
+  await expect(page.getByText(/análise por regras do servidor/)).toBeVisible();
   await page.getByRole('button', { name: 'Sair', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Entrar no Planner' })).toBeVisible();
   await expect
@@ -185,7 +186,7 @@ test('dashboard e tendências usam o servidor, mesmo com explicação indisponí
   await expect(page.getByRole('table', { name: 'Valores por dia de conclusão no fuso da loja' })).toBeVisible();
   await page.route('**/api/v1/ai/cash-analysis', route => route.abort('failed'));
   await page.getByRole('button', { name: 'Abrir menu', exact: true }).click();
-  await page.getByRole('link', { name: /Análise com IA/ }).click();
+  await page.getByRole('link', { name: 'Análise financeira' }).click();
   await page.getByLabel('Análise de').fill(hoje);
   await page.getByLabel('Análise até').fill(hoje);
   await page.getByRole('button', { name: 'Solicitar explicação' }).click();

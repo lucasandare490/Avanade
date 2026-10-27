@@ -72,7 +72,9 @@ export function TelaLogin({
               <p><b>03</b> Análise inteligente</p>
             </div>
           </div>
-          <small>Planner Comercial · MVP demonstrativo · Dados simulados</small>
+          <small>{demonstrativo
+            ? 'Planner Comercial · Demonstração local · Dados fictícios'
+            : 'Planner Comercial · MVP · Pagamentos simulados'}</small>
         </aside>
       )}
       <div className="coluna-autenticacao">

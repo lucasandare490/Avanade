@@ -6,13 +6,14 @@ for (const largura of [320,390,768,1024,1440]) {
  test(`telas integradas sem transbordamento em ${largura}px`, async ({page}) => {
   await page.setViewportSize({width:largura,height:800});
   await page.goto('/');
+  await page.getByRole('button',{name:'Entrar',exact:true}).click();
   await page.getByLabel('E-mail',{exact:true}).fill('gerente1@demo.local');
   await page.getByLabel('Senha',{exact:true}).fill(senha);
   await page.getByRole('button',{name:'Entrar',exact:true}).click();
   await expect(page.locator('main#conteudo')).toBeVisible();
   await page.addScriptTag({content:axe.source});
   const problemas:string[]=[];
-  for (const [rota, titulo] of Object.entries({dashboard:'Dashboard',operacoes:'Operações',vendas:'Vendas',despesas:'Despesas','fluxo-caixa':'Fluxo de caixa',simulacao:'Simulação Split',analise:'Análise com IA',configuracoes:'Configurações e sessão',relatorios:'Relatórios'})) {
+  for (const [rota, titulo] of Object.entries({dashboard:'Dashboard',operacoes:'Operações',vendas:'Vendas',despesas:'Despesas','fluxo-caixa':'Fluxo de caixa',simulacao:'Simulação Split',analise:'Análise financeira',configuracoes:'Configurações e sessão',relatorios:'Relatórios'})) {
    await page.evaluate(r=>{location.hash='/'+r},rota);
    await expect(page.getByRole('heading', {name:titulo,exact:true})).toBeVisible();
    await page.waitForLoadState('networkidle');

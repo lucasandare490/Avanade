@@ -23,12 +23,12 @@ export function TelaAnaliseIntegrada({ servico }: { servico: ServicoPlanner }) {
   return (
     <>
       <CabecalhoPagina
-        titulo="Análise com IA"
+        titulo="Análise financeira"
         descricao="Explicação do período solicitado, sem alterar os registros financeiros."
       />
       <Aviso>
-        Explicação demonstrativa baseada nos registros do período. Nenhuma ação financeira é
-        executada.
+        Explicação por regras baseada nos registros do período. Não utiliza IA externa nem executa
+        ações financeiras.
       </Aviso>
       {!servico.explicar ? (
         <Estado
@@ -116,7 +116,7 @@ export function TelaAnaliseIntegrada({ servico }: { servico: ServicoPlanner }) {
             <p className="nota">
               Origem:{' '}
               {consulta.dados.origem === 'demonstrativa'
-                ? 'provedor demonstrativo do servidor'
+                ? 'análise por regras do servidor'
                 : 'serviço de explicação'}
               . A explicação não executa ações financeiras.
             </p>

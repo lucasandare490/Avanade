@@ -56,6 +56,12 @@ responsividade ou estados visuais. Diferencie as regras confirmadas no
 protótipo das recomendações e registre qualquer desvio necessário para a
 implementação atual.
 
+O site conectado à API é o MVP publicado, não a demonstração local. Na
+interface integrada, descreva vendas e despesas como registros persistidos;
+use “simulado” somente para pagamentos, split e tributos, que ainda não
+movimentam dinheiro. Identifique a análise atual como explicação por regras,
+sem IA externa. Mantenha telas com dados fictícios fora da navegação do MVP.
+
 ## Delegação Codex no Avanade
 
 - Os agentes do projeto estão registrados em `.codex/config.toml`, com instruções

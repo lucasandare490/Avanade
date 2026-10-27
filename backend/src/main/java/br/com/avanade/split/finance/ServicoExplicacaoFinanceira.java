@@ -62,7 +62,7 @@ public class ServicoExplicacaoFinanceira {
     var attention = facts.closingCents() < 0 ? "NEGATIVE_BALANCE" : facts.closingCents() == 0 ? "ZERO_BALANCE" : "POSITIVE_BALANCE";
     var structured = Map.of("summary", text, "attention", attention,
         "recommendations", List.of(facts.closingCents() < 0 ? "Confira as saídas realizadas e as entradas previstas antes de assumir novos compromissos." : "Compare os registros do período e confira as despesas antes de planejar novos compromissos."),
-        "limitations", List.of("Dados demonstrativos; não representa aconselhamento fiscal.", "Saldo histórico não é previsão nem garantia de disponibilidade futura."),
+        "limitations", List.of("Pagamentos e tributos são simulados; esta análise não representa aconselhamento fiscal.", "Saldo histórico não é previsão nem garantia de disponibilidade futura."),
         "templateVersion", "cash-explanation-v2");
     return Map.of(
         "structured", structured,

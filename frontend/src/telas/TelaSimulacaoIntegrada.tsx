@@ -91,7 +91,7 @@ export function TelaSimulacaoIntegrada({ servico }: { servico: ServicoPlanner })
             <label className="campo">
               <span>Percentual hipotético de tributo (%)</span>
               <input inputMode="decimal" value={percentual} onChange={e=>{invalidar();setPercentual(e.target.value);}} aria-describedby="nota-percentual" />
-              <small id="nota-percentual">Opcional. Vazio usa a regra demonstrativa. Não altera regras de vendas nem representa alíquota oficial.</small>
+              <small id="nota-percentual">Opcional. Vazio usa a regra simulada padrão. Não altera regras de vendas nem representa alíquota oficial.</small>
             </label>
             <label className="check">
               <input

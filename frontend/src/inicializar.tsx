@@ -31,7 +31,7 @@ try {
     });
     if (!url || !contratoServidor)
       throw new Error(
-        'Integração não configurada. É necessário definir a URL e o contrato do servidor. Nenhum dado demonstrativo será carregado neste modo.',
+        'Integração não configurada. É necessário definir a URL e o contrato do servidor. Nenhum dado será carregado até corrigir a configuração.',
       );
     integracao = criarIntegracaoApi(url, contratoServidor);
   }

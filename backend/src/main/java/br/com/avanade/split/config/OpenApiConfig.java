@@ -17,7 +17,7 @@ public class OpenApiConfig {
         new OpenAPI()
             .info(
                 new Info()
-                    .title("Split demonstrativo")
+                    .title("Planner Comercial MVP · pagamentos simulados")
                     .version("1.1.0")
                     .description(
                         "Centavos BRL. Pagamentos simulados. Comparação histórica e projeção manual disponíveis; ver"
