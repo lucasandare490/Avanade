@@ -1,10 +1,25 @@
-# Operação da demonstração publicada
+# Operação do MVP publicado
 
 Este documento fecha a operação mínima do ambiente publicado:
 
 ```text
 Vercel → Render → Supabase
 ```
+
+## Origem permitida no Render
+
+Em **Render → planner-api → Environment**, configure `CORS_ORIGINS` com a
+origem exata do frontend publicado:
+
+```text
+https://avanade-frontend-xi.vercel.app
+```
+
+Use apenas esquema e domínio, sem caminho ou barra final. `localhost` só
+autoriza o frontend local; se for necessário usar ambos os ambientes, inclua
+as origens explicitamente na configuração. Salve a variável e aguarde a API
+reiniciar antes de testar login ou cadastro pelo site. O valor configurado no
+painel do Render não é armazenado pelo Git.
 
 ## Monitoramento público
 
