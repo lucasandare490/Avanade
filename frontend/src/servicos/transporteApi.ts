@@ -4,9 +4,37 @@ export class FalhaTransporte extends Error {
     public codigo: number,
     mensagem: string,
     public campos: Record<string, string> = {},
+    /** Login: tentativas que restam antes do bloqueio (quando o servidor informa). */
+    public tentativasRestantes?: number,
+    /** Login bloqueado: segundos até poder tentar de novo. */
+    public esperaSegundos?: number,
   ) {
     super(mensagem);
   }
+}
+
+const inteiroSeguro = (v: unknown, max: number) =>
+  typeof v === 'number' && Number.isInteger(v) && v >= 0 && v <= max ? v : undefined;
+/** Monta a mensagem do login a partir dos números do servidor, sem exibir texto livre recebido. */
+export function mensagemLogin(status: number, corpo: unknown) {
+  const c = corpo && typeof corpo === 'object' ? (corpo as Record<string, unknown>) : {};
+  const restantes = inteiroSeguro(c.remainingAttempts, 20);
+  const espera = inteiroSeguro(c.retryAfterSeconds, 86400);
+  if (status === 429 && espera !== undefined) {
+    const minutos = Math.max(1, Math.ceil(espera / 60));
+    return {
+      mensagem: `Muitas tentativas erradas. O acesso foi bloqueado temporariamente. Tente novamente em ${minutos} ${minutos === 1 ? 'minuto' : 'minutos'} ou recupere sua senha.`,
+      restantes: 0,
+      espera,
+    };
+  }
+  if (status === 401 && restantes !== undefined && restantes > 0)
+    return {
+      mensagem: `E-mail ou senha inválidos. ${restantes === 1 ? 'Resta 1 tentativa' : `Restam ${restantes} tentativas`} antes do bloqueio temporário.`,
+      restantes,
+      espera: undefined,
+    };
+  return undefined;
 }
 export interface OpcoesRequisicao {
   metodo?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -74,6 +102,17 @@ export function criarTransporteApi(
           503: 'O serviço está acordando após um período de inatividade. Aguarde alguns segundos e tente novamente.',
           502: 'O serviço respondeu de forma incompleta. Aguarde alguns segundos e tente novamente.',
         };
+        if (caminho === '/api/v1/auth/login' && [401, 429].includes(resposta.status)) {
+          let corpo: unknown;
+          try {
+            corpo = await resposta.json();
+          } catch {
+            /* Servidor antigo ou corpo vazio: usa a mensagem padrão. */
+          }
+          const login = mensagemLogin(resposta.status, corpo);
+          if (login)
+            throw new FalhaTransporte(resposta.status, login.mensagem, {}, login.restantes, login.espera);
+        }
         let campos: Record<string, string> = {};
         if (interpretarCampos && [400, 422].includes(resposta.status)) {
           try {

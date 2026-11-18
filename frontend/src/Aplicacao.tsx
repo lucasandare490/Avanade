@@ -7,6 +7,8 @@ import { TelaSimulacaoIntegrada } from './telas/TelaSimulacaoIntegrada';
 import { TelaOperacoesApi, TelaDetalheRemoto } from './telas/TelaOperacoesApi';
 import { DialogoConfirmacao } from './componentes/DialogoConfirmacao';
 import { TelaLogin } from './telas/TelaLogin';
+import { TelaRedefinirSenha } from './telas/TelaRedefinirSenha';
+import { SeletorPreferencias } from './componentes/SeletorPreferencias';
 import {
   autenticacaoDemonstrativa,
   sessaoDemonstrativa,
@@ -96,6 +98,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
     setAtualizando(false);
     setCenarioConsulta('normal');
     limparPreferenciasSessao();
+    if (expirada) integracao?.autenticacao.esquecer?.();
     setLogin(expirada || Boolean(integracao));
     setMensagemSessao(expirada ? 'Sua sessão expirou. Entre novamente para continuar.' : '');
   }
@@ -183,6 +186,12 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
       });
   }
   useEffect(() => {
+    // "Lembrar de mim": retoma a sessão salva neste aparelho, se ainda for válida.
+    const lembrada = integracao?.autenticacao.retomar?.();
+    if (lembrada) iniciar(lembrada);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
     if (sessao) void atualizar();
     return () => {
       consultaAtual.current?.abort();
@@ -208,14 +217,36 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
     return () => window.removeEventListener('hashchange', mudar);
   }, []);
   useEffect(() => {
-    document.title = `Planner Comercial · ${rota.split('/')[0]}`;
+    document.title = `Planner Comercial · ${rota.split(/[/?]/)[0]}`;
     document.getElementById('conteudo')?.focus({ preventScroll: true });
   }, [rota, entrou]);
+  const tokenRedefinicao = /^redefinir-senha\?token=([\w-]{20,200})$/.exec(rota)?.[1];
+  if (tokenRedefinicao && !sessao)
+    return (
+      <>
+        <SeletorPreferencias flutuante />
+        <TelaRedefinirSenha
+          token={tokenRedefinicao}
+          redefinir={integracao?.autenticacao.redefinirSenha}
+          concluir={() => {
+            location.hash = '/';
+            setLogin(true);
+            setMensagemSessao('Senha redefinida. Entre com a nova senha.');
+          }}
+        />
+      </>
+    );
   if (!entrou || !sessao)
-    return login ? (
+    return <>
+      <SeletorPreferencias flutuante />
+      {login ? (
       <TelaLogin
         cadastrar={integracao?.autenticacao.cadastrar}
-        solicitarRedefinicao={integracao?.autenticacao.solicitarRedefinicao}
+        solicitarRedefinicao={
+          integracao ? integracao.autenticacao.solicitarRedefinicao : async () => {
+            await new Promise((r) => setTimeout(r, 250));
+          }
+        }
         demonstrativo={!integracao}
         mensagem={mensagemSessao}
         autenticar={async (dados) => {
@@ -231,9 +262,10 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         abrirLogin={() => setLogin(true)}
         permitirDemo={!integracao}
       />
-    );
+    )}
+    </>;
   if (!integracao && rota === 'pos-prototipo' && podeAcessarRota(rota, sessao))
-    return <TelaPosDesign voltar={() => { location.hash = '/dashboard'; setRota('dashboard'); }} />;
+    return <><SeletorPreferencias flutuante /><TelaPosDesign voltar={() => { location.hash = '/dashboard'; setRota('dashboard'); }} /></>;
   const baseVisivel =
     cenarioConsulta === 'vazio'
       ? { operacoes: [], despesas: [] }

@@ -53,6 +53,15 @@ export function criarIntegracaoApi(
   if (!contrato.versao.trim()) throw new Error('Identifique a versão do contrato.');
   const enviar = criarTransporteApi(url, contrato.credenciais, contrato.interpretarCampos);
   let token: string | undefined;
+  // "Lembrar de mim": sessão guardada neste aparelho até expirar, ligada a esta API.
+  const CHAVE_SESSAO = 'planner:sessao-lembrada';
+  const esquecer = () => {
+    try {
+      localStorage.removeItem(CHAVE_SESSAO);
+    } catch {
+      /* Sem armazenamento. */
+    }
+  };
   const executar = <T>(pedido: RequisicaoMapeada, validar: (v: unknown) => T) =>
     enviar(pedido.caminho, validar, pedido);
   return {
@@ -71,14 +80,41 @@ export function criarIntegracaoApi(
       } : undefined,
       async entrar(dados) {
         token = undefined;
+        esquecer();
         const resultado = await executar(contrato.login(dados), (v) => ({
           sessao: validarSessao(contrato.mapearSessao(v)),
           token: contrato.extrairToken?.(v),
         }));
         token = resultado.token;
+        if (dados.lembrar && token) {
+          try {
+            localStorage.setItem(CHAVE_SESSAO, JSON.stringify({ api: url, token, sessao: resultado.sessao }));
+          } catch {
+            /* Sem armazenamento: a sessão vale só nesta aba. */
+          }
+        }
         return resultado.sessao;
       },
+      retomar() {
+        try {
+          const bruto = localStorage.getItem(CHAVE_SESSAO);
+          if (!bruto) return null;
+          const salvo = JSON.parse(bruto) as { api?: unknown; token?: unknown; sessao?: unknown };
+          const sessao = validarSessao(salvo.sessao);
+          if (salvo.api !== url || typeof salvo.token !== 'string' || !/^[A-Za-z0-9_-]{43}$/.test(salvo.token) || sessao.expiraEm <= Date.now()) {
+            esquecer();
+            return null;
+          }
+          token = salvo.token;
+          return sessao;
+        } catch {
+          esquecer();
+          return null;
+        }
+      },
+      esquecer,
       async sair() {
+        esquecer();
         const anterior = token;
         token = undefined;
         await executar({ ...contrato.logout(), token: anterior }, () => undefined);

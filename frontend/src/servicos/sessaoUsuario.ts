@@ -11,6 +11,8 @@ export interface SessaoUsuario {
 export interface Credenciais {
   email: string;
   senha: string;
+  /** "Lembrar de mim": mantém a sessão neste aparelho até expirar. A senha nunca é guardada. */
+  lembrar?: boolean;
 }
 export interface ServicoSessao {
   cadastrar?(dados: { name: string; merchantName: string; email: string; password: string }): Promise<void>;
@@ -18,6 +20,56 @@ export interface ServicoSessao {
   redefinirSenha?(token: string, senha: string): Promise<void>;
   entrar(dados: Credenciais): Promise<SessaoUsuario>;
   sair(): Promise<void>;
+  /** Retoma a sessão lembrada neste aparelho, se ainda for válida. */
+  retomar?(): SessaoUsuario | null;
+  /** Apaga a sessão lembrada (por exemplo, quando expira). */
+  esquecer?(): void;
+}
+
+/** Limite de tentativas erradas antes do bloqueio temporário (mesmo valor do servidor). */
+export const MAXIMO_TENTATIVAS = 5;
+export const MINUTOS_BLOQUEIO = 15;
+
+/** Erro de login com a contagem de tentativas que ainda restam. */
+export class FalhaLogin extends Error {
+  constructor(
+    mensagem: string,
+    public tentativasRestantes?: number,
+    public bloqueadoAteMs?: number,
+  ) {
+    super(mensagem);
+  }
+}
+
+const CHAVE_EMAIL = 'planner:email-lembrado';
+export function lerEmailLembrado() {
+  try {
+    return localStorage.getItem(CHAVE_EMAIL) ?? '';
+  } catch {
+    return '';
+  }
+}
+export function lembrarEmail(email: string | null) {
+  try {
+    if (email) localStorage.setItem(CHAVE_EMAIL, email);
+    else localStorage.removeItem(CHAVE_EMAIL);
+  } catch {
+    /* Sem armazenamento: o e-mail não é lembrado. */
+  }
+}
+
+function mensagemTentativas(base: string, restantes: number) {
+  return `${base} ${restantes === 1 ? 'Resta 1 tentativa' : `Restam ${restantes} tentativas`} antes do bloqueio temporário.`;
+}
+function mensagemBloqueio(minutos: number) {
+  return `Muitas tentativas erradas. O acesso foi bloqueado temporariamente. Tente novamente em ${minutos} ${minutos === 1 ? 'minuto' : 'minutos'} ou recupere sua senha.`;
+}
+export { mensagemTentativas, mensagemBloqueio };
+
+// Contagem só da demonstração local (no MVP a contagem fica no servidor).
+const tentativasDemo = new Map<string, { erros: number; bloqueadoAte: number }>();
+export function zerarTentativasDemo() {
+  tentativasDemo.clear();
 }
 export const perfisDemonstrativos = {
   gestor: {
@@ -50,13 +102,30 @@ export function sessaoDemonstrativa(
 export const autenticacaoDemonstrativa: ServicoSessao = {
   async entrar({ email, senha }) {
     await new Promise((resolve) => setTimeout(resolve, 250));
+    const chave = email.trim().toLowerCase();
+    const agora = Date.now();
+    const registro = tentativasDemo.get(chave) ?? { erros: 0, bloqueadoAte: 0 };
+    if (registro.bloqueadoAte > agora)
+      throw new FalhaLogin(mensagemBloqueio(Math.ceil((registro.bloqueadoAte - agora) / 60000)), 0, registro.bloqueadoAte);
     const perfil = email.split('@')[0] as keyof typeof perfisDemonstrativos;
     if (
       senha !== 'demo' ||
       !Object.hasOwn(perfisDemonstrativos, perfil) ||
       email !== `${perfil}@exemplo.invalid`
-    )
-      throw new Error('E-mail ou senha inválidos para a demonstração.');
+    ) {
+      registro.erros = registro.bloqueadoAte && registro.bloqueadoAte <= agora ? 1 : registro.erros + 1;
+      registro.bloqueadoAte = 0;
+      const restantes = MAXIMO_TENTATIVAS - registro.erros;
+      if (restantes <= 0) {
+        registro.erros = 0;
+        registro.bloqueadoAte = agora + MINUTOS_BLOQUEIO * 60000;
+        tentativasDemo.set(chave, registro);
+        throw new FalhaLogin(mensagemBloqueio(MINUTOS_BLOQUEIO), 0, registro.bloqueadoAte);
+      }
+      tentativasDemo.set(chave, registro);
+      throw new FalhaLogin(mensagemTentativas('E-mail ou senha inválidos para a demonstração.', restantes), restantes);
+    }
+    tentativasDemo.delete(chave);
     return sessaoDemonstrativa(perfil);
   },
   async sair() {
