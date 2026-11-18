@@ -13,7 +13,7 @@ html[data-tema="escuro"] .seletor-preferencias select option { color: #e2e8f0; b
 
 .dica-i {
   display: inline-grid; place-items: center; width: 15px; height: 15px; margin-left: 5px; flex: none;
-  border: 1px solid currentColor; border-radius: 50%; color: #64748b; background: transparent;
+  border: 1px solid currentColor; border-radius: 50%; color: #5b6b82; background: transparent;
   font: italic 600 10px/1 Georgia, 'Times New Roman', serif; text-transform: none; letter-spacing: 0;
   vertical-align: middle; cursor: help; opacity: .85; user-select: none;
 }
@@ -36,14 +36,14 @@ html[data-tema="escuro"] .dica-balao { color: #0f172a; background: #e2e8f0; }
 
 .senha-com-olho { position: relative; display: flex; }
 .senha-com-olho input { flex: 1; padding-right: 42px; }
-.botao-olho { position: absolute; top: 50%; right: 4px; display: grid; width: 34px; height: 34px; place-items: center; transform: translateY(-50%); border: 0; border-radius: 8px; color: #64748b; background: transparent; }
+.botao-olho { position: absolute; top: 50%; right: 4px; display: grid; width: 34px; height: 34px; place-items: center; transform: translateY(-50%); border: 0; border-radius: 8px; color: #5b6b82; background: transparent; }
 .botao-olho:hover { color: #1e54b7; background: #eff6ff; }
 html[data-tema="escuro"] .botao-olho { color: #9fb0c6; }
 html[data-tema="escuro"] .botao-olho:hover { color: #93c5fd; background: #1e293b; }
 .linha-lembrar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
 .campo-check { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; }
 .campo-check input { width: 16px; height: 16px; accent-color: #1e54b7; }
-.nota-tentativas { margin: 0; color: #64748b; font-size: 12px; }
+.nota-tentativas { margin: 0; color: #5b6b82; font-size: 12px; }
 html[data-tema="escuro"] .nota-tentativas { color: #9fb0c6; }
 .convite-cadastro { margin: 14px 0 0; text-align: center; font-size: 13px; }
 .botao.texto.destaque { padding: 0; color: #1e54b7; font-weight: 600; text-decoration: underline; }

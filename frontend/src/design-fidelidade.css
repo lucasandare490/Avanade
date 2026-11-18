@@ -1,12 +1,15 @@
-/* Tradução dos valores medidos no protótipo Figma Make (raiz de 14px). */
+/* Tradução dos valores medidos no protótipo Figma Make (raiz de 14px).
+   Desvio registrado na entrega final: cinza secundário #64748b -> #5b6b82 e verde de texto
+   #16a34a -> #15803d e títulos dos grupos do menu #4e7298 -> #7495bc, para atingir
+   contraste 4,5:1 (WCAG AA). */
 :root {
   font-family: 'Inter', sans-serif;
   color: #0f172a;
   background: #f0f4f8;
   --azul: #0f2544;
   --borda: #e2e8f0;
-  --muted: #64748b;
-  --verde: #16a34a;
+  --muted: #5b6b82;
+  --verde: #15803d;
   --fundo: #f0f4f8;
   --action: #1e54b7;
   --action-hover: #1844a0;
@@ -38,7 +41,7 @@ h3 { font-size: 12.25px; }
 .barra-lateral .loja small { color: #93c5fd; }
 .barra-lateral .avatar { background: #1e3a5f; color: #fff; }
 .grupo-menu { margin-top: 18px; }
-.grupo-menu > p { color: #4e7298; font-size: 10px; letter-spacing: 1px; }
+.grupo-menu > p { color: #7495bc; font-size: 10px; letter-spacing: 1px; }
 .grupo-menu a { min-height: 34px; padding: 8px 10px; margin: 2px 0; color: #93c5fd; font-size: 12.25px; border-radius: 10px; }
 .grupo-menu a:hover { background: #ffffff12; color: #fff; }
 .grupo-menu a[aria-current='page'] { background: var(--accent); color: #fff; }
@@ -49,7 +52,7 @@ h3 { font-size: 12.25px; }
 .rodape-menu button { color: #93c5fd; }
 .area-principal { height: 100dvh; margin-left: 210px; display: flex; flex-direction: column; min-width: 0; }
 .barra-superior { flex: none; height: 49px; padding: 0 21px; }
-.data-topo { font-size: 10.5px; color: #64748b; white-space: nowrap; }
+.data-topo { font-size: 10.5px; color: #5b6b82; white-space: nowrap; }
 .nome-topo { font-size: 12.25px; font-weight: 500; color: #334155; white-space: nowrap; }
 .acoes-topo { gap: 12px; }
 .rodape-pagina { display: none; }
@@ -144,7 +147,7 @@ main#conteudo { width: min(100%, 938px); max-width: none; margin: 0; padding: 21
 .grafico-area .grade-grafico { stroke: #e2e8f0; stroke-width: 1; }
 .grafico-area .area-preenchida { fill: #dbeafe; }
 .grafico-area .linha-saldo { fill: none; stroke: #1e54b7; stroke-width: 3; vector-effect: non-scaling-stroke; }
-.rotulos-grafico { display: flex; justify-content: space-between; gap: 6px; margin-top: 5px; color: #64748b; font-size: 9px; }
+.rotulos-grafico { display: flex; justify-content: space-between; gap: 6px; margin-top: 5px; color: #5b6b82; font-size: 9px; }
 .rotulos-grafico span { min-width: 0; text-align: center; overflow-wrap: anywhere; }
 .grafico-analise { grid-template-columns: minmax(0, 1fr); }
 

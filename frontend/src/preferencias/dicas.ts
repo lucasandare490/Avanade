@@ -28,6 +28,18 @@ const textoProprio = (el: Element) => {
   return normalizarTexto(t);
 };
 
+/** Texto que aparece agora na tela (já traduzido), sem o ícone; <br> vira espaço. */
+const textoAtual = (el: Element) => {
+  let t = '';
+  el.childNodes.forEach((n) => {
+    if (n.nodeType === Node.TEXT_NODE) t += n.nodeValue ?? '';
+    else if (n.nodeType === Node.ELEMENT_NODE && (n as Element).tagName === 'BR') t += ' ';
+    else if (n.nodeType === Node.ELEMENT_NODE && !(n as Element).classList.contains('dica-i') && !(n as Element).classList.contains('somente-leitor'))
+      t += (n as Element).textContent ?? '';
+  });
+  return normalizarTexto(t);
+};
+
 export function explicacao(rotulo: string, idioma: Idioma): string | undefined {
   const item = glossario[normalizarTexto(rotulo).toLowerCase()];
   if (!item) return undefined;
@@ -157,7 +169,7 @@ class Dicas {
           campo.setAttribute('aria-labelledby', el.id);
       } else el.appendChild(icone);
     }
-    const nome = traduzirTexto(rotulo, tradutor.idioma);
+    const nome = textoAtual(el) || traduzirTexto(rotulo, tradutor.idioma);
     const prefixo = tradutor.idioma === 'en' ? 'More information' : tradutor.idioma === 'es' ? 'Más información' : 'Mais informações';
     // Títulos e cabeçalhos de tabela têm o nome tirado do conteúdo: fixa o nome
     // no próprio rótulo para o leitor de tela não anunciar o texto do ícone junto.

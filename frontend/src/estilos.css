@@ -335,7 +335,7 @@ main#conteudo {
   font-size: 9px;
   letter-spacing: 0.3px;
   font-weight: 700;
-  color: #927320;
+  color: #8a6500; /* contraste AA (era #927320) */
   margin: 14px 0 30px;
 }
 .contexto-dados > span:last-child {
@@ -1091,7 +1091,7 @@ tbody tr:hover {
 .cartao-entrada .etiqueta {
   font-size: 9px;
   letter-spacing: 1.6px;
-  color: #7991ad;
+  color: #5b6b82; /* contraste AA (era #7991ad) */
   margin: 38px 0 13px;
 }
 .cartao-entrada h1 {

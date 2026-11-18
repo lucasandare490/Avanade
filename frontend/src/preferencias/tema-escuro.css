@@ -54,7 +54,7 @@ html[data-tema="escuro"] .botao-icone:hover {
   background: #141c24 !important;
 }
 html[data-tema="escuro"] .contexto-dados {
-  color: #e2c579 !important;
+  color: #f3ce68 !important;
 }
 html[data-tema="escuro"] .seletor-periodo {
   background: #181f27 !important;
@@ -250,7 +250,7 @@ html[data-tema="escuro"] .cartao-entrada {
   box-shadow: 0 15px 70px rgba(0, 0, 0, 0.26) !important;
 }
 html[data-tema="escuro"] .cartao-entrada .etiqueta {
-  color: #a2acb9 !important;
+  color: #a5acb6 !important;
 }
 html[data-tema="escuro"] .preview-split {
   border: 1px solid #222931 !important;
@@ -312,7 +312,7 @@ html[data-tema="escuro"] body {
   background: #0f161c !important;
 }
 html[data-tema="escuro"] .data-topo {
-  color: #a5acb5 !important;
+  color: #a5acb6 !important;
 }
 html[data-tema="escuro"] .nome-topo {
   color: #a8b1bf !important;
@@ -391,7 +391,7 @@ html[data-tema="escuro"] .grafico-area .grade-grafico {
   stroke: #1b222c !important;
 }
 html[data-tema="escuro"] .rotulos-grafico {
-  color: #a5acb5 !important;
+  color: #a5acb6 !important;
 }
 html[data-tema="escuro"] .pos-page {
   color: #8fa2cc !important;
