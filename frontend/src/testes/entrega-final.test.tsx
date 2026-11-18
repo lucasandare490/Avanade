@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { TelaLogin } from '../telas/TelaLogin';
 import { TelaRedefinirSenha } from '../telas/TelaRedefinirSenha';
-import { autenticacaoDemonstrativa, FalhaLogin, zerarTentativasDemo } from '../servicos/sessaoUsuario';
+import { autenticacaoDemonstrativa, FalhaLogin, zerarTentativasDemo, zerarDemonstracao } from '../servicos/sessaoUsuario';
 import { FalhaTransporte, mensagemLogin } from '../servicos/transporteApi';
 import { traduzirTexto, temTraducao } from '../preferencias/idioma';
 import { aplicarTema, lerTema, resolverTema } from '../preferencias/tema';
@@ -227,5 +227,34 @@ describe('tela Criar nova senha', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Salvar nova senha' }));
     await waitFor(() => expect(concluir).toHaveBeenCalled());
     expect(redefinir).toHaveBeenLastCalledWith('t'.repeat(43), 'Senha-nova-123456');
+  });
+});
+
+describe('demonstração: recuperação de senha e lembrar de mim', () => {
+  beforeEach(() => zerarDemonstracao());
+  it('gera link simulado, troca a senha uma vez e desbloqueia o acesso', async () => {
+    const demo = autenticacaoDemonstrativa;
+    for (let i = 0; i < 5; i++) await demo.entrar({ email: 'gestor@exemplo.invalid', senha: 'errada' }).catch(() => undefined);
+    await expect(demo.entrar({ email: 'gestor@exemplo.invalid', senha: 'demo' })).rejects.toThrow('bloqueado');
+    expect(await demo.solicitarRedefinicao!('ninguem@exemplo.invalid')).toBeUndefined();
+    const link = (await demo.solicitarRedefinicao!('gestor@exemplo.invalid')) as string;
+    expect(link).toMatch(/^#\/redefinir-senha\?token=[\w-]{20,200}$/);
+    const token = link.split('token=')[1];
+    await demo.redefinirSenha!(token, 'Senha-nova-123456');
+    await expect(demo.redefinirSenha!(token, 'Outra-senha-12345')).rejects.toThrow('inválido ou expirou');
+    await expect(demo.entrar({ email: 'gestor@exemplo.invalid', senha: 'demo' })).rejects.toThrow();
+    await expect(demo.entrar({ email: 'gestor@exemplo.invalid', senha: 'Senha-nova-123456' })).resolves.toMatchObject({ nome: 'Maria' });
+  });
+  it('lembrar de mim guarda só o perfil e a validade, e sair apaga', async () => {
+    const demo = autenticacaoDemonstrativa;
+    await demo.entrar({ email: 'financeiro@exemplo.invalid', senha: 'demo', lembrar: true });
+    expect(localStorage.getItem('planner:sessao-demo-lembrada')).not.toContain('demo"');
+    expect(demo.retomar!()).toMatchObject({ nome: 'Mariana' });
+    await demo.sair();
+    expect(demo.retomar!()).toBeNull();
+    localStorage.setItem('planner:sessao-demo-lembrada', JSON.stringify({ perfil: 'admin', expiraEm: Date.now() + 60000 }));
+    expect(demo.retomar!()).toBeNull();
+    await demo.entrar({ email: 'gestor@exemplo.invalid', senha: 'demo' });
+    expect(demo.retomar!()).toBeNull();
   });
 });

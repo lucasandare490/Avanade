@@ -16,7 +16,8 @@ export interface Credenciais {
 }
 export interface ServicoSessao {
   cadastrar?(dados: { name: string; merchantName: string; email: string; password: string }): Promise<void>;
-  solicitarRedefinicao?(email: string): Promise<void>;
+  /** Pede o link de recuperação. Na demonstração devolve o link simulado (não há e-mail). */
+  solicitarRedefinicao?(email: string): Promise<string | void>;
   redefinirSenha?(token: string, senha: string): Promise<void>;
   entrar(dados: Credenciais): Promise<SessaoUsuario>;
   sair(): Promise<void>;
@@ -99,20 +100,38 @@ export function sessaoDemonstrativa(
     expiraEm: Date.now() + 30 * 60 * 1000,
   };
 }
+// Demonstração local: senhas trocadas pela recuperação valem até recarregar a página;
+// links de recuperação simulados valem 30 minutos e uma vez só.
+const senhasDemo = new Map<string, string>();
+const linksDemo = new Map<string, { email: string; expiraEm: number }>();
+const CHAVE_SESSAO_DEMO = 'planner:sessao-demo-lembrada';
+function perfilDoEmail(email: string) {
+  const perfil = email.split('@')[0] as keyof typeof perfisDemonstrativos;
+  return Object.hasOwn(perfisDemonstrativos, perfil) && email === `${perfil}@exemplo.invalid` ? perfil : undefined;
+}
+function esquecerDemo() {
+  try {
+    localStorage.removeItem(CHAVE_SESSAO_DEMO);
+  } catch {
+    /* Sem armazenamento. */
+  }
+}
+export function zerarDemonstracao() {
+  tentativasDemo.clear();
+  senhasDemo.clear();
+  linksDemo.clear();
+  esquecerDemo();
+}
 export const autenticacaoDemonstrativa: ServicoSessao = {
-  async entrar({ email, senha }) {
+  async entrar({ email, senha, lembrar }) {
     await new Promise((resolve) => setTimeout(resolve, 250));
     const chave = email.trim().toLowerCase();
     const agora = Date.now();
     const registro = tentativasDemo.get(chave) ?? { erros: 0, bloqueadoAte: 0 };
     if (registro.bloqueadoAte > agora)
       throw new FalhaLogin(mensagemBloqueio(Math.ceil((registro.bloqueadoAte - agora) / 60000)), 0, registro.bloqueadoAte);
-    const perfil = email.split('@')[0] as keyof typeof perfisDemonstrativos;
-    if (
-      senha !== 'demo' ||
-      !Object.hasOwn(perfisDemonstrativos, perfil) ||
-      email !== `${perfil}@exemplo.invalid`
-    ) {
+    const perfil = perfilDoEmail(email);
+    if (!perfil || senha !== (senhasDemo.get(email) ?? 'demo')) {
       registro.erros = registro.bloqueadoAte && registro.bloqueadoAte <= agora ? 1 : registro.erros + 1;
       registro.bloqueadoAte = 0;
       const restantes = MAXIMO_TENTATIVAS - registro.erros;
@@ -126,10 +145,52 @@ export const autenticacaoDemonstrativa: ServicoSessao = {
       throw new FalhaLogin(mensagemTentativas('E-mail ou senha inválidos para a demonstração.', restantes), restantes);
     }
     tentativasDemo.delete(chave);
-    return sessaoDemonstrativa(perfil);
+    const sessao = sessaoDemonstrativa(perfil);
+    esquecerDemo();
+    if (lembrar) {
+      try {
+        localStorage.setItem(CHAVE_SESSAO_DEMO, JSON.stringify({ perfil, expiraEm: sessao.expiraEm }));
+      } catch {
+        /* Sem armazenamento: a sessão vale só nesta aba. */
+      }
+    }
+    return sessao;
+  },
+  retomar() {
+    try {
+      const salvo = JSON.parse(localStorage.getItem(CHAVE_SESSAO_DEMO) ?? 'null') as { perfil?: string; expiraEm?: number } | null;
+      if (!salvo) return null;
+      if (typeof salvo.perfil !== 'string' || !Object.hasOwn(perfisDemonstrativos, salvo.perfil) || typeof salvo.expiraEm !== 'number' || salvo.expiraEm <= Date.now()) {
+        esquecerDemo();
+        return null;
+      }
+      return { ...sessaoDemonstrativa(salvo.perfil as keyof typeof perfisDemonstrativos), expiraEm: salvo.expiraEm };
+    } catch {
+      esquecerDemo();
+      return null;
+    }
+  },
+  esquecer: esquecerDemo,
+  async solicitarRedefinicao(email) {
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    const limpo = email.trim().toLowerCase();
+    // Mesma resposta para qualquer e-mail; só perfis da demonstração recebem link.
+    if (!perfilDoEmail(limpo)) return undefined;
+    const bytes = crypto.getRandomValues(new Uint8Array(24));
+    const token = btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    linksDemo.set(token, { email: limpo, expiraEm: Date.now() + 30 * 60000 });
+    return `#/redefinir-senha?token=${token}`;
+  },
+  async redefinirSenha(token, senha) {
+    await new Promise((resolve) => setTimeout(resolve, 250));
+    const link = linksDemo.get(token);
+    linksDemo.delete(token);
+    if (!link || link.expiraEm <= Date.now()) throw new Error('O link de recuperação é inválido ou expirou.');
+    senhasDemo.set(link.email, senha);
+    tentativasDemo.delete(link.email);
   },
   async sair() {
-    /* Não existe sessão de servidor no cenário local. */
+    esquecerDemo();
   },
 };
 export function podeAcessarRota(rota: string, sessao: SessaoUsuario) {

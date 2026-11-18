@@ -59,7 +59,7 @@ export function TelaLogin({
   demonstrativo = true,
 }: {
   cadastrar?: (dados: { name: string; merchantName: string; email: string; password: string }) => Promise<void>;
-  solicitarRedefinicao?: (email: string) => Promise<void>;
+  solicitarRedefinicao?: (email: string) => Promise<string | void>;
   autenticar: (dados: Credenciais) => Promise<SessaoUsuario>;
   concluir: (sessao: SessaoUsuario) => void;
   voltar: () => void;
@@ -82,6 +82,7 @@ export function TelaLogin({
   const [confirmacaoInvalida, setConfirmacaoInvalida] = useState(false);
   const [ocupado, setOcupado] = useState(false);
   const [recuperando, setRecuperando] = useState(false);
+  const [linkSimulado, setLinkSimulado] = useState('');
   const bloqueio = useRef(false);
   const bloqueado = bloqueadoAte > agora && !criando && !recuperando;
 
@@ -101,6 +102,7 @@ export function TelaLogin({
 
   function trocarModo(mudar: () => void) {
     mudar();
+    setLinkSimulado('');
     setConfirmacaoInvalida(false);
     setErro('');
     setSucesso('');
@@ -117,7 +119,9 @@ export function TelaLogin({
     setConfirmacaoInvalida(false);
     try {
       if (recuperando && solicitarRedefinicao) {
-        await solicitarRedefinicao(email.trim());
+        const link = await solicitarRedefinicao(email.trim());
+        // Só a demonstração devolve um link (simula o e-mail); aceita apenas a rota interna.
+        setLinkSimulado(demonstrativo && typeof link === 'string' && /^#\/redefinir-senha\?token=[\w-]{20,200}$/.test(link) ? link : '');
         setSucesso('Se o e-mail estiver cadastrado, enviaremos instruções de recuperação.');
       } else if (criando && cadastrar) {
         if (senha !== confirmacao) {
@@ -208,6 +212,14 @@ export function TelaLogin({
           {sucesso && (
             <p role="status" className="aviso">
               {sucesso}
+            </p>
+          )}
+          {recuperando && linkSimulado && (
+            <p className="nota">
+              Demonstração: não há envio real de e-mail.{' '}
+              <a className="botao texto destaque" href={linkSimulado}>
+                Abrir o link do e-mail (simulado)
+              </a>
             </p>
           )}
           {mensagem && (

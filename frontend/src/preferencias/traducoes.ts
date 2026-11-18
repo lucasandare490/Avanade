@@ -895,6 +895,9 @@ export const traducoes: Record<string, readonly [string, string]> = {
   "Dispositivo": ["Device", "Dispositivo"],
   "Split": ["Split", "Split"],
   "Mais informações": ["More information", "Más información"],
+  "Demonstração: não há envio real de e-mail.": ["Demo: no real email is sent.", "Demostración: no se envía ningún correo real."],
+  "Abrir o link do e-mail (simulado)": ["Open the email link (simulated)", "Abrir el enlace del correo (simulado)"],
+  "O link de recuperação é inválido ou expirou.": ["The recovery link is invalid or expired.", "El enlace de recuperación es inválido o expiró."],
 };
 
 // Textos que aparecem no código mas não devem ser traduzidos, com o motivo.

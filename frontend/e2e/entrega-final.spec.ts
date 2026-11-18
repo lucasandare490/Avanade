@@ -95,6 +95,40 @@ test.describe('login seguro', () => {
   });
 });
 
+test.describe('demonstração funcional', () => {
+  test('recuperação de senha completa com link simulado', async ({ page }) => {
+    await page.goto('/');
+    await page.evaluate(() => localStorage.clear());
+    await page.goto('/');
+    await page.getByRole('button', { name: /Entrar com perfil|Conhecer as telas|Entrar/ }).last().click();
+    await page.getByRole('button', { name: 'Esqueci minha senha' }).click();
+    await page.getByLabel('E-mail', { exact: true }).fill('operador@exemplo.invalid');
+    await page.getByRole('button', { name: 'Enviar instruções' }).click();
+    await page.getByRole('link', { name: 'Abrir o link do e-mail (simulado)' }).click();
+    await expect(page.getByRole('heading', { name: 'Criar nova senha' })).toBeVisible();
+    await page.getByLabel('Nova senha', { exact: true }).fill('Senha-nova-123456');
+    await page.getByLabel('Confirmar senha', { exact: true }).fill('Senha-nova-123456');
+    await page.getByRole('button', { name: 'Salvar nova senha' }).click();
+    await expect(page.getByText('Senha redefinida. Entre com a nova senha.')).toBeVisible();
+    await page.getByLabel('E-mail', { exact: true }).fill('operador@exemplo.invalid');
+    await page.getByLabel('Senha', { exact: true }).fill('Senha-nova-123456');
+    await page.getByRole('button', { name: 'Entrar no cenário simulado' }).click();
+    await expect(page.locator('main#conteudo')).toBeVisible();
+  });
+  test('lembrar de mim mantém a demonstração aberta depois de recarregar', async ({ page }) => {
+    await page.goto('/');
+    await page.evaluate(() => localStorage.clear());
+    await page.goto('/');
+    await page.getByRole('button', { name: /Entrar com perfil|Conhecer as telas|Entrar/ }).last().click();
+    await page.getByLabel('Senha', { exact: true }).fill('demo');
+    await page.getByRole('checkbox', { name: 'Lembrar de mim' }).check();
+    await page.getByRole('button', { name: 'Entrar no cenário simulado' }).click();
+    await expect(page.locator('main#conteudo')).toBeVisible();
+    await page.reload();
+    await expect(page.locator('main#conteudo')).toBeVisible();
+  });
+});
+
 test.describe('tema', () => {
   for (const [escolha, esperado] of [['claro', 'claro'], ['escuro', 'escuro']] as const) {
     test(`tema ${escolha} vale em todas as telas e fica salvo`, async ({ page }) => {

@@ -98,7 +98,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
     setAtualizando(false);
     setCenarioConsulta('normal');
     limparPreferenciasSessao();
-    if (expirada) integracao?.autenticacao.esquecer?.();
+    if (expirada) (integracao?.autenticacao ?? autenticacaoDemonstrativa).esquecer?.();
     setLogin(expirada || Boolean(integracao));
     setMensagemSessao(expirada ? 'Sua sessão expirou. Entre novamente para continuar.' : '');
   }
@@ -187,7 +187,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
   }
   useEffect(() => {
     // "Lembrar de mim": retoma a sessão salva neste aparelho, se ainda for válida.
-    const lembrada = integracao?.autenticacao.retomar?.();
+    const lembrada = (integracao?.autenticacao ?? autenticacaoDemonstrativa).retomar?.();
     if (lembrada) iniciar(lembrada);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -227,7 +227,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         <SeletorPreferencias flutuante />
         <TelaRedefinirSenha
           token={tokenRedefinicao}
-          redefinir={integracao?.autenticacao.redefinirSenha}
+          redefinir={(integracao?.autenticacao ?? autenticacaoDemonstrativa).redefinirSenha}
           concluir={() => {
             location.hash = '/';
             setLogin(true);
@@ -242,11 +242,7 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
       {login ? (
       <TelaLogin
         cadastrar={integracao?.autenticacao.cadastrar}
-        solicitarRedefinicao={
-          integracao ? integracao.autenticacao.solicitarRedefinicao : async () => {
-            await new Promise((r) => setTimeout(r, 250));
-          }
-        }
+        solicitarRedefinicao={(integracao?.autenticacao ?? autenticacaoDemonstrativa).solicitarRedefinicao}
         demonstrativo={!integracao}
         mensagem={mensagemSessao}
         autenticar={async (dados) => {
