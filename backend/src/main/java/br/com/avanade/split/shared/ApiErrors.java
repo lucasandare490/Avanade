@@ -13,12 +13,33 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 @RestControllerAdvice
 public class ApiErrors {
+  @com.fasterxml.jackson.annotation.JsonInclude(
+      com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL)
   public record Error(
-      String code, String message, Map<String, String> fieldErrors, String correlationId) {}
+      String code,
+      String message,
+      Map<String, String> fieldErrors,
+      String correlationId,
+      Integer remainingAttempts,
+      Integer retryAfterSeconds) {
+    public Error(String code, String message, Map<String, String> fieldErrors, String correlationId) {
+      this(code, message, fieldErrors, correlationId, null, null);
+    }
+  }
 
   @ExceptionHandler(ApiException.class)
   ResponseEntity<Error> domain(ApiException e, HttpServletRequest r) {
-    return body(e.status, e.code, e.getMessage(), Map.of(), r);
+    var builder = ResponseEntity.status(e.status);
+    if (e.retryAfterSeconds != null)
+      builder.header("Retry-After", String.valueOf(e.retryAfterSeconds));
+    return builder.body(
+        new Error(
+            e.code,
+            e.getMessage(),
+            Map.of(),
+            String.valueOf(r.getAttribute("correlationId")),
+            e.remainingAttempts,
+            e.retryAfterSeconds));
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)

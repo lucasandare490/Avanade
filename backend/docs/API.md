@@ -6,6 +6,7 @@ Base `/api/v1`. JSON UTF-8. Exceto login e cadastro (`POST /auth/register`), tod
 |---|---|---|
 | POST auth/register | Pública | name, merchantName, email, password → 201; nova loja e gerente |
 | POST auth/login | Pública | email/password → sessionId, user{id,name}, merchant{id,name,timeZone}, permissions, expiresAt ISO, accessToken, tokenType |
+| POST auth/login (erro) | Pública | Senha errada: 401 `INVALID_CREDENTIALS` com `remainingAttempts` (4, 3, 2, 1). Na 5ª errada seguida: 429 `LOGIN_TEMPORARILY_LOCKED` com `remainingAttempts: 0`, `retryAfterSeconds` e header `Retry-After`; o bloqueio dura `LOGIN_LOCK_MINUTES` (15) e vale também para a senha certa. Conta pelo hash do e-mail normalizado, exista a conta ou não. Login certo ou redefinição de senha zeram a contagem. Limites: `LOGIN_MAX_ATTEMPTS` (5) |
 | POST auth/logout | Sessão | 204; repetição com token revogado retorna401 |
 | POST sales | vender | Idempotency-Key + SaleInput →201 nova /200 replay; venda com pagamento e operation completa ou null |
 | GET sales | consultar | Lista paginada, inclusive pagamentos sem split |
@@ -80,7 +81,7 @@ Caixa: `{period:{from,to},timeZone,updatedAt,openingCents,inflowCents,expenseCen
 
 `Idempotency-Key`: 8–128 caracteres ASCII `[A-Za-z0-9_-]`; gerar antes de enviar e preservar após timeout. Escopo loja/ação, sem expurgo nesta versão. `Idempotency-Replayed: true|false`. Recovery devolve snapshot original; detalhe devolve estado atual. Enquanto transação inicial está em andamento, consulta pode retornar404 por ainda não haver commit: **não criar uma nova chave**. Reenviar mesma chave é seguro e aguarda lock; timeout SQL pode produzir5xx recuperável. Não há HTTP202 nesta versão síncrona.
 
-Erro `{code,message,fieldErrors,correlationId}` e header `X-Correlation-Id`. 400 formato/filtro;401 sessão;403 permissão;404 ausência/tenant;409 chave divergente/estado;413 corpo>16KiB;422 validação;429 limite com Retry-After;500 resultado possivelmente desconhecido, consultar/repetir mesma chave. Não interpretar5xx/rede como recusa de pagamento.
+Erro `{code,message,fieldErrors,correlationId}` (login também pode trazer `remainingAttempts` e `retryAfterSeconds`) e header `X-Correlation-Id`. 400 formato/filtro;401 sessão;403 permissão;404 ausência/tenant;409 chave divergente/estado;413 corpo>16KiB;422 validação;429 limite com Retry-After;500 resultado possivelmente desconhecido, consultar/repetir mesma chave. Não interpretar5xx/rede como recusa de pagamento.
 
 ## Mapeamento para clientes existentes
 
@@ -115,3 +116,8 @@ No launcher local, `APP_MOCK_PAYMENT=DECLINED` ou `PENDING` configura novas vend
 GET /api/v1/exports/operations?from=YYYY-MM-DD&to=YYYY-MM-DD
 
 Permissão: financeiro. Filtros opcionais: status, paymentMethod e search, iguais aos da lista de operações. Período obrigatório até 366 dias. Máximo 2.000 resultados, com 422 EXPORT_LIMIT acima disso. Retorno: columns (8 títulos), rows (linhas de 8 strings), total e mode SIMULADO. Valores monetários em centavos BRL e instantes UTC. Snapshot consistente de todas as páginas; isolamento por loja. A interface gera CSV identificado como simulado. Não é documento fiscal.
+
+
+## Recuperação de senha por e-mail
+
+`POST auth/password-reset/request` sempre responde 202 e, se a conta existir, envia um e-mail com o link `PASSWORD_RESET_LINK_BASE/#/redefinir-senha?token=…` (válido por `PASSWORD_RESET_MINUTES`, uso único). O envio acontece fora da requisição, para o tempo de resposta não revelar se o e-mail existe. Configuração no servidor: `SPRING_MAIL_HOST`, `SPRING_MAIL_PORT`, `SPRING_MAIL_USERNAME`, `SPRING_MAIL_PASSWORD`, `SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true`, `PASSWORD_RESET_FROM` e `PASSWORD_RESET_LINK_BASE` (https, sem query nem fragmento). Sem essa configuração o pedido é aceito e nada é enviado. `POST auth/password-reset/complete` recebe `{token,password}`, troca a senha, revoga as sessões e desbloqueia o login.

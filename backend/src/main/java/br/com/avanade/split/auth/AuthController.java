@@ -22,6 +22,9 @@ public class AuthController {
   private final int resetMinutes;
   private final boolean exposeResetToken;
   private final String dummy;
+  private final int maxAttempts;
+  private final int lockMinutes;
+  private final EnvioRecuperacaoSenha envioRecuperacao;
   private final SecureRandom random = new SecureRandom();
 
   public AuthController(
@@ -30,7 +33,10 @@ public class AuthController {
       Clock clock,
       @Value("${app.session-minutes}") int minutes,
       @Value("${app.password-reset-minutes:30}") int resetMinutes,
-      @Value("${app.password-reset-dev-token:false}") boolean exposeResetToken) {
+      @Value("${app.password-reset-dev-token:false}") boolean exposeResetToken,
+      @Value("${app.login-max-attempts:5}") int maxAttempts,
+      @Value("${app.login-lock-minutes:15}") int lockMinutes,
+      EnvioRecuperacaoSenha envioRecuperacao) {
     this.db = db;
     this.passwords = passwords;
     this.clock = clock;
@@ -38,6 +44,11 @@ public class AuthController {
     if (resetMinutes < 12 || resetMinutes > 72) throw new IllegalArgumentException("Password reset expiry must be between 12 and 72 minutes.");
     this.resetMinutes = resetMinutes;
     this.exposeResetToken = exposeResetToken;
+    if (maxAttempts < 1 || maxAttempts > 20) throw new IllegalArgumentException("Login attempts must be between 1 and 20.");
+    if (lockMinutes < 1 || lockMinutes > 1440) throw new IllegalArgumentException("Login lock must be between 1 and 1440 minutes.");
+    this.maxAttempts = maxAttempts;
+    this.lockMinutes = lockMinutes;
+    this.envioRecuperacao = envioRecuperacao;
     this.dummy = passwords.encode(UUID.randomUUID().toString());
   }
 
@@ -85,17 +96,52 @@ public class AuthController {
   public Map<String, Object> login(@Valid @RequestBody Login input) {
     if (input.password().getBytes(java.nio.charset.StandardCharsets.UTF_8).length > 72)
       throw new ApiException(422, "VALIDATION_ERROR", "Senha excede 72 bytes UTF-8.");
+    String email = input.email().trim().toLowerCase(Locale.ROOT);
+    String emailHash = Hashes.sha256(email);
+    Instant now = clock.instant();
+    // Bloqueio ativo: recusa antes de comparar a senha, sem revelar se a conta existe.
+    var locks = db.queryForList(
+        "SELECT locked_until FROM login_attempt WHERE email_hash=? AND locked_until>?",
+        emailHash, java.sql.Timestamp.from(now));
+    if (!locks.isEmpty())
+      throw bloqueado(((java.sql.Timestamp) locks.getFirst().get("locked_until")).toInstant(), now);
     var users =
         db.queryForList(
             "SELECT u.*,m.name merchant_name,m.time_zone FROM app_user u JOIN merchant m ON"
                 + " m.id=u.merchant_id WHERE u.email=?",
-            input.email().trim().toLowerCase(Locale.ROOT));
+            email);
     boolean valid =
         passwords.matches(
             input.password(),
             users.isEmpty() ? dummy : (String) users.getFirst().get("password_hash"));
-    if (!valid || users.isEmpty())
-      throw new ApiException(401, "INVALID_CREDENTIALS", "Credenciais inválidas.");
+    if (!valid || users.isEmpty()) {
+      // Incremento atômico: duas tentativas simultâneas não se perdem.
+      Integer failed = db.queryForObject(
+          "INSERT INTO login_attempt(email_hash,failed_count,locked_until,updated_at) VALUES (?,1,NULL,?)"
+              + " ON CONFLICT (email_hash) DO UPDATE SET failed_count = CASE WHEN"
+              + " login_attempt.locked_until IS NOT NULL AND login_attempt.locked_until<=EXCLUDED.updated_at"
+              + " THEN 1 ELSE login_attempt.failed_count+1 END, locked_until = CASE WHEN"
+              + " login_attempt.locked_until<=EXCLUDED.updated_at THEN NULL ELSE login_attempt.locked_until END,"
+              + " updated_at=EXCLUDED.updated_at RETURNING failed_count",
+          Integer.class, emailHash, java.sql.Timestamp.from(now));
+      // Limpeza ocasional de registros antigos (e-mails tentados e já sem bloqueio).
+      if (random.nextInt(50) == 0)
+        db.update("DELETE FROM login_attempt WHERE updated_at<? AND (locked_until IS NULL OR locked_until<?)",
+            java.sql.Timestamp.from(now.minusSeconds(86400)), java.sql.Timestamp.from(now));
+      int restantes = maxAttempts - (failed == null ? maxAttempts : failed);
+      if (restantes <= 0) {
+        Instant ate = now.plusSeconds(lockMinutes * 60L);
+        db.update("UPDATE login_attempt SET failed_count=0, locked_until=?, updated_at=? WHERE email_hash=?",
+            java.sql.Timestamp.from(ate), java.sql.Timestamp.from(now), emailHash);
+        throw bloqueado(ate, now);
+      }
+      throw new ApiException(401, "INVALID_CREDENTIALS",
+          "Credenciais inválidas. " + (restantes == 1
+              ? "Resta 1 tentativa antes do bloqueio temporário."
+              : "Restam " + restantes + " tentativas antes do bloqueio temporário."),
+          restantes, null);
+    }
+    db.update("DELETE FROM login_attempt WHERE email_hash=?", emailHash);
     var u = users.getFirst();
     byte[] bytes = new byte[32];
     random.nextBytes(bytes);
@@ -135,6 +181,15 @@ public class AuthController {
         "Bearer");
   }
 
+  private ApiException bloqueado(Instant ate, Instant now) {
+    int segundos = (int) Math.max(1, Duration.between(now, ate).toSeconds());
+    int minutos = (segundos + 59) / 60;
+    return new ApiException(429, "LOGIN_TEMPORARILY_LOCKED",
+        "Muitas tentativas erradas. O acesso foi bloqueado temporariamente. Tente novamente em "
+            + minutos + (minutos == 1 ? " minuto" : " minutos") + " ou recupere sua senha.",
+        0, segundos);
+  }
+
   @PostMapping("/logout")
   public ResponseEntity<Void> logout(@RequestAttribute Actor actor) {
     db.update("UPDATE auth_session SET revoked=true WHERE id=?", actor.sessionId());
@@ -158,7 +213,9 @@ public class AuthController {
       db.update("INSERT INTO password_reset_token(id,user_id,token_hash,expires_at,created_at) VALUES (?,?,?,?,?)",
           UUID.randomUUID(), users.getFirst().get("id"), Hashes.sha256(raw),
           java.sql.Timestamp.from(created.plusSeconds(resetMinutes * 60L)), java.sql.Timestamp.from(created));
-      // SMTP/e-mail delivery can consume this event later. Never log the raw token.
+      // O token bruto nunca vai para log. O envio acontece fora da requisição
+      // para que o tempo de resposta não revele se o e-mail existe.
+      envioRecuperacao.enviar(email, raw, resetMinutes);
       if (exposeResetToken) resposta.put("developmentToken", raw);
     }
     return ResponseEntity.accepted().body(resposta);
@@ -178,6 +235,7 @@ public class AuthController {
     db.update("UPDATE app_user SET password_hash=? WHERE id=?", passwords.encode(input.password()), userId);
     db.update("UPDATE password_reset_token SET used_at=? WHERE id=?", java.sql.Timestamp.from(now), id);
     db.update("UPDATE auth_session SET revoked=true WHERE user_id=? AND revoked=false", userId);
+    db.update("DELETE FROM login_attempt WHERE email_hash=(SELECT encode(sha256(convert_to(email,'UTF8')),'hex') FROM app_user WHERE id=?)", userId);
     return ResponseEntity.noContent().build();
   }
 }
