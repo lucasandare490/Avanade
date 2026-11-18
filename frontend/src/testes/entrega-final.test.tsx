@@ -4,6 +4,7 @@ import '@testing-library/jest-dom/vitest';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { TelaLogin } from '../telas/TelaLogin';
+import { TelaRedefinirSenha } from '../telas/TelaRedefinirSenha';
 import { autenticacaoDemonstrativa, FalhaLogin, zerarTentativasDemo } from '../servicos/sessaoUsuario';
 import { FalhaTransporte, mensagemLogin } from '../servicos/transporteApi';
 import { traduzirTexto, temTraducao } from '../preferencias/idioma';
@@ -202,5 +203,29 @@ describe('ícones "i"', () => {
     expect(balao.hidden).toBe(false);
     act(() => icone.click());
     expect(balao.hidden).toBe(true);
+  });
+});
+
+describe('tela Criar nova senha', () => {
+  it('confere as duas senhas, envia o token e trata link vencido', async () => {
+    const redefinir = vi.fn().mockRejectedValueOnce(new Error('400')).mockResolvedValueOnce(undefined);
+    const concluir = vi.fn();
+    render(<TelaRedefinirSenha token={'t'.repeat(43)} redefinir={redefinir} concluir={concluir} />);
+    const nova = screen.getByLabelText('Nova senha', { exact: true });
+    const confirmar = screen.getByLabelText('Confirmar senha', { exact: true });
+    fireEvent.change(nova, { target: { value: 'Senha-nova-123456' } });
+    fireEvent.change(confirmar, { target: { value: 'Outra-senha-12345' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Salvar nova senha' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('As senhas precisam ser iguais.');
+    expect(redefinir).not.toHaveBeenCalled();
+    fireEvent.change(nova, { target: { value: 'Senha-nova-123456' } });
+    fireEvent.change(confirmar, { target: { value: 'Senha-nova-123456' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Salvar nova senha' }));
+    expect(await screen.findByText(/link de recuperação é inválido ou expirou/)).toBeInTheDocument();
+    fireEvent.change(nova, { target: { value: 'Senha-nova-123456' } });
+    fireEvent.change(confirmar, { target: { value: 'Senha-nova-123456' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Salvar nova senha' }));
+    await waitFor(() => expect(concluir).toHaveBeenCalled());
+    expect(redefinir).toHaveBeenLastCalledWith('t'.repeat(43), 'Senha-nova-123456');
   });
 });
