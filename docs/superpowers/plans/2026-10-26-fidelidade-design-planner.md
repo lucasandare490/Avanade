@@ -1,6 +1,5 @@
 # Fidelidade visual do Planner — plano de implementação
 
-> **For agentic workers:** Use `superpowers:executing-plans` or bounded independent delegation. Track each deliverable and verify it.
 
 **Goal:** Aproximar o frontend da documentação Figma Make incorporada ao repositório, com servidor local para revisão visual.
 
