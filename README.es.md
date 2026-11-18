@@ -117,7 +117,7 @@ El sistema es auditable: cada cambio tiene un commit con autoría, el [CHANGELOG
 - Contraseñas con BCrypt. El token de acceso es opaco, revocable y expira. La contraseña nunca se guarda en el navegador.
 - El bloqueo de inicio de sesión está en el servidor, guarda solo el hash del correo y responde igual para correos registrados y no registrados, así nadie descubre qué cuentas existen.
 - **Recordarme** guarda el token en este dispositivo hasta que la sesión expire. No lo use en una computadora compartida.
-- El enlace de recuperación vale por 30 minutos y una sola vez, y el token viaja en el fragmento `#` de la URL, que no llega a los registros del servidor. El envío del correo requiere SMTP configurado en el servidor (`SPRING_MAIL_HOST`, `SPRING_MAIL_PORT`, `SPRING_MAIL_USERNAME`, `SPRING_MAIL_PASSWORD`, `PASSWORD_RESET_FROM`, `PASSWORD_RESET_LINK_BASE`). Sin eso, la solicitud se acepta y no se envía nada.
+- El enlace de recuperación vale por 30 minutos y una sola vez, y el token viaja en el fragmento `#` de la URL, que no llega a los registros del servidor. El envío del correo requiere SMTP configurado en el servidor (`SPRING_MAIL_HOST`, `SPRING_MAIL_PORT`, `SPRING_MAIL_USERNAME`, `SPRING_MAIL_PASSWORD`, `PASSWORD_RESET_FROM`, `PASSWORD_RESET_LINK_BASE`). Sin eso, la solicitud se acepta y no se envía nada. Paso a paso (en portugués): [configurar el correo de recuperación](documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md). En la demostración local, el correo se simula con un enlace en la pantalla.
 - Ninguna contraseña, clave ni base de datos local entra en el repositorio (`.env`, `backend/.local` y similares están en `.gitignore`).
 
 ## Carpetas

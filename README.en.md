@@ -117,7 +117,7 @@ The system is auditable: every change has an authored commit, the [CHANGELOG](CH
 - Passwords hashed with BCrypt. The access token is opaque, revocable and expires. The password is never stored in the browser.
 - The sign-in lock lives on the server, stores only a hash of the email and answers the same way for registered and unregistered emails, so nobody can find out which accounts exist.
 - **Remember me** keeps the token on this device until the session expires. Do not use it on a shared computer.
-- The recovery link is valid for 30 minutes and only once, and the token travels in the URL `#` fragment, which never reaches server logs. Sending the email requires SMTP configured on the server (`SPRING_MAIL_HOST`, `SPRING_MAIL_PORT`, `SPRING_MAIL_USERNAME`, `SPRING_MAIL_PASSWORD`, `PASSWORD_RESET_FROM`, `PASSWORD_RESET_LINK_BASE`). Without it, the request is accepted and nothing is sent.
+- The recovery link is valid for 30 minutes and only once, and the token travels in the URL `#` fragment, which never reaches server logs. Sending the email requires SMTP configured on the server (`SPRING_MAIL_HOST`, `SPRING_MAIL_PORT`, `SPRING_MAIL_USERNAME`, `SPRING_MAIL_PASSWORD`, `PASSWORD_RESET_FROM`, `PASSWORD_RESET_LINK_BASE`). Without it, the request is accepted and nothing is sent. Step by step (in Portuguese): [set up the recovery email](documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md). In the local demo, the email is simulated by a link on the screen.
 - No password, key or local database goes into the repository (`.env`, `backend/.local` and similar are in `.gitignore`).
 
 ## Folders

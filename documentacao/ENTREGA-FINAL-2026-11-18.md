@@ -23,7 +23,7 @@ O texto completo está no [README](../README.md#o-problema), também em [inglês
 | Recuperação de conta | `EnvioRecuperacaoSenha.java`, `TelaRedefinirSenha.tsx`, `SessionFilter` (rotas públicas) | `RecuperacaoSenhaIntegrationTest`, `RecuperacaoSenhaEmailTest`; navegador (pedido de recuperação) |
 | Olhinho da senha | `TelaLogin.tsx` (`CampoSenha`), `TelaRedefinirSenha.tsx` | unitários e navegador |
 | "Ainda não tem uma conta? Cadastre-se" | `TelaLogin.tsx` | unitários e navegador |
-| Lembrar de mim | `TelaLogin.tsx`, `adaptarEValidarRespostasApi.ts` (`retomar`, `esquecer`) | unitários (guarda só e-mail e token; descarta sessão expirada, de outra API ou adulterada) |
+| Lembrar de mim | `TelaLogin.tsx`, `adaptarEValidarRespostasApi.ts` e `sessaoUsuario.ts` (`retomar`, `esquecer`), no MVP e na demonstração | unitários (guarda só e-mail e token; descarta sessão expirada, de outra API ou adulterada) |
 | Tema claro, escuro e do sistema em todas as telas | `preferencias/tema.ts`, `tema-escuro.css` (gerado), `SeletorPreferencias.tsx` | navegador em 10 telas + telas públicas; contraste do tema escuro medido |
 | Português, inglês e espanhol em todas as telas | `preferencias/idioma.ts`, `traducoes.ts` | `verificar-traducoes.mjs` (todo texto do código); navegador percorre 10 telas e as telas públicas nos dois idiomas sem sobrar texto sem tradução |
 | Ícone "i" em cada informação | `preferencias/dicas.ts`, `glossario.ts` | navegador: toda informação das telas tem explicação; abre com mouse, teclado e toque; fecha com Esc; muda de idioma |
@@ -38,9 +38,9 @@ Os números abaixo foram medidos nesta entrega, no Linux (Node 20.20, JDK 21.0.1
 | Bateria | `main` antes da entrega | Esta entrega |
 |---|---|---|
 | Backend (`./mvnw test`, PostgreSQL embutido) | 61 testes, 1 falha por tempo de espera (`CrashRecoveryTest`, máquina ocupada) | **70 testes, 0 falhas** (9 novos: bloqueio, recuperação e e-mail) |
-| Frontend unitários (`npm test`) | 110 testes | **125 testes, 0 falhas** (15 novos) |
+| Frontend unitários (`npm test`) | 110 testes | **127 testes, 0 falhas** (17 novos) |
 | Tipos e build de produção (`npm run build`) | passa | **passa**; o código de teste (`__planner`) não vai para o build |
-| Navegador na demonstração (`npm run test:e2e:entrega`) | — | **18 de 18**: login, tema, idiomas, ícones "i", WCAG A/AA nos temas claro e escuro, teclado e ampliação |
+| Navegador na demonstração (`npm run test:e2e:entrega`) | — | **20 de 20**: login, recuperação de senha completa, lembrar de mim, tema, idiomas, ícones "i", WCAG A/AA nos temas claro e escuro, teclado e ampliação |
 | Navegador contra a API real (`npx playwright test`, com backend local) | **0 de 22** (testes desatualizados: esperavam o login na primeira tela) | **21 de 21** (19 do time, atualizados, e 2 novos de login integrado) |
 | Traduções (`verificar-traducoes.mjs`) | — | 892 textos em EN/ES e 159 explicações em PT/EN/ES, nenhum faltando |
 | Acessibilidade (axe, WCAG 2.1 A/AA, 10 telas) | violações de contraste no design | **0 violações** nos temas claro e escuro |
@@ -79,7 +79,7 @@ Fica de fora (risco aceito ou depende de outra pessoa):
 ## 5. Pendências
 
 - Novo deploy da API no Render e do site na Vercel com esta versão (o deploy da API é manual).
-- Configurar o SMTP no Render para o e-mail de recuperação sair de verdade.
+- Configurar o SMTP no Render para o e-mail de recuperação sair de verdade: [passo a passo](CONFIGURAR-EMAIL-RECUPERACAO.md).
 - Aplicar a correção do problema central também nos documentos do Google Docs.
 - Homologação do aplicativo Android em aparelho físico.
 

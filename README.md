@@ -115,7 +115,7 @@ Os resultados da entrega final estão em [documentacao/ENTREGA-FINAL-2026-11-18.
 - Senhas com BCrypt. O token de acesso é opaco, revogável e expira. A senha nunca é guardada no navegador.
 - O bloqueio de login fica no servidor, guarda só o hash do e-mail e responde igual para e-mails cadastrados e não cadastrados. Assim ninguém descobre quais contas existem.
 - **Lembrar de mim** guarda o token neste aparelho até a sessão expirar. Não use em computador compartilhado.
-- O link de recuperação vale por 30 minutos e uma vez só, e o token vai no fragmento `#` da URL, que não chega aos logs do servidor. O envio do e-mail exige SMTP configurado no servidor (`SPRING_MAIL_HOST`, `SPRING_MAIL_PORT`, `SPRING_MAIL_USERNAME`, `SPRING_MAIL_PASSWORD`, `PASSWORD_RESET_FROM`, `PASSWORD_RESET_LINK_BASE`). Sem isso, o pedido é aceito e nada é enviado.
+- O link de recuperação vale por 30 minutos e uma vez só, e o token vai no fragmento `#` da URL, que não chega aos logs do servidor. O envio do e-mail exige SMTP configurado no servidor (`SPRING_MAIL_HOST`, `SPRING_MAIL_PORT`, `SPRING_MAIL_USERNAME`, `SPRING_MAIL_PASSWORD`, `PASSWORD_RESET_FROM`, `PASSWORD_RESET_LINK_BASE`). Sem isso, o pedido é aceito e nada é enviado. Passo a passo: [configurar o e-mail de recuperação](documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md). Na demonstração local, o e-mail é simulado por um link na própria tela.
 - Nenhuma senha, chave ou banco local entra no repositório (`.env`, `backend/.local` e afins estão no `.gitignore`).
 
 ## Pastas

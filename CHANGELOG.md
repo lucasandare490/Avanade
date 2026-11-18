@@ -16,6 +16,8 @@ Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autori
 - Botão de olho para mostrar ou esconder a senha.
 - **Lembrar de mim**: mantém a sessão no aparelho até expirar. A senha nunca é guardada.
 - **Ainda não tem uma conta? Cadastre-se** na tela de login.
+- Demonstração local funcional: a recuperação de senha gera um link simulado que abre **Criar nova senha**, e **Lembrar de mim** mantém a sessão ao recarregar.
+- Guia para ligar o e-mail de recuperação no Render: `documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md`.
 
 ### Todas as telas
 - Tema claro, escuro ou do sistema, no menu e nas telas públicas. O tema escuro é gerado a partir das cores do tema claro (`npm run tema:escuro`).
