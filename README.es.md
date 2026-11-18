@@ -89,7 +89,7 @@ Mentor: **Eryson Moreira** (Avanade). Grupo: GROWUP-SENAC-N2. La autoría de cad
 
 ## Documentos del proyecto
 
-- [Prototipo en Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design)
+- [Prototipo en Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design) y [documentación de diseño, tokens y capturas](documentacao/design/README.md)
 - [Carpeta de documentación del Squad 19](https://drive.google.com/drive/folders/1_4WXflZ5LvJ3yTbEgqiSV5Qw5S6jHoYp?usp=sharing)
 - [Análisis y levantamiento de requisitos de Split Pay y Planner Comercial](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing)
 - [Documentación de requisitos (V2)](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
@@ -109,6 +109,7 @@ Mentor: **Eryson Moreira** (Avanade). Grupo: GROWUP-SENAC-N2. La autoría de cad
 | Todas las frases de la interfaz traducidas | `node scripts/auditoria/verificar-traducoes.mjs` |
 | Ningún crédito de IA en el proyecto | `node scripts/auditoria/verificar-sem-credito-ia.mjs` |
 | Tema oscuro al día con el tema claro | `cd frontend && node scripts/gerar-tema-escuro.mjs --verificar` |
+| Sitio y API publicados actualizados | `node scripts/auditoria/site-producao.mjs` y `node scripts/auditoria/api-producao.mjs` |
 
 El sistema es auditable: cada cambio tiene un commit con autoría, el [CHANGELOG](CHANGELOG.md) resume lo que cambió y cualquier persona puede ejecutar los verificadores de arriba.
 

@@ -2,6 +2,11 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-18 — Design e verificação da produção (Thayná Batista da Silva)
+
+- Documentação de design publicada em `documentacao/design/`: checklist de fidelidade visual, inventários de telas e componentes, tokens de design, 158 capturas e o documento completo em .docx e .pdf (gerados de novo a partir do .md revisado).
+- `scripts/auditoria/site-producao.mjs` e `api-producao.mjs` conferem se o site da Vercel e a API do Render estão na versão nova.
+
 ## 2026-11-18 — Entrega final (Thayná Batista da Silva)
 
 ### Problema central
