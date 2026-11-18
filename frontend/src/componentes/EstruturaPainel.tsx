@@ -1,3 +1,5 @@
+import { SeletorPreferencias } from './SeletorPreferencias';
+import { useIdioma } from '../preferencias/useIdioma';
 import { podeAcessarRota, type SessaoUsuario } from '../servicos/sessaoUsuario';
 import {
   ArrowLeftRight,
@@ -77,6 +79,7 @@ export function EstruturaPainel({
   const lateral = useRef<HTMLElement>(null);
   const abrir = useRef<HTMLButtonElement>(null);
   const devolverFoco = useRef(false);
+  const idioma = useIdioma();
   function fecharMenu() {
     devolverFoco.current = true;
     setMenu(false);
@@ -206,6 +209,7 @@ export function EstruturaPainel({
           ))}
         </nav>
         <div className="rodape-menu">
+          <SeletorPreferencias />
           <div>
             <ShieldCheck size={16} />
             <span>
@@ -237,8 +241,8 @@ export function EstruturaPainel({
             <strong>Visão do negócio</strong>
           </div>
           <div className="acoes-topo">
-            <time className="data-topo" dateTime={new Date().toISOString().slice(0, 10)}>
-              {new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date())}
+            <time data-sem-traducao className="data-topo" dateTime={new Date().toISOString().slice(0, 10)}>
+              {new Intl.DateTimeFormat(idioma === 'en' ? 'en-US' : idioma === 'es' ? 'es-ES' : 'pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date())}
             </time>
             <span className="modo-demo">
               <i />
