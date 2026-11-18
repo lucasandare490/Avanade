@@ -3,6 +3,8 @@ import axe from 'axe-core';
 for(const width of [320,768,1440]) test(`acesso e cadastro: erro, teclado e layout em ${width}px`,async({page})=>{
  await page.setViewportSize({width,height:900});
  await page.goto('/');
+ // O MVP abre na apresentação pública; o login fica no botão Entrar.
+ await page.getByRole('button',{name:'Entrar',exact:true}).click();
  await page.addScriptTag({content:axe.source});
  const check=async()=>{
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBeTruthy();
@@ -26,8 +28,12 @@ for(const width of [320,768,1440]) test(`acesso e cadastro: erro, teclado e layo
  await expect(page.getByLabel('Confirmar senha',{exact:true})).toHaveAttribute('aria-describedby','erro-login');
  await check();
  await page.getByLabel('Seu nome',{exact:true}).focus();
+ // Cada campo tem antes o ícone "i" de explicação, também alcançável pelo Tab.
+ await page.keyboard.press('Tab');
+ await expect(page.getByRole('button',{name:'Mais informações',description:'Nome do estabelecimento'})).toBeFocused();
  await page.keyboard.press('Tab');
  await expect(page.getByLabel('Nome do estabelecimento',{exact:true})).toBeFocused();
+ await page.keyboard.press('Tab');
  await page.keyboard.press('Tab');
  await expect(page.getByLabel('E-mail',{exact:true})).toBeFocused();
 });

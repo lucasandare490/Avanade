@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
+import axe from 'axe-core';
 
 // Entrega final (Thayná Batista da Silva): login seguro, tema, idioma e ícones "i".
 // Roda contra o modo demonstração: VITE_MODO_DADOS=demo npm run dev
@@ -40,7 +41,8 @@ async function textosEmPortugues(page: Page) {
       if (falta(original)) achados.add(original.replace(/\s+/g, ' ').trim());
     }
     document.querySelectorAll('[aria-label],[placeholder],[title]').forEach((el) => {
-      if (el.closest('[data-sem-traducao]')) return;
+      // Títulos com ícone "i": o nome acessível é copiado do texto já traduzido na tela.
+      if (el.closest('[data-sem-traducao]') || el.hasAttribute('data-rotulo-dica')) return;
       for (const a of ['aria-label', 'placeholder', 'title']) {
         if (!el.hasAttribute(a)) continue;
         const v = p.tradutor.originalAtributo(el, a);
@@ -204,4 +206,26 @@ test.describe('ícones "i"', () => {
     await expect(page.getByLabel('E-mail', { exact: true })).toBeVisible();
     await expect(page.getByLabel('Senha', { exact: true })).toBeVisible();
   });
+});
+
+test.describe('acessibilidade nos dois temas', () => {
+  for (const tema of ['claro', 'escuro'] as const) {
+    test(`sem violações WCAG A/AA no tema ${tema}, em todas as telas`, async ({ page }) => {
+      await page.addInitScript((t) => localStorage.setItem('planner:tema', t), tema);
+      await entrarDemo(page);
+      await page.addInitScript((t) => localStorage.setItem('planner:tema', t), tema);
+      const problemas: string[] = [];
+      for (const rota of ROTAS) {
+        await irPara(page, rota);
+        await page.addScriptTag({ content: axe.source });
+        const r = await page.evaluate(async () =>
+          (await (window as any).axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(
+            (v: any) => `${v.id}: ${v.nodes.map((n: any) => n.target.join(' ')).join(' | ')}`,
+          ),
+        );
+        r.forEach((x: string) => problemas.push(`${rota} → ${x}`));
+      }
+      expect(problemas).toEqual([]);
+    });
+  }
 });

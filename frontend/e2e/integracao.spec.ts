@@ -69,7 +69,7 @@ test('venda, despesas, totais, simulação, análise, consulta e logout contra P
   await page.getByLabel('De', { exact: true }).fill(hoje);
   await page.getByLabel('Até', { exact: true }).fill(hoje);
   await page.getByRole('button', { name: 'Consultar período' }).click();
-  await expect(page.getByText('Saldo final', { exact: true })).toBeVisible();
+  await expect(page.getByText('Saldo final', { exact: true }).first()).toBeVisible();
   await page.getByRole('link', { name: 'Simulação Split', exact: true }).click();
   await page.getByLabel('Valor bruto (R$)').fill('150,00');
   await page.getByRole('button', { name: 'Calcular simulação' }).click();

@@ -6,6 +6,8 @@ for(const width of [320,768]) {
  test(`estados de consulta: carregamento, erro e recuperação em ${width}px`,async({page})=>{
   await page.setViewportSize({width,height:900});
   await page.goto('/');
+  // O MVP abre na apresentação pública; o login fica no botão Entrar.
+  await page.getByRole('button',{name:'Entrar',exact:true}).click();
   await page.getByLabel('E-mail',{exact:true}).fill('gerente1@demo.local');
   await page.getByLabel('Senha',{exact:true}).fill(senha);
   await page.getByRole('button',{name:'Entrar',exact:true}).click();
