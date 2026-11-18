@@ -93,6 +93,7 @@ Mentor: **Eryson Moreira** (Avanade). Grupo: GROWUP-SENAC-N2. La autoría de cad
 - [Carpeta de documentación del Squad 19](https://drive.google.com/drive/folders/1_4WXflZ5LvJ3yTbEgqiSV5Qw5S6jHoYp?usp=sharing)
 - [Análisis y levantamiento de requisitos de Split Pay y Planner Comercial](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing)
 - [Documentación de requisitos (V2)](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
+- [Documento de la entrega final (PDF, en portugués)](documentacao/entrega-final/Entrega_Final_GrowUp_Senac_Squad19_Planner_Comercial_Avanade.pdf)
 - [Entrega parcial](https://docs.google.com/document/d/16FiTQW6DRE6WRpWBlSeXzVHnP-lr3DfT/edit?usp=sharing)
 - [Registro de la entrega final](documentacao/ENTREGA-FINAL-2026-11-18.md) (en portugués): qué cambió, cómo se probó y qué quedó pendiente
 - [Contrato de la API](backend/docs/API.md) · [Integración con Supabase](scripts/supabase/README.md) · [Operación en producción](documentacao/OPERACAO-PRODUCAO.md)

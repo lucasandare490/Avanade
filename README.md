@@ -91,6 +91,7 @@ Mentor: **Eryson Moreira** (Avanade). Turma: GROWUP-SENAC-N2. A autoria de cada 
 - [Pasta de documentação da Squad 19](https://drive.google.com/drive/folders/1_4WXflZ5LvJ3yTbEgqiSV5Qw5S6jHoYp?usp=sharing)
 - [Análise e levantamento de requisitos do Split Pay e do Planner Comercial](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing)
 - [Documentação de requisitos (V2)](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
+- [Documento da entrega final (PDF)](documentacao/entrega-final/Entrega_Final_GrowUp_Senac_Squad19_Planner_Comercial_Avanade.pdf) · [DOCX](documentacao/entrega-final/Entrega_Final_GrowUp_Senac_Squad19_Planner_Comercial_Avanade.docx)
 - [Entrega parcial](https://docs.google.com/document/d/16FiTQW6DRE6WRpWBlSeXzVHnP-lr3DfT/edit?usp=sharing)
 - [Registro da entrega final](documentacao/ENTREGA-FINAL-2026-11-18.md): o que mudou, como foi testado e o que ficou pendente
 - [Contrato da API](backend/docs/API.md) · [Integração com Supabase](scripts/supabase/README.md) · [Operação em produção](documentacao/OPERACAO-PRODUCAO.md)

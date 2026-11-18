@@ -1,0 +1,294 @@
+---
+title: "Planner Comercial — Entrega Final"
+subtitle: "GrowUp | Residência em Software & IA · Squad 19 · Avanade"
+author: "Thayná Batista da Silva"
+date: "18/11/2026"
+lang: pt-BR
+---
+
+# Planner Comercial
+
+**Planejamento de caixa para o pequeno comerciante diante do Split Payment da Reforma Tributária, com venda no Smart POS Android e painel web.**
+
+> **OBJETIVO PRINCIPAL DO PROJETO**
+> Evitar que o pequeno comerciante se descapitalize com o Split Payment. O Planner Comercial mostra, venda a venda, quanto de fato entra no caixa depois que o imposto e a taxa são separados no pagamento, e projeta o caixa para que ele se antecipe à falta de capital de giro.
+
+| Item | Informação |
+|---|---|
+| Entrega | Final — 18/11/2026 |
+| Programa | Residência Tecnológica Grow Up 2026.2 — Porto Digital e Faculdade Senac de Pernambuco (Recife-PE) |
+| Turma | GROWUP-SENAC-N2 |
+| Squad | 19 — Planner Comercial (Split Tributário) |
+| Empresa parceira | Avanade |
+| Mentor | Eryson Moreira |
+| Versão | MVP acadêmico publicado |
+| Site publicado | https://avanade-frontend-xi.vercel.app/ |
+| Repositório | https://github.com/lucasandare490/Avanade |
+| Documento produzido por | Thayná Batista da Silva — design e prototipação de alta fidelidade ([Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design)), pesquisa e [levantamento de requisitos](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing), [documentação de requisitos](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing), README (PT/EN/ES), Scrum Master e testes |
+| Entrevista com pessoas usuárias | Kleysson Teixeira da Cruz Junior |
+
+### Equipe
+
+| Pessoa | Papel na squad |
+|---|---|
+| Thayná Batista da Silva | Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; testes; implementação da entrega final (login seguro, tema, idiomas, explicações, correções e auditoria) |
+| Kássio Lima de Oliveira | Código do projeto e deploy (Render e Vercel); integração backend–frontend; Supabase |
+| Lucas André Cardoso de Lima | Código do front-end (web e Android) |
+| Kleysson Teixeira da Cruz Junior | Entrevistas com pessoas usuárias; repositório inicial |
+| Heitor Sette Couto de Melo | Apresentação do pitch deck |
+| James Bernardino da Silva Neto | Integrante da squad |
+
+> **LIMITE DE RESPONSABILIDADE**
+> O recolhimento oficial de IBS/CBS depende de integração com instituição autorizada e homologação. No MVP, vendas, despesas e usuários ficam salvos de verdade no banco de dados; pagamentos, separação do tributo e roteamento são **simulados** e identificados como tal. Percentuais de exemplo não são legislação.
+
+# 1. O que mudou desde a entrega parcial
+
+| Ponto | Entrega parcial | Entrega final |
+|---|---|---|
+| Problema central | Confundido com a solução: o foco era *como recolher o imposto de cada venda* | **Descapitalização** do comerciante com o desconto automático do imposto no pagamento (correção pedida pelo mentor) |
+| Código | Iniciando; protótipo no Figma | MVP publicado: API Java com PostgreSQL, site React, cliente Android |
+| Login | Planejado | Cadastro, login, bloqueio após 5 tentativas, recuperação de conta, lembrar de mim |
+| Acessibilidade e idiomas | — | Tema claro/escuro/sistema, português/inglês/espanhol, ícone "i" com explicação em cada informação, contraste WCAG AA |
+| Testes | Planejados | 70 testes de backend, 127 unitários de frontend, 41 testes em navegador real |
+
+# 2. Definição do problema e personas
+
+## 2.1 Problema, solução e oportunidade de IA
+
+### Problema (até 250 caracteres)
+
+Com o split payment, o imposto sai na hora em que a venda é paga. O dinheiro que ficava no caixa até a data de recolher deixa de entrar, e o pequeno comerciante perde capital de giro (descapitalização) sem perceber a tempo.
+
+### O problema em detalhe
+
+A Reforma Tributária do consumo (Emenda Constitucional 132/2023 e Lei Complementar 214/2025) cria o IBS e a CBS e prevê o **split payment**: no momento do pagamento, a parte do imposto é separada automaticamente e o comerciante recebe só o valor líquido.
+
+Hoje, o dinheiro do imposto entra no caixa junto com a venda e só sai semanas depois, na data de recolhimento. Nesse intervalo, ele funciona como **capital de giro**: paga fornecedor, estoque e salários. Com o split payment, esse dinheiro deixa de entrar. O pequeno e médio comerciante perde capital de giro de uma vez e, sem planejamento, pode ficar sem caixa para pagar as contas mesmo vendendo bem.
+
+Portanto, o problema **não é como recolher o imposto de cada venda** — o split payment já faz isso sozinho. É **como manter o caixa saudável quando o imposto sai na hora da venda**.
+
+### Solução (até 250 caracteres)
+
+O Planner Comercial mostra, venda a venda, quanto vai para imposto, taxa e caixa, calcula o caixa real e projeta os próximos dias, avisando antes de faltar dinheiro, com explicações simples e sem mexer nos valores.
+
+### Como o produto funciona
+
+Venda paga no Smart POS ou no POS web → pagamento confirmado (simulado) → identificação da regra de tributo vigente → separação em **tributo · taxa · valor líquido** → roteamento simulado de cada parcela → registro auditável (eventos com hash encadeado) → caixa atualizado **pelo valor líquido** → projeção e aviso de déficit → explicação em linguagem simples.
+
+**Regra fundamental:** cálculos, separação e movimentação são feitos pelo backend com regras determinísticas. A camada de explicação recebe resultados já calculados e não altera valores.
+
+### Onde a IA gera valor (e como está no MVP)
+
+| Categoria | Aplicação | Situação no MVP |
+|---|---|---|
+| Automação | Sugestão de categoria de despesa por texto | Implementada por regras (palavras-chave), sempre confirmada pela pessoa |
+| Predição | Interpretação da projeção de caixa e comparação de tendências entre períodos | Projeção manual com aviso de déficit e comparação de tendências implementadas; interpretação por regras |
+| Geração de conteúdo | Explicação simples do split e do caixa | Implementada por regras, com dados do servidor; provedor de IA externo continua opcional |
+
+### Limites da IA
+
+Não calcula nem separa tributo; não roteia parcelas nem autoriza pagamentos; não calcula oficialmente IBS/CBS; não aprova crédito; não altera vendas, despesas ou o registro de eventos. Se a explicação estiver indisponível, o núcleo de split e o Planner continuam funcionando.
+
+## 2.2 Personas
+
+| Persona | Necessidades | Dificuldades |
+|---|---|---|
+| Carlos, pequeno comerciante | Saber quanto de cada venda realmente fica no caixa; prever se vai faltar capital de giro; acompanhar vendas e despesas | Pouco tempo; conhecimento tributário limitado; dificuldade com dados complexos |
+| Mariana, responsável financeira | Conferir cada operação de split; ver o caixa pelo valor líquido; comparar períodos; projetar o caixa | Conciliar bruto e líquido; falta de rastreabilidade |
+| João, operador do Smart POS | Registrar a venda rápido; ver a confirmação do split; evitar lançamento duplicado | Pressão de atendimento; risco de erro de digitação |
+
+## 2.3 Cenários de uso e casos de borda
+
+| Cenário | Entrada | Resultado |
+|---|---|---|
+| Venda paga | Pagamento confirmado | Tributo, taxa e líquido separados; parcelas roteadas; operação registrada |
+| Caixa do período | Período | Caixa realizado pelo valor líquido, por dia e por semana |
+| Projeção | Entradas e despesas previstas | Saldo projetado e aviso de déficit |
+| Simulação | Valor e percentual hipotético | Composição sem criar venda |
+| Explicação | Operação ou período | Texto simples a partir dos fatos do servidor |
+| Categoria de despesa | Descrição | Sugestão revisável |
+
+| Caso crítico | Comportamento implementado |
+|---|---|
+| Soma das parcelas diferente do bruto | Operação bloqueada |
+| Venda repetida (perda de resposta) | Idempotência: devolve a mesma operação, sem cobrar de novo |
+| Regra de tributo ausente para a data | Split não é executado; recuperação posterior com a regra histórica |
+| Falha em uma parcela | Parcelas confirmadas preservadas; retomada só do que falta |
+| Pagamento não confirmado | Split não é iniciado |
+| Valor zero ou negativo | Rejeitado |
+| Tentativa de alterar o registro | Bloqueada; registro só recebe novos eventos |
+| Senhas erradas seguidas | Bloqueio temporário de 15 minutos após 5 tentativas, igual para e-mail cadastrado ou não |
+
+## 2.4 Entrevistas e validação de hipóteses
+
+### Hipóteses
+
+1. O comerciante não sabe quanto de cada venda ficará disponível depois do split payment. **Confirmada** na entrevista.
+2. A perda do dinheiro do imposto no caixa afeta o capital de giro e o planejamento. **Confirmada**: a principal dor foi prever o valor realmente disponível.
+3. Ver bruto, tributo, taxa e líquido separados gera confiança. **Confirmada**; virou requisito.
+4. Explicações em linguagem simples ajudam a decidir. Atendida com o ícone "i" e as explicações por regras.
+
+### A) Entrevista com pessoa usuária (realizada por Kleysson)
+
+| Campo | Registro |
+|---|---|
+| Entrevistado | Lucas — empreendedor no ramo de alimentos |
+| Data e método | 04/10 — perguntas estruturadas, 20 minutos |
+| Principal dor | Prever o valor realmente disponível depois de impostos e taxas, o que prejudica o planejamento do caixa |
+| Necessidade | Ver com clareza bruto, impostos, taxas e líquido de cada venda |
+| Alteração no projeto | Visualização detalhada da composição de cada venda e caixa calculado pelo valor líquido |
+
+### B) Entrevista com agente inteligente
+
+Conversa com um assistente de IA generativa (ferramenta de chat), em 01/10/2026, a partir da documentação do projeto. Trata-se de uma entrevista simulada, usada para levantar riscos e casos de falha.
+
+| Sugestão | Decisão | Motivo |
+|---|---|---|
+| Deixar explícito que o recolhimento oficial depende de instituição autorizada | Aceita | Evita prometer o que o projeto não entrega |
+| Marcar operações do MVP como simuladas | Aceita | Não confundir demonstração com operação real |
+| Regras de tributo em tabela com vigência, sem valores fixos no código | Aceita | As regras mudam com o tempo |
+| Idempotência e retomada de falhas | Aceita | Evita duplicidade e perda de parcela |
+| Registro com hash encadeado | Aceita, simplificada | Sem blockchain, para caber no prazo |
+| IA não calcula nem move valores | Aceita | Reduz risco financeiro |
+| Adiar crédito e integrações reais | Aceita | Fora do MVP por prazo e dependência de parceiros |
+
+# 3. Backlog e requisitos
+
+## 3.1 Épicos e situação na entrega final
+
+| ID | Épico | Prioridade | Situação |
+|---|---|---|---|
+| E01 | Autenticação e conta | P1 | **Concluído**: cadastro, login, perfis, bloqueio após 5 tentativas, recuperação por e-mail, lembrar de mim |
+| E02 | Vendas e pagamento | P1 | **Concluído** com pagamento simulado; POS web e cliente Android |
+| E03 | Identificação e separação do tributo | P1 | **Concluído** (simulado, regras com vigência) |
+| E04 | Roteamento das parcelas | P1 | **Concluído** (simulado), com retomada de falha parcial |
+| E05 | Registro auditável | P1 | **Concluído**: eventos em sequência com hash encadeado |
+| E06 | Fluxo de caixa pelo valor líquido | P2 | **Concluído**: caixa realizado, composição diária e semanal |
+| E07 | Simulação de cenários | P2 | **Concluído** |
+| E08 | Explicação dos resultados | P2 | **Parcial**: explicações por regras; provedor de IA externo opcional |
+| E09 | Classificação de despesas | P3 | **Concluído** como sugestão por regras, confirmada pela pessoa |
+| E10 | Alertas de caixa | P3 | **Concluído** como aviso de déficit na projeção |
+| E11 | Crédito e cancelamento | Futuro | Fora do MVP (decisão do grupo) |
+| E12 | Acessibilidade, tema e idiomas | P2 | **Concluído**: tema claro/escuro/sistema, PT/EN/ES, ícone "i", WCAG AA |
+
+## 3.2 Critérios de aceitação verificados por testes
+
+| História | Critério | Teste |
+|---|---|---|
+| Login | Senha errada mostra tentativas restantes; 5ª bloqueia por 15 min; senha certa não entra durante o bloqueio | `LoginBloqueioIntegrationTest`, `login-integrado.spec.ts` |
+| Recuperação | Pedido sem login; link de uso único e com validade; troca de senha revoga sessões e desbloqueia | `RecuperacaoSenhaIntegrationTest`, `RecuperacaoSenhaEmailTest` |
+| Venda e split | Soma das parcelas igual ao bruto; mesma tentativa não duplica | `BackendIntegrationTest`, `CrashRecoveryTest` |
+| Caixa | Entra o líquido, saem despesas, saldo por período e semana | `QueryAndCashIntegrationTest`, `caixa-semanal.spec.ts` |
+| Tema e idiomas | Todas as telas nos três idiomas, sem texto sem tradução; tema salvo | `entrega-final.spec.ts`, `verificar-traducoes.mjs` |
+| Explicações | Toda informação das telas tem "i" que abre com mouse, teclado e toque | `entrega-final.spec.ts` |
+
+## 3.3 Uso de ferramentas de IA no processo
+
+Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes e organização de textos, sempre com revisão humana antes de entrar no repositório. Cálculos financeiros nunca são delegados à IA. A autoria das mudanças é das pessoas da equipe, registrada no histórico de commits.
+
+# 4. Banco de dados e API
+
+## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V8)
+
+| Tabela | Função |
+|---|---|
+| `merchant`, `app_user`, `auth_session` | Loja, pessoas (perfis Gerente, Financeiro, Operador) e sessões revogáveis |
+| `login_attempt` | Contagem de senhas erradas e bloqueio (guarda só o hash do e-mail) |
+| `password_reset_token` | Links de recuperação (só o hash, validade e uso único) |
+| `sale`, `payment` | Venda e pagamento simulado |
+| `tax_rule` | Regras de tributo com vigência |
+| `split_operation`, `parcel` | Separação em tributo, taxa e líquido, e cada parcela com status |
+| `ledger_event` | Registro somente de inserção, com hash anterior e hash do evento |
+| `cash_entry` | Entradas e saídas reconhecidas no caixa |
+| `expense`, `expense_category` | Despesas pagas e categorias |
+| `request_intent` | Idempotência: mesma chave devolve o mesmo resultado |
+| `ai_interaction` | Registro das explicações geradas, sem dados sensíveis |
+
+Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos.
+
+## 4.2 Principais endpoints (`/api/v1`)
+
+| Método e rota | Função |
+|---|---|
+| POST `auth/register`, `auth/login`, `auth/logout` | Conta e sessão (login informa tentativas restantes e bloqueio) |
+| POST `auth/password-reset/request`, `/complete` | Recuperação de conta sem estar logado |
+| POST/GET `sales`, GET `sales/{id}` | Venda com split; consulta |
+| GET `split-operations`, `split-operations/{id}`; POST `/{id}/reprocess` | Operações, parcelas e retomada |
+| GET `ledger?saleId=` | Eventos auditáveis da venda |
+| POST/GET `expenses`, GET `expense-categories` | Despesas |
+| GET `cash-flow`, `dashboard` | Caixa pelo valor líquido |
+| POST `planning/projection` | Projeção manual com aviso de déficit |
+| POST `split-payment/simulate` | Simulação sem escrita |
+| POST `ai/cash-analysis`, GET `ai/split-explanation/{id}`, POST `ai/expense-category` | Explicações e sugestão revisável |
+| GET `reports/{sales,expenses,taxes}` | Relatórios com CSV |
+
+Erros seguem o formato `{code, message, fieldErrors, correlationId}`. Contrato completo: `backend/docs/API.md` no repositório.
+
+# 5. Arquitetura e stack
+
+| Camada | Tecnologias |
+|---|---|
+| Backend | Java 21, Spring Boot 3.5, Spring Security, Bean Validation, Flyway, BCrypt, envio de e-mail por SMTP |
+| Banco | PostgreSQL (Supabase em produção; embutido nos testes) |
+| Web | React 19, TypeScript, Vite; tema, idiomas e explicações sem dependências externas |
+| Android | Kotlin, cliente POS integrado por HTTPS |
+| Testes | JUnit, MockMvc, Vitest, Testing Library, Playwright, axe-core |
+| Infraestrutura | GitHub e GitHub Actions; API no Render (Docker); site na Vercel |
+
+Smart POS/POS web e painel web → API REST (autenticação, núcleo de split, Planner, explicações) → PostgreSQL. Adaptadores de pagamento e de split são simulados no MVP e podem ser trocados por integrações oficiais sem mudar o núcleo.
+
+**Segurança:** senhas com BCrypt; token opaco, revogável e com validade; autorização por loja e perfil em cada ação; limite de requisições por IP; bloqueio de login no servidor; token de recuperação só como hash e no fragmento da URL; nenhum segredo no repositório; traduções e explicações inseridas como texto, sem HTML.
+
+# 6. Resultados de testes da entrega final
+
+| Bateria | Resultado |
+|---|---|
+| Backend (`./mvnw test`) | **70 de 70** |
+| Frontend unitários (`npm test`) | **127 de 127** |
+| Navegador na demonstração (`npm run test:e2e:entrega`) | **20 de 20** — login, recuperação, lembrar de mim, tema, idiomas, ícones "i", WCAG A/AA nos dois temas, teclado |
+| Navegador contra a API real | **21 de 21** (no `main` antes desta entrega: 0 de 22) |
+| CI do GitHub | 12 de 12 verificações |
+| Traduções | 895 textos em inglês e espanhol; 159 explicações em três idiomas |
+| Acessibilidade (axe, 10 telas) | 0 violações nos temas claro e escuro |
+
+Defeitos antigos encontrados e corrigidos: as rotas de recuperação de senha exigiam login, e o banco não permitia à API trocar a senha — a recuperação nunca tinha funcionado.
+
+# 7. Relato do processo
+
+### O que fizemos
+
+- Definição do produto, personas, cenários e backlog; protótipo de alta fidelidade no Figma.
+- Implementação do núcleo de split simulado, do Planner (caixa, projeção, simulação, relatórios) e do cliente Android.
+- Publicação do site (Vercel) e da API (Render) com banco gerenciado (Supabase).
+- Na entrega final: correção do problema central, segurança do login, acessibilidade, idiomas, explicações contextuais, documentação trilíngue e verificações de auditoria.
+
+### Como trabalhamos
+
+Equipe dividida por frentes (produto e design, front-end, código e deploy, entrevistas, pitch), com Trello, Discord e Google Meet; código integrado por Pull Requests no GitHub e validado pelo CI.
+
+### O que aprendemos
+
+- **Problema antes da solução:** o mentor mostrou que descrevíamos o recolhimento do imposto (solução) em vez da dor do comerciante (descapitalização). Separar os dois deixou o produto mais claro.
+- Separar o que o MVP entrega do que depende de parceiros e homologação evita promessas que o projeto não cumpre.
+- Dinheiro exige idempotência, registro auditável e testes de falha.
+- Acessibilidade e idiomas precisam de teste automático; sem isso, textos e contrastes escapam.
+
+### Dificuldades
+
+- Dependência de instituição autorizada para o recolhimento oficial, resolvida com simulação explícita.
+- Funcionamento real das maquininhas e do Smart POS; homologação em aparelho físico pendente.
+- Comunicação e prazos da equipe na reta final.
+
+# 8. Pendências
+
+| Pendência | Responsável |
+|---|---|
+| Deploy manual da API no Render com a versão final (aplica as migrations V7 e V8) | Kássio |
+| Configurar o SMTP no Render para o e-mail de recuperação (guia em `documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md`) | Kássio |
+| Homologação do aplicativo Android em aparelho físico | Equipe |
+| Integração oficial de pagamento e recolhimento (fora do MVP) | Evolução futura |
+| Crédito e cancelamento | Evolução futura |
+
+---
+
+Planner Comercial · Squad 19 · GrowUp/Senac com Avanade · 2026
