@@ -1,0 +1,230 @@
+/*
+ * Planner Comercial · Design Tokens
+ * Fonte: protótipo Figma Make, commit 508e5de (src/index.css, src/components/ui.tsx, páginas).
+ * Documento de referência: DOCUMENTACAO_COMPLETA_FRONTEND_DESIGN_SYSTEM.md, seção 22.
+ *
+ * Bloco 1 (EXISTENTES): espelha exatamente o @theme atual. Não altera nada.
+ * Bloco 2 (SUGERIDOS): dá nome semântico a valores que hoje estão repetidos como hex
+ * arbitrário no código. Todos os valores são os atuais; nenhum valor visual foi modificado.
+ * Medidas em px absolutos já convertidas com a raiz de 14px do protótipo.
+ */
+
+/* ===================== 1. EXISTENTES (src/index.css, @theme) ===================== */
+:root {
+  --color-primary: #1E3A5F;
+  --color-primary-light: #2563EB;
+  --color-primary-foreground: #FFFFFF;
+  --color-accent: #2563EB;
+  --color-accent-hover: #1D4ED8;
+  --color-background: #F0F4F8;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F8FAFC;
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
+  --color-text: #0F172A;
+  --color-text-2: #334155;
+  --color-text-muted: #64748B;
+  --color-success: #16A34A;
+  --color-success-bg: #F0FDF4;
+  --color-warning: #D97706;
+  --color-warning-bg: #FFFBEB;
+  --color-danger: #DC2626;
+  --color-danger-bg: #FEF2F2;
+  --color-sidebar: #0F2544;
+
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+}
+
+/* ===================== 2. SUGERIDOS (valores atuais, nomes novos) ===================== */
+:root {
+  /* Ação (web): hoje como hex arbitrário em ui.tsx e páginas */
+  --pc-color-action: #1E54B7;
+  --pc-color-action-hover: #1844A0;
+  --pc-color-action-active: #143590;
+  --pc-color-nav-active: #2563EB;
+  --pc-color-focus-ring: #2563EB;
+
+  /* Marca escura */
+  --pc-color-brand-dark: #0F2544;
+  --pc-color-brand-dark-hover: #1A3860;
+  --pc-color-brand-dark-active: #0A1A30;
+  --pc-color-avatar: #1E3A5F;
+  --pc-color-on-dark-muted: #93C5FD;
+  --pc-color-on-dark-subtle: #4E7298;
+
+  /* Smart POS */
+  --pc-pos-color-primary: #1F4E9E;
+  --pc-pos-color-header: #123463;
+
+  /* Texto */
+  --pc-color-text: #0F172A;
+  --pc-color-text-secondary: #334155;
+  --pc-color-text-badge: #475569;
+  --pc-color-text-muted: #64748B;
+  --pc-color-text-subtle: #94A3B8;
+
+  /* Superfícies e bordas */
+  --pc-color-bg-page: #F0F4F8;
+  --pc-color-surface: #FFFFFF;
+  --pc-color-surface-2: #F8FAFC;
+  --pc-color-surface-muted: #F1F5F9;
+  --pc-color-border: #E2E8F0;
+  --pc-color-border-strong: #CBD5E1;
+
+  /* Informação / simulado */
+  --pc-color-info-text: #1D4ED8;
+  --pc-color-info-title: #1E3A8A;
+  --pc-color-info-text-light: #3B82F6;
+  --pc-color-info-border: #BFDBFE;
+  --pc-color-info-bg-strong: #DBEAFE;
+  --pc-color-info-bg: #EFF6FF;
+  --pc-color-simulated-text: #075985;
+  --pc-color-simulated-bg: #E0F2FE;
+
+  /* Sucesso */
+  --pc-color-success: #16A34A;
+  --pc-color-success-strong: #15803D;
+  --pc-color-success-title: #14532D;
+  --pc-color-success-border: #BBF7D0;
+  --pc-color-success-bg-strong: #DCFCE7;
+  --pc-color-success-bg: #F0FDF4;
+  --pc-color-chart-inflow: #86EFAC;
+
+  /* Atenção / tributo */
+  --pc-color-warning: #D97706;
+  --pc-color-tax: #F59E0B;
+  --pc-color-warning-text: #A16207;
+  --pc-color-warning-body: #92400E;
+  --pc-color-warning-title: #78350F;
+  --pc-color-warning-border: #FDE68A;
+  --pc-color-warning-bg-strong: #FEF9C3;
+  --pc-color-warning-bg: #FFFBEB;
+
+  /* Erro */
+  --pc-color-danger: #DC2626;
+  --pc-color-danger-hover: #B91C1C;
+  --pc-color-danger-title: #991B1B;
+  --pc-color-danger-border: #FCA5A5;
+  --pc-color-chart-outflow: #FCA5A5;
+  --pc-color-danger-bg-strong: #FEE2E2;
+  --pc-color-danger-bg: #FEF2F2;
+
+  /* Sobreposição e transparência */
+  --pc-overlay: rgba(0, 0, 0, 0.4);
+  --pc-overlay-blur: 8px;
+  --pc-on-dark-surface-5: rgba(255, 255, 255, 0.05);
+  --pc-on-dark-surface-8: rgba(255, 255, 255, 0.08);
+  --pc-on-dark-border-10: rgba(255, 255, 255, 0.10);
+  --pc-focus-ring-field: rgba(30, 84, 183, 0.15);
+  --pc-focus-ring-field-error: rgba(220, 38, 38, 0.20);
+  --pc-opacity-disabled: 0.5;
+
+  /* Tipografia (px renderizados com raiz 14px) */
+  --pc-font-size-root: 14px;
+  --pc-font-size-pos-root: 16px;
+  --pc-line-height-root: 1.6;
+  --pc-line-height-pos: 1.45;
+  --pc-line-height-heading: 1.25;
+  --pc-font-size-9: 9px;
+  --pc-font-size-10: 10px;
+  --pc-font-size-xs: 10.5px;     /* lh 14px */
+  --pc-font-size-sm: 12.25px;    /* lh 17.5px */
+  --pc-font-size-base: 14px;     /* lh 21px */
+  --pc-font-size-lg: 15.75px;    /* lh 24.5px */
+  --pc-font-size-xl: 17.5px;     /* lh 24.5px; em títulos 21.875px */
+  --pc-font-size-2xl: 21px;      /* lh 28px */
+  --pc-font-size-3xl: 26.25px;   /* lh 31.5px */
+  --pc-font-size-4xl: 31.5px;    /* lh 35px */
+  --pc-font-weight-regular: 400;
+  --pc-font-weight-medium: 500;
+  --pc-font-weight-semibold: 600;
+  --pc-font-weight-bold: 700;
+  --pc-letter-spacing-wide: 0.025em;
+  --pc-letter-spacing-widest: 0.1em;
+  --pc-letter-spacing-pos-brand: 0.16em;
+
+  /* Espaçamento (unidade 3.5px) */
+  --pc-space-0-5: 1.75px;
+  --pc-space-1: 3.5px;
+  --pc-space-1-5: 5.25px;
+  --pc-space-2: 7px;
+  --pc-space-2-5: 8.75px;
+  --pc-space-3: 10.5px;
+  --pc-space-3-5: 12.25px;
+  --pc-space-4: 14px;
+  --pc-space-5: 17.5px;
+  --pc-space-6: 21px;
+  --pc-space-8: 28px;
+  --pc-space-10: 35px;
+  --pc-space-12: 42px;
+  --pc-space-14: 49px;
+  --pc-space-16: 56px;
+  --pc-space-20: 70px;
+
+  /* Raios */
+  --pc-radius-xs: 3.5px;   /* rounded */
+  --pc-radius-sm: 6px;
+  --pc-radius-md: 10px;
+  --pc-radius-lg: 14px;    /* rounded-lg e rounded-2xl renderizam igual */
+  --pc-radius-xl: 20px;
+  --pc-radius-full: 9999px;
+
+  /* Sombras (CSS compilado) */
+  --pc-shadow-sm: 0 1px 3px 0 #0000001A, 0 1px 2px -1px #0000001A;
+  --pc-shadow-md: 0 4px 6px -1px #0000001A, 0 2px 4px -2px #0000001A;
+  --pc-shadow-lg: 0 10px 15px -3px #0000001A, 0 4px 6px -4px #0000001A;
+  --pc-shadow-2xl: 0 25px 50px -12px #00000040;
+
+  /* Dimensões */
+  --pc-sidebar-width: 210px;
+  --pc-header-height: 49px;
+  --pc-field-height: 37px;
+  --pc-button-height-sm: 24.5px;
+  --pc-button-height-md: 31.5px;
+  --pc-button-height-lg: 35px;
+  --pc-button-height-xl: 49px;
+  --pc-icon-size: 16px;
+  --pc-avatar-size: 28px;
+  --pc-login-brand-width: 420px;
+  --pc-login-form-width: 360px;
+  --pc-register-form-width: 380px;
+  --pc-container-xs: 280px;
+  --pc-container-sm: 336px;
+  --pc-container-md: 392px;
+  --pc-container-lg: 448px;
+  --pc-container-2xl: 588px;
+  --pc-container-3xl: 672px;
+  --pc-container-4xl: 784px;
+  --pc-container-5xl: 896px;
+  --pc-chat-height: 480px;
+  --pc-chart-height-dashboard: 180px;
+  --pc-chart-height-cashflow: 260px;
+  --pc-pos-width: 360px;
+  --pc-pos-min-height: 640px;
+  --pc-pos-max-height: 760px;
+  --pc-pos-touch-min: 42px;     /* atual (min-h-12). Requisito do produto: 48px */
+
+  /* Camadas */
+  --pc-z-sticky: 10;
+  --pc-z-overlay: 20;
+  --pc-z-drawer: 30;
+  --pc-z-modal: 50;
+  --pc-z-toast: 50;
+  --pc-z-chart-tooltip: 1000;
+
+  /* Movimento */
+  --pc-duration-fast: 150ms;
+  --pc-duration-base: 200ms;
+  --pc-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --pc-toast-lifetime: 3500ms;
+}
+
+/* Breakpoints (media queries usam 16px por rem, por isso os valores em px):
+   sm: 640px   lg: 1024px   (md, xl, 2xl não são usados) */

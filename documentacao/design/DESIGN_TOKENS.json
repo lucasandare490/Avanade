@@ -1,0 +1,937 @@
+{
+  "$meta": {
+    "project": "Planner Comercial MVP Design (Figma Make)",
+    "commit": "508e5def93168a95d14c58b8cb57fe876ae5548a",
+    "rootFontSize": "14px (1rem = 14px)",
+    "posRootFontSize": "16px",
+    "breakpoints": {
+      "sm": "640px",
+      "lg": "1024px"
+    },
+    "note": "'existing' espelha o @theme atual. 'suggested' nomeia valores já usados; nenhum valor visual foi alterado. Referência: DOCUMENTACAO_COMPLETA_FRONTEND_DESIGN_SYSTEM.md, seção 22."
+  },
+  "existing": {
+    "color": {
+      "color-primary": {
+        "value": "#1E3A5F",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-primary-light": {
+        "value": "#2563EB",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-primary-foreground": {
+        "value": "#FFFFFF",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-accent": {
+        "value": "#2563EB",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-accent-hover": {
+        "value": "#1D4ED8",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-background": {
+        "value": "#F0F4F8",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-surface": {
+        "value": "#FFFFFF",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-surface-2": {
+        "value": "#F8FAFC",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-border": {
+        "value": "#E2E8F0",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-border-strong": {
+        "value": "#CBD5E1",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-text": {
+        "value": "#0F172A",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-text-2": {
+        "value": "#334155",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-text-muted": {
+        "value": "#64748B",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-success": {
+        "value": "#16A34A",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-success-bg": {
+        "value": "#F0FDF4",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-warning": {
+        "value": "#D97706",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-warning-bg": {
+        "value": "#FFFBEB",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-danger": {
+        "value": "#DC2626",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-danger-bg": {
+        "value": "#FEF2F2",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "color-sidebar": {
+        "value": "#0F2544",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      }
+    },
+    "typography": {
+      "font-display": {
+        "value": "'Outfit', sans-serif",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "font-body": {
+        "value": "'Inter', sans-serif",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "font-mono": {
+        "value": "'JetBrains Mono', monospace",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      }
+    },
+    "radius": {
+      "radius-sm": {
+        "value": "6px",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "radius-md": {
+        "value": "10px",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "radius-lg": {
+        "value": "14px",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      },
+      "radius-xl": {
+        "value": "20px",
+        "origin": "src/index.css @theme",
+        "confidence": "confirmado"
+      }
+    }
+  },
+  "suggested": {
+    "color": {
+      "pc-color-action": {
+        "value": "#1E54B7",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-action-hover": {
+        "value": "#1844A0",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-action-active": {
+        "value": "#143590",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-nav-active": {
+        "value": "#2563EB",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-focus-ring": {
+        "value": "#2563EB",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Marca escura"
+      },
+      "pc-color-brand-dark": {
+        "value": "#0F2544",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-brand-dark-hover": {
+        "value": "#1A3860",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-brand-dark-active": {
+        "value": "#0A1A30",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-avatar": {
+        "value": "#1E3A5F",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-on-dark-muted": {
+        "value": "#93C5FD",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-on-dark-subtle": {
+        "value": "#4E7298",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Smart POS"
+      },
+      "pc-pos-color-primary": {
+        "value": "#1F4E9E",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-pos-color-header": {
+        "value": "#123463",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Texto"
+      },
+      "pc-color-text": {
+        "value": "#0F172A",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-text-secondary": {
+        "value": "#334155",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-text-badge": {
+        "value": "#475569",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-text-muted": {
+        "value": "#64748B",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-text-subtle": {
+        "value": "#94A3B8",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Superfícies e bordas"
+      },
+      "pc-color-bg-page": {
+        "value": "#F0F4F8",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-surface": {
+        "value": "#FFFFFF",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-surface-2": {
+        "value": "#F8FAFC",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-surface-muted": {
+        "value": "#F1F5F9",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-border": {
+        "value": "#E2E8F0",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-border-strong": {
+        "value": "#CBD5E1",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Informação / simulado"
+      },
+      "pc-color-info-text": {
+        "value": "#1D4ED8",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-info-title": {
+        "value": "#1E3A8A",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-info-text-light": {
+        "value": "#3B82F6",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-info-border": {
+        "value": "#BFDBFE",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-info-bg-strong": {
+        "value": "#DBEAFE",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-info-bg": {
+        "value": "#EFF6FF",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-simulated-text": {
+        "value": "#075985",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-simulated-bg": {
+        "value": "#E0F2FE",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Sucesso"
+      },
+      "pc-color-success": {
+        "value": "#16A34A",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-success-strong": {
+        "value": "#15803D",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-success-title": {
+        "value": "#14532D",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-success-border": {
+        "value": "#BBF7D0",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-success-bg-strong": {
+        "value": "#DCFCE7",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-success-bg": {
+        "value": "#F0FDF4",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-chart-inflow": {
+        "value": "#86EFAC",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Atenção / tributo"
+      },
+      "pc-color-warning": {
+        "value": "#D97706",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-tax": {
+        "value": "#F59E0B",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-warning-text": {
+        "value": "#A16207",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-warning-body": {
+        "value": "#92400E",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-warning-title": {
+        "value": "#78350F",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-warning-border": {
+        "value": "#FDE68A",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-warning-bg-strong": {
+        "value": "#FEF9C3",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-warning-bg": {
+        "value": "#FFFBEB",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Erro"
+      },
+      "pc-color-danger": {
+        "value": "#DC2626",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-danger-hover": {
+        "value": "#B91C1C",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-danger-title": {
+        "value": "#991B1B",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-danger-border": {
+        "value": "#FCA5A5",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-chart-outflow": {
+        "value": "#FCA5A5",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-danger-bg-strong": {
+        "value": "#FEE2E2",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-color-danger-bg": {
+        "value": "#FEF2F2",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Sobreposição e transparência"
+      },
+      "pc-overlay": {
+        "value": "rgba(0, 0, 0, 0.4)",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-overlay-blur": {
+        "value": "8px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-on-dark-surface-5": {
+        "value": "rgba(255, 255, 255, 0.05)",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-on-dark-surface-8": {
+        "value": "rgba(255, 255, 255, 0.08)",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-on-dark-border-10": {
+        "value": "rgba(255, 255, 255, 0.10)",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-focus-ring-field": {
+        "value": "rgba(30, 84, 183, 0.15)",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-focus-ring-field-error": {
+        "value": "rgba(220, 38, 38, 0.20)",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-z-overlay": {
+        "value": "20",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      }
+    },
+    "opacity": {
+      "pc-opacity-disabled": {
+        "value": "0.5",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Tipografia (px renderizados com raiz 14px)"
+      }
+    },
+    "typography": {
+      "pc-font-size-root": {
+        "value": "14px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-font-size-pos-root": {
+        "value": "16px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-line-height-root": {
+        "value": "1.6",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-line-height-pos": {
+        "value": "1.45",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-line-height-heading": {
+        "value": "1.25",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-font-size-9": {
+        "value": "9px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-font-size-10": {
+        "value": "10px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-font-size-xs": {
+        "value": "10.5px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "lh 14px"
+      },
+      "pc-font-size-sm": {
+        "value": "12.25px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "lh 17.5px"
+      },
+      "pc-font-size-base": {
+        "value": "14px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "lh 21px"
+      },
+      "pc-font-size-lg": {
+        "value": "15.75px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "lh 24.5px"
+      },
+      "pc-font-size-xl": {
+        "value": "17.5px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "lh 24.5px; em títulos 21.875px"
+      },
+      "pc-font-size-2xl": {
+        "value": "21px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "lh 28px"
+      },
+      "pc-font-size-3xl": {
+        "value": "26.25px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "lh 31.5px"
+      },
+      "pc-font-size-4xl": {
+        "value": "31.5px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "lh 35px"
+      },
+      "pc-font-weight-regular": {
+        "value": "400",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-font-weight-medium": {
+        "value": "500",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-font-weight-semibold": {
+        "value": "600",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-font-weight-bold": {
+        "value": "700",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-letter-spacing-wide": {
+        "value": "0.025em",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-letter-spacing-widest": {
+        "value": "0.1em",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-letter-spacing-pos-brand": {
+        "value": "0.16em",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Espaçamento (unidade 3.5px)"
+      }
+    },
+    "spacing": {
+      "pc-space-0-5": {
+        "value": "1.75px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-1": {
+        "value": "3.5px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-1-5": {
+        "value": "5.25px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-2": {
+        "value": "7px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-2-5": {
+        "value": "8.75px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-3": {
+        "value": "10.5px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-3-5": {
+        "value": "12.25px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-4": {
+        "value": "14px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-5": {
+        "value": "17.5px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-6": {
+        "value": "21px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-8": {
+        "value": "28px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-10": {
+        "value": "35px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-12": {
+        "value": "42px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-14": {
+        "value": "49px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-16": {
+        "value": "56px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-space-20": {
+        "value": "70px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Raios"
+      }
+    },
+    "radius": {
+      "pc-radius-xs": {
+        "value": "3.5px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "rounded"
+      },
+      "pc-radius-sm": {
+        "value": "6px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-radius-md": {
+        "value": "10px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-radius-lg": {
+        "value": "14px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "rounded-lg e rounded-2xl renderizam igual"
+      },
+      "pc-radius-xl": {
+        "value": "20px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-radius-full": {
+        "value": "9999px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Sombras (CSS compilado)"
+      }
+    },
+    "shadow": {
+      "pc-shadow-sm": {
+        "value": "0 1px 3px 0 #0000001A, 0 1px 2px -1px #0000001A",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-shadow-md": {
+        "value": "0 4px 6px -1px #0000001A, 0 2px 4px -2px #0000001A",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-shadow-lg": {
+        "value": "0 10px 15px -3px #0000001A, 0 4px 6px -4px #0000001A",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-shadow-2xl": {
+        "value": "0 25px 50px -12px #00000040",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Dimensões"
+      }
+    },
+    "dimension": {
+      "pc-sidebar-width": {
+        "value": "210px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-header-height": {
+        "value": "49px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-field-height": {
+        "value": "37px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-button-height-sm": {
+        "value": "24.5px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-button-height-md": {
+        "value": "31.5px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-button-height-lg": {
+        "value": "35px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-button-height-xl": {
+        "value": "49px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-icon-size": {
+        "value": "16px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-avatar-size": {
+        "value": "28px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-login-brand-width": {
+        "value": "420px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-login-form-width": {
+        "value": "360px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-register-form-width": {
+        "value": "380px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-container-xs": {
+        "value": "280px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-container-sm": {
+        "value": "336px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-container-md": {
+        "value": "392px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-container-lg": {
+        "value": "448px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-container-2xl": {
+        "value": "588px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-container-3xl": {
+        "value": "672px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-container-4xl": {
+        "value": "784px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-container-5xl": {
+        "value": "896px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-chat-height": {
+        "value": "480px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-chart-height-dashboard": {
+        "value": "180px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-chart-height-cashflow": {
+        "value": "260px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-pos-width": {
+        "value": "360px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-pos-min-height": {
+        "value": "640px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-pos-max-height": {
+        "value": "760px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-pos-touch-min": {
+        "value": "42px",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "atual (min-h-12). Requisito do produto: 48px"
+      }
+    },
+    "zIndex": {
+      "pc-z-sticky": {
+        "value": "10",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-z-drawer": {
+        "value": "30",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-z-modal": {
+        "value": "50",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-z-toast": {
+        "value": "50",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-z-chart-tooltip": {
+        "value": "1000",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)",
+        "note": "Movimento"
+      }
+    },
+    "motion": {
+      "pc-duration-fast": {
+        "value": "150ms",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-duration-base": {
+        "value": "200ms",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-ease-standard": {
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      },
+      "pc-toast-lifetime": {
+        "value": "3500ms",
+        "origin": "valor atual no código (hex/classe arbitrária ou CSS compilado)",
+        "confidence": "confirmado (valor) / sugerido (nome)"
+      }
+    }
+  }
+}

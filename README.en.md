@@ -89,7 +89,7 @@ Mentor: **Eryson Moreira** (Avanade). Class: GROWUP-SENAC-N2. The authorship of 
 
 ## Project documents
 
-- [Figma prototype](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design)
+- [Figma prototype](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design) and [design documentation, tokens and screenshots](documentacao/design/README.md)
 - [Squad 19 documentation folder](https://drive.google.com/drive/folders/1_4WXflZ5LvJ3yTbEgqiSV5Qw5S6jHoYp?usp=sharing)
 - [Split Pay and Planner Comercial analysis and requirements gathering](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing)
 - [Requirements documentation (V2)](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
@@ -109,6 +109,7 @@ Mentor: **Eryson Moreira** (Avanade). Class: GROWUP-SENAC-N2. The authorship of 
 | Every interface phrase translated | `node scripts/auditoria/verificar-traducoes.mjs` |
 | No AI credit anywhere in the project | `node scripts/auditoria/verificar-sem-credito-ia.mjs` |
 | Dark theme in sync with the light theme | `cd frontend && node scripts/gerar-tema-escuro.mjs --verificar` |
+| Published site and API up to date | `node scripts/auditoria/site-producao.mjs` and `node scripts/auditoria/api-producao.mjs` |
 
 The system is auditable: every change has an authored commit, the [CHANGELOG](CHANGELOG.md) summarizes what changed and anyone can run the checkers above.
 
