@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 test('cadastro integrado, loja vazia e simulação hipotética',async({page})=>{
  const email=`cadastro-${Date.now()}@example.invalid`,senha='Senha-teste-12345';
  await page.goto('/');
- await page.getByRole('button',{name:'Criar minha conta'}).click();
+ await page.getByRole('button',{name:'Cadastre-se'}).click();
  await page.getByLabel('Seu nome',{exact:true}).fill('Pessoa de teste');
  await page.getByLabel('Nome do estabelecimento',{exact:true}).fill('Loja de teste de cadastro');
  await page.getByLabel('E-mail',{exact:true}).fill(email);

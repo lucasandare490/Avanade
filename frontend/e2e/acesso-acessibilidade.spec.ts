@@ -16,7 +16,7 @@ for(const width of [320,768,1440]) test(`acesso e cadastro: erro, teclado e layo
  await page.getByRole('button',{name:'Entrar',exact:true}).click();
  await expect(page.getByRole('alert')).toBeVisible();
  await check();
- await page.getByRole('button',{name:'Criar minha conta'}).click();
+ await page.getByRole('button',{name:'Cadastre-se'}).click();
  await page.getByLabel('Seu nome',{exact:true}).fill('Pessoa sintética');
  await page.getByLabel('Nome do estabelecimento',{exact:true}).fill('Loja sintética');
  await page.getByLabel('Senha',{exact:true}).fill('Senha-sintetica-123');

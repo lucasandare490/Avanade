@@ -29,7 +29,7 @@ async function novaVenda(page: Page, valor = '150,00') {
 async function novaDespesa(page: Page, descricao: string) {
   await page.getByRole('link', { name: 'Despesas', exact: true }).click();
   await page.getByRole('button', { name: 'Registrar despesa', exact: true }).click();
-  await page.getByLabel('Descrição', { exact: true }).fill(descricao);
+  await page.getByRole('textbox', { name: 'Descrição', exact: true }).fill(descricao);
   await page.getByLabel('Valor (R$)', { exact: true }).fill('10,00');
   await page.getByLabel('Data do pagamento').fill(hoje);
   await page

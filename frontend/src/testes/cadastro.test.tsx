@@ -7,7 +7,7 @@ afterEach(cleanup);
 it('cria conta e retorna ao login sem autenticar automaticamente',async()=>{
  const cadastrar=vi.fn().mockResolvedValue(undefined),autenticar=vi.fn();
  render(<TelaLogin cadastrar={cadastrar} autenticar={autenticar} concluir={vi.fn()} voltar={vi.fn()} demonstrativo={false}/>);
- fireEvent.click(screen.getByRole('button',{name:'Criar minha conta'}));
+ fireEvent.click(screen.getByRole('button',{name:'Cadastre-se'}));
  for(const [label,value] of [['Seu nome','Pessoa'],['Nome do estabelecimento','Loja'],['E-mail','pessoa@example.invalid'],['Senha','Senha-teste-12345'],['Confirmar senha','Senha-teste-12345']]) fireEvent.change(screen.getByLabelText(label,{exact:true}),{target:{value}});
  fireEvent.click(screen.getByRole('button',{name:'Criar conta'}));
  await waitFor(()=>expect(screen.getByRole('status')).toHaveTextContent('Conta e estabelecimento criados'));
@@ -17,7 +17,7 @@ it('cria conta e retorna ao login sem autenticar automaticamente',async()=>{
 });
 it('impede envio de senhas divergentes',async()=>{
  const cadastrar=vi.fn();render(<TelaLogin cadastrar={cadastrar} autenticar={vi.fn()} concluir={vi.fn()} voltar={vi.fn()} demonstrativo={false}/>);
- fireEvent.click(screen.getByRole('button',{name:'Criar minha conta'}));
+ fireEvent.click(screen.getByRole('button',{name:'Cadastre-se'}));
  fireEvent.change(screen.getByLabelText('Senha',{exact:true}),{target:{value:'Senha-teste-12345'}});
  fireEvent.submit(screen.getByRole('button',{name:'Criar conta'}).closest('form')!);
  await waitFor(()=>expect(screen.getByRole('alert')).toHaveTextContent('As senhas precisam ser iguais'));
