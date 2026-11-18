@@ -32,3 +32,18 @@ services:
         value: /etc/secrets/supabase-ca.crt
       - key: CORS_ORIGINS
         sync: false
+      # Recuperação de senha por e-mail (preencher no painel do Render; sem isso nada é enviado).
+      - key: PASSWORD_RESET_LINK_BASE
+        value: https://avanade-frontend-xi.vercel.app
+      - key: PASSWORD_RESET_FROM
+        sync: false
+      - key: SPRING_MAIL_HOST
+        sync: false
+      - key: SPRING_MAIL_PORT
+        sync: false
+      - key: SPRING_MAIL_USERNAME
+        sync: false
+      - key: SPRING_MAIL_PASSWORD
+        sync: false
+      - key: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
+        value: "true"

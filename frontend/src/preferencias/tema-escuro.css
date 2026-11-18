@@ -1,0 +1,641 @@
+/* GERADO por scripts/gerar-tema-escuro.mjs a partir de src/estilos.css, src/design-fidelidade.css, src/estilos-pos.css.
+   Não edite à mão: rode "npm run tema:escuro" depois de mudar as cores do tema claro. */
+html[data-tema="escuro"] {
+  --azul: #dbe6f5;
+  --borda: #263247;
+  --muted: #9fb0c6;
+  --verde: #4ade80;
+  --fundo: #0b1220;
+  color: #e2e8f0;
+  background: #0b1220;
+}
+html[data-tema="escuro"] body {
+  background: #0b1220 !important;
+  color: #e2e8f0;
+}
+html[data-tema="escuro"] input,
+html[data-tema="escuro"] select,
+html[data-tema="escuro"] textarea {
+  background-color: #111a2b;
+  color: #e2e8f0;
+  border-color: #334155;
+}
+html[data-tema="escuro"] {
+  color: #83a9d7 !important;
+  background: #0f161d !important;
+}
+html[data-tema="escuro"] :focus-visible {
+  outline: 3px solid #314c73 !important;
+}
+html[data-tema="escuro"] .pular-conteudo {
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .avatar {
+  background: #121d29 !important;
+}
+html[data-tema="escuro"] .mini-selo {
+  background: #140a2e !important;
+  color: #a38bd0 !important;
+}
+html[data-tema="escuro"] .barra-superior {
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .trilha,
+html[data-tema="escuro"] .acoes-topo {
+  color: #a5adb6 !important;
+}
+html[data-tema="escuro"] .trilha strong {
+  color: #9eacbd !important;
+}
+html[data-tema="escuro"] .botao-icone {
+  color: #a5adb6 !important;
+}
+html[data-tema="escuro"] .botao-icone:hover {
+  background: #141c24 !important;
+}
+html[data-tema="escuro"] .contexto-dados {
+  color: #f3ce68 !important;
+}
+html[data-tema="escuro"] .seletor-periodo {
+  background: #181f27 !important;
+}
+html[data-tema="escuro"] .seletor-periodo button[aria-pressed='true'] {
+  background: #171e2c !important;
+  color: #85a9d6 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.29) !important;
+}
+html[data-tema="escuro"] .selo-simulado {
+  background: #12242c !important;
+  color: #84bdd6 !important;
+}
+html[data-tema="escuro"] .indicador {
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .indicador > span {
+  color: #a4adb7 !important;
+}
+html[data-tema="escuro"] .indicador.amarelo {
+  background: #1d1a0f !important;
+  border-color: #484122 !important;
+}
+html[data-tema="escuro"] .indicador.amarelo > span {
+  color: #e6c474 !important;
+}
+html[data-tema="escuro"] .indicador.verde {
+  background: #0f1d15 !important;
+  border-color: #243a2c !important;
+}
+html[data-tema="escuro"] .indicador.verde > span {
+  color: #a1baab !important;
+}
+html[data-tema="escuro"] .painel {
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .barra-composicao {
+  background: #10151b !important;
+}
+html[data-tema="escuro"] .taxa {
+  background: #3a424b !important;
+}
+html[data-tema="escuro"] .legenda-composicao strong {
+  color: #8eabcd !important;
+}
+html[data-tema="escuro"] .nota {
+  color: #a4adb7 !important;
+}
+html[data-tema="escuro"] .nota.bloco {
+  border-top: 1px solid #21252a !important;
+}
+html[data-tema="escuro"] .link {
+  color: #85a8d6 !important;
+}
+html[data-tema="escuro"] .ultimas-operacoes > a {
+  border-bottom: 1px solid #21252a !important;
+}
+html[data-tema="escuro"] .ultimas-operacoes > a:hover {
+  background: #0f161d !important;
+}
+html[data-tema="escuro"] .status.concluida {
+  background: #12281a !important;
+  color: #84d7a8 !important;
+}
+html[data-tema="escuro"] .status.pendente {
+  background: #3a2b08 !important;
+  color: #f1c36a !important;
+}
+html[data-tema="escuro"] .status.falha {
+  background: #1d0f0f !important;
+  color: #d6848b !important;
+}
+html[data-tema="escuro"] .valor-coluna {
+  color: #a4adb7 !important;
+}
+html[data-tema="escuro"] .trilho-coluna {
+  background: repeating-linear-gradient(to top, transparent 0, transparent 31px, #171d23 32px) !important;
+}
+html[data-tema="escuro"] .painel-ia {
+  background: #120f1d !important;
+  border-color: #251e34 !important;
+}
+html[data-tema="escuro"] .painel-ia h2 {
+  color: #aa9ebd !important;
+}
+html[data-tema="escuro"] .acoes-rapidas h2 {
+  color: #a4adb7 !important;
+}
+html[data-tema="escuro"] .acoes-rapidas a {
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .acoes-rapidas a:hover {
+  border-color: #37414d !important;
+  background: #0f131d !important;
+}
+html[data-tema="escuro"] .rodape-pagina {
+  color: #a4adb7 !important;
+}
+html[data-tema="escuro"] .primario {
+  border-color: #3b5069 !important;
+}
+html[data-tema="escuro"] .secundario {
+  background: #171e2c !important;
+  border-color: #252b33 !important;
+  color: #9eacbd !important;
+}
+html[data-tema="escuro"] .secundario:hover:not(:disabled) {
+  background: #0f151d !important;
+}
+html[data-tema="escuro"] .botao.texto:hover:not(:disabled) {
+  background: #0f151d !important;
+}
+html[data-tema="escuro"] .acoes-entrada {
+  border-top: 1px solid #1e252c !important;
+}
+html[data-tema="escuro"] .acoes-entrada .botao.texto {
+  color: #a3acb8 !important;
+}
+html[data-tema="escuro"] .acoes-entrada .botao.texto:first-child {
+  color: #7fa9db !important;
+}
+html[data-tema="escuro"] .destaque-liquido,
+html[data-tema="escuro"] .texto-verde {
+  color: #7fdcad !important;
+}
+html[data-tema="escuro"] .texto-vermelho {
+  color: #cd8d90 !important;
+}
+html[data-tema="escuro"] th {
+  background: #0f141d !important;
+  color: #a4adb7 !important;
+}
+html[data-tema="escuro"] td {
+  border-bottom: 1px solid #20262b !important;
+}
+html[data-tema="escuro"] tbody tr:hover {
+  background: #0f161d !important;
+}
+html[data-tema="escuro"] .link-operacao {
+  color: #83a9d8 !important;
+}
+html[data-tema="escuro"] .campo > span {
+  color: #a3adb8 !important;
+}
+html[data-tema="escuro"] .campo input,
+html[data-tema="escuro"] .campo select {
+  border: 1px solid #252c34 !important;
+  background: #171e2c !important;
+  color: #8babd0 !important;
+}
+html[data-tema="escuro"] .campo input::placeholder {
+  color: #a5acb5 !important;
+}
+html[data-tema="escuro"] .campo.busca svg {
+  color: #a5adb6 !important;
+}
+html[data-tema="escuro"] .aviso {
+  background: #0f151d !important;
+  border: 1px solid #1e2b3a !important;
+  color: #9eacbd !important;
+}
+html[data-tema="escuro"] .estado {
+  color: #a3acb8 !important;
+}
+html[data-tema="escuro"] .voltar {
+  color: #a1adb9 !important;
+}
+html[data-tema="escuro"] .linha-tempo li {
+  border-left: 1px solid #222b35 !important;
+}
+html[data-tema="escuro"] .erro {
+  color: #dc7f8d !important;
+  background: #1d0f10 !important;
+}
+html[data-tema="escuro"] .sucesso {
+  color: #83d8ab !important;
+  background: #122818 !important;
+}
+html[data-tema="escuro"] .regra-demo {
+  background: #1d190f !important;
+  border: 1px solid #433d22 !important;
+}
+html[data-tema="escuro"] .icone-destaque {
+  background: #0f141d !important;
+  color: #86a9d5 !important;
+}
+html[data-tema="escuro"] .tela-entrada {
+  background: radial-gradient(ellipse at 10% 0%, #132234, transparent 55%), #0f161d !important;
+}
+html[data-tema="escuro"] .cartao-entrada {
+  background: #171e2c !important;
+  border: 1px solid #242c33 !important;
+  box-shadow: 0 15px 70px rgba(0, 0, 0, 0.26) !important;
+}
+html[data-tema="escuro"] .cartao-entrada .etiqueta {
+  color: #a5acb6 !important;
+}
+html[data-tema="escuro"] .preview-split {
+  border: 1px solid #222931 !important;
+  background: #0f161d !important;
+}
+html[data-tema="escuro"] .preview-split > div {
+  border-top: 1px solid #232a31 !important;
+}
+html[data-tema="escuro"] .preview-split b {
+  color: #8aacd1 !important;
+}
+html[data-tema="escuro"] .dados-grafico {
+  color: #a0acbb !important;
+}
+html[data-tema="escuro"] .titulo-painel > .selo-simulado {
+  color: #84bdd6 !important;
+}
+html[data-tema="escuro"] .titulo-painel > .mini-selo {
+  color: #a38bd0 !important;
+}
+html[data-tema="escuro"] .pergunta-ajuda {
+  border-bottom: 1px solid #262b33 !important;
+}
+html[data-tema="escuro"] .tabela-rolavel:focus-visible {
+  outline: 3px solid #39516a !important;
+}
+@media print {
+html[data-tema="escuro"] body,
+html[data-tema="escuro"] .aplicacao,
+html[data-tema="escuro"] .painel {
+  background: #171e2c !important;
+  color: #ededed !important;
+}
+}
+@media print {
+html[data-tema="escuro"] .painel,
+html[data-tema="escuro"] .indicador {
+  color: #ededed !important;
+}
+}
+@media print {
+html[data-tema="escuro"] .indicador strong,
+html[data-tema="escuro"] .indicador small,
+html[data-tema="escuro"] .indicador span {
+  color: #ededed !important;
+}
+}
+html[data-tema="escuro"] .dialogo-confirmacao {
+  color: #83a9d7 !important;
+}
+html[data-tema="escuro"] .botao.destrutivo {
+  border-color: #6a393e !important;
+}
+html[data-tema="escuro"] {
+  color: #879ed4 !important;
+  background: #0f161c !important;
+}
+html[data-tema="escuro"] body {
+  background: #0f161c !important;
+}
+html[data-tema="escuro"] .data-topo {
+  color: #a5acb6 !important;
+}
+html[data-tema="escuro"] .nome-topo {
+  color: #a8b1bf !important;
+}
+html[data-tema="escuro"] .painel,
+html[data-tema="escuro"] .indicador {
+  border-color: #232930 !important;
+}
+html[data-tema="escuro"] .indicador.azul > span,
+html[data-tema="escuro"] .indicador.azul small {
+  color: #99c5f7 !important;
+}
+html[data-tema="escuro"] .indicador.amarelo {
+  background: #1d1a0f !important;
+  border-color: #5a4e1f !important;
+}
+html[data-tema="escuro"] .indicador.verde {
+  background: #0f1d13 !important;
+  border-color: #1e452c !important;
+}
+html[data-tema="escuro"] .titulo-secao h2,
+html[data-tema="escuro"] .titulo-painel h2 {
+  color: #879ed4 !important;
+}
+html[data-tema="escuro"] .selo-simulado {
+  background: #092334 !important;
+  color: #68c2f3 !important;
+}
+html[data-tema="escuro"] .taxa {
+  background: #38414c !important;
+}
+html[data-tema="escuro"] .seletor-periodo {
+  background: #0f161d !important;
+}
+html[data-tema="escuro"] .seletor-periodo button[aria-pressed='true'] {
+  color: #879ed4 !important;
+}
+html[data-tema="escuro"] .mini-selo {
+  background: #091d38 !important;
+  color: #6f90ec !important;
+}
+html[data-tema="escuro"] .campo > span {
+  color: #a8b1bf !important;
+}
+html[data-tema="escuro"] .campo input,
+html[data-tema="escuro"] .campo select {
+  border-color: #232930 !important;
+  color: #879ed4 !important;
+}
+html[data-tema="escuro"] .campo input:focus-visible,
+html[data-tema="escuro"] .campo select:focus-visible {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.47) !important;
+}
+html[data-tema="escuro"] .campo input::placeholder {
+  color: #a3acb7 !important;
+}
+html[data-tema="escuro"] .tela-entrada {
+  background: #0f161c !important;
+}
+html[data-tema="escuro"] .mensagem-marca-entrada h2 span {
+  color: #99c5f7 !important;
+}
+html[data-tema="escuro"] .beneficios-entrada b {
+  background: #171e2c14 !important;
+}
+html[data-tema="escuro"] .tela-autenticacao .acoes-entrada {
+  border-top-color: #232930 !important;
+}
+html[data-tema="escuro"] .tela-entrada:not(.tela-autenticacao) {
+  background: #0f161c !important;
+}
+html[data-tema="escuro"] .tela-entrada:not(.tela-autenticacao) .cartao-entrada {
+  border-color: #232930 !important;
+}
+html[data-tema="escuro"] .grafico-area .grade-grafico {
+  stroke: #1b222c !important;
+}
+html[data-tema="escuro"] .rotulos-grafico {
+  color: #a5acb6 !important;
+}
+html[data-tema="escuro"] .pos-page {
+  color: #8fa2cc !important;
+  background: #0f161c !important;
+}
+html[data-tema="escuro"] .pos-shell {
+  background: #0f161d !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45) !important;
+}
+html[data-tema="escuro"] .pos-login {
+  background: #171e2c !important;
+  color: #8fa2cc !important;
+}
+html[data-tema="escuro"] .pos-login h1 {
+  color: #75a4e6 !important;
+}
+html[data-tema="escuro"] .pos-wordmark {
+  color: #779fe4 !important;
+}
+html[data-tema="escuro"] .pos-muted,
+html[data-tema="escuro"] .pos-login-note {
+  color: #a5acb5 !important;
+}
+html[data-tema="escuro"] .pos-header small {
+  color: #c3dbfa !important;
+}
+html[data-tema="escuro"] .pos-simulated {
+  background: #171e2c1c !important;
+}
+html[data-tema="escuro"] .pos-main h2 {
+  color: #75a4e6 !important;
+}
+html[data-tema="escuro"] .pos-secondary {
+  border: 1px solid #182c46 !important;
+  color: #779fe4 !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-outline-danger {
+  border: 1px solid #411717 !important;
+  color: #ea7171 !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-text-button {
+  color: #779fe4 !important;
+}
+html[data-tema="escuro"] .pos-field {
+  color: #b3bdcc !important;
+}
+html[data-tema="escuro"] .pos-field input,
+html[data-tema="escuro"] .pos-field select,
+html[data-tema="escuro"] .pos-filter-row select {
+  border: 1px solid #2c323a !important;
+  color: #8fa2cc !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-amount-field > span {
+  border: 2px solid #364a6d !important;
+  color: #779fe4 !important;
+}
+html[data-tema="escuro"] .pos-info,
+html[data-tema="escuro"] .pos-notice {
+  color: #68c2f3 !important;
+  background: #092334 !important;
+}
+html[data-tema="escuro"] .pos-notice {
+  color: #a4acb7 !important;
+  background: #0f161d !important;
+}
+html[data-tema="escuro"] .pos-balance-breakdown {
+  border-top: 1px solid #1f1f1f26 !important;
+}
+html[data-tema="escuro"] .pos-balance-breakdown strong {
+  color: #f4ba7d !important;
+}
+html[data-tema="escuro"] .pos-shortcuts button {
+  border: 1px solid #232930 !important;
+  color: #779fe4 !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-section {
+  border: 1px solid #232930 !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-operation {
+  border-bottom: 1px solid #232930 !important;
+}
+html[data-tema="escuro"] .pos-operation small,
+html[data-tema="escuro"] .pos-operation-net {
+  color: #a5acb5 !important;
+}
+html[data-tema="escuro"] .pos-operation-net {
+  color: #73e89f !important;
+}
+html[data-tema="escuro"] .pos-pill {
+  color: #79e2a1 !important;
+  background: #0c361b !important;
+}
+html[data-tema="escuro"] .pos-alert-cta,
+html[data-tema="escuro"] .pos-plain-cta {
+  color: #efb16b !important;
+  background: #463a0b !important;
+}
+html[data-tema="escuro"] .pos-plain-cta {
+  color: #779fe4 !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-nav {
+  border-top: 1px solid #232930 !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-nav button {
+  color: #a5acb5 !important;
+}
+html[data-tema="escuro"] .pos-nav button[aria-current='page'] {
+  color: #779fe4 !important;
+}
+html[data-tema="escuro"] .pos-danger-text {
+  color: #ea7171 !important;
+}
+html[data-tema="escuro"] .pos-process > p {
+  color: #a5acb5 !important;
+}
+html[data-tema="escuro"] .pos-pulse {
+  border: 4px solid #15253b !important;
+  border-top-color: #364a6d !important;
+}
+html[data-tema="escuro"] .pos-step {
+  border: 1px solid #232930 !important;
+  color: #a5acb5 !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-step.is-done {
+  border-color: #1e452c !important;
+  color: #79e2a1 !important;
+  background: #0f1d13 !important;
+}
+html[data-tema="escuro"] .pos-step .pos-step-dot {
+  border: 1px solid #444a53 !important;
+}
+html[data-tema="escuro"] .pos-result-card span {
+  color: #c3dbfa !important;
+}
+html[data-tema="escuro"] .pos-split small {
+  color: #a5acb5 !important;
+}
+html[data-tema="escuro"] .pos-split.orange {
+  border-color: #784b2b !important;
+  color: #ee8d6d !important;
+  background: #1d160f !important;
+}
+html[data-tema="escuro"] .pos-split.neutral {
+  border-color: #444a53 !important;
+  color: #a8b1bf !important;
+  background: #0f161d !important;
+}
+html[data-tema="escuro"] .pos-split.green {
+  border-color: #356e4a !important;
+  color: #79e2a1 !important;
+  background: #0f1d13 !important;
+}
+html[data-tema="escuro"] .pos-sum {
+  color: #748fe7 !important;
+  background: #0f151d !important;
+}
+html[data-tema="escuro"] .pos-failure {
+  border: 1px solid #411717 !important;
+  color: #e77474 !important;
+  background: #1d0f0f !important;
+}
+html[data-tema="escuro"] .pos-failed-item {
+  border: 1px solid #4f1d1d !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-warning,
+html[data-tema="escuro"] .pos-sticky-warning {
+  color: #efb16b !important;
+  background: #463a0b !important;
+}
+html[data-tema="escuro"] .pos-filter-row > button {
+  border: 1px solid #2c323a !important;
+  color: #a4acb7 !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-filter-row > button.is-selected {
+  border-color: #364a6d !important;
+  color: #779fe4 !important;
+  background: #0f151d !important;
+}
+html[data-tema="escuro"] .pos-record > div {
+  border-bottom: 1px solid #232930 !important;
+}
+html[data-tema="escuro"] .pos-record dt {
+  color: #a5acb5 !important;
+}
+html[data-tema="escuro"] .pos-destination,
+html[data-tema="escuro"] .pos-timeline {
+  border-left: 4px solid #356e4a !important;
+  background: #171e2c !important;
+}
+html[data-tema="escuro"] .pos-timeline {
+  border-left: 1px solid #1e3956 !important;
+}
+html[data-tema="escuro"] .pos-cash-grid article {
+  color: #79e2a1 !important;
+  background: #0f1d13 !important;
+}
+html[data-tema="escuro"] .pos-cash-grid article + article {
+  color: #ee8d6d !important;
+  background: #1d160f !important;
+}
+html[data-tema="escuro"] .pos-chart {
+  border-bottom: 1px solid #2c323a !important;
+}
+html[data-tema="escuro"] .pos-chart span {
+  background: #0c284c !important;
+}
+html[data-tema="escuro"] .pos-chart-labels {
+  color: #a5acb5 !important;
+}
+html[data-tema="escuro"] .pos-list-row {
+  border-top: 1px solid #232930 !important;
+}
+html[data-tema="escuro"] .pos-simulation-result {
+  background: #1d160f !important;
+}
+html[data-tema="escuro"] .pos-simulation-result > div {
+  color: #ee8d6d !important;
+}
+html[data-tema="escuro"] .pos-simulation-result > div + div {
+  color: #79e2a1 !important;
+}
+html[data-tema="escuro"] .pos-ai-card {
+  color: #7994e2 !important;
+  background: #0f151d !important;
+}
+html[data-tema="escuro"] .pos-alert-card.amber {
+  color: #efb16b !important;
+  background: #463a0b !important;
+}
+html[data-tema="escuro"] .pos-alert-card.red {
+  color: #e77474 !important;
+  background: #1d0f0f !important;
+}
+html[data-tema="escuro"] .pos-alert-card.blue {
+  color: #748fe7 !important;
+  background: #0f151d !important;
+}

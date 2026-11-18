@@ -1,93 +1,127 @@
 # Planner Comercial — Split Tributário
 
-Projeto acadêmico da Squad 19, GrowUp/Senac com Avanade. O comerciante acompanha o valor bruto, tributo demonstrativo, taxa e líquido de cada venda; a pessoa responsável pelo financeiro consulta despesas, caixa e comparações; o operador registra vendas pelo POS.
+**Português** · [English](README.en.md) · [Español](README.es.md)
 
-**Persistência real em PostgreSQL; pagamentos, tributos, roteamento e explicações demonstrativos.** Não há transferências reais nem recolhimento fiscal. Percentuais de exemplo não são legislação. Crédito e cancelamento permanecem evolução futura.
+Projeto da **Squad 19** da Residência Tecnológica **Grow Up 2026.2** (Porto Digital e Faculdade Senac de Pernambuco, Recife-PE), feito com a empresa parceira **Avanade**.
 
-## Comece aqui
+**Ver funcionando agora:** https://avanade-frontend-xi.vercel.app/ (a API no plano gratuito do Render pode levar até 1 minuto para acordar no primeiro acesso).
 
-- Para executar e apresentar: [material para o mentor](documentacao/APRESENTACAO-MENTOR-2026-10-21.md).
-- Para usar o banco do Supabase: [configuração e execução](scripts/supabase/README.md).
-- Para comunicar essa mudança à equipe: [registro da integração Supabase](documentacao/INTEGRACAO-SUPABASE-2026-10-19.md).
-- Para localizar código: [mapa de nomes](documentacao/plano-de-finalizacao-2026-10-15/04-MAPA-DE-NOMES-APLICADOS.md).
-- Para acompanhar entrega: [estado e pendências](documentacao/plano-de-finalizacao-2026-10-15/03-INCREMENTO-IMPLEMENTADO.md).
-- Para revisar requisitos: [516 critérios, com ressalvas de aceite](documentacao/plano-de-finalizacao-2026-10-15/05-REVISAO-DOS-516-CRITERIOS.csv).
-- Para integrar: [contrato](backend/docs/API.md) e [novas capacidades](backend/docs/INCREMENTO-FUNCIONAL-2026-10-15.md).
+## Instalar e rodar
 
-## O que está no código
+**Requisitos:** Git, JDK 21, Node.js 20.19+ (ou 22.12+), Python 3 e curl. Docker não é necessário.
 
-| Área | Funcionamento | Limite |
-|---|---|---|
-| Cadastro e sessão | Nova loja e gerente, login, perfis, logout e expiração | Sem recuperação por e-mail ou convite de usuários |
-| Estabelecimento | Consulta e edição autorizada do nome | Não altera fuso nem regra financeira |
-| Venda e split | Pagamento simulado, parcelas, regra histórica e eventos | Sem PSP real; pendência não se confirma automaticamente |
-| Recuperação | Mesma intenção após perda de resposta, retomada parcial e recuperação de regra ausente | Exige permissões e regra aplicável à data original |
-| Despesas | Registro de despesa paga, consulta e sugestão de categoria confirmada pelo usuário | Recorrência, edição/exclusão e contas a pagar não foram assumidas |
-| Caixa e painel | Agregados do servidor, composição diária e saldo reconhecido | Previsão não é saldo disponível |
-| Projeção | Cenário manual com horizonte, entradas/despesas previstas e aviso de déficit | Não é previsão estatística nem garantia |
-| Simulação | Percentual hipotético e inclusão opcional de taxa | Não cria venda nem movimentação |
-| Explicações | Texto do caixa, comparação de tendências e explicação de split | Mock determinístico; serviço externo é opcional |
-| Relatórios | Vendas, despesas e composição tributária por período; CSV completo | Até 2.000 registros por consulta; excedentes são recusados sem truncar |
-| Android | Cliente Kotlin local e integrado por HTTPS, com recuperação de intenção | Execução física/HTTPS compartilhado ainda precisa de homologação |
+**Linux ou macOS, um comando** (sobe a API com banco local e o site):
 
-As mudanças passaram pelas verificações locais descritas no [relatório de validação](documentacao/plano-de-finalizacao-2026-10-15/06-RESULTADOS-DA-VALIDACAO.md). A tabela descreve implementação, não aprovação integral dos 516 critérios. Relatórios anteriores mantêm suas datas e não representam o estado atual automaticamente.
+```bash
+git clone https://github.com/lucasandare490/Avanade.git && cd Avanade && ./scripts/dev.sh
+```
 
-## Tecnologias e pastas
-
-- `frontend/`: painel React 19, TypeScript, Vite, CSS e fontes locais. Telas em `src/telas`; partes reutilizáveis em `src/componentes`; comunicação com servidor em `src/servicos`.
-- `backend/`: Java 21, Spring Boot, Maven Wrapper, PostgreSQL e Flyway. `auth` cuida de acesso; `core`, de vendas e split; `finance`, de despesas/caixa/relatórios/explicações; `shared`, de erros e idempotência.
-- `android-pos/`: aplicativo Kotlin. `TelaPosIntegradoActivity.kt` é a tela ligada ao servidor; `TelaPrincipalActivity.kt` é a demonstração local.
-- `scripts/`: comandos de execução. `documentacao/`: estado, decisões, operação e material de apresentação.
-
-Nomes técnicos obrigatórios das ferramentas, como package.json, pom.xml e AndroidManifest.xml, são preservados. O mapa de nomes mostra os módulos internos renomeados.
-
-## Executar no Windows
-
-Instale JDK 21 e Node/npm. Na raiz, em um terminal PowerShell:
+**Windows (PowerShell)**, em dois terminais, na pasta do projeto:
 
 ```powershell
 .\scripts\iniciar-backend-local.ps1 -Jdk 'C:\Program Files\Eclipse Adoptium\jdk-21.0.4.7-hotspot'
 ```
 
-Em outro terminal, também na raiz:
-
 ```powershell
-npm.cmd --prefix frontend ci
-npm.cmd run dev
+npm.cmd --prefix frontend ci; npm.cmd run dev
 ```
 
-Abra http://127.0.0.1:5173. API: http://127.0.0.1:8080. Se já houver serviço reconhecido na porta, use a instância existente; alterações Java exigem reiniciar a API pelo terminal de origem.
+**Só a demonstração, sem Java** (dados fictícios no navegador):
 
-Clique em **Criar minha conta** para iniciar uma loja vazia. Contas seed de demonstração também existem; sua senha é configuração local e nunca deve ser publicada. O token permanece em memória e recarregar a página exige novo login.
+```bash
+cd frontend && npm ci && VITE_MODO_DADOS=demo npm run dev
+```
 
-No modo local, o banco fica em `backend/.local/postgres`, preservado ao reiniciar. É ambiente local, não hospedagem de produção. O frontend não recebe credenciais PostgreSQL. A [integração com Supabase](scripts/supabase/README.md) também permite usar PostgreSQL remoto mantendo o backend Java; conexão, migrations e verificações básicas da API foram validadas em 19/10/2026. Para compartilhar o projeto, ainda é necessário hospedar frontend/backend, configurar HTTPS e segredos e homologar os fluxos completos. Consulte o [registro para a equipe](documentacao/INTEGRACAO-SUPABASE-2026-10-19.md).
+**Como confirmar que funcionou**
 
-## Contratos e segurança
+1. Abra http://127.0.0.1:5173: aparece a tela de entrada do Planner Comercial.
+2. Clique em **Entrar** e depois em **Cadastre-se** para criar uma loja vazia. Ou entre com `gerente1@demo.local` e a senha gerada em `backend/.local/demo-password`.
+3. A API responde `{"status":"UP"}` em http://127.0.0.1:8080/actuator/health.
 
-Dinheiro em centavos inteiros BRL; percentuais em pontos-base. Uma venda fictícia de R$ 150,00 gera 15/3/132 no cenário padrão. Sem taxa, 15/0/135. Regras são versionadas e o snapshot histórico é preservado. Flyway V1–V5 mantém a evolução do schema; não editar migrations já aplicadas.
+## O problema
 
-O servidor valida loja e papel em cada ação. Senhas usam BCrypt; bearer opaco é revogável. Idempotência associa loja, ação e chave com entrada e resposta persistidas. Eventos do ledger não equivalem a contabilidade de partidas dobradas.
+A Reforma Tributária do consumo (Emenda Constitucional 132/2023 e Lei Complementar 214/2025) cria o IBS e a CBS e prevê o **split payment**. Com ele, a parte do imposto é separada automaticamente **no momento em que o cliente paga**, e o comerciante recebe só o valor líquido.
 
-A IA não escolhe alíquota, não calcula valores autoritativos e não movimenta dinheiro. As explicações são produzidas a partir de fatos autorizados, com limite de espera, fallback e identificação demonstrativa.
+Hoje, o dinheiro do imposto entra no caixa junto com a venda e só sai semanas depois, na data de recolhimento. Nesse intervalo, ele funciona como **capital de giro**: paga fornecedor, estoque e salários. Com o split payment, esse dinheiro deixa de entrar. O pequeno e médio comerciante perde capital de giro de uma vez. Essa é a **descapitalização**. Sem planejamento, quem vende bem pode ficar sem caixa para pagar as contas.
 
-## Validação e publicação
+O problema central, portanto, **não é como recolher o imposto de cada venda**, porque o split payment já faz isso sozinho. É **como manter o caixa saudável quando o imposto sai na hora da venda**.
 
-Os testes locais foram executados após as alterações funcionais. O relatório registra resultados, correções e limitações. Docker e restauração foram verificados no GitHub, com 15 tabelas conferidas. Os 516 critérios têm revisão individual, com pendências e limites explícitos. Homologação física, aceite visual e implantação continuam abertos. O caixa semanal recebeu testes adicionais locais; consulte o relatório para identificar o commit de cada evidência.
+## A solução
 
-A publicação autorizada usa https://github.com/lucasandare490/Avanade. Esta pasta de trabalho é uma cópia sem `.git`; a publicação deve comparar o remoto para preservar contribuições dos colegas. Excluir `.local`, senhas, banco, caches, conversas e fontes privadas.
+O **Planner Comercial** ajuda o comerciante a enxergar e a se antecipar à descapitalização:
 
-## Créditos
+- mostra, venda a venda, quanto foi para imposto, quanto foi para a taxa do meio de pagamento e quanto **de fato entrou no caixa**;
+- calcula o caixa realizado (entradas líquidas menos despesas pagas) e o caixa por semana;
+- projeta o caixa dos próximos dias e avisa quando o cenário indica déficit;
+- simula vendas antes de acontecerem, para entender o impacto de cada percentual;
+- explica os números em linguagem simples, com análise por regras, sem IA externa e sem alterar valores.
 
-Design, prototipação de alta fidelidade e pesquisa: **Thayná Batista da Silva**. Documentação de requisitos: **Thayná Batista da Silva e Kleysson Teixeira**, conforme materiais fornecidos. Autoria de commits não é inferida a partir do nome de uma pasta.
+**Persistência real em PostgreSQL. Pagamentos, split e tributos são simulados:** não há transferência de dinheiro nem recolhimento fiscal. Percentuais de exemplo não são legislação. Crédito simulado e cancelamento ficam para evolução futura.
 
-[Protótipo Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design). [README anterior preservado](documentacao/historico/README-antes-da-consolidacao-2026-10-15.md).
+## O que o sistema tem
 
-## Revisão operacional de 16/10/2026
+| Área | Como funciona |
+|---|---|
+| Login seguro | Bloqueio temporário de 15 minutos após 5 senhas erradas seguidas. A cada erro aparece quantas tentativas restam. Também tem recuperação de conta por e-mail, botão de olho para ver a senha, **Lembrar de mim** e **Ainda não tem uma conta? Cadastre-se** |
+| Tema | Claro, escuro ou seguir o sistema, em todas as telas, escolhido no menu |
+| Idiomas | Português, inglês e espanhol em todas as telas, escolhidos no menu |
+| Explicações | Ícone **i** ao lado de cada informação. Mostra o que ela significa ao passar o mouse, com a tecla Tab ou com um toque no celular |
+| Vendas e split | Pagamento simulado, divisão em imposto, taxa e líquido, regra histórica e retomada de falha parcial |
+| Despesas | Registro de despesa paga, busca e sugestão de categoria confirmada pela pessoa |
+| Caixa | Agregados do servidor, composição diária, caixa semanal, projeção manual com aviso de déficit |
+| Relatórios | Vendas, despesas e composição tributária por período, com CSV completo |
+| Android | Cliente Kotlin (POS) local e integrado por HTTPS. A homologação em aparelho físico está pendente |
 
-Logs JSON, métricas locais e recuperação de falhas temporárias foram reforçados. [Auditoria Java/Android e alertas remanescentes](documentacao/plano-de-finalizacao-2026-10-15/07-AUDITORIA-DE-DEPENDENCIAS.md). Testes web atuais: 100 aprovados; consulte o relatório para backend, Android e limites de cada ambiente. Não confundir resultado verde do CI com ausência de avisos de segurança.
+## Equipe e o que cada pessoa fez
 
-## Dados para apresentação local
+| Pessoa | Papel na squad | Contribuições registradas |
+|---|---|---|
+| **Thayná Batista da Silva** | Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; testes | Protótipo de alta fidelidade no [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); pesquisa e levantamento de requisitos do Split Pay e do Planner Comercial; documentação de requisitos. Na entrega final: correção do problema central (descapitalização); login com bloqueio, aviso de tentativas, recuperação por e-mail, botão de olho, Lembrar de mim e Cadastre-se; temas claro, escuro e do sistema; idiomas PT/EN/ES; ícones **i** com explicações; verificadores de auditoria; testes novos de backend, unitários e de navegador |
+| **Kássio Lima de Oliveira** | Código do projeto e deploy | Integração entre backend e frontend com persistência; recuperação de operações; fluxo seguro de recuperação de senha; configuração do Supabase; deploy no Render (API) e na Vercel (site); monitoramento e rotina de backup |
+| **Lucas André Cardoso de Lima** | Código do front-end | Primeira entrega dos frontends web e Android; comparação de tendências; contratos de integração; revisão dos 516 critérios com evidências; caixa semanal, cadastro e relatórios |
+| **Kleysson Teixeira da Cruz Junior** | Entrevistas com pessoas usuárias | Entrevistas com usuários; revisão do README do MVP; [repositório inicial](https://github.com/Kleyssonteixeirapf/projeto-split-tributario) do projeto |
+| **Heitor Sette Couto de Melo** | Pitch | Apresentação do pitch deck |
+| **James Bernardino da Silva Neto** | Integrante da squad | — |
 
-Há uma opção explícita para carregar vendas e despesas sintéticas em duas lojas, sem duplicar registros ao repetir. Consulte o [guia do cenário de apresentação](backend/docs/CENARIO-DE-APRESENTACAO.md).
+Mentor: **Eryson Moreira** (Avanade). Turma: GROWUP-SENAC-N2. A autoria de cada mudança no código pode ser conferida no [histórico de commits](https://github.com/lucasandare490/Avanade/commits/main) e em [CHANGELOG.md](CHANGELOG.md).
 
-Preparação para servidor compartilhado: [guia de hospedagem](scripts/hospedagem/README.md). Inclui configuração e teste isolado; domínio, certificado público e banco remoto precisam do ambiente escolhido.
+## Documentos do projeto
+
+- [Protótipo no Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design)
+- [Pasta de documentação da Squad 19](https://drive.google.com/drive/folders/1_4WXflZ5LvJ3yTbEgqiSV5Qw5S6jHoYp?usp=sharing)
+- [Análise e levantamento de requisitos do Split Pay e do Planner Comercial](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing)
+- [Documentação de requisitos (V2)](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
+- [Entrega parcial](https://docs.google.com/document/d/16FiTQW6DRE6WRpWBlSeXzVHnP-lr3DfT/edit?usp=sharing)
+- [Registro da entrega final](documentacao/ENTREGA-FINAL-2026-11-18.md): o que mudou, como foi testado e o que ficou pendente
+- [Contrato da API](backend/docs/API.md) · [Integração com Supabase](scripts/supabase/README.md) · [Operação em produção](documentacao/OPERACAO-PRODUCAO.md)
+
+## Testes e auditoria
+
+| O que testar | Comando |
+|---|---|
+| Backend (Java, banco embutido) | `cd backend && ./mvnw test` |
+| Frontend (unitários) | `cd frontend && npm test` |
+| Tipos e build | `cd frontend && npm run build` |
+| Navegador: login, tema, idiomas, ícones **i** e acessibilidade (sobe a demonstração sozinho) | `cd frontend && npm run test:e2e:entrega` |
+| Navegador contra a API real | com `./scripts/dev.sh` rodando: `cd frontend && npx playwright test` |
+| Toda frase da interface traduzida | `node scripts/auditoria/verificar-traducoes.mjs` |
+| Nenhum crédito de IA no projeto | `node scripts/auditoria/verificar-sem-credito-ia.mjs` |
+| Tema escuro em dia com o tema claro | `cd frontend && node scripts/gerar-tema-escuro.mjs --verificar` |
+
+Os resultados da entrega final estão em [documentacao/ENTREGA-FINAL-2026-11-18.md](documentacao/ENTREGA-FINAL-2026-11-18.md). O sistema é auditável: cada mudança tem um commit com autoria, o [CHANGELOG](CHANGELOG.md) resume o que mudou e os verificadores acima podem ser rodados por qualquer pessoa.
+
+## Segurança e privacidade
+
+- Senhas com BCrypt. O token de acesso é opaco, revogável e expira. A senha nunca é guardada no navegador.
+- O bloqueio de login fica no servidor, guarda só o hash do e-mail e responde igual para e-mails cadastrados e não cadastrados. Assim ninguém descobre quais contas existem.
+- **Lembrar de mim** guarda o token neste aparelho até a sessão expirar. Não use em computador compartilhado.
+- O link de recuperação vale por 30 minutos e uma vez só, e o token vai no fragmento `#` da URL, que não chega aos logs do servidor. O envio do e-mail exige SMTP configurado no servidor (`SPRING_MAIL_HOST`, `SPRING_MAIL_PORT`, `SPRING_MAIL_USERNAME`, `SPRING_MAIL_PASSWORD`, `PASSWORD_RESET_FROM`, `PASSWORD_RESET_LINK_BASE`). Sem isso, o pedido é aceito e nada é enviado. Passo a passo: [configurar o e-mail de recuperação](documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md). Na demonstração local, o e-mail é simulado por um link na própria tela.
+- Nenhuma senha, chave ou banco local entra no repositório (`.env`, `backend/.local` e afins estão no `.gitignore`).
+
+## Pastas
+
+- `frontend/`: site em React 19, TypeScript e Vite. Telas em `src/telas`, tema, idiomas e explicações em `src/preferencias`.
+- `backend/`: API em Java 21, Spring Boot, PostgreSQL e Flyway (migrations V1–V8).
+- `android-pos/`: aplicativo Kotlin do POS.
+- `scripts/`: execução local, Supabase, hospedagem e `auditoria/`.
+- `documentacao/`: estado, decisões, operação e histórico (inclui o [README anterior](documentacao/historico/README-antes-da-entrega-final-2026-11-18.md)).

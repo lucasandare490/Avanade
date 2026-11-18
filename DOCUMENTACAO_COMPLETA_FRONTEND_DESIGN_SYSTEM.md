@@ -1933,7 +1933,7 @@ Referência: WCAG 2.2. As razões de contraste foram calculadas com a fórmula d
 ```
 /
 ├── .figma/make/          scripts e site.json do Figma Make (hospedagem)
-├── AGENTS.md, CLAUDE.md  instruções do ambiente de geração
+├── arquivos de configuração do Figma Make
 ├── index.html            shell com marcadores <!-- figma:* -->
 ├── package.json, pnpm-lock.yaml, tsconfig.json, vite.config.ts (387 linhas, plugins do Figma Make)
 └── src/
@@ -2315,4 +2315,3 @@ O arquivo `metrics.json` (incluído em `capturas.zip`) contém, para cada largur
 | 4 | `2ffc68e` | 2026-10-01 06:35 | Planner Comercial Prototype |
 | exportação | `508e5de` | 2026-10-23 22:35 | bootstrap (estado analisado) |
 
-Modelo de geração registrado no histórico: `anthropic-claude-4.6-sonnet_1.2.1` (campo `modelConfigVersion` de `ai_chat.json`) **[C]**.

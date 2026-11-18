@@ -19,6 +19,14 @@ import '@fontsource/jetbrains-mono/latin-700.css';
 import './estilos.css';
 import './design-fidelidade.css';
 import './estilos-pos.css';
+import './preferencias/preferencias.css';
+import './preferencias/tema-escuro.css';
+import { aplicarTema, lerTema } from './preferencias/tema';
+import { lerIdioma, tradutor, traduzirTexto, temTraducao } from './preferencias/idioma';
+import { textosSemTraducao } from './preferencias/traducoes';
+import { dicas } from './preferencias/dicas';
+import { SeletorPreferencias } from './componentes/SeletorPreferencias';
+aplicarTema(lerTema(), false);
 let integracao: ReturnType<typeof criarIntegracaoApi> | undefined;
 let erroConfiguracao = '';
 try {
@@ -43,6 +51,7 @@ createRoot(document.getElementById('root')!).render(
     <LimiteErro>
       {erroConfiguracao ? (
         <main className="cartao-entrada">
+          <SeletorPreferencias flutuante />
           <h1>Configuração de integração pendente</h1>
           <p role="alert">{erroConfiguracao}</p>
         </main>
@@ -52,3 +61,7 @@ createRoot(document.getElementById('root')!).render(
     </LimiteErro>
   </StrictMode>,
 );
+tradutor.iniciar(document.body, lerIdioma());
+dicas.iniciar(document.body);
+// Somente em desenvolvimento/testes: permite aos testes de navegador conferir dicas e traduções.
+if (import.meta.env.DEV) Object.assign(window, { __planner: { dicas, tradutor, traduzirTexto, temTraducao, textosSemTraducao } });

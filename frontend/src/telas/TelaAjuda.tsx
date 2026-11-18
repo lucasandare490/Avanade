@@ -32,7 +32,7 @@ export function TelaAjuda({ demonstrativo = true }: { demonstrativo?: boolean })
       'Onde ficam meus dados?',
       demonstrativo
         ? 'Operações e despesas ficam na memória desta página. Recarregar ou sair da demonstração restaura o conjunto inicial. Os filtros podem ser lembrados durante a sessão do navegador.'
-        : 'Vendas e despesas confirmadas ficam no banco do servidor. O token fica somente em memória: recarregar exige novo login. A aba guarda filtros e intenções ainda sem confirmação, separadas por conta e loja.',
+        : 'Vendas e despesas confirmadas ficam no banco do servidor. O token de acesso fica só na memória, a menos que você marque Lembrar de mim. A aba guarda filtros e intenções ainda sem confirmação, separadas por conta e loja.',
     ],
     [
       'Posso usar o comprovante para fins fiscais?',

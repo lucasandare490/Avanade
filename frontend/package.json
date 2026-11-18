@@ -10,7 +10,10 @@
     "test": "vitest run --pool=threads --maxWorkers=1 --no-isolate",
     "formatar": "prettier --write src",
     "verificar:tipos": "tsc --noEmit",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "tema:escuro": "node scripts/gerar-tema-escuro.mjs",
+    "verificar:traducoes": "node ../scripts/auditoria/verificar-traducoes.mjs",
+    "test:e2e:entrega": "node scripts/e2e-entrega.mjs"
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",
