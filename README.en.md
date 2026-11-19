@@ -73,7 +73,7 @@ So the core problem **is not how to pay the tax on each sale**, since split paym
 | Expenses | Recording paid expenses, search and a category suggestion confirmed by the person |
 | Cash | Server totals, daily breakdown, weekly cash, manual projection with a deficit warning |
 | Reports | Sales, expenses and tax breakdown by period, with full CSV |
-| Working capital | Inside the app, without going to the bank: limit, authorization to share data, simulation with installment, total, interest and CET, and contracting. The credit enters the cash projection. Today the partner is simulated; to connect a bank or fintech, see the [credit partner integration](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) (in Portuguese) |
+| Working capital | Inside the app, without going to the bank. **Decapitalization diagnosis** (tax withheld, 30-day cash shortfall, coverage and recommendation), **bank and fintech offers compared by CET**, responsible lending (blocks installments above 50% of inflows), **cash before and after** over 12 weeks, contracting, installment payment, **early payoff with discount**, 7-day withdrawal, contract summary and immutable history. Simulated partners today; connecting a real partner is one class and a signed webhook. [Specification and integration](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) (in Portuguese) |
 | Android | Kotlin POS client, local and integrated over HTTPS. Testing on a physical device is pending |
 
 ## Team and what each person did
@@ -127,7 +127,7 @@ The system is auditable: every change has an authored commit, the [CHANGELOG](CH
 ## Folders
 
 - `frontend/`: React 19, TypeScript and Vite website. Screens in `src/telas`; theme, languages and explanations in `src/preferencias`.
-- `backend/`: Java 21, Spring Boot, PostgreSQL and Flyway API (migrations V1–V9).
+- `backend/`: Java 21, Spring Boot, PostgreSQL and Flyway API (migrations V1–V10).
 - `android-pos/`: Kotlin POS app.
 - `scripts/`: local run, Supabase, hosting and `auditoria/`.
 - `documentacao/`: status, decisions, operations and history.

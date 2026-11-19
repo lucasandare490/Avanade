@@ -111,7 +111,7 @@ export function PainelProjecaoCaixa({ servico }: { servico: ServicoPlanner }) {
               valor={resultado.openingCents}
               detalhe="Origem: servidor"
             />
-            {resultado.creditCents > 0 && (
+            {resultado.creditCents !== 0 && (
               <Indicador
                 titulo="CAPITAL DE GIRO"
                 valor={resultado.creditCents}

@@ -169,7 +169,7 @@ Conversa com um assistente de IA generativa (ferramenta de chat), em 01/10/2026,
 | E08 | Explicação dos resultados | P2 | **Parcial**: explicações por regras; provedor de IA externo opcional |
 | E09 | Classificação de despesas | P3 | **Concluído** como sugestão por regras, confirmada pela pessoa |
 | E10 | Alertas de caixa | P3 | **Concluído** como aviso de déficit na projeção |
-| E11 | Capital de giro com parceiro | P2 | **Concluído com parceiro simulado**: limite, consentimento revogável, simulação com parcela, juros e CET, contratação dentro do app e crédito na projeção. Pronto para ligar um banco ou fintech |
+| E11 | Capital de giro com parceiros | P1 | **Concluído com parceiros simulados**: diagnóstico da descapitalização, ofertas comparadas pelo CET, crédito responsável, antes e depois do caixa, contratação, pagamento, quitação antecipada, desistência, histórico imutável e webhook assinado. Pronto para ligar um banco ou fintech |
 | E13 | Cancelamento de vendas | Futuro | Fora do MVP (decisão do grupo) |
 | E12 | Acessibilidade, tema e idiomas | P2 | **Concluído**: tema claro/escuro/sistema, PT/EN/ES, ícone "i", WCAG AA |
 
@@ -190,7 +190,7 @@ Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes 
 
 # 4. Banco de dados e API
 
-## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V9)
+## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V10)
 
 | Tabela | Função |
 |---|---|
@@ -205,9 +205,9 @@ Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes 
 | `expense`, `expense_category` | Despesas pagas e categorias |
 | `request_intent` | Idempotência: mesma chave devolve o mesmo resultado |
 | `ai_interaction` | Registro das explicações geradas, sem dados sensíveis |
-| `credit_consent`, `credit_offer`, `credit_contract`, `credit_installment` | Capital de giro: consentimento revogável, propostas (com os fatos usados), contratos e parcelas |
+| `credit_consent`, `credit_offer`, `credit_contract`, `credit_installment`, `credit_event`, `credit_webhook_event` | Capital de giro: consentimento revogável, propostas (com os fatos usados e o comprometimento), contratos, parcelas, trilha imutável e avisos do parceiro |
 
-Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos. Migrations V1–V9.
+Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos. Migrations V1–V10.
 
 ## 4.2 Principais endpoints (`/api/v1`)
 
@@ -224,23 +224,45 @@ Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de 
 | POST `split-payment/simulate` | Simulação sem escrita |
 | POST `ai/cash-analysis`, GET `ai/split-explanation/{id}`, POST `ai/expense-category` | Explicações e sugestão revisável |
 | GET `reports/{sales,expenses,taxes}` | Relatórios com CSV |
-| GET `credit`; POST/DELETE `credit/consent`; POST `credit/offers`, `credit/offers/{id}/accept` | Capital de giro: limite, consentimento, proposta e contratação |
+| GET `credit`; POST/DELETE `credit/consent`; POST `credit/offers`, `credit/offers/{id}/accept`; POST `credit/contracts/{id}/installments/{n}/pay`; GET/POST `credit/contracts/{id}/payoff`; POST `credit/contracts/{id}/cancel`; GET `credit/events`; POST `credit/webhook/{parceiro}` | Capital de giro: diagnóstico, ofertas, contratação, parcelas, quitação, desistência, histórico e webhook |
 
 Erros seguem o formato `{code, message, fieldErrors, correlationId}`. Contrato completo: `backend/docs/API.md` no repositório.
 
-# 5. Capital de giro com parceiro financeiro
+# 5. Capital de giro com parceiros financeiros
 
-Quando a projeção mostra que vai faltar dinheiro, o comerciante pode resolver **dentro do app, sem ir ao banco**:
+O capital de giro é a resposta direta ao problema central. Se o imposto sai na hora da venda e o caixa fica descapitalizado, o comerciante precisa **ver o tamanho do buraco** e **resolver sem sair do app**. O módulo cobre o ciclo inteiro do crédito.
 
-1. Vê o **limite disponível**, calculado pelo parceiro com dados agregados da loja.
-2. **Autoriza o compartilhamento** apenas de totais dos últimos 90 dias (entradas líquidas, despesas e número de vendas). Nenhum dado de clientes é enviado, e a autorização pode ser revogada.
-3. **Simula** valor e parcelas (1 a 12) e vê parcela, total a pagar, juros, taxa mensal, CET anual, primeira parcela e validade da proposta.
-4. Marca que leu e concorda e **contrata**. Aceitar de novo não contrata em dobro.
-5. O crédito **entra na projeção do caixa** e as parcelas aparecem como compromissos.
+## 5.1 Jornada
 
-**Quem concede o crédito é a instituição autorizada** (banco, SCD ou fintech). O Planner mostra a oferta, coleta o consentimento e registra a contratação. Só a pessoa gerente autoriza e contrata.
+| Etapa | O que o comerciante vê e faz |
+|---|---|
+| Diagnóstico | Situação do caixa (*saudável*, *no limite* ou *falta capital de giro*), **imposto retido por mês pelo split**, saldo atual, falta prevista em 30 dias, cobertura em dias e **recomendação** de valor e parcelas. Sem falta prevista, a recomendação é não contratar |
+| Parceiros | Banco e fintech com limite, taxa mensal e CET lado a lado |
+| Compartilhamento de dados | Autorização revogável para enviar só totais de 90 dias (entradas líquidas, despesas e número de vendas). Nenhum dado de cliente |
+| Comparar ofertas | Uma simulação gera as ofertas de todos os parceiros, ordenadas pelo CET, com o selo *Menor CET* |
+| Crédito responsável | Cada oferta mostra quanto a parcela compromete das entradas mensais. Acima de 50%, a contratação é bloqueada |
+| Antes e depois | Caixa estimado nas próximas 12 semanas, sem e com a oferta escolhida |
+| Contratar | Aceite consciente (valor total, taxa e CET), sem contratar em dobro |
+| Gerir o contrato | Próxima parcela e atraso, pagamento em ordem, **quitação antecipada com desconto dos juros futuros**, **desistência em 7 dias sem juros**, resumo para imprimir e cronograma |
+| Histórico | Trilha imutável de autorizações, propostas, contratação e pagamentos |
+| Caixa | O crédito entra na projeção e as parcelas saem. No déficit, a projeção oferece *Ver opções de capital de giro* |
 
-**Pronto para parceria:** o parceiro é uma peça plugável (`ParceiroCredito`). Hoje é simulado (2,49% ao mês, limite de 50% das entradas líquidas de 90 dias, sem movimentar dinheiro). Para ligar um parceiro real, basta implementar a chamada à API dele e trocar `CREDIT_PARTNER` no servidor. O guia está em `documentacao/INTEGRACAO-PARCEIRO-CREDITO.md`.
+## 5.2 Regras principais
+
+- Valor de R$ 500,00 até o limite do parceiro (no máximo R$ 50.000,00), em 1 a 12 parcelas pela tabela Price.
+- Parceiros simulados: fintech com 2,49% ao mês e limite de 50% das entradas de 90 dias; banco com 1,89% ao mês e limite de 30%.
+- CET estimado sem tarifas. Um parceiro real informa o CET oficial.
+- Comprometimento: até 20% *saudável*, até 30% *atenção*, até 50% *alto*, acima de 50% *excessivo* (bloqueado).
+- Só a pessoa gerente autoriza, contrata, paga, quita e desiste. O perfil financeiro consulta e simula.
+- A proposta vale 24 horas. Revogar o consentimento impede novas contratações.
+
+## 5.3 Base regulatória considerada
+
+Quem concede o crédito é a instituição autorizada pelo Banco Central. O Planner mostra, compara, coleta o consentimento e registra. As regras seguem: SCD/SEP (Res. CMN 4.656/2018), correspondentes (Res. CMN 4.935/2021), divulgação do CET (Res. CMN 3.517/2007), informação prévia e liquidação antecipada com redução proporcional dos juros (CDC, art. 52), desistência inspirada no CDC, art. 49, consentimento e minimização de dados (LGPD) e Open Finance Brasil como caminho natural para o consentimento real.
+
+## 5.4 Pronto para parceria
+
+O parceiro é uma peça plugável (`ParceiroCredito`). Para ligar um banco ou fintech real, basta implementar a chamada à API dele e trocar `CREDIT_PARTNER`. Ele confirma os pagamentos por um **webhook assinado com HMAC-SHA256**, idempotente e restrito aos contratos do próprio parceiro. A especificação completa, com fórmulas, API, webhook, dados e testes, está em `documentacao/INTEGRACAO-PARCEIRO-CREDITO.md`.
 
 # 6. Arquitetura e stack
 
@@ -261,12 +283,12 @@ Smart POS/POS web e painel web → API REST (autenticação, núcleo de split, P
 
 | Bateria | Resultado |
 |---|---|
-| Backend (`./mvnw test`) | **74 de 74** |
-| Frontend unitários (`npm test`) | **135 de 135** |
-| Navegador na demonstração (`npm run test:e2e:entrega`) | **22 de 22** — login, recuperação, lembrar de mim, capital de giro, tema, idiomas, ícones "i", WCAG A/AA nos dois temas, teclado |
-| Navegador contra a API real | **22 de 22**, incluindo a contratação de capital de giro (no `main` antes desta entrega: 0 de 22) |
+| Backend (`./mvnw test`) | **81 de 81** |
+| Frontend unitários (`npm test`) | **140 de 140** |
+| Navegador na demonstração (`npm run test:e2e:entrega`) | **23 de 23** — login, recuperação, lembrar de mim, ciclo completo do capital de giro, tema, idiomas, ícones "i", WCAG A/AA nos dois temas, teclado |
+| Navegador contra a API real | **22 de 22**, incluindo o ciclo do capital de giro e a projeção (no `main` antes desta entrega: 0 de 22) |
 | CI do GitHub | 12 de 12 verificações |
-| Traduções | 959 textos em inglês e espanhol; 181 explicações em três idiomas |
+| Traduções | 1.059 textos em inglês e espanhol; 205 explicações em três idiomas |
 | Acessibilidade (axe, 11 telas) | 0 violações nos temas claro e escuro |
 
 Defeitos antigos encontrados e corrigidos: as rotas de recuperação de senha exigiam login, e o banco não permitia à API trocar a senha — a recuperação nunca tinha funcionado.

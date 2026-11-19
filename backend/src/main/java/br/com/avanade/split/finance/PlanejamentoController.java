@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 public class PlanejamentoController {
  private final FinanceService finance;
  private final Clock clock;
- private final br.com.avanade.split.credito.CreditoController credito;
- public PlanejamentoController(FinanceService finance,Clock clock,br.com.avanade.split.credito.CreditoController credito){this.finance=finance;this.clock=clock;this.credito=credito;}
+ private final br.com.avanade.split.credito.CreditoService credito;
+ public PlanejamentoController(FinanceService finance,Clock clock,br.com.avanade.split.credito.CreditoService credito){this.finance=finance;this.clock=clock;this.credito=credito;}
  public record Entrada(@NotNull LocalDate until,@NotNull @Min(0) @Max(100000000) Long incomeCents,@NotNull @Min(0) @Max(100000000) Long expenseCents){}
  @PostMapping("/projection")
  public Object projetar(@RequestAttribute Actor actor,@Valid @RequestBody Entrada input){

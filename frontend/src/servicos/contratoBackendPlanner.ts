@@ -328,7 +328,7 @@ export const contratoServidor: ContratoServidor = {
           const incomeCents = inteiro(o.incomeCents),
             expenseCents = inteiro(o.expenseCents);
           // API anterior não envia os campos de crédito: valem zero.
-          const creditCents = o.creditCents === undefined ? 0 : inteiro(o.creditCents),
+          const creditCents = o.creditCents === undefined ? 0 : inteiro(o.creditCents, Number.MIN_SAFE_INTEGER),
             installmentsDueCents = o.installmentsDueCents === undefined ? 0 : inteiro(o.installmentsDueCents);
           if (
             o.until !== entrada.until ||

@@ -32,7 +32,7 @@ Base `/api/v1`. JSON UTF-8. Exceto login e cadastro (`POST /auth/register`), tod
 | POST /ai/expense-category | despesa | description → sugestão revisável |
 | POST /planning/projection | financeiro | until, incomeCents, expenseCents → cenário manual |
 | GET /reports/{kind}?from=&to= | financeiro | sales/expenses/taxes → columns, rows, total, mode; limite 2000 |
-| GET /credit · POST/DELETE /credit/consent · POST /credit/offers · POST /credit/offers/{id}/accept | financeiro / gerente | Capital de giro com parceiro (simulado): limite, consentimento, proposta e contratação idempotente. Detalhes: [integração com parceiro de crédito](../../documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) |
+| GET /credit · POST/DELETE /credit/consent · POST /credit/offers · POST /credit/offers/{id}/accept · POST /credit/contracts/{id}/installments/{n}/pay · GET/POST /credit/contracts/{id}/payoff · POST /credit/contracts/{id}/cancel · GET /credit/events · POST /credit/webhook/{parceiro} | financeiro / gerente / HMAC | Capital de giro de ponta a ponta: diagnóstico, ofertas de vários parceiros pelo CET, crédito responsável, contratação idempotente, parcelas, quitação antecipada, desistência, trilha imutável e webhook assinado. Detalhes: [especificação e integração](../../documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) |
 
 Detalhes de cada extensão: [capacidades](INCREMENTO-FUNCIONAL-2026-10-15.md). Falhas temporárias: [operação e recuperação](OPERACAO-E-RECUPERACAO.md).
 

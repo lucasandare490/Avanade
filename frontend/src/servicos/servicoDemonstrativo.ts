@@ -60,7 +60,7 @@ export function criarServicoDemonstrativo(): ServicoPlanner {
         );
       return structuredClone(operacao);
     },
-    credito: criarCreditoDemo(() => base.operacoes, DATA_REFERENCIA),
+    credito: criarCreditoDemo(() => base, DATA_REFERENCIA),
     async reprocessar(id) {
       const operacao = base.operacoes.find((o) => o.id === id);
       if (!operacao) throw new Error('Operação não encontrada.');

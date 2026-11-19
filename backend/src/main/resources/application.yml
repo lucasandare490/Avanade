@@ -53,6 +53,8 @@ app:
   credit:
     partner: ${CREDIT_PARTNER:simulado}
     simulated-monthly-rate-bp: ${CREDIT_SIMULATED_MONTHLY_RATE_BP:249}
+    simulated-bank-monthly-rate-bp: ${CREDIT_SIMULATED_BANK_MONTHLY_RATE_BP:189}
+    webhook-secret: ${CREDIT_WEBHOOK_SECRET:}
   demo-seed: ${DEMO_SEED_ENABLED:false}
   demo-password: ${DEMO_PASSWORD:}
   mock-payment: CONFIRMED

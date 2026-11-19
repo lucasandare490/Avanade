@@ -2,6 +2,17 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-18 — Capital de giro completo (Thayná Batista da Silva)
+
+- **Diagnóstico da descapitalização**: imposto retido por mês pelo split, saldo, cobertura em dias, falta de caixa em 30 dias e recomendação responsável de valor e parcelas.
+- **Vários parceiros** (fintech e banco simulados) com ofertas comparadas pelo CET e selo de menor CET.
+- **Crédito responsável**: comprometimento da parcela sobre as entradas, com níveis e bloqueio acima de 50%.
+- **Antes e depois do caixa** nas próximas 12 semanas, sem e com a oferta escolhida.
+- **Gestão do contrato**: pagamento de parcela em ordem, quitação antecipada com desconto proporcional dos juros, desistência em 7 dias sem juros, resumo para impressão e histórico imutável (`credit_event`).
+- **Webhook assinado (HMAC-SHA256)** e idempotente para o parceiro real confirmar pagamentos.
+- Migration V10; especificação, regras, base regulatória e integração em `documentacao/INTEGRACAO-PARCEIRO-CREDITO.md`.
+- Testes: `CreditoIntegrationTest` (10), `CreditoWebhookIntegrationTest`, `credito.test.ts` (12) e navegador (demonstração e API real).
+
 ## 2026-11-18 — Capital de giro com parceiro (Thayná Batista da Silva)
 
 - Tela **Capital de giro** no menu: limite, autorização revogável para compartilhar dados agregados, simulação com parcela, total, juros, taxa e CET, aceite consciente e contratação sem ir ao banco. Funciona no MVP e na demonstração.
