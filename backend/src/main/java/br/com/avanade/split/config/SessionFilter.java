@@ -71,7 +71,9 @@ public class SessionFilter extends OncePerRequestFilter {
         }
         if (req.getContentLengthLong() > 16384)
           throw new ApiException(413, "PAYLOAD_TOO_LARGE", "Corpo excede 16 KiB.");
-        if (!login) {
+        // Webhook do parceiro de crédito: autenticado por assinatura HMAC no próprio controller.
+        boolean webhook = path.startsWith("/api/v1/credit/webhook/") && req.getMethod().equals("POST");
+        if (!login && !webhook) {
           String h = req.getHeader("Authorization");
           if (h == null || !h.matches("Bearer [A-Za-z0-9_-]{43}")) throw unauthorized();
           var actors =

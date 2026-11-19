@@ -24,6 +24,9 @@ public interface ParceiroCredito {
       long totalCents,
       LocalDate primeiroVencimento) {}
 
+  /** Identificador estável do parceiro (usado no webhook e nos registros). */
+  String id();
+
   /** Nome exibido ao comerciante. */
   String nome();
 
