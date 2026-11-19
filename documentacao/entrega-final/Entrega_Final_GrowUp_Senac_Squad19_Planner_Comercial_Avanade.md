@@ -48,8 +48,9 @@ lang: pt-BR
 | Problema central | Confundido com a solução: o foco era *como recolher o imposto de cada venda* | **Descapitalização** do comerciante com o desconto automático do imposto no pagamento (correção pedida pelo mentor) |
 | Código | Iniciando; protótipo no Figma | MVP publicado: API Java com PostgreSQL, site React, cliente Android |
 | Login | Planejado | Cadastro, login, bloqueio após 5 tentativas, recuperação de conta, lembrar de mim |
+| Crédito | Futuro | Capital de giro dentro do app, com parceiro plugável (simulado no MVP) |
 | Acessibilidade e idiomas | — | Tema claro/escuro/sistema, português/inglês/espanhol, ícone "i" com explicação em cada informação, contraste WCAG AA |
-| Testes | Planejados | 70 testes de backend, 127 unitários de frontend, 41 testes em navegador real |
+| Testes | Planejados | Backend, unitários de frontend e testes em navegador real (seção 7) |
 
 # 2. Definição do problema e personas
 
@@ -69,11 +70,11 @@ Portanto, o problema **não é como recolher o imposto de cada venda** — o spl
 
 ### Solução (até 250 caracteres)
 
-O Planner Comercial mostra, venda a venda, quanto vai para imposto, taxa e caixa, calcula o caixa real e projeta os próximos dias, avisando antes de faltar dinheiro, com explicações simples e sem mexer nos valores.
+O Planner Comercial mostra, venda a venda, quanto vai para imposto, taxa e caixa, projeta os próximos dias e, se faltar dinheiro, oferece capital de giro de um parceiro dentro do app.
 
 ### Como o produto funciona
 
-Venda paga no Smart POS ou no POS web → pagamento confirmado (simulado) → identificação da regra de tributo vigente → separação em **tributo · taxa · valor líquido** → roteamento simulado de cada parcela → registro auditável (eventos com hash encadeado) → caixa atualizado **pelo valor líquido** → projeção e aviso de déficit → explicação em linguagem simples.
+Venda paga no Smart POS ou no POS web → pagamento confirmado (simulado) → identificação da regra de tributo vigente → separação em **tributo · taxa · valor líquido** → roteamento simulado de cada parcela → registro auditável (eventos com hash encadeado) → caixa atualizado **pelo valor líquido** → projeção e aviso de déficit → **capital de giro** com banco ou fintech parceira, dentro do app → explicação em linguagem simples.
 
 **Regra fundamental:** cálculos, separação e movimentação são feitos pelo backend com regras determinísticas. A camada de explicação recebe resultados já calculados e não altera valores.
 
@@ -168,7 +169,8 @@ Conversa com um assistente de IA generativa (ferramenta de chat), em 01/10/2026,
 | E08 | Explicação dos resultados | P2 | **Parcial**: explicações por regras; provedor de IA externo opcional |
 | E09 | Classificação de despesas | P3 | **Concluído** como sugestão por regras, confirmada pela pessoa |
 | E10 | Alertas de caixa | P3 | **Concluído** como aviso de déficit na projeção |
-| E11 | Crédito e cancelamento | Futuro | Fora do MVP (decisão do grupo) |
+| E11 | Capital de giro com parceiro | P2 | **Concluído com parceiro simulado**: limite, consentimento revogável, simulação com parcela, juros e CET, contratação dentro do app e crédito na projeção. Pronto para ligar um banco ou fintech |
+| E13 | Cancelamento de vendas | Futuro | Fora do MVP (decisão do grupo) |
 | E12 | Acessibilidade, tema e idiomas | P2 | **Concluído**: tema claro/escuro/sistema, PT/EN/ES, ícone "i", WCAG AA |
 
 ## 3.2 Critérios de aceitação verificados por testes
@@ -188,7 +190,7 @@ Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes 
 
 # 4. Banco de dados e API
 
-## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V8)
+## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V9)
 
 | Tabela | Função |
 |---|---|
@@ -203,8 +205,9 @@ Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes 
 | `expense`, `expense_category` | Despesas pagas e categorias |
 | `request_intent` | Idempotência: mesma chave devolve o mesmo resultado |
 | `ai_interaction` | Registro das explicações geradas, sem dados sensíveis |
+| `credit_consent`, `credit_offer`, `credit_contract`, `credit_installment` | Capital de giro: consentimento revogável, propostas (com os fatos usados), contratos e parcelas |
 
-Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos.
+Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos. Migrations V1–V9.
 
 ## 4.2 Principais endpoints (`/api/v1`)
 
@@ -221,10 +224,25 @@ Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de 
 | POST `split-payment/simulate` | Simulação sem escrita |
 | POST `ai/cash-analysis`, GET `ai/split-explanation/{id}`, POST `ai/expense-category` | Explicações e sugestão revisável |
 | GET `reports/{sales,expenses,taxes}` | Relatórios com CSV |
+| GET `credit`; POST/DELETE `credit/consent`; POST `credit/offers`, `credit/offers/{id}/accept` | Capital de giro: limite, consentimento, proposta e contratação |
 
 Erros seguem o formato `{code, message, fieldErrors, correlationId}`. Contrato completo: `backend/docs/API.md` no repositório.
 
-# 5. Arquitetura e stack
+# 5. Capital de giro com parceiro financeiro
+
+Quando a projeção mostra que vai faltar dinheiro, o comerciante pode resolver **dentro do app, sem ir ao banco**:
+
+1. Vê o **limite disponível**, calculado pelo parceiro com dados agregados da loja.
+2. **Autoriza o compartilhamento** apenas de totais dos últimos 90 dias (entradas líquidas, despesas e número de vendas). Nenhum dado de clientes é enviado, e a autorização pode ser revogada.
+3. **Simula** valor e parcelas (1 a 12) e vê parcela, total a pagar, juros, taxa mensal, CET anual, primeira parcela e validade da proposta.
+4. Marca que leu e concorda e **contrata**. Aceitar de novo não contrata em dobro.
+5. O crédito **entra na projeção do caixa** e as parcelas aparecem como compromissos.
+
+**Quem concede o crédito é a instituição autorizada** (banco, SCD ou fintech). O Planner mostra a oferta, coleta o consentimento e registra a contratação. Só a pessoa gerente autoriza e contrata.
+
+**Pronto para parceria:** o parceiro é uma peça plugável (`ParceiroCredito`). Hoje é simulado (2,49% ao mês, limite de 50% das entradas líquidas de 90 dias, sem movimentar dinheiro). Para ligar um parceiro real, basta implementar a chamada à API dele e trocar `CREDIT_PARTNER` no servidor. O guia está em `documentacao/INTEGRACAO-PARCEIRO-CREDITO.md`.
+
+# 6. Arquitetura e stack
 
 | Camada | Tecnologias |
 |---|---|
@@ -239,21 +257,21 @@ Smart POS/POS web e painel web → API REST (autenticação, núcleo de split, P
 
 **Segurança:** senhas com BCrypt; token opaco, revogável e com validade; autorização por loja e perfil em cada ação; limite de requisições por IP; bloqueio de login no servidor; token de recuperação só como hash e no fragmento da URL; nenhum segredo no repositório; traduções e explicações inseridas como texto, sem HTML.
 
-# 6. Resultados de testes da entrega final
+# 7. Resultados de testes da entrega final
 
 | Bateria | Resultado |
 |---|---|
-| Backend (`./mvnw test`) | **70 de 70** |
-| Frontend unitários (`npm test`) | **127 de 127** |
-| Navegador na demonstração (`npm run test:e2e:entrega`) | **20 de 20** — login, recuperação, lembrar de mim, tema, idiomas, ícones "i", WCAG A/AA nos dois temas, teclado |
-| Navegador contra a API real | **21 de 21** (no `main` antes desta entrega: 0 de 22) |
+| Backend (`./mvnw test`) | **74 de 74** |
+| Frontend unitários (`npm test`) | **134 de 134** |
+| Navegador na demonstração (`npm run test:e2e:entrega`) | **22 de 22** — login, recuperação, lembrar de mim, capital de giro, tema, idiomas, ícones "i", WCAG A/AA nos dois temas, teclado |
+| Navegador contra a API real | **22 de 22**, incluindo a contratação de capital de giro (no `main` antes desta entrega: 0 de 22) |
 | CI do GitHub | 12 de 12 verificações |
-| Traduções | 895 textos em inglês e espanhol; 159 explicações em três idiomas |
-| Acessibilidade (axe, 10 telas) | 0 violações nos temas claro e escuro |
+| Traduções | 959 textos em inglês e espanhol; 181 explicações em três idiomas |
+| Acessibilidade (axe, 11 telas) | 0 violações nos temas claro e escuro |
 
 Defeitos antigos encontrados e corrigidos: as rotas de recuperação de senha exigiam login, e o banco não permitia à API trocar a senha — a recuperação nunca tinha funcionado.
 
-# 7. Relato do processo
+# 8. Relato do processo
 
 ### O que fizemos
 
@@ -279,7 +297,7 @@ Equipe dividida por frentes (produto e design, front-end, código e deploy, entr
 - Funcionamento real das maquininhas e do Smart POS; homologação em aparelho físico pendente.
 - Comunicação e prazos da equipe na reta final.
 
-# 8. Pendências
+# 9. Pendências
 
 | Pendência | Responsável |
 |---|---|
@@ -287,7 +305,8 @@ Equipe dividida por frentes (produto e design, front-end, código e deploy, entr
 | Configurar o SMTP no Render para o e-mail de recuperação (guia em `documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md`) | Kássio |
 | Homologação do aplicativo Android em aparelho físico | Equipe |
 | Integração oficial de pagamento e recolhimento (fora do MVP) | Evolução futura |
-| Crédito e cancelamento | Evolução futura |
+| Ligar um banco ou fintech parceira ao capital de giro (guia em `documentacao/INTEGRACAO-PARCEIRO-CREDITO.md`) | Parceria futura |
+| Cancelamento de vendas | Evolução futura |
 
 ---
 

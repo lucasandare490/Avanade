@@ -16,6 +16,7 @@ import {
   Wallet,
   X,
   Percent,
+  Landmark,
 } from 'lucide-react';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 const grupos = [
@@ -34,6 +35,7 @@ const grupos = [
       { rota: 'fluxo-caixa', nome: 'Fluxo de Caixa', icone: Wallet },
       { rota: 'relatorios', nome: 'Relatórios', icone: Receipt },
       { rota: 'simulacao', nome: 'Simulação Split', icone: Percent },
+      { rota: 'credito', nome: 'Capital de giro', icone: Landmark },
     ],
   },
   { nome: 'INTELIGÊNCIA', itens: [{ rota: 'analise', nome: 'Análise com IA', icone: Sparkles }] },

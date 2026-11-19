@@ -49,6 +49,10 @@ app:
   password-reset-from: ${PASSWORD_RESET_FROM:}
   login-max-attempts: ${LOGIN_MAX_ATTEMPTS:5}
   login-lock-minutes: ${LOGIN_LOCK_MINUTES:15}
+  login-rate-limit-per-minute: ${LOGIN_RATE_LIMIT_PER_MINUTE:20}
+  credit:
+    partner: ${CREDIT_PARTNER:simulado}
+    simulated-monthly-rate-bp: ${CREDIT_SIMULATED_MONTHLY_RATE_BP:249}
   demo-seed: ${DEMO_SEED_ENABLED:false}
   demo-password: ${DEMO_PASSWORD:}
   mock-payment: CONFIRMED

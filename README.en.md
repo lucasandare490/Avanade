@@ -56,9 +56,10 @@ So the core problem **is not how to pay the tax on each sale**, since split paym
 - calculates actual cash (net inflows minus paid expenses) and weekly cash;
 - projects cash for the coming days and warns when the scenario points to a deficit;
 - simulates sales before they happen, to understand the impact of each percentage;
-- explains the numbers in plain language, with rule-based analysis, no external AI and no changes to values.
+- explains the numbers in plain language, with rule-based analysis, no external AI and no changes to values;
+- when cash is about to get tight, offers **working capital** from a partner bank or fintech inside the app, with every cost shown before contracting.
 
-**Real persistence in PostgreSQL. Payments, split and taxes are simulated:** no money is transferred and no tax is paid. Example percentages are not legislation. Simulated credit and cancellation are future work.
+**Real persistence in PostgreSQL. Payments, split and taxes are simulated:** no money is transferred and no tax is paid. Example percentages are not legislation. Working capital already works with a simulated partner; cancellation is future work.
 
 ## What the system has
 
@@ -72,6 +73,7 @@ So the core problem **is not how to pay the tax on each sale**, since split paym
 | Expenses | Recording paid expenses, search and a category suggestion confirmed by the person |
 | Cash | Server totals, daily breakdown, weekly cash, manual projection with a deficit warning |
 | Reports | Sales, expenses and tax breakdown by period, with full CSV |
+| Working capital | Inside the app, without going to the bank: limit, authorization to share data, simulation with installment, total, interest and CET, and contracting. The credit enters the cash projection. Today the partner is simulated; to connect a bank or fintech, see the [credit partner integration](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) (in Portuguese) |
 | Android | Kotlin POS client, local and integrated over HTTPS. Testing on a physical device is pending |
 
 ## Team and what each person did
@@ -106,7 +108,7 @@ Mentor: **Eryson Moreira** (Avanade). Class: GROWUP-SENAC-N2. The authorship of 
 | Frontend (unit) | `cd frontend && npm test` |
 | Types and build | `cd frontend && npm run build` |
 | Browser: sign-in, theme, languages, **i** icons and accessibility (starts the demo by itself) | `cd frontend && npm run test:e2e:entrega` |
-| Browser against the real API | with `./scripts/dev.sh` running: `cd frontend && npx playwright test` |
+| Browser against the real API | with `./scripts/dev.sh` running (use `LOGIN_RATE_LIMIT_PER_MINUTE=300` on the local server, since the suite logs in many times): `cd frontend && npx playwright test` |
 | Every interface phrase translated | `node scripts/auditoria/verificar-traducoes.mjs` |
 | No AI credit anywhere in the project | `node scripts/auditoria/verificar-sem-credito-ia.mjs` |
 | Dark theme in sync with the light theme | `cd frontend && node scripts/gerar-tema-escuro.mjs --verificar` |
@@ -125,7 +127,7 @@ The system is auditable: every change has an authored commit, the [CHANGELOG](CH
 ## Folders
 
 - `frontend/`: React 19, TypeScript and Vite website. Screens in `src/telas`; theme, languages and explanations in `src/preferencias`.
-- `backend/`: Java 21, Spring Boot, PostgreSQL and Flyway API (migrations V1–V8).
+- `backend/`: Java 21, Spring Boot, PostgreSQL and Flyway API (migrations V1–V9).
 - `android-pos/`: Kotlin POS app.
 - `scripts/`: local run, Supabase, hosting and `auditoria/`.
 - `documentacao/`: status, decisions, operations and history.

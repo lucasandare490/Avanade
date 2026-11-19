@@ -54,9 +54,10 @@ O **Planner Comercial** ajuda o comerciante a enxergar e a se antecipar à desca
 - calcula o caixa realizado (entradas líquidas menos despesas pagas) e o caixa por semana;
 - projeta o caixa dos próximos dias e avisa quando o cenário indica déficit;
 - simula vendas antes de acontecerem, para entender o impacto de cada percentual;
-- explica os números em linguagem simples, com análise por regras, sem IA externa e sem alterar valores.
+- explica os números em linguagem simples, com análise por regras, sem IA externa e sem alterar valores;
+- quando o caixa vai apertar, oferece **capital de giro** de um banco ou fintech parceira dentro do próprio app, com todos os custos à vista antes de contratar.
 
-**Persistência real em PostgreSQL. Pagamentos, split e tributos são simulados:** não há transferência de dinheiro nem recolhimento fiscal. Percentuais de exemplo não são legislação. Crédito simulado e cancelamento ficam para evolução futura.
+**Persistência real em PostgreSQL. Pagamentos, split e tributos são simulados:** não há transferência de dinheiro nem recolhimento fiscal. Percentuais de exemplo não são legislação. O capital de giro já funciona com um parceiro simulado; o cancelamento fica para evolução futura.
 
 ## O que o sistema tem
 
@@ -70,6 +71,7 @@ O **Planner Comercial** ajuda o comerciante a enxergar e a se antecipar à desca
 | Despesas | Registro de despesa paga, busca e sugestão de categoria confirmada pela pessoa |
 | Caixa | Agregados do servidor, composição diária, caixa semanal, projeção manual com aviso de déficit |
 | Relatórios | Vendas, despesas e composição tributária por período, com CSV completo |
+| Capital de giro | Dentro do app, sem ir ao banco: limite, autorização para compartilhar dados, simulação com parcela, total, juros e CET, e contratação. O crédito entra na projeção do caixa. Hoje o parceiro é simulado; para ligar um banco ou fintech, veja [integração com parceiro de crédito](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) |
 | Android | Cliente Kotlin (POS) local e integrado por HTTPS. A homologação em aparelho físico está pendente |
 
 ## Equipe e o que cada pessoa fez
@@ -104,7 +106,7 @@ Mentor: **Eryson Moreira** (Avanade). Turma: GROWUP-SENAC-N2. A autoria de cada 
 | Frontend (unitários) | `cd frontend && npm test` |
 | Tipos e build | `cd frontend && npm run build` |
 | Navegador: login, tema, idiomas, ícones **i** e acessibilidade (sobe a demonstração sozinho) | `cd frontend && npm run test:e2e:entrega` |
-| Navegador contra a API real | com `./scripts/dev.sh` rodando: `cd frontend && npx playwright test` |
+| Navegador contra a API real | com `./scripts/dev.sh` rodando (use `LOGIN_RATE_LIMIT_PER_MINUTE=300` no servidor local, porque a bateria faz muitos logins): `cd frontend && npx playwright test` |
 | Toda frase da interface traduzida | `node scripts/auditoria/verificar-traducoes.mjs` |
 | Nenhum crédito de IA no projeto | `node scripts/auditoria/verificar-sem-credito-ia.mjs` |
 | Tema escuro em dia com o tema claro | `cd frontend && node scripts/gerar-tema-escuro.mjs --verificar` |
@@ -123,7 +125,7 @@ Os resultados da entrega final estão em [documentacao/ENTREGA-FINAL-2026-11-18.
 ## Pastas
 
 - `frontend/`: site em React 19, TypeScript e Vite. Telas em `src/telas`, tema, idiomas e explicações em `src/preferencias`.
-- `backend/`: API em Java 21, Spring Boot, PostgreSQL e Flyway (migrations V1–V8).
+- `backend/`: API em Java 21, Spring Boot, PostgreSQL e Flyway (migrations V1–V9).
 - `android-pos/`: aplicativo Kotlin do POS.
 - `scripts/`: execução local, Supabase, hospedagem e `auditoria/`.
 - `documentacao/`: estado, decisões, operação e histórico (inclui o [README anterior](documentacao/historico/README-antes-da-entrega-final-2026-11-18.md)).

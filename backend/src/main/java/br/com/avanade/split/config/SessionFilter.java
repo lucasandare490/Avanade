@@ -19,6 +19,14 @@ public class SessionFilter extends OncePerRequestFilter {
   private final Clock clock;
   private final io.micrometer.core.instrument.MeterRegistry metrics;
   private final Map<String, Window> windows = new HashMap<>();
+  private int limiteAcessoPorMinuto = 20;
+
+  /** Limite de pedidos de acesso (login, cadastro, recuperação) por IP e minuto. Produção: 20. */
+  @org.springframework.beans.factory.annotation.Autowired(required = false)
+  void definirLimiteAcesso(@org.springframework.beans.factory.annotation.Value("${app.login-rate-limit-per-minute:20}") int limite) {
+    if (limite < 1 || limite > 10_000) throw new IllegalArgumentException("Limite de acesso por minuto inválido.");
+    this.limiteAcessoPorMinuto = limite;
+  }
 
   private record Window(long minute, int count) {}
 
@@ -57,7 +65,7 @@ public class SessionFilter extends OncePerRequestFilter {
         boolean login = (path.equals("/api/v1/auth/login") || path.equals("/api/v1/auth/register")
                 || path.equals("/api/v1/auth/password-reset/request") || path.equals("/api/v1/auth/password-reset/complete"))
             && req.getMethod().equals("POST");
-        if (!allow((login ? "login:" : "api:") + req.getRemoteAddr(), login ? 20 : 600)) {
+        if (!allow((login ? "login:" : "api:") + req.getRemoteAddr(), login ? limiteAcessoPorMinuto : 600)) {
           res.setHeader("Retry-After", "60");
           throw new ApiException(429, "RATE_LIMITED", "Aguarde antes de tentar novamente.");
         }

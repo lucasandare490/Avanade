@@ -85,6 +85,9 @@ export interface ProjecaoCaixa {
   openingCents: number;
   incomeCents: number;
   expenseCents: number;
+  /** Capital de giro contratado (simulado) e parcelas que vencem até a data. */
+  creditCents: number;
+  installmentsDueCents: number;
   projectedCents: number;
   attention: string;
   explanation: string;
@@ -109,6 +112,8 @@ export interface ConsultasPlanner {
     descricao: string,
     sinal?: AbortSignal,
   ) => Promise<{ categorias: string[]; explicacao: string }>;
+  /** Capital de giro com parceiro de crédito (simulado no MVP). */
+  credito?: import('./credito').ServicoCredito;
   projetarCaixa?: (
     entrada: { until: string; incomeCents: number; expenseCents: number },
     sinal?: AbortSignal,

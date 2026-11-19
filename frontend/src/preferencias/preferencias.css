@@ -48,3 +48,11 @@ html[data-tema="escuro"] .nota-tentativas { color: #9fb0c6; }
 .convite-cadastro { margin: 14px 0 0; text-align: center; font-size: 13px; }
 .botao.texto.destaque { padding: 0; color: #1e54b7; font-weight: 600; text-decoration: underline; }
 html[data-tema="escuro"] .botao.texto.destaque { color: #93c5fd; }
+
+/* Capital de giro */
+.detalhes-credito { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 14px 0; }
+.detalhes-credito dt { color: #5b6b82; font-weight: 500; }
+.detalhes-credito dd { margin: 0; font-weight: 600; }
+.contrato-credito + .contrato-credito { margin-top: 18px; padding-top: 14px; border-top: 1px solid #e2e8f0; }
+html[data-tema="escuro"] .detalhes-credito dt { color: #9fb0c6; }
+html[data-tema="escuro"] .contrato-credito + .contrato-credito { border-top-color: #263247; }
