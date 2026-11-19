@@ -962,6 +962,7 @@ export const traducoes: Record<string, readonly [string, string]> = {
   "Consultando parceiro financeiro…": ["Contacting financial partner…", "Consultando socio financiero…"],
   "CAPITAL DE GIRO": ["WORKING CAPITAL", "CAPITAL DE TRABAJO"],
   "Vencimento": ["Due date", "Vencimiento"],
+  "O servidor ainda não foi atualizado com o capital de giro. Assim que a API for publicada com esta versão, a tela funciona normalmente.": ["The server has not been updated with working capital yet. As soon as the API is published with this version, the screen works normally.", "El servidor aún no se actualizó con el capital de trabajo. En cuanto la API se publique con esta versión, la pantalla funcionará normalmente."],
 };
 
 // Textos que aparecem no código mas não devem ser traduzidos, com o motivo.
