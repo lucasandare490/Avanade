@@ -1,6 +1,12 @@
 # Planner Comercial — Split Tributario
 
-[Português](README.md) · [English](README.en.md) · **Español**
+[🇧🇷 Português](README.md) · [🇺🇸 English](README.en.md) · **🇪🇸 Español**
+
+<p align="center"><em>Planificación de caja para que el pequeño comerciante no se descapitalice con el split payment de la reforma tributaria de Brasil.</em></p>
+
+<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><img src="documentacao/readme/es-painel.png" alt="Panel del Planner Comercial" width="860"></a></p>
+
+<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><b>▶ Abrir el sitio publicado</b></a></p>
 
 Proyecto del **Squad 19** de la Residencia Tecnológica **Grow Up 2026.2** (Porto Digital y Faculdade Senac de Pernambuco, Recife, Brasil), hecho con la empresa asociada **Avanade**.
 
@@ -40,6 +46,18 @@ cd frontend && npm ci && VITE_MODO_DADOS=demo npm run dev
 
 Use el menú para cambiar la interfaz a español o inglés y el tema a claro, oscuro o del sistema.
 
+## Pitch en video
+
+🎬 **Próximamente:** el video del pitch (hasta 5 minutos) se publicará aquí.
+
+<!-- Quando o vídeo estiver no YouTube (não listado), troque ID_DO_VIDEO pelo código do link (o que vem depois de "v=") e apague a linha "Em breve" acima:
+<p align="center"><a href="https://www.youtube.com/watch?v=ID_DO_VIDEO"><img src="https://img.youtube.com/vi/ID_DO_VIDEO/maxresdefault.jpg" alt="Ver el pitch del Planner Comercial" width="720"></a></p>
+-->
+
+[Guion de la grabación (en portugués)](documentacao/pitch/ROTEIRO-PITCH.md)
+
+<p align="center"><img alt="Java 21" src="https://img.shields.io/badge/Java-21-E76F00?logo=openjdk&logoColor=white"> <img alt="Spring Boot" src="https://img.shields.io/badge/Spring_Boot-3.5-6DB33F?logo=springboot&logoColor=white"> <img alt="React 19" src="https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white"> <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white"> <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Supabase-4169E1?logo=postgresql&logoColor=white"> <img alt="Kotlin" src="https://img.shields.io/badge/Android-Kotlin-7F52FF?logo=kotlin&logoColor=white"> <img alt="Idiomas" src="https://img.shields.io/badge/PT_·_EN_·_ES-0E7490"> <img alt="WCAG" src="https://img.shields.io/badge/WCAG_2.1-AA-15803D"></p>
+
 ## El problema
 
 La Reforma Tributaria del consumo de Brasil (Enmienda Constitucional 132/2023 y Ley Complementaria 214/2025) crea los impuestos IBS y CBS e introduce el **split payment**: la parte del impuesto se separa automáticamente **en el momento en que el cliente paga**, y el comerciante recibe solo el valor neto.
@@ -59,7 +77,18 @@ Por lo tanto, el problema central **no es cómo pagar el impuesto de cada venta*
 - explica los números en lenguaje simple, con análisis por reglas, sin IA externa y sin alterar valores;
 - cuando la caja va a quedar ajustada, ofrece **capital de trabajo** de un banco o fintech asociado dentro de la app, con todos los costos a la vista antes de contratar.
 
-**Persistencia real en PostgreSQL. Los pagos, el split y los tributos son simulados:** no hay transferencia de dinero ni pago de impuestos. Los porcentajes de ejemplo no son legislación. El capital de trabajo ya funciona con un socio simulado; la cancelación queda para una evolución futura.
+**Persistencia real en PostgreSQL. Los pagos, el split y los tributos son simulados:** no hay transferencia de dinero ni pago de impuestos. Los porcentajes de ejemplo no son legislación. El capital de trabajo ya funciona de punta a punta con socios simulados (un banco y una fintech); para usar dinero real, basta conectar un socio autorizado por el Banco Central de Brasil.
+
+## Pantallas
+
+Capturas de la demostración (datos ficticios). Todas las pantallas están en portugués, inglés y español, en tema claro y oscuro.
+
+<table>
+<tr><td align="center" valign="top"><img src="documentacao/readme/es-entrada.png" alt="Entrada: tema e idioma elegidos arriba"><br><sub>Entrada: tema e idioma elegidos arriba</sub></td><td align="center" valign="top"><img src="documentacao/readme/es-painel.png" alt="Panel: bruto, impuesto, tasa y lo que realmente entra en la caja"><br><sub>Panel: bruto, impuesto, tasa y lo que realmente entra en la caja</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/es-fluxo-caixa.png" alt="Flujo de caja: entradas netas, gastos y saldo"><br><sub>Flujo de caja: entradas netas, gastos y saldo</sub></td><td align="center" valign="top"><img src="documentacao/readme/es-split.png" alt="Venta y split: adónde fue cada parte del pago"><br><sub>Venta y split: adónde fue cada parte del pago</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/es-capital-de-giro.png" alt="Capital de trabajo: diagnóstico de la descapitalización y ofertas de crédito"><br><sub>Capital de trabajo: diagnóstico de la descapitalización y ofertas de crédito</sub></td><td align="center" valign="top"><img src="documentacao/readme/es-explicacao.png" alt="Ícono i: explicación de cada información"><br><sub>Ícono i: explicación de cada información</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/es-capital-de-giro-escuro.png" alt="Tema oscuro"><br><sub>Tema oscuro</sub></td><td align="center" valign="top"><img src="documentacao/readme/es-celular.png" alt="Celular" width="230"><br><sub>Celular</sub></td></tr>
+</table>
 
 ## Qué tiene el sistema
 
@@ -83,7 +112,7 @@ Por lo tanto, el problema central **no es cómo pagar el impuesto de cada venta*
 | **Thayná Batista da Silva** | Scrum Master; diseño y prototipado; investigación; documentación de requisitos; README en portugués, inglés y español; pruebas | Prototipo de alta fidelidad en [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); investigación y levantamiento de requisitos de Split Pay y de Planner Comercial; documentación de requisitos. En la entrega final: corrección del problema central (descapitalización); inicio de sesión con bloqueo, aviso de intentos, recuperación por correo, botón de ojo, Recordarme y Regístrese; temas claro, oscuro y del sistema; idiomas PT/EN/ES; íconos **i** con explicaciones; verificadores de auditoría; nuevas pruebas de backend, unitarias y de navegador |
 | **Kássio Lima de Oliveira** | Código del proyecto y despliegue | Integración entre backend y frontend con persistencia; recuperación de operaciones; flujo seguro de recuperación de contraseña; configuración de Supabase; despliegue en Render (API) y Vercel (sitio); monitoreo y rutina de respaldo |
 | **Lucas André Cardoso de Lima** | Código del front-end | Primera entrega de los frontends web y Android; comparación de tendencias; contratos de integración; revisión de los 516 criterios con evidencias; caja semanal, registro e informes |
-| **Kleysson Teixeira da Cruz Junior** | Entrevistas con usuarios | Entrevistas con usuarios; revisión del README del MVP; [repositorio inicial](https://github.com/Kleyssonteixeirapf/projeto-split-tributario) del proyecto |
+| **Kleysson Teixeira da Cruz Junior** | Organización del equipo y entrevistas con usuarios | Organización y división de las tareas del equipo; estructuración y actualización del tablero de Trello; entrevistas con usuarios y apoyo en la investigación de campo; apoyo en la elaboración de la documentación; revisión del README del MVP; [repositorio inicial](https://github.com/Kleyssonteixeirapf/projeto-split-tributario) del proyecto; apoyo en las tareas generales del proyecto |
 | **Heitor Sette Couto de Melo** | Pitch | Presentación del pitch deck |
 | **James Bernardino da Silva Neto** | Integrante del squad | — |
 
@@ -131,3 +160,7 @@ El sistema es auditable: cada cambio tiene un commit con autoría, el [CHANGELOG
 - `android-pos/`: aplicación POS en Kotlin.
 - `scripts/`: ejecución local, Supabase, hosting y `auditoria/`.
 - `documentacao/`: estado, decisiones, operación e historial.
+
+## Licencia
+
+© 2026 Squad 19 (Thayná Batista da Silva, Kássio Lima de Oliveira, Lucas André Cardoso de Lima, Kleysson Teixeira da Cruz Junior, Heitor Sette Couto de Melo y James Bernardino da Silva Neto). **Todos los derechos reservados.** Se puede ver este repositorio para evaluar el proyecto; cualquier otro uso requiere autorización por escrito. Detalles en [LICENSE](LICENSE).

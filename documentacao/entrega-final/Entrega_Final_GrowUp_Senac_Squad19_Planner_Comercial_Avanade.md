@@ -25,7 +25,7 @@ lang: pt-BR
 | Site publicado | https://avanade-frontend-xi.vercel.app/ |
 | Repositório | https://github.com/lucasandare490/Avanade |
 | Documento produzido por | Thayná Batista da Silva — design e prototipação de alta fidelidade ([Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design)), pesquisa e [levantamento de requisitos](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing), [documentação de requisitos](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing), README (PT/EN/ES), Scrum Master e testes |
-| Entrevista com pessoas usuárias | Kleysson Teixeira da Cruz Junior |
+| Organização da equipe, Trello e entrevista com pessoas usuárias | Kleysson Teixeira da Cruz Junior |
 
 ### Equipe
 
@@ -34,7 +34,7 @@ lang: pt-BR
 | Thayná Batista da Silva | Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; testes; implementação da entrega final (login seguro, tema, idiomas, explicações, correções e auditoria) |
 | Kássio Lima de Oliveira | Código do projeto e deploy (Render e Vercel); integração backend–frontend; Supabase |
 | Lucas André Cardoso de Lima | Código do front-end (web e Android) |
-| Kleysson Teixeira da Cruz Junior | Entrevistas com pessoas usuárias; repositório inicial |
+| Kleysson Teixeira da Cruz Junior | Organização e divisão das demandas da equipe; estruturação e atualização do quadro no Trello; entrevistas com pessoas usuárias e auxílio na pesquisa de campo; auxílio na elaboração da documentação; repositório inicial; suporte nas demandas gerais do projeto |
 | Heitor Sette Couto de Melo | Apresentação do pitch deck |
 | James Bernardino da Silva Neto | Integrante da squad |
 
@@ -181,6 +181,7 @@ Conversa com um assistente de IA generativa (ferramenta de chat), em 01/10/2026,
 | Recuperação | Pedido sem login; link de uso único e com validade; troca de senha revoga sessões e desbloqueia | `RecuperacaoSenhaIntegrationTest`, `RecuperacaoSenhaEmailTest` |
 | Venda e split | Soma das parcelas igual ao bruto; mesma tentativa não duplica | `BackendIntegrationTest`, `CrashRecoveryTest` |
 | Caixa | Entra o líquido, saem despesas, saldo por período e semana | `QueryAndCashIntegrationTest`, `caixa-semanal.spec.ts` |
+| Capital de giro | Diagnóstico, ofertas comparadas pelo CET, parcela acima de 50% bloqueada, contratação com aceite, pagamento de parcela, quitação antecipada com desconto, desistência em 7 dias, histórico imutável e webhook assinado | `CreditoIntegrationTest`, `CreditoWebhookIntegrationTest`, `credito.test.ts`, `credito-integrado.spec.ts` |
 | Tema e idiomas | Todas as telas nos três idiomas, sem texto sem tradução; tema salvo | `entrega-final.spec.ts`, `verificar-traducoes.mjs` |
 | Explicações | Toda informação das telas tem "i" que abre com mouse, teclado e toque | `entrega-final.spec.ts` |
 
@@ -323,7 +324,7 @@ Equipe dividida por frentes (produto e design, front-end, código e deploy, entr
 
 | Pendência | Responsável |
 |---|---|
-| Deploy manual da API no Render com a versão final (aplica as migrations V7 e V8) | Kássio |
+| Deploy manual da API no Render com a versão final (aplica as migrations V7 a V10: bloqueio de login, recuperação de senha e capital de giro) | Kássio |
 | Configurar o SMTP no Render para o e-mail de recuperação (guia em `documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md`) | Kássio |
 | Homologação do aplicativo Android em aparelho físico | Equipe |
 | Integração oficial de pagamento e recolhimento (fora do MVP) | Evolução futura |

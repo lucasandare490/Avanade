@@ -2,6 +2,14 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-19 — README visual, roteiro do pitch e documentação atualizada (Thayná Batista da Silva)
+
+- READMEs em português, inglês e espanhol com print de abertura, galeria de telas no idioma de cada versão (entrada, painel, fluxo de caixa, split, capital de giro, explicação "i", tema escuro e celular) e selos da tecnologia.
+- `frontend/scripts/capturar-readme.mjs` refaz os 27 prints a partir da demonstração, sem dados reais (`documentacao/readme/`).
+- Espaço "Pitch em vídeo" nos três READMEs, pronto para receber o link do YouTube.
+- Roteiro do pitch em vídeo, com falas pausadas, tempo de cada bloco e o que mostrar na maquininha e no celular: `documentacao/pitch/ROTEIRO-PITCH.md` (também em DOCX e PDF).
+- Entrega final e resumo da entrega com os números atuais dos testes, a linha do capital de giro e a pendência do deploy da API (migrations V7 a V10).
+
 ## 2026-11-18 — Capital de giro completo (Thayná Batista da Silva)
 
 - **Diagnóstico da descapitalização**: imposto retido por mês pelo split, saldo, cobertura em dias, falta de caixa em 30 dias e recomendação responsável de valor e parcelas.
