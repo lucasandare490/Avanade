@@ -1,13 +1,16 @@
-// A API publicada no Render roda a versão nova: conta tentativas e aceita
+// A API publicada (Render, ou a Vercel se passar o endereço) roda a versão nova: conta tentativas e aceita
 // pedido de recuperação sem sessão. Usa um e-mail fictício diferente a cada vez.
-const api = 'https://planner-api-tvmg.onrender.com/api/v1/auth';
+// Uso: node scripts/auditoria/api-producao.mjs [https://endereço-da-api]  (padrão: Render)
+const base = new URL(process.argv[2] ?? 'https://planner-api-tvmg.onrender.com');
+if (base.protocol !== 'https:' || base.username || base.password) { console.error('use um endereço https sem credenciais'); process.exit(1); }
+const api = base.origin + '/api/v1/auth';
 const email = `verificacao-${Date.now()}@example.invalid`;
 const post = (rota, corpo) => fetch(api + rota, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo), signal: AbortSignal.timeout(100000) });
 let login;
 try {
   login = await post('/login', { email, password: 'Senha-errada-123' });
 } catch {
-  console.error('a API do Render não respondeu em 100 s (pode estar acordando); rode de novo em seguida');
+  console.error(`a API em ${base.host} não respondeu em 100 s (pode estar acordando); rode de novo em seguida`);
   process.exit(1);
 }
 const corpo = await login.json().catch(() => ({}));

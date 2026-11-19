@@ -157,7 +157,7 @@ Os resultados da entrega final estão em [documentacao/ENTREGA-FINAL-2026-11-18.
 ## Pastas
 
 - `frontend/`: site em React 19, TypeScript e Vite. Telas em `src/telas`, tema, idiomas e explicações em `src/preferencias`.
-- `backend/`: API em Java 21, Spring Boot, PostgreSQL e Flyway (migrations V1–V11).
+- `backend/`: API em Java 21, Spring Boot, PostgreSQL e Flyway (migrations V1–V12).
 - `android-pos/`: aplicativo Kotlin do POS.
 - `scripts/`: execução local, Supabase, hospedagem e `auditoria/`.
 - `documentacao/`: estado, decisões, operação e histórico (inclui o [README anterior](documentacao/historico/README-antes-da-entrega-final-2026-11-18.md)).

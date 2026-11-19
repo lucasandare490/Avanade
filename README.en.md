@@ -159,7 +159,7 @@ The system is auditable: every change has an authored commit, the [CHANGELOG](CH
 ## Folders
 
 - `frontend/`: React 19, TypeScript and Vite website. Screens in `src/telas`; theme, languages and explanations in `src/preferencias`.
-- `backend/`: Java 21, Spring Boot, PostgreSQL and Flyway API (migrations V1–V11).
+- `backend/`: Java 21, Spring Boot, PostgreSQL and Flyway API (migrations V1–V12).
 - `android-pos/`: Kotlin POS app.
 - `scripts/`: local run, Supabase, hosting and `auditoria/`.
 - `documentacao/`: status, decisions, operations and history.

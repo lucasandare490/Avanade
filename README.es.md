@@ -159,7 +159,7 @@ El sistema es auditable: cada cambio tiene un commit con autoría, el [CHANGELOG
 ## Carpetas
 
 - `frontend/`: sitio en React 19, TypeScript y Vite. Pantallas en `src/telas`; tema, idiomas y explicaciones en `src/preferencias`.
-- `backend/`: API en Java 21, Spring Boot, PostgreSQL y Flyway (migrations V1–V11).
+- `backend/`: API en Java 21, Spring Boot, PostgreSQL y Flyway (migrations V1–V12).
 - `android-pos/`: aplicación POS en Kotlin.
 - `scripts/`: ejecución local, Supabase, hosting y `auditoria/`.
 - `documentacao/`: estado, decisiones, operación e historial.

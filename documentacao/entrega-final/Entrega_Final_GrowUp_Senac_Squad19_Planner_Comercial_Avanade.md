@@ -193,7 +193,7 @@ Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes 
 
 # 4. Banco de dados e API
 
-## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V11)
+## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V12)
 
 | Tabela | Função |
 |---|---|
@@ -210,7 +210,7 @@ Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes 
 | `ai_interaction` | Registro das explicações geradas, sem dados sensíveis |
 | `credit_consent`, `credit_offer`, `credit_contract`, `credit_installment`, `credit_event`, `credit_webhook_event` | Capital de giro: consentimento revogável, propostas (com os fatos usados e o comprometimento), contratos, parcelas, trilha imutável e avisos do parceiro |
 
-Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos. Migrations V1–V11.
+Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos. Migrations V1–V12.
 
 ## 4.2 Principais endpoints (`/api/v1`)
 
@@ -339,7 +339,7 @@ Equipe dividida por frentes (produto e design, front-end, código e deploy, entr
 
 | Pendência | Responsável |
 |---|---|
-| Deploy manual da API no Render com a versão final (aplica as migrations V7 a V11: bloqueio de login, recuperação de senha e capital de giro) | Kássio |
+| Publicar a API junto com o site num único deploy na Vercel: cadastrar as variáveis do banco no projeto e juntar o PR (passo a passo em `documentacao/DEPLOY-UNICO-VERCEL.md`; aplica as migrations V7 a V12) | Lucas |
 | Configurar o SMTP no Render para o e-mail de recuperação (guia em `documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md`) | Kássio |
 | Homologação do aplicativo Android em aparelho físico | Equipe |
 | Integração oficial de pagamento e recolhimento (fora do MVP) | Evolução futura |
