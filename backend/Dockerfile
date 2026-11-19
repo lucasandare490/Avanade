@@ -9,7 +9,11 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/* && useradd --system --uid 10001 app
 COPY --from=build /app/target/split-backend-0.1.0-SNAPSHOT.jar app.jar
+COPY docker/iniciar.sh /app/iniciar.sh
+RUN chmod 0555 /app/iniciar.sh
+# Dentro do contêiner a API precisa ouvir em todas as interfaces; a Vercel informa a porta em PORT.
+ENV SERVER_ADDRESS=0.0.0.0
 USER 10001
 EXPOSE 8080
 HEALTHCHECK --interval=15s --timeout=3s --start-period=40s CMD curl -fsS http://127.0.0.1:8080/actuator/health/readiness || exit 1
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["/app/iniciar.sh"]

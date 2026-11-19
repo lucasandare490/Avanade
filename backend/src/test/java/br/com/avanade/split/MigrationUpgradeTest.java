@@ -30,7 +30,7 @@ class MigrationUpgradeTest extends PostgresSupport {
     Map<String,String> before=new LinkedHashMap<>();
     for(String table:tables) before.put(table,snapshot(db,table));
     var flyway=Flyway.configure().dataSource(url,"postgres","").load();
-    assertThat(flyway.migrate().migrationsExecuted).isEqualTo(10);
+    assertThat(flyway.migrate().migrationsExecuted).isEqualTo(11);
     for(String table:tables) assertThat(snapshot(db,table)).as(table).isEqualTo(before.get(table));
     assertThat(flyway.migrate().migrationsExecuted).isZero();
     assertThatThrownBy(()->db.update("UPDATE request_intent SET response_json='{}' WHERE request_key='upgrade-key'")).isInstanceOf(org.springframework.dao.DataAccessException.class);

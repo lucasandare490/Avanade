@@ -28,6 +28,55 @@ public class SessionFilter extends OncePerRequestFilter {
     this.limiteAcessoPorMinuto = limite;
   }
 
+  /**
+   * Cabeçalho com o IP real de quem acessa, quando a API fica atrás de um proxy que o
+   * sobrescreve (na Vercel: x-vercel-forwarded-for). Vazio usa o IP da conexão. Nunca
+   * ligar sem proxy na frente: o cliente poderia mandar o cabeçalho que quisesse.
+   */
+  private String cabecalhoIp = "";
+
+  @org.springframework.beans.factory.annotation.Autowired(required = false)
+  void definirCabecalhoIp(@org.springframework.beans.factory.annotation.Value("${app.client-ip-header:}") String cabecalho) {
+    String c = cabecalho == null ? "" : cabecalho.trim();
+    if (!c.isEmpty() && !c.matches("[A-Za-z0-9-]{1,64}")) throw new IllegalArgumentException("Cabeçalho de IP inválido.");
+    this.cabecalhoIp = c;
+  }
+
+  private static final java.util.regex.Pattern IP = java.util.regex.Pattern.compile("[0-9A-Fa-f:.]{2,45}");
+
+  /** IP de quem acessa: o do cabeçalho do proxy (primeiro valor, validado) ou o da conexão. */
+  String ipCliente(HttpServletRequest req) {
+    if (!cabecalhoIp.isEmpty()) {
+      String v = req.getHeader(cabecalhoIp);
+      if (v != null) {
+        String primeiro = v.split(",", 2)[0].trim();
+        if (IP.matcher(primeiro).matches()) return primeiro;
+      }
+    }
+    return req.getRemoteAddr();
+  }
+
+  private long ultimaLimpeza = -1;
+
+  /**
+   * Limite de acesso no banco, compartilhado entre as cópias da API: soma um pedido na janela
+   * do minuto e recusa acima do máximo. Guarda só o hash do IP.
+   */
+  private boolean allowCompartilhado(String key, int max) {
+    long minute = clock.millis() / 60000;
+    Integer hits = db.queryForObject(
+        "INSERT INTO access_rate_window(bucket_hash,minute,hits) VALUES (?,?,1)"
+            + " ON CONFLICT (bucket_hash,minute) DO UPDATE SET hits=access_rate_window.hits+1 RETURNING hits",
+        Integer.class, Hashes.sha256(key), minute);
+    synchronized (this) {
+      if (ultimaLimpeza != minute) {
+        ultimaLimpeza = minute;
+        db.update("DELETE FROM access_rate_window WHERE minute<?", minute - 2);
+      }
+    }
+    return hits != null && hits <= max;
+  }
+
   private record Window(long minute, int count) {}
 
   public SessionFilter(JdbcTemplate db, ObjectMapper json, Clock clock, io.micrometer.core.instrument.MeterRegistry metrics) {
@@ -65,7 +114,11 @@ public class SessionFilter extends OncePerRequestFilter {
         boolean login = (path.equals("/api/v1/auth/login") || path.equals("/api/v1/auth/register")
                 || path.equals("/api/v1/auth/password-reset/request") || path.equals("/api/v1/auth/password-reset/complete"))
             && req.getMethod().equals("POST");
-        if (!allow((login ? "login:" : "api:") + req.getRemoteAddr(), login ? limiteAcessoPorMinuto : 600)) {
+        String ip = ipCliente(req);
+        // Acesso (login, cadastro, recuperação): limite no banco, igual em todas as cópias.
+        // Demais rotas: limite generoso na memória de cada cópia.
+        boolean permitido = login ? allowCompartilhado("login:" + ip, limiteAcessoPorMinuto) : allow("api:" + ip, 600);
+        if (!permitido) {
           res.setHeader("Retry-After", "60");
           throw new ApiException(429, "RATE_LIMITED", "Aguarde antes de tentar novamente.");
         }
