@@ -6,6 +6,7 @@ import { Plus, X } from 'lucide-react';
 import type { Despesa } from '../tipos';
 import { Aviso, CabecalhoPagina, Estado } from '../componentes/ElementosInterface';
 import { dataCurta, dentroPeriodo, lerCentavos, moeda } from '../utilitarios/valoresFinanceiros';
+import { CamposNotaCompra } from '../componentes/CamposNotaCompra';
 import { validarDespesa, CATEGORIAS_DESPESA } from '../utilitarios/validarDespesa';
 export function TelaDespesas({
   despesas,
@@ -60,11 +61,18 @@ export function TelaDespesas({
       setErro('Informe um valor de 0,01 a 1.000.000,00, sem ponto de milhar.');
       return;
     }
+    const textoCredito = String(f.get('credito') ?? '').trim();
+    const credito = textoCredito ? lerCentavos(textoCredito) : 0;
+    if (credito === null) {
+      setErro('Informe o crédito de IBS/CBS em reais, com vírgula decimal.');
+      return;
+    }
     const despesa = {
       descricao: String(f.get('descricao')).trim(),
       valor,
       categoria: String(f.get('categoria')),
       data: String(f.get('data')),
+      ...(credito ? { credito } : {}),
     };
     const validacao = validarDespesa(despesa);
     if (validacao) {
@@ -209,6 +217,7 @@ export function TelaDespesas({
                   max="2026-10-09"
                 />
               </label>
+              <CamposNotaCompra desabilitado={ocupado || !permitirRegistro} />
             </fieldset>
             {Object.entries(errosCampo)
               .filter(([nome]) => ['descricao', 'valor', 'categoria', 'data'].includes(nome))

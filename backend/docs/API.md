@@ -20,6 +20,7 @@ Base `/api/v1`. JSON UTF-8. Exceto login e cadastro (`POST /auth/register`), tod
 | POST expenses | despesa | Idempotency-Key + descrição/valor/categoria/data →201/200, despesa com ID |
 | GET expenses | financeiro | Lista paginada de despesas pagas |
 | GET expenses/{id} | financeiro | Despesa autorizada |
+| GET tax-reform/summary?from=&to= | financeiro | Reforma no caixa: imposto retido, créditos de IBS/CBS das compras (`taxCreditCents` opcional no POST expenses, de 0 ao valor da compra), imposto líquido, crédito acumulado e linhas para o contador (até 1.000); período até 366 dias. Ver `documentacao/REFORMA-NO-CAIXA.md` |
 | GET cash-flow?from=&to= | financeiro | Caixa realizado, saldo inicial, entradas, despesas, saldo final e weeks (semanas parciais/vazias) |
 | GET dashboard?from=&to= | financeiro | Mesmo contrato de caixa; sem séries gráficas inventadas |
 | POST split-payment/simulate | consultar | Cálculo sem escrita financeira |

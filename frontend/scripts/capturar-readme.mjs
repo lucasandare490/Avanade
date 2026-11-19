@@ -75,6 +75,8 @@ for (const idioma of ['pt', 'en', 'es']) {
   await foto(page, `${idioma}-split`);
   await ir(page, 'credito');
   await foto(page, `${idioma}-capital-de-giro`);
+  await ir(page, 'reforma');
+  await foto(page, `${idioma}-reforma`);
   // Explicação "i" aberta no primeiro indicador do painel.
   await ir(page, 'dashboard');
   await page.getByRole('button', { name: /Mais informações|More information|Más información/ }).first().click();

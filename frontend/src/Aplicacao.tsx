@@ -5,6 +5,10 @@ import { TelaResumoFinanceiroApi } from './telas/TelaResumoFinanceiroApi';
 import { TelaAnaliseIntegrada } from './telas/TelaAnaliseIntegrada';
 import { TelaSimulacaoIntegrada } from './telas/TelaSimulacaoIntegrada';
 import { TelaCapitalGiro } from './telas/TelaCapitalGiro';
+import { TelaReforma } from './telas/TelaReforma';
+import { DATA_REFERENCIA } from './dados/cenarioDemonstrativo';
+/** Data de hoje no fuso do navegador, no formato AAAA-MM-DD. */
+const hojeLocal = () => new Date().toLocaleDateString('sv-SE');
 import { TelaOperacoesApi, TelaDetalheRemoto } from './telas/TelaOperacoesApi';
 import { DialogoConfirmacao } from './componentes/DialogoConfirmacao';
 import { TelaLogin } from './telas/TelaLogin';
@@ -292,6 +296,8 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
     conteudo = <TelaSimulacaoIntegrada servico={servicoPlanner} />;
   else if (integracao && rota === 'credito')
     conteudo = <TelaCapitalGiro servico={servicoPlanner.credito} />;
+  else if (integracao && rota === 'reforma')
+    conteudo = <TelaReforma servico={servicoPlanner.reforma} credito={servicoPlanner.credito} hoje={hojeLocal()} />;
   else if (integracao && rota === 'analise')
     conteudo = <TelaAnaliseIntegrada servico={servicoPlanner} />;
   else if (integracao && (rota === 'dashboard' || rota === 'fluxo-caixa'))
@@ -374,6 +380,9 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
         break;
       case 'credito':
         conteudo = <TelaCapitalGiro servico={servicoPlanner.credito} />;
+        break;
+      case 'reforma':
+        conteudo = <TelaReforma servico={servicoPlanner.reforma} credito={servicoPlanner.credito} hoje={integracao ? hojeLocal() : DATA_REFERENCIA} />;
         break;
       case 'simulacao':
         conteudo = integracao ? (

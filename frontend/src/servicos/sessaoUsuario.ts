@@ -205,6 +205,7 @@ export function podeAcessarRota(rota: string, sessao: SessaoUsuario) {
     relatorios: 'financeiro',
     simulacao: 'financeiro',
     credito: 'financeiro',
+    reforma: 'financeiro',
     'venda-demonstrativa': 'vender',
     'pos-prototipo': 'consultar',
   };

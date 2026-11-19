@@ -16,7 +16,17 @@ public class FinanceService {
       @NotBlank @Size(max = 240) String description,
       @NotNull @Min(1) @Max(100000000) Long amountCents,
       @NotBlank @Size(max = 40) String categoryId,
-      @NotNull LocalDate paidOn) {}
+      @NotNull LocalDate paidOn,
+      @Min(0) @Max(100000000) Long taxCreditCents) {
+    public ExpenseInput(String description, Long amountCents, String categoryId, LocalDate paidOn) {
+      this(description, amountCents, categoryId, paidOn, null);
+    }
+
+    /** Crédito de IBS/CBS da nota de compra; ausente vale zero. */
+    public long credito() {
+      return taxCreditCents == null ? 0 : taxCreditCents;
+    }
+  }
 
   private final JdbcTemplate db;
   private final Clock clock;
@@ -35,9 +45,13 @@ public class FinanceService {
     if (db.queryForObject(
             "SELECT count(*) FROM expense_category WHERE id=?", Long.class, input.categoryId())
         == 0) throw new ApiException(422, "INVALID_CATEGORY", "Categoria inválida.");
+    if (input.credito() > input.amountCents())
+      throw new ApiException(
+          422, "INVALID_TAX_CREDIT", "O crédito de IBS/CBS não pode ser maior que o valor da compra.");
     UUID id = UUID.randomUUID();
     db.update(
-        "INSERT INTO expense VALUES (?,?,?,?,?,?,?,?)",
+        "INSERT INTO expense(id,merchant_id,user_id,description,amount_cents,category_id,paid_on,"
+            + "created_at,tax_credit_cents) VALUES (?,?,?,?,?,?,?,?,?)",
         id,
         actor.merchantId(),
         actor.userId(),
@@ -45,7 +59,8 @@ public class FinanceService {
         input.amountCents(),
         input.categoryId(),
         java.sql.Date.valueOf(input.paidOn()),
-        java.sql.Timestamp.from(clock.instant()));
+        java.sql.Timestamp.from(clock.instant()),
+        input.credito());
     db.update(
         "INSERT INTO cash_entry(id,merchant_id,expense_id,amount_cents,booked_on) VALUES"
             + " (?,?,?,?,?)",
@@ -84,6 +99,8 @@ public class FinanceService {
         r.getString("category_name"),
         "paidOn",
         r.getDate("paid_on").toLocalDate(),
+        "taxCreditCents",
+        r.getLong("tax_credit_cents"),
         "createdAt",
         r.getTimestamp("created_at").toInstant());
   }

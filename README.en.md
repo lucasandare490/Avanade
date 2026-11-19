@@ -75,7 +75,8 @@ So the core problem **is not how to pay the tax on each sale**, since split paym
 - projects cash for the coming days and warns when the scenario points to a deficit;
 - simulates sales before they happen, to understand the impact of each percentage;
 - explains the numbers in plain language, with rule-based analysis, no external AI and no changes to values;
-- when cash is about to get tight, offers **working capital** from a partner bank or fintech inside the app, with every cost shown before contracting.
+- when cash is about to get tight, offers **working capital** from a partner bank or fintech inside the app, with every cost shown before contracting;
+- handles the other effects of the tax reform on cash: tracks **IBS/CBS credits from purchases** (including reading the NF-e XML), recalculates the **selling price**, shows how much cash longer **supplier terms** free up, compares **receivables advances** with credit and generates the **accountant package**.
 
 **Real persistence in PostgreSQL. Payments, split and taxes are simulated:** no money is transferred and no tax is paid. Example percentages are not legislation. Working capital already works end to end with simulated partners (a bank and a fintech); to use real money, connect a partner authorized by the Central Bank of Brazil.
 
@@ -86,8 +87,9 @@ Screenshots from the demo (fictitious data). Every screen is available in Portug
 <table>
 <tr><td align="center" valign="top"><img src="documentacao/readme/en-entrada.png" alt="Entry: theme and language chosen at the top"><br><sub>Entry: theme and language chosen at the top</sub></td><td align="center" valign="top"><img src="documentacao/readme/en-painel.png" alt="Dashboard: gross, tax, fee and what actually reaches the cash"><br><sub>Dashboard: gross, tax, fee and what actually reaches the cash</sub></td></tr>
 <tr><td align="center" valign="top"><img src="documentacao/readme/en-fluxo-caixa.png" alt="Cash flow: net inflows, expenses and balance"><br><sub>Cash flow: net inflows, expenses and balance</sub></td><td align="center" valign="top"><img src="documentacao/readme/en-split.png" alt="Sale and split: where each part of the payment went"><br><sub>Sale and split: where each part of the payment went</sub></td></tr>
-<tr><td align="center" valign="top"><img src="documentacao/readme/en-capital-de-giro.png" alt="Working capital: decapitalization diagnosis and credit offers"><br><sub>Working capital: decapitalization diagnosis and credit offers</sub></td><td align="center" valign="top"><img src="documentacao/readme/en-explicacao.png" alt=""i" icon: an explanation for every piece of information"><br><sub>"i" icon: an explanation for every piece of information</sub></td></tr>
-<tr><td align="center" valign="top"><img src="documentacao/readme/en-capital-de-giro-escuro.png" alt="Dark theme"><br><sub>Dark theme</sub></td><td align="center" valign="top"><img src="documentacao/readme/en-celular.png" alt="Mobile" width="230"><br><sub>Mobile</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/en-capital-de-giro.png" alt="Working capital: decapitalization diagnosis and credit offers"><br><sub>Working capital: decapitalization diagnosis and credit offers</sub></td><td align="center" valign="top"><img src="documentacao/readme/en-reforma.png" alt="Tax reform and cash: IBS/CBS purchase credits, price, supplier terms, advances and accountant package"><br><sub>Tax reform and cash: IBS/CBS purchase credits, price, supplier terms, advances and accountant package</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/en-explicacao.png" alt=""i" icon: an explanation for every piece of information"><br><sub>"i" icon: an explanation for every piece of information</sub></td><td align="center" valign="top"><img src="documentacao/readme/en-capital-de-giro-escuro.png" alt="Dark theme"><br><sub>Dark theme</sub></td></tr>
+<tr><td align="center" valign="top" colspan="2"><img src="documentacao/readme/en-celular.png" alt="Mobile" width="230"><br><sub>Mobile</sub></td></tr>
 </table>
 
 ## What the system has
@@ -103,13 +105,14 @@ Screenshots from the demo (fictitious data). Every screen is available in Portug
 | Cash | Server totals, daily breakdown, weekly cash, manual projection with a deficit warning |
 | Reports | Sales, expenses and tax breakdown by period, with full CSV |
 | Working capital | Inside the app, without going to the bank. **Decapitalization diagnosis** (tax withheld, 30-day cash shortfall, coverage and recommendation), **bank and fintech offers compared by CET**, responsible lending (blocks installments above 50% of inflows), **cash before and after** over 12 weeks, contracting, installment payment, **early payoff with discount**, 7-day withdrawal, contract summary and immutable history. Simulated partners today; connecting a real partner is one class and a signed webhook. [Specification and integration](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) (in Portuguese) |
+| Tax reform and cash | **IBS/CBS credits from purchases** (field on the expense and **NF-e XML** reading), tax withheld, net tax and accumulated credit; **selling price** with IBS/CBS added on top, credit, fee and margin; **supplier terms** and how much of the cash shortfall they cover; **receivables advance** compared with working capital; **accountant package** in CSV. [Formulas and rules](documentacao/REFORMA-NO-CAIXA.md) (in Portuguese) |
 | Android | Kotlin POS client, local and integrated over HTTPS. Testing on a physical device is pending |
 
 ## Team and what each person did
 
 | Person | Role in the squad | Recorded contributions |
 |---|---|---|
-| **Thayná Batista da Silva** | Scrum Master; design and prototyping; research; requirements documentation; README in Portuguese, English and Spanish; testing | High-fidelity prototype in [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); research and requirements gathering for Split Pay and Planner Comercial; requirements documentation. In the final delivery: corrected core problem (decapitalization); sign-in with lock, attempts warning, email recovery, eye button, Remember me and Sign up; light, dark and system themes; PT/EN/ES languages; **i** icons with explanations; audit checkers; new backend, unit and browser tests |
+| **Thayná Batista da Silva** | Scrum Master; design and prototyping; research; requirements documentation; README in Portuguese, English and Spanish; testing | High-fidelity prototype in [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); research and requirements gathering for Split Pay and Planner Comercial; requirements documentation. In the final delivery: corrected core problem (decapitalization); sign-in with lock, attempts warning, email recovery, eye button, Remember me and Sign up; light, dark and system themes; PT/EN/ES languages; **i** icons with explanations; audit checkers; in-app working capital (diagnosis, offers, contracting, installments, payoff and withdrawal); tax reform and cash (IBS/CBS credits with NF-e reading, selling price, supplier terms, advances and accountant package); visual README and pitch script; new backend, unit and browser tests |
 | **Kássio Lima de Oliveira** | Project code and deployment | Backend–frontend integration with persistence; operation recovery; secure password recovery flow; Supabase setup; deployment on Render (API) and Vercel (website); monitoring and backup routine |
 | **Lucas André Cardoso de Lima** | Front-end code | First delivery of the web and Android frontends; trend comparison; integration contracts; review of the 516 criteria with evidence; weekly cash, sign-up and reports |
 | **Kleysson Teixeira da Cruz Junior** | Team organization and user interviews | Organized and split the team's tasks; set up and kept the Trello board up to date; user interviews and support in field research; support in writing the documentation; MVP README review; the project's [initial repository](https://github.com/Kleyssonteixeirapf/projeto-split-tributario); support for general project tasks |
@@ -156,7 +159,7 @@ The system is auditable: every change has an authored commit, the [CHANGELOG](CH
 ## Folders
 
 - `frontend/`: React 19, TypeScript and Vite website. Screens in `src/telas`; theme, languages and explanations in `src/preferencias`.
-- `backend/`: Java 21, Spring Boot, PostgreSQL and Flyway API (migrations V1–V10).
+- `backend/`: Java 21, Spring Boot, PostgreSQL and Flyway API (migrations V1–V11).
 - `android-pos/`: Kotlin POS app.
 - `scripts/`: local run, Supabase, hosting and `auditoria/`.
 - `documentacao/`: status, decisions, operations and history.

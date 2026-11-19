@@ -33,6 +33,8 @@ export interface Despesa {
   valor: number;
   categoria: string;
   data: string;
+  /** Crédito de IBS/CBS da nota de compra, em centavos (Reforma Tributária). */
+  credito?: number;
 }
 export interface BaseDemonstracao {
   operacoes: Operacao[];

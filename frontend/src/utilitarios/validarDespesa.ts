@@ -6,6 +6,8 @@ export function validarDespesa(d: Omit<Despesa, 'id'>): string | null {
     return 'Informe uma descrição de até 100 caracteres.';
   if (!Number.isSafeInteger(d.valor) || d.valor <= 0 || d.valor > 100000000)
     return 'Informe um valor de 0,01 a 1.000.000,00.';
+  if (d.credito !== undefined && (!Number.isSafeInteger(d.credito) || d.credito < 0 || d.credito > d.valor))
+    return 'O crédito de IBS/CBS não pode ser maior que o valor da compra.';
   if (!CATEGORIAS_DESPESA.some((c) => c === d.categoria))
     return 'Selecione uma categoria disponível.';
   const data = new Date(`${d.data}T12:00:00Z`);

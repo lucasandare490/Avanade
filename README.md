@@ -73,7 +73,8 @@ O **Planner Comercial** ajuda o comerciante a enxergar e a se antecipar à desca
 - projeta o caixa dos próximos dias e avisa quando o cenário indica déficit;
 - simula vendas antes de acontecerem, para entender o impacto de cada percentual;
 - explica os números em linguagem simples, com análise por regras, sem IA externa e sem alterar valores;
-- quando o caixa vai apertar, oferece **capital de giro** de um banco ou fintech parceira dentro do próprio app, com todos os custos à vista antes de contratar.
+- quando o caixa vai apertar, oferece **capital de giro** de um banco ou fintech parceira dentro do próprio app, com todos os custos à vista antes de contratar;
+- cuida dos outros efeitos da Reforma no caixa: acompanha os **créditos de IBS/CBS das compras** (inclusive lendo o XML da NF-e), recalcula o **preço de venda**, mostra quanto o **prazo com fornecedores** libera de caixa, compara a **antecipação de recebíveis** com o crédito e gera o **pacote do contador**.
 
 **Persistência real em PostgreSQL. Pagamentos, split e tributos são simulados:** não há transferência de dinheiro nem recolhimento fiscal. Percentuais de exemplo não são legislação. O capital de giro já funciona de ponta a ponta com parceiros simulados (banco e fintech); para usar dinheiro de verdade, basta ligar um parceiro autorizado pelo Banco Central.
 
@@ -84,8 +85,9 @@ Prints da demonstração (dados fictícios). Todas as telas existem em portuguê
 <table>
 <tr><td align="center" valign="top"><img src="documentacao/readme/pt-entrada.png" alt="Entrada: tema e idioma escolhidos no canto superior"><br><sub>Entrada: tema e idioma escolhidos no canto superior</sub></td><td align="center" valign="top"><img src="documentacao/readme/pt-painel.png" alt="Painel: bruto, imposto, taxa e o que de fato entra no caixa"><br><sub>Painel: bruto, imposto, taxa e o que de fato entra no caixa</sub></td></tr>
 <tr><td align="center" valign="top"><img src="documentacao/readme/pt-fluxo-caixa.png" alt="Fluxo de caixa: entradas líquidas, despesas e saldo"><br><sub>Fluxo de caixa: entradas líquidas, despesas e saldo</sub></td><td align="center" valign="top"><img src="documentacao/readme/pt-split.png" alt="Venda e split: para onde foi cada parte do pagamento"><br><sub>Venda e split: para onde foi cada parte do pagamento</sub></td></tr>
-<tr><td align="center" valign="top"><img src="documentacao/readme/pt-capital-de-giro.png" alt="Capital de giro: diagnóstico da descapitalização e ofertas de crédito"><br><sub>Capital de giro: diagnóstico da descapitalização e ofertas de crédito</sub></td><td align="center" valign="top"><img src="documentacao/readme/pt-explicacao.png" alt="Ícone i: explicação de cada informação"><br><sub>Ícone i: explicação de cada informação</sub></td></tr>
-<tr><td align="center" valign="top"><img src="documentacao/readme/pt-capital-de-giro-escuro.png" alt="Tema escuro"><br><sub>Tema escuro</sub></td><td align="center" valign="top"><img src="documentacao/readme/pt-celular.png" alt="Celular" width="230"><br><sub>Celular</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/pt-capital-de-giro.png" alt="Capital de giro: diagnóstico da descapitalização e ofertas de crédito"><br><sub>Capital de giro: diagnóstico da descapitalização e ofertas de crédito</sub></td><td align="center" valign="top"><img src="documentacao/readme/pt-reforma.png" alt="Reforma no caixa: créditos de IBS/CBS das compras, preço, prazo, antecipação e pacote do contador"><br><sub>Reforma no caixa: créditos de IBS/CBS das compras, preço, prazo, antecipação e pacote do contador</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/pt-explicacao.png" alt="Ícone i: explicação de cada informação"><br><sub>Ícone i: explicação de cada informação</sub></td><td align="center" valign="top"><img src="documentacao/readme/pt-capital-de-giro-escuro.png" alt="Tema escuro"><br><sub>Tema escuro</sub></td></tr>
+<tr><td align="center" valign="top" colspan="2"><img src="documentacao/readme/pt-celular.png" alt="Celular" width="230"><br><sub>Celular</sub></td></tr>
 </table>
 
 ## O que o sistema tem
@@ -101,13 +103,14 @@ Prints da demonstração (dados fictícios). Todas as telas existem em portuguê
 | Caixa | Agregados do servidor, composição diária, caixa semanal, projeção manual com aviso de déficit |
 | Relatórios | Vendas, despesas e composição tributária por período, com CSV completo |
 | Capital de giro | Dentro do app, sem ir ao banco. **Diagnóstico da descapitalização** (imposto retido, falta de caixa em 30 dias, cobertura e recomendação), **ofertas de banco e fintech comparadas pelo CET**, crédito responsável (bloqueia parcela acima de 50% das entradas), **antes e depois do caixa** em 12 semanas, contratação, pagamento de parcela, **quitação antecipada com desconto**, desistência em 7 dias, resumo do contrato e histórico imutável. Parceiros simulados hoje; ligar um parceiro real é uma classe e um webhook assinado. [Especificação e integração](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) |
+| Reforma no caixa | **Créditos de IBS/CBS das compras** (campo na despesa e leitura do **XML da NF-e**), imposto retido, imposto líquido e crédito acumulado; **preço de venda** com IBS/CBS por fora, crédito, taxa e margem; **prazo com fornecedores** e quanto ele cobre da falta de caixa; **antecipação de recebíveis** comparada com o capital de giro; **pacote do contador** em CSV. [Fórmulas e regras](documentacao/REFORMA-NO-CAIXA.md) |
 | Android | Cliente Kotlin (POS) local e integrado por HTTPS. A homologação em aparelho físico está pendente |
 
 ## Equipe e o que cada pessoa fez
 
 | Pessoa | Papel na squad | Contribuições registradas |
 |---|---|---|
-| **Thayná Batista da Silva** | Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; testes | Protótipo de alta fidelidade no [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); pesquisa e levantamento de requisitos do Split Pay e do Planner Comercial; documentação de requisitos. Na entrega final: correção do problema central (descapitalização); login com bloqueio, aviso de tentativas, recuperação por e-mail, botão de olho, Lembrar de mim e Cadastre-se; temas claro, escuro e do sistema; idiomas PT/EN/ES; ícones **i** com explicações; verificadores de auditoria; testes novos de backend, unitários e de navegador |
+| **Thayná Batista da Silva** | Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; testes | Protótipo de alta fidelidade no [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); pesquisa e levantamento de requisitos do Split Pay e do Planner Comercial; documentação de requisitos. Na entrega final: correção do problema central (descapitalização); login com bloqueio, aviso de tentativas, recuperação por e-mail, botão de olho, Lembrar de mim e Cadastre-se; temas claro, escuro e do sistema; idiomas PT/EN/ES; ícones **i** com explicações; verificadores de auditoria; capital de giro dentro do app (diagnóstico, ofertas, contratação, parcelas, quitação e desistência); Reforma no caixa (créditos de IBS/CBS com leitura da NF-e, preço de venda, prazo com fornecedores, antecipação e pacote do contador); README visual e roteiro do pitch; testes novos de backend, unitários e de navegador |
 | **Kássio Lima de Oliveira** | Código do projeto e deploy | Integração entre backend e frontend com persistência; recuperação de operações; fluxo seguro de recuperação de senha; configuração do Supabase; deploy no Render (API) e na Vercel (site); monitoramento e rotina de backup |
 | **Lucas André Cardoso de Lima** | Código do front-end | Primeira entrega dos frontends web e Android; comparação de tendências; contratos de integração; revisão dos 516 critérios com evidências; caixa semanal, cadastro e relatórios |
 | **Kleysson Teixeira da Cruz Junior** | Organização da equipe e entrevistas com pessoas usuárias | Organização e divisão das demandas da equipe; estruturação e atualização do quadro no Trello; entrevistas com usuários e auxílio na pesquisa de campo; auxílio na elaboração da documentação; revisão do README do MVP; [repositório inicial](https://github.com/Kleyssonteixeirapf/projeto-split-tributario) do projeto; suporte nas demandas gerais do projeto |
@@ -154,7 +157,7 @@ Os resultados da entrega final estão em [documentacao/ENTREGA-FINAL-2026-11-18.
 ## Pastas
 
 - `frontend/`: site em React 19, TypeScript e Vite. Telas em `src/telas`, tema, idiomas e explicações em `src/preferencias`.
-- `backend/`: API em Java 21, Spring Boot, PostgreSQL e Flyway (migrations V1–V10).
+- `backend/`: API em Java 21, Spring Boot, PostgreSQL e Flyway (migrations V1–V11).
 - `android-pos/`: aplicativo Kotlin do POS.
 - `scripts/`: execução local, Supabase, hospedagem e `auditoria/`.
 - `documentacao/`: estado, decisões, operação e histórico (inclui o [README anterior](documentacao/historico/README-antes-da-entrega-final-2026-11-18.md)).

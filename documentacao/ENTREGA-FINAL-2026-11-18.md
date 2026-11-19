@@ -29,6 +29,7 @@ O texto completo está no [README](../README.md#o-problema), também em [inglês
 | Ícone "i" em cada informação | `preferencias/dicas.ts`, `glossario.ts` | navegador: toda informação das telas tem explicação; abre com mouse, teclado e toque; fecha com Esc; muda de idioma |
 | README trilíngue com o que cada pessoa fez | `README.md`, `README.en.md`, `README.es.md` | `verificar-readme.mjs` |
 | Capital de giro dentro do app (empréstimo com banco ou fintech parceira) | `credito/` no backend (`CreditoService`, `CreditoController`, `CreditoWebhookController`, migrations V9 e V10); `TelaCapitalGiro.tsx` e `servicos/credito.ts` no frontend | `CreditoIntegrationTest` (10 testes), `CreditoWebhookIntegrationTest`, `credito.test.ts`; navegador na demonstração (`entrega-final.spec.ts`) e contra a API real (`credito-integrado.spec.ts`): consentimento, comparação de ofertas, contratação, pagamento de parcela, quitação antecipada, desistência e projeção |
+| Reforma no caixa (créditos de IBS/CBS, NF-e, preço, prazo, antecipação e contador) | `ReformaController`, migration V11, `FinanceService` (`taxCreditCents`); `TelaReforma.tsx`, `CamposNotaCompra.tsx` e `servicos/reforma.ts` | `ReformaIntegrationTest` (5 testes), `MigrationUpgradeTest`, `reforma.test.ts` (14 testes); navegador na demonstração e contra a API real (`reforma-integrado.spec.ts`) |
 | Nenhum crédito de IA | todo o repositório e mensagens de commit | `verificar-sem-credito-ia.mjs` (com autoteste) |
 | Autoria da Thayná | commits da branch | `verificar-autoria.mjs` |
 
@@ -38,13 +39,13 @@ Os números abaixo foram medidos nesta entrega, no Linux (Node 20.20, JDK 21.0.1
 
 | Bateria | `main` antes da entrega | Esta entrega |
 |---|---|---|
-| Backend (`./mvnw test`, PostgreSQL embutido) | 61 testes, 1 falha por tempo de espera (`CrashRecoveryTest`, máquina ocupada) | **81 testes, 0 falhas** (20 novos: bloqueio, recuperação, e-mail e capital de giro) |
-| Frontend unitários (`npm test`) | 110 testes | **140 testes, 0 falhas** (30 novos) |
+| Backend (`./mvnw test`, PostgreSQL embutido) | 61 testes, 1 falha por tempo de espera (`CrashRecoveryTest`, máquina ocupada) | **86 testes, 0 falhas** (25 novos: bloqueio, recuperação, e-mail, capital de giro e Reforma no caixa) |
+| Frontend unitários (`npm test`) | 110 testes | **154 testes, 0 falhas** (44 novos) |
 | Tipos e build de produção (`npm run build`) | passa | **passa**; o código de teste (`__planner`) não vai para o build |
-| Navegador na demonstração (`npm run test:e2e:entrega`) | — | **23 de 23**: login, recuperação de senha completa, lembrar de mim, ciclo completo do capital de giro, tema, idiomas, ícones "i", WCAG A/AA nos temas claro e escuro, teclado e ampliação |
-| Navegador contra a API real (`npx playwright test`, com backend local) | **0 de 22** (testes desatualizados: esperavam o login na primeira tela) | **22 de 22** (19 do time, atualizados, 2 de login integrado e 1 do ciclo do capital de giro) |
-| Traduções (`verificar-traducoes.mjs`) | — | 1.059 textos em EN/ES e 205 explicações em PT/EN/ES, nenhum faltando |
-| Acessibilidade (axe, WCAG 2.1 A/AA, 11 telas) | violações de contraste no design | **0 violações** nos temas claro e escuro |
+| Navegador na demonstração (`npm run test:e2e:entrega`) | — | **25 de 25**: login, recuperação de senha completa, lembrar de mim, ciclo completo do capital de giro, Reforma no caixa, tema, idiomas, ícones "i", WCAG A/AA nos temas claro e escuro, teclado e ampliação |
+| Navegador contra a API real (`npx playwright test`, com backend local) | **0 de 22** (testes desatualizados: esperavam o login na primeira tela) | **23 de 23** (19 do time, atualizados, 2 de login integrado, 1 do capital de giro e 1 da Reforma no caixa) |
+| Traduções (`verificar-traducoes.mjs`) | — | 1.145 textos em EN/ES e 241 explicações em PT/EN/ES, nenhum faltando |
+| Acessibilidade (axe, WCAG 2.1 A/AA, 12 telas) | violações de contraste no design | **0 violações** nos temas claro e escuro |
 | Crédito de IA (`verificar-sem-credito-ia.mjs`) | 1 menção na documentação de design | **nenhum** (com autoteste do verificador) |
 
 Teste manual contra a API local com `curl`: o pedido de recuperação sem login respondeu 202. Duas senhas erradas responderam 401 com `remainingAttempts` 4 e 3.
@@ -79,7 +80,7 @@ Fica de fora (risco aceito ou depende de outra pessoa):
 
 ## 5. Pendências
 
-- O site na Vercel já está com esta versão. Falta o deploy manual da API no Render, que aplica as migrations V7 a V10 e liga em produção o bloqueio de login, a recuperação de senha e o capital de giro com a conta real. Na demonstração do site, tudo já funciona.
+- O site na Vercel já está com esta versão. Falta o deploy manual da API no Render, que aplica as migrations V7 a V11 e liga em produção o bloqueio de login, a recuperação de senha e o capital de giro com a conta real. Na demonstração do site, tudo já funciona.
 - Configurar o SMTP no Render para o e-mail de recuperação sair de verdade: [passo a passo](CONFIGURAR-EMAIL-RECUPERACAO.md).
 - Aplicar a correção do problema central também nos documentos do Google Docs.
 - Homologação do aplicativo Android em aparelho físico.

@@ -40,6 +40,21 @@ const padroes: [RegExp, (m: RegExpMatchArray) => readonly [string, string]][] = 
   [/^(.+), perfil atual$/, (m) => [`${m[1]}, current profile`, `${m[1]}, perfil actual`]],
   [/^Página (\d+) de (\d+)$/, (m) => [`Page ${m[1]} of ${m[2]}`, `Página ${m[1]} de ${m[2]}`]],
   [/^Sobre: (.+)$/, (m) => [`About: ${traduzirTexto(m[1], 'en')}`, `Acerca de: ${traduzirTexto(m[1], 'es')}`]],
+  // Reforma no caixa (Thayná Batista da Silva)
+  [/^(\d+) vendas? concluídas?$/, (m) => [`${m[1]} completed sale${m[1] === '1' ? '' : 's'}`, `${m[1]} venta${m[1] === '1' ? '' : 's'} concluida${m[1] === '1' ? '' : 's'}`]],
+  [/^(\d+) de (\d+) compras com crédito$/, (m) => [`${m[1]} of ${m[2]} purchases with credit`, `${m[1]} de ${m[2]} compras con crédito`]],
+  [/^Usar as compras registradas \((R\$ [\d.,]+) por mês\)$/, (m) => [`Use the recorded purchases (${m[1]} per month)`, `Usar las compras registradas (${m[1]} por mes)`]],
+  [/^Nota lida: (R\$ [\d.,]+), com (R\$ [\d.,]+) de crédito de IBS\/CBS\. Confira e salve\.$/, (m) => [`Invoice read: ${m[1]}, with ${m[2]} of IBS/CBS credit. Check and save.`, `Factura leída: ${m[1]}, con ${m[2]} de crédito de IBS/CBS. Verifique y guarde.`]],
+  [/^Nota lida: (R\$ [\d.,]+)\. Ela não tem o grupo de IBS\/CBS; informe o crédito se houver\.$/, (m) => [`Invoice read: ${m[1]}. It has no IBS/CBS group; enter the credit if there is one.`, `Factura leída: ${m[1]}. No tiene el grupo de IBS/CBS; ingrese el crédito si lo hay.`]],
+  [/^Com o preço atual, a margem fica em (-?[\d.,]+%)\. Para manter a margem desejada, o preço precisa subir (R\$ [\d.,]+)\.$/, (m) => [`At the current price, the margin is ${m[1]}. To keep the desired margin, the price needs to go up by ${m[2]}.`, `Con el precio actual, el margen queda en ${m[1]}. Para mantener el margen deseado, el precio debe subir ${m[2]}.`]],
+  [/^O preço atual já cobre a margem desejada \(margem de (-?[\d.,]+%)\)\.$/, (m) => [`The current price already covers the desired margin (margin of ${m[1]}).`, `El precio actual ya cubre el margen deseado (margen de ${m[1]}).`]],
+  [/^Pagando (\d+) dias depois, ficam (R\$ [\d.,]+) a mais no caixa, sem juros\.$/, (m) => [`Paying ${m[1]} days later keeps ${m[2]} more in the cash, with no interest.`, `Pagando ${m[1]} días después, quedan ${m[2]} más en la caja, sin intereses.`]],
+  [/^Com um prazo menor, saem (R\$ [\d.,]+) do caixa mais cedo\.$/, (m) => [`With a shorter term, ${m[1]} leaves the cash earlier.`, `Con un plazo menor, salen ${m[1]} de la caja antes.`]],
+  [/^Isso cobre toda a falta de caixa prevista para 30 dias \((R\$ [\d.,]+)\), sem precisar de crédito\.$/, (m) => [`This covers the whole cash shortfall expected for 30 days (${m[1]}), without needing credit.`, `Esto cubre todo el faltante de caja previsto para 30 días (${m[1]}), sin necesitar crédito.`]],
+  [/^Isso cobre (\d+)% da falta de caixa prevista para 30 dias \((R\$ [\d.,]+)\)\.$/, (m) => [`This covers ${m[1]}% of the cash shortfall expected for 30 days (${m[2]}).`, `Esto cubre el ${m[1]}% del faltante de caja previsto para 30 días (${m[2]}).`]],
+  [/^O capital de giro do parceiro sai mais barato: ([\d.,]+%) ao mês, contra ([\d.,]+%) da antecipação\.$/, (m) => [`The partner's working capital is cheaper: ${m[1]} per month, versus ${m[2]} for the advance.`, `El capital de trabajo del socio sale más barato: ${m[1]} al mes, contra ${m[2]} del anticipo.`]],
+  [/^A antecipação sai mais barata que o capital de giro do parceiro \(([\d.,]+%) ao mês\)\.$/, (m) => [`The advance is cheaper than the partner's working capital (${m[1]} per month).`, `El anticipo sale más barato que el capital de trabajo del socio (${m[1]} al mes).`]],
+  [/^O período tem mais de (\d+) registros\. Escolha um período menor para o arquivo trazer todos\.$/, (m) => [`The period has more than ${m[1]} records. Choose a shorter period so the file includes all of them.`, `El período tiene más de ${m[1]} registros. Elija un período menor para que el archivo los incluya todos.`]],
 ];
 
 const MESES_CURTOS: Record<string, readonly [string, string]> = {
