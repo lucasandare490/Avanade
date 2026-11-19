@@ -71,7 +71,7 @@ O **Planner Comercial** ajuda o comerciante a enxergar e a se antecipar à desca
 | Despesas | Registro de despesa paga, busca e sugestão de categoria confirmada pela pessoa |
 | Caixa | Agregados do servidor, composição diária, caixa semanal, projeção manual com aviso de déficit |
 | Relatórios | Vendas, despesas e composição tributária por período, com CSV completo |
-| Capital de giro | Dentro do app, sem ir ao banco: limite, autorização para compartilhar dados, simulação com parcela, total, juros e CET, e contratação. O crédito entra na projeção do caixa. Hoje o parceiro é simulado; para ligar um banco ou fintech, veja [integração com parceiro de crédito](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) |
+| Capital de giro | Dentro do app, sem ir ao banco. **Diagnóstico da descapitalização** (imposto retido, falta de caixa em 30 dias, cobertura e recomendação), **ofertas de banco e fintech comparadas pelo CET**, crédito responsável (bloqueia parcela acima de 50% das entradas), **antes e depois do caixa** em 12 semanas, contratação, pagamento de parcela, **quitação antecipada com desconto**, desistência em 7 dias, resumo do contrato e histórico imutável. Parceiros simulados hoje; ligar um parceiro real é uma classe e um webhook assinado. [Especificação e integração](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) |
 | Android | Cliente Kotlin (POS) local e integrado por HTTPS. A homologação em aparelho físico está pendente |
 
 ## Equipe e o que cada pessoa fez
@@ -125,7 +125,7 @@ Os resultados da entrega final estão em [documentacao/ENTREGA-FINAL-2026-11-18.
 ## Pastas
 
 - `frontend/`: site em React 19, TypeScript e Vite. Telas em `src/telas`, tema, idiomas e explicações em `src/preferencias`.
-- `backend/`: API em Java 21, Spring Boot, PostgreSQL e Flyway (migrations V1–V9).
+- `backend/`: API em Java 21, Spring Boot, PostgreSQL e Flyway (migrations V1–V10).
 - `android-pos/`: aplicativo Kotlin do POS.
 - `scripts/`: execução local, Supabase, hospedagem e `auditoria/`.
 - `documentacao/`: estado, decisões, operação e histórico (inclui o [README anterior](documentacao/historico/README-antes-da-entrega-final-2026-11-18.md)).

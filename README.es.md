@@ -73,7 +73,7 @@ Por lo tanto, el problema central **no es cómo pagar el impuesto de cada venta*
 | Gastos | Registro de gasto pagado, búsqueda y sugerencia de categoría confirmada por la persona |
 | Caja | Totales del servidor, composición diaria, caja semanal, proyección manual con aviso de déficit |
 | Informes | Ventas, gastos y composición tributaria por período, con CSV completo |
-| Capital de trabajo | Dentro de la app, sin ir al banco: límite, autorización para compartir datos, simulación con cuota, total, intereses y CET, y contratación. El crédito entra en la proyección de caja. Hoy el socio es simulado; para conectar un banco o fintech, vea la [integración con socio de crédito](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) (en portugués) |
+| Capital de trabajo | Dentro de la app, sin ir al banco. **Diagnóstico de la descapitalización** (impuesto retenido, faltante de caja en 30 días, cobertura y recomendación), **ofertas de banco y fintech comparadas por el CET**, crédito responsable (bloquea cuotas por encima del 50% de las entradas), **caja antes y después** en 12 semanas, contratación, pago de cuotas, **liquidación anticipada con descuento**, desistimiento en 7 días, resumen del contrato e historial inmutable. Socios simulados hoy; conectar un socio real es una clase y un webhook firmado. [Especificación e integración](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) (en portugués) |
 | Android | Cliente POS en Kotlin, local e integrado por HTTPS. La prueba en dispositivo físico está pendiente |
 
 ## Equipo y qué hizo cada persona
@@ -127,7 +127,7 @@ El sistema es auditable: cada cambio tiene un commit con autoría, el [CHANGELOG
 ## Carpetas
 
 - `frontend/`: sitio en React 19, TypeScript y Vite. Pantallas en `src/telas`; tema, idiomas y explicaciones en `src/preferencias`.
-- `backend/`: API en Java 21, Spring Boot, PostgreSQL y Flyway (migrations V1–V9).
+- `backend/`: API en Java 21, Spring Boot, PostgreSQL y Flyway (migrations V1–V10).
 - `android-pos/`: aplicación POS en Kotlin.
 - `scripts/`: ejecución local, Supabase, hosting y `auditoria/`.
 - `documentacao/`: estado, decisiones, operación e historial.
