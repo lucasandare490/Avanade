@@ -1,6 +1,12 @@
 # Planner Comercial — Tax Split
 
-[Português](README.md) · **English** · [Español](README.es.md)
+[🇧🇷 Português](README.md) · **🇺🇸 English** · [🇪🇸 Español](README.es.md)
+
+<p align="center"><em>Cash planning so small merchants are not decapitalized by the split payment of Brazil's tax reform.</em></p>
+
+<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><img src="documentacao/readme/en-painel.png" alt="Planner Comercial dashboard" width="860"></a></p>
+
+<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><b>▶ Open the live site</b></a></p>
 
 Project by **Squad 19** of the **Grow Up 2026.2** Technology Residency (Porto Digital and Faculdade Senac de Pernambuco, Recife, Brazil), built with partner company **Avanade**.
 
@@ -40,6 +46,18 @@ cd frontend && npm ci && VITE_MODO_DADOS=demo npm run dev
 
 Use the menu to switch the interface to English or Spanish and the theme to light, dark or system.
 
+## Video pitch
+
+🎬 **Coming soon:** the video pitch (up to 5 minutes) will be published here.
+
+<!-- Quando o vídeo estiver no YouTube (não listado), troque ID_DO_VIDEO pelo código do link (o que vem depois de "v=") e apague a linha "Em breve" acima:
+<p align="center"><a href="https://www.youtube.com/watch?v=ID_DO_VIDEO"><img src="https://img.youtube.com/vi/ID_DO_VIDEO/maxresdefault.jpg" alt="Watch the Planner Comercial pitch" width="720"></a></p>
+-->
+
+[Recording script (Portuguese)](documentacao/pitch/ROTEIRO-PITCH.md)
+
+<p align="center"><img alt="Java 21" src="https://img.shields.io/badge/Java-21-E76F00?logo=openjdk&logoColor=white"> <img alt="Spring Boot" src="https://img.shields.io/badge/Spring_Boot-3.5-6DB33F?logo=springboot&logoColor=white"> <img alt="React 19" src="https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white"> <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white"> <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Supabase-4169E1?logo=postgresql&logoColor=white"> <img alt="Kotlin" src="https://img.shields.io/badge/Android-Kotlin-7F52FF?logo=kotlin&logoColor=white"> <img alt="Languages" src="https://img.shields.io/badge/PT_·_EN_·_ES-0E7490"> <img alt="WCAG" src="https://img.shields.io/badge/WCAG_2.1-AA-15803D"></p>
+
 ## The problem
 
 Brazil's consumption Tax Reform (Constitutional Amendment 132/2023 and Complementary Law 214/2025) creates the IBS and CBS taxes and introduces **split payment**: the tax portion is separated automatically **at the moment the customer pays**, and the merchant receives only the net amount.
@@ -59,7 +77,18 @@ So the core problem **is not how to pay the tax on each sale**, since split paym
 - explains the numbers in plain language, with rule-based analysis, no external AI and no changes to values;
 - when cash is about to get tight, offers **working capital** from a partner bank or fintech inside the app, with every cost shown before contracting.
 
-**Real persistence in PostgreSQL. Payments, split and taxes are simulated:** no money is transferred and no tax is paid. Example percentages are not legislation. Working capital already works with a simulated partner; cancellation is future work.
+**Real persistence in PostgreSQL. Payments, split and taxes are simulated:** no money is transferred and no tax is paid. Example percentages are not legislation. Working capital already works end to end with simulated partners (a bank and a fintech); to use real money, connect a partner authorized by the Central Bank of Brazil.
+
+## Screens
+
+Screenshots from the demo (fictitious data). Every screen is available in Portuguese, English and Spanish, in light and dark themes.
+
+<table>
+<tr><td align="center" valign="top"><img src="documentacao/readme/en-entrada.png" alt="Entry: theme and language chosen at the top"><br><sub>Entry: theme and language chosen at the top</sub></td><td align="center" valign="top"><img src="documentacao/readme/en-painel.png" alt="Dashboard: gross, tax, fee and what actually reaches the cash"><br><sub>Dashboard: gross, tax, fee and what actually reaches the cash</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/en-fluxo-caixa.png" alt="Cash flow: net inflows, expenses and balance"><br><sub>Cash flow: net inflows, expenses and balance</sub></td><td align="center" valign="top"><img src="documentacao/readme/en-split.png" alt="Sale and split: where each part of the payment went"><br><sub>Sale and split: where each part of the payment went</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/en-capital-de-giro.png" alt="Working capital: decapitalization diagnosis and credit offers"><br><sub>Working capital: decapitalization diagnosis and credit offers</sub></td><td align="center" valign="top"><img src="documentacao/readme/en-explicacao.png" alt=""i" icon: an explanation for every piece of information"><br><sub>"i" icon: an explanation for every piece of information</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/en-capital-de-giro-escuro.png" alt="Dark theme"><br><sub>Dark theme</sub></td><td align="center" valign="top"><img src="documentacao/readme/en-celular.png" alt="Mobile" width="230"><br><sub>Mobile</sub></td></tr>
+</table>
 
 ## What the system has
 
@@ -83,7 +112,7 @@ So the core problem **is not how to pay the tax on each sale**, since split paym
 | **Thayná Batista da Silva** | Scrum Master; design and prototyping; research; requirements documentation; README in Portuguese, English and Spanish; testing | High-fidelity prototype in [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); research and requirements gathering for Split Pay and Planner Comercial; requirements documentation. In the final delivery: corrected core problem (decapitalization); sign-in with lock, attempts warning, email recovery, eye button, Remember me and Sign up; light, dark and system themes; PT/EN/ES languages; **i** icons with explanations; audit checkers; new backend, unit and browser tests |
 | **Kássio Lima de Oliveira** | Project code and deployment | Backend–frontend integration with persistence; operation recovery; secure password recovery flow; Supabase setup; deployment on Render (API) and Vercel (website); monitoring and backup routine |
 | **Lucas André Cardoso de Lima** | Front-end code | First delivery of the web and Android frontends; trend comparison; integration contracts; review of the 516 criteria with evidence; weekly cash, sign-up and reports |
-| **Kleysson Teixeira da Cruz Junior** | User interviews | User interviews; MVP README review; the project's [initial repository](https://github.com/Kleyssonteixeirapf/projeto-split-tributario) |
+| **Kleysson Teixeira da Cruz Junior** | Team organization and user interviews | Organized and split the team's tasks; set up and kept the Trello board up to date; user interviews and support in field research; support in writing the documentation; MVP README review; the project's [initial repository](https://github.com/Kleyssonteixeirapf/projeto-split-tributario); support for general project tasks |
 | **Heitor Sette Couto de Melo** | Pitch | Pitch deck presentation |
 | **James Bernardino da Silva Neto** | Squad member | — |
 
@@ -131,3 +160,7 @@ The system is auditable: every change has an authored commit, the [CHANGELOG](CH
 - `android-pos/`: Kotlin POS app.
 - `scripts/`: local run, Supabase, hosting and `auditoria/`.
 - `documentacao/`: status, decisions, operations and history.
+
+## License
+
+© 2026 Squad 19 (Thayná Batista da Silva, Kássio Lima de Oliveira, Lucas André Cardoso de Lima, Kleysson Teixeira da Cruz Junior, Heitor Sette Couto de Melo and James Bernardino da Silva Neto). **All rights reserved.** You may view this repository to evaluate the project; any other use requires written permission. Details in [LICENSE](LICENSE).

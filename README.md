@@ -1,6 +1,12 @@
 # Planner Comercial — Split Tributário
 
-**Português** · [English](README.en.md) · [Español](README.es.md)
+**🇧🇷 Português** · [🇺🇸 English](README.en.md) · [🇪🇸 Español](README.es.md)
+
+<p align="center"><em>Planejamento de caixa para o pequeno comerciante não se descapitalizar com o split payment da Reforma Tributária.</em></p>
+
+<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><img src="documentacao/readme/pt-painel.png" alt="Painel do Planner Comercial" width="860"></a></p>
+
+<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><b>▶ Abrir o site publicado</b></a></p>
 
 Projeto da **Squad 19** da Residência Tecnológica **Grow Up 2026.2** (Porto Digital e Faculdade Senac de Pernambuco, Recife-PE), feito com a empresa parceira **Avanade**.
 
@@ -38,6 +44,18 @@ cd frontend && npm ci && VITE_MODO_DADOS=demo npm run dev
 2. Clique em **Entrar** e depois em **Cadastre-se** para criar uma loja vazia. Ou entre com `gerente1@demo.local` e a senha gerada em `backend/.local/demo-password`.
 3. A API responde `{"status":"UP"}` em http://127.0.0.1:8080/actuator/health.
 
+## Pitch em vídeo
+
+🎬 **Em breve:** o vídeo do pitch (até 5 minutos) será publicado aqui.
+
+<!-- Quando o vídeo estiver no YouTube (não listado), troque ID_DO_VIDEO pelo código do link (o que vem depois de "v=") e apague a linha "Em breve" acima:
+<p align="center"><a href="https://www.youtube.com/watch?v=ID_DO_VIDEO"><img src="https://img.youtube.com/vi/ID_DO_VIDEO/maxresdefault.jpg" alt="Assistir ao pitch do Planner Comercial" width="720"></a></p>
+-->
+
+[Roteiro da gravação](documentacao/pitch/ROTEIRO-PITCH.md)
+
+<p align="center"><img alt="Java 21" src="https://img.shields.io/badge/Java-21-E76F00?logo=openjdk&logoColor=white"> <img alt="Spring Boot" src="https://img.shields.io/badge/Spring_Boot-3.5-6DB33F?logo=springboot&logoColor=white"> <img alt="React 19" src="https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white"> <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white"> <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-Supabase-4169E1?logo=postgresql&logoColor=white"> <img alt="Kotlin" src="https://img.shields.io/badge/Android-Kotlin-7F52FF?logo=kotlin&logoColor=white"> <img alt="Idiomas" src="https://img.shields.io/badge/PT_·_EN_·_ES-0E7490"> <img alt="WCAG" src="https://img.shields.io/badge/WCAG_2.1-AA-15803D"></p>
+
 ## O problema
 
 A Reforma Tributária do consumo (Emenda Constitucional 132/2023 e Lei Complementar 214/2025) cria o IBS e a CBS e prevê o **split payment**. Com ele, a parte do imposto é separada automaticamente **no momento em que o cliente paga**, e o comerciante recebe só o valor líquido.
@@ -57,7 +75,18 @@ O **Planner Comercial** ajuda o comerciante a enxergar e a se antecipar à desca
 - explica os números em linguagem simples, com análise por regras, sem IA externa e sem alterar valores;
 - quando o caixa vai apertar, oferece **capital de giro** de um banco ou fintech parceira dentro do próprio app, com todos os custos à vista antes de contratar.
 
-**Persistência real em PostgreSQL. Pagamentos, split e tributos são simulados:** não há transferência de dinheiro nem recolhimento fiscal. Percentuais de exemplo não são legislação. O capital de giro já funciona com um parceiro simulado; o cancelamento fica para evolução futura.
+**Persistência real em PostgreSQL. Pagamentos, split e tributos são simulados:** não há transferência de dinheiro nem recolhimento fiscal. Percentuais de exemplo não são legislação. O capital de giro já funciona de ponta a ponta com parceiros simulados (banco e fintech); para usar dinheiro de verdade, basta ligar um parceiro autorizado pelo Banco Central.
+
+## Telas
+
+Prints da demonstração (dados fictícios). Todas as telas existem em português, inglês e espanhol, nos temas claro e escuro.
+
+<table>
+<tr><td align="center" valign="top"><img src="documentacao/readme/pt-entrada.png" alt="Entrada: tema e idioma escolhidos no canto superior"><br><sub>Entrada: tema e idioma escolhidos no canto superior</sub></td><td align="center" valign="top"><img src="documentacao/readme/pt-painel.png" alt="Painel: bruto, imposto, taxa e o que de fato entra no caixa"><br><sub>Painel: bruto, imposto, taxa e o que de fato entra no caixa</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/pt-fluxo-caixa.png" alt="Fluxo de caixa: entradas líquidas, despesas e saldo"><br><sub>Fluxo de caixa: entradas líquidas, despesas e saldo</sub></td><td align="center" valign="top"><img src="documentacao/readme/pt-split.png" alt="Venda e split: para onde foi cada parte do pagamento"><br><sub>Venda e split: para onde foi cada parte do pagamento</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/pt-capital-de-giro.png" alt="Capital de giro: diagnóstico da descapitalização e ofertas de crédito"><br><sub>Capital de giro: diagnóstico da descapitalização e ofertas de crédito</sub></td><td align="center" valign="top"><img src="documentacao/readme/pt-explicacao.png" alt="Ícone i: explicação de cada informação"><br><sub>Ícone i: explicação de cada informação</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/pt-capital-de-giro-escuro.png" alt="Tema escuro"><br><sub>Tema escuro</sub></td><td align="center" valign="top"><img src="documentacao/readme/pt-celular.png" alt="Celular" width="230"><br><sub>Celular</sub></td></tr>
+</table>
 
 ## O que o sistema tem
 
@@ -81,7 +110,7 @@ O **Planner Comercial** ajuda o comerciante a enxergar e a se antecipar à desca
 | **Thayná Batista da Silva** | Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; testes | Protótipo de alta fidelidade no [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); pesquisa e levantamento de requisitos do Split Pay e do Planner Comercial; documentação de requisitos. Na entrega final: correção do problema central (descapitalização); login com bloqueio, aviso de tentativas, recuperação por e-mail, botão de olho, Lembrar de mim e Cadastre-se; temas claro, escuro e do sistema; idiomas PT/EN/ES; ícones **i** com explicações; verificadores de auditoria; testes novos de backend, unitários e de navegador |
 | **Kássio Lima de Oliveira** | Código do projeto e deploy | Integração entre backend e frontend com persistência; recuperação de operações; fluxo seguro de recuperação de senha; configuração do Supabase; deploy no Render (API) e na Vercel (site); monitoramento e rotina de backup |
 | **Lucas André Cardoso de Lima** | Código do front-end | Primeira entrega dos frontends web e Android; comparação de tendências; contratos de integração; revisão dos 516 critérios com evidências; caixa semanal, cadastro e relatórios |
-| **Kleysson Teixeira da Cruz Junior** | Entrevistas com pessoas usuárias | Entrevistas com usuários; revisão do README do MVP; [repositório inicial](https://github.com/Kleyssonteixeirapf/projeto-split-tributario) do projeto |
+| **Kleysson Teixeira da Cruz Junior** | Organização da equipe e entrevistas com pessoas usuárias | Organização e divisão das demandas da equipe; estruturação e atualização do quadro no Trello; entrevistas com usuários e auxílio na pesquisa de campo; auxílio na elaboração da documentação; revisão do README do MVP; [repositório inicial](https://github.com/Kleyssonteixeirapf/projeto-split-tributario) do projeto; suporte nas demandas gerais do projeto |
 | **Heitor Sette Couto de Melo** | Pitch | Apresentação do pitch deck |
 | **James Bernardino da Silva Neto** | Integrante da squad | — |
 
@@ -129,3 +158,7 @@ Os resultados da entrega final estão em [documentacao/ENTREGA-FINAL-2026-11-18.
 - `android-pos/`: aplicativo Kotlin do POS.
 - `scripts/`: execução local, Supabase, hospedagem e `auditoria/`.
 - `documentacao/`: estado, decisões, operação e histórico (inclui o [README anterior](documentacao/historico/README-antes-da-entrega-final-2026-11-18.md)).
+
+## Licença
+
+© 2026 Squad 19 (Thayná Batista da Silva, Kássio Lima de Oliveira, Lucas André Cardoso de Lima, Kleysson Teixeira da Cruz Junior, Heitor Sette Couto de Melo e James Bernardino da Silva Neto). **Todos os direitos reservados.** O repositório pode ser visto para avaliação do projeto; qualquer outro uso precisa de autorização por escrito. Detalhes em [LICENSE](LICENSE).
