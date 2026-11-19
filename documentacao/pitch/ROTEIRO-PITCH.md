@@ -3,7 +3,7 @@
 Squad 19 · Grow Up 2026.2 · Avanade
 Roteiro: Thayná Batista da Silva
 
-**Duração:** entre 4 minutos e 4 minutos e 40 segundos, falando devagar e com as pausas (são 383 palavras: cerca de 3 minutos e 50 segundos de fala lenta, mais 17 pausas e o tempo das telas). Fica abaixo do limite de 5 minutos.
+**Duração:** entre 4 minutos e 20 segundos e 4 minutos e 55 segundos, falando devagar e com as pausas (são 425 palavras: cerca de 4 minutos e 15 segundos de fala lenta, mais 18 pausas). Fica abaixo do limite de 5 minutos. Se passar de 5 minutos no ensaio, encurte as pausas do Bloco 5, não a fala.
 **Formato:** a tela da solução aparece em dois aparelhos, um ao lado do outro: **à esquerda, a maquininha de cartão (Smart POS)** e **à direita, o celular**. A pessoa que apresenta aparece num canto do vídeo, falando.
 
 ---
@@ -167,7 +167,25 @@ Abra http://127.0.0.1:5173 e clique em **Explorar demonstração**.
 
 ---
 
-## Bloco 6 — Simples para qualquer pessoa (3:55 a 4:20)
+## Bloco 6 — Os outros efeitos da Reforma (3:55 a 4:15)
+
+| Maquininha | Celular |
+|---|---|
+| Fica parada. | Menu (☰) → **Reforma no caixa**. Mostre os cards **Imposto retido nas vendas** e **Créditos das compras**, depois role devagar passando por **Preço de venda**, **Prazo com fornecedores** e **Pacote do contador**. |
+
+**Fala:**
+
+> E a Reforma mexe em mais coisas no caixa.
+> O Planner acompanha o crédito do imposto das compras...
+> lendo a própria nota fiscal.
+> ( pausa )
+> Ajuda a recalcular o preço.
+> A negociar prazo com o fornecedor.
+> E já prepara o arquivo para o contador.
+
+---
+
+## Bloco 7 — Simples para qualquer pessoa (4:15 a 4:35)
 
 | Maquininha | Celular |
 |---|---|
@@ -184,7 +202,7 @@ Abra http://127.0.0.1:5173 e clique em **Explorar demonstração**.
 
 ---
 
-## Bloco 7 — Fechamento (4:20 a 4:40)
+## Bloco 8 — Fechamento (4:35 a 4:55)
 
 | Maquininha | Celular |
 |---|---|
@@ -229,6 +247,8 @@ Olha a venda acontecendo na maquininha. Cento e cinquenta reais. O Planner mostr
 O Planner junta as vendas e as despesas. Mostra o caixa da semana. E projeta os próximos dias. Se o dinheiro vai faltar, ele avisa antes. E aí dá tempo de se organizar.
 
 E se, mesmo assim, faltar? Aqui está o nosso diferencial. O Planner calcula quanto imposto saiu do caixa e quanto vai faltar nos próximos trinta dias. E mostra ofertas de crédito de bancos e fintechs parceiras. Ali mesmo, no app. Sem precisar ir ao banco. Ele compara as ofertas pelo custo total. E não deixa contratar uma parcela que o caixa não aguenta. Antes de contratar, a Maria vê como o caixa fica, semana a semana. Depois, pode pagar antes, com desconto nos juros. Ou desistir em até sete dias.
+
+E a Reforma mexe em mais coisas no caixa. O Planner acompanha o crédito do imposto das compras, lendo a própria nota fiscal. Ajuda a recalcular o preço. A negociar prazo com o fornecedor. E já prepara o arquivo para o contador.
 
 E tudo isso de um jeito simples. Cada número tem um "i" que explica o que ele quer dizer. Funciona em português, inglês e espanhol. No tema claro ou escuro. No celular, no computador e na maquininha.
 

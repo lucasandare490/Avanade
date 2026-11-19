@@ -114,6 +114,8 @@ export interface ConsultasPlanner {
   ) => Promise<{ categorias: string[]; explicacao: string }>;
   /** Capital de giro com parceiro de crédito (simulado no MVP). */
   credito?: import('./credito').ServicoCredito;
+  /** Reforma Tributária no caixa: imposto retido, créditos das compras e pacote do contador. */
+  reforma?: import('./reforma').ServicoReforma;
   projetarCaixa?: (
     entrada: { until: string; incomeCents: number; expenseCents: number },
     sinal?: AbortSignal,

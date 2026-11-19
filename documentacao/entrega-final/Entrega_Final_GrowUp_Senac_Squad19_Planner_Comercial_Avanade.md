@@ -31,7 +31,7 @@ lang: pt-BR
 
 | Pessoa | Papel na squad |
 |---|---|
-| Thayná Batista da Silva | Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; testes; implementação da entrega final (login seguro, tema, idiomas, explicações, correções e auditoria) |
+| Thayná Batista da Silva | Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; testes; implementação da entrega final (login seguro, tema, idiomas, explicações, capital de giro, Reforma no caixa, correções e auditoria) |
 | Kássio Lima de Oliveira | Código do projeto e deploy (Render e Vercel); integração backend–frontend; Supabase |
 | Lucas André Cardoso de Lima | Código do front-end (web e Android) |
 | Kleysson Teixeira da Cruz Junior | Organização e divisão das demandas da equipe; estruturação e atualização do quadro no Trello; entrevistas com pessoas usuárias e auxílio na pesquisa de campo; auxílio na elaboração da documentação; repositório inicial; suporte nas demandas gerais do projeto |
@@ -172,6 +172,7 @@ Conversa com um assistente de IA generativa (ferramenta de chat), em 01/10/2026,
 | E11 | Capital de giro com parceiros | P1 | **Concluído com parceiros simulados**: diagnóstico da descapitalização, ofertas comparadas pelo CET, crédito responsável, antes e depois do caixa, contratação, pagamento, quitação antecipada, desistência, histórico imutável e webhook assinado. Pronto para ligar um banco ou fintech |
 | E13 | Cancelamento de vendas | Futuro | Fora do MVP (decisão do grupo) |
 | E12 | Acessibilidade, tema e idiomas | P2 | **Concluído**: tema claro/escuro/sistema, PT/EN/ES, ícone "i", WCAG AA |
+| E14 | Reforma no caixa | P1 | **Concluído**: créditos de IBS/CBS das compras com leitura do XML da NF-e, preço de venda, prazo com fornecedores, antecipação de recebíveis e pacote do contador |
 
 ## 3.2 Critérios de aceitação verificados por testes
 
@@ -182,6 +183,7 @@ Conversa com um assistente de IA generativa (ferramenta de chat), em 01/10/2026,
 | Venda e split | Soma das parcelas igual ao bruto; mesma tentativa não duplica | `BackendIntegrationTest`, `CrashRecoveryTest` |
 | Caixa | Entra o líquido, saem despesas, saldo por período e semana | `QueryAndCashIntegrationTest`, `caixa-semanal.spec.ts` |
 | Capital de giro | Diagnóstico, ofertas comparadas pelo CET, parcela acima de 50% bloqueada, contratação com aceite, pagamento de parcela, quitação antecipada com desconto, desistência em 7 dias, histórico imutável e webhook assinado | `CreditoIntegrationTest`, `CreditoWebhookIntegrationTest`, `credito.test.ts`, `credito-integrado.spec.ts` |
+| Reforma no caixa | Crédito de IBS/CBS guardado e limitado ao valor da compra; resumo com imposto retido, créditos, imposto líquido e crédito acumulado; NF-e preenche a despesa; XML perigoso recusado; CSV do contador com os mesmos números | `ReformaIntegrationTest`, `reforma.test.ts`, `reforma-integrado.spec.ts`, `entrega-final.spec.ts` |
 | Tema e idiomas | Todas as telas nos três idiomas, sem texto sem tradução; tema salvo | `entrega-final.spec.ts`, `verificar-traducoes.mjs` |
 | Explicações | Toda informação das telas tem "i" que abre com mouse, teclado e toque | `entrega-final.spec.ts` |
 
@@ -191,7 +193,7 @@ Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes 
 
 # 4. Banco de dados e API
 
-## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V10)
+## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V11)
 
 | Tabela | Função |
 |---|---|
@@ -203,12 +205,12 @@ Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes 
 | `split_operation`, `parcel` | Separação em tributo, taxa e líquido, e cada parcela com status |
 | `ledger_event` | Registro somente de inserção, com hash anterior e hash do evento |
 | `cash_entry` | Entradas e saídas reconhecidas no caixa |
-| `expense`, `expense_category` | Despesas pagas e categorias |
+| `expense`, `expense_category` | Despesas pagas e categorias; `tax_credit_cents` guarda o crédito de IBS/CBS da nota (V11) |
 | `request_intent` | Idempotência: mesma chave devolve o mesmo resultado |
 | `ai_interaction` | Registro das explicações geradas, sem dados sensíveis |
 | `credit_consent`, `credit_offer`, `credit_contract`, `credit_installment`, `credit_event`, `credit_webhook_event` | Capital de giro: consentimento revogável, propostas (com os fatos usados e o comprometimento), contratos, parcelas, trilha imutável e avisos do parceiro |
 
-Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos. Migrations V1–V10.
+Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos. Migrations V1–V11.
 
 ## 4.2 Principais endpoints (`/api/v1`)
 
@@ -225,6 +227,7 @@ Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de 
 | POST `split-payment/simulate` | Simulação sem escrita |
 | POST `ai/cash-analysis`, GET `ai/split-explanation/{id}`, POST `ai/expense-category` | Explicações e sugestão revisável |
 | GET `reports/{sales,expenses,taxes}` | Relatórios com CSV |
+| GET `tax-reform/summary` | Reforma no caixa: imposto retido, créditos das compras, imposto líquido e linhas do pacote do contador |
 | GET `credit`; POST/DELETE `credit/consent`; POST `credit/offers`, `credit/offers/{id}/accept`; POST `credit/contracts/{id}/installments/{n}/pay`; GET/POST `credit/contracts/{id}/payoff`; POST `credit/contracts/{id}/cancel`; GET `credit/events`; POST `credit/webhook/{parceiro}` | Capital de giro: diagnóstico, ofertas, contratação, parcelas, quitação, desistência, histórico e webhook |
 
 Erros seguem o formato `{code, message, fieldErrors, correlationId}`. Contrato completo: `backend/docs/API.md` no repositório.
@@ -265,6 +268,18 @@ Quem concede o crédito é a instituição autorizada pelo Banco Central. O Plan
 
 O parceiro é uma peça plugável (`ParceiroCredito`). Para ligar um banco ou fintech real, basta implementar a chamada à API dele e trocar `CREDIT_PARTNER`. Ele confirma os pagamentos por um **webhook assinado com HMAC-SHA256**, idempotente e restrito aos contratos do próprio parceiro. A especificação completa, com fórmulas, API, webhook, dados e testes, está em `documentacao/INTEGRACAO-PARCEIRO-CREDITO.md`.
 
+## 5.5 Reforma no caixa
+
+Além do imposto retido, a Reforma mexe em outras partes do caixa. A tela **Reforma no caixa** cuida delas:
+
+- **Créditos de IBS/CBS das compras:** a despesa ganhou o campo do crédito da nota, que também pode vir do XML da NF-e. A tela mostra o imposto retido, os créditos, o imposto líquido e o crédito acumulado.
+- **Preço de venda:** calcula o preço que mantém a margem com o IBS/CBS "por fora", o crédito da compra e a taxa da maquininha.
+- **Prazo com fornecedores:** mostra quanto caixa um prazo maior libera, sem juros, e quanto isso cobre da falta prevista.
+- **Antecipação de recebíveis:** calcula o desconto e o custo efetivo ao mês e compara com o capital de giro.
+- **Pacote do contador:** CSV com o resumo, as vendas e as compras com crédito.
+
+As alíquotas são informadas pela pessoa e nada movimenta dinheiro. As fórmulas e as regras estão em `documentacao/REFORMA-NO-CAIXA.md`.
+
 # 6. Arquitetura e stack
 
 | Camada | Tecnologias |
@@ -284,13 +299,13 @@ Smart POS/POS web e painel web → API REST (autenticação, núcleo de split, P
 
 | Bateria | Resultado |
 |---|---|
-| Backend (`./mvnw test`) | **81 de 81** |
-| Frontend unitários (`npm test`) | **140 de 140** |
-| Navegador na demonstração (`npm run test:e2e:entrega`) | **23 de 23** — login, recuperação, lembrar de mim, ciclo completo do capital de giro, tema, idiomas, ícones "i", WCAG A/AA nos dois temas, teclado |
-| Navegador contra a API real | **22 de 22**, incluindo o ciclo do capital de giro e a projeção (no `main` antes desta entrega: 0 de 22) |
+| Backend (`./mvnw test`) | **86 de 86** |
+| Frontend unitários (`npm test`) | **154 de 154** |
+| Navegador na demonstração (`npm run test:e2e:entrega`) | **25 de 25** — login, recuperação, lembrar de mim, ciclo completo do capital de giro, Reforma no caixa (NF-e, créditos, preço, prazo, antecipação e CSV), tema, idiomas, ícones "i", WCAG A/AA nos dois temas, teclado |
+| Navegador contra a API real | **23 de 23**, incluindo o ciclo do capital de giro, a projeção e a NF-e com crédito no resumo da reforma (no `main` antes desta entrega: 0 de 22) |
 | CI do GitHub | 12 de 12 verificações |
-| Traduções | 1.059 textos em inglês e espanhol; 205 explicações em três idiomas |
-| Acessibilidade (axe, 11 telas) | 0 violações nos temas claro e escuro |
+| Traduções | 1.145 textos em inglês e espanhol; 241 explicações em três idiomas |
+| Acessibilidade (axe, 12 telas) | 0 violações nos temas claro e escuro |
 
 Defeitos antigos encontrados e corrigidos: as rotas de recuperação de senha exigiam login, e o banco não permitia à API trocar a senha — a recuperação nunca tinha funcionado.
 
@@ -324,7 +339,7 @@ Equipe dividida por frentes (produto e design, front-end, código e deploy, entr
 
 | Pendência | Responsável |
 |---|---|
-| Deploy manual da API no Render com a versão final (aplica as migrations V7 a V10: bloqueio de login, recuperação de senha e capital de giro) | Kássio |
+| Deploy manual da API no Render com a versão final (aplica as migrations V7 a V11: bloqueio de login, recuperação de senha e capital de giro) | Kássio |
 | Configurar o SMTP no Render para o e-mail de recuperação (guia em `documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md`) | Kássio |
 | Homologação do aplicativo Android em aparelho físico | Equipe |
 | Integração oficial de pagamento e recolhimento (fora do MVP) | Evolução futura |

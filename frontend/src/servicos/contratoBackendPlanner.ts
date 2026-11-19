@@ -1,4 +1,5 @@
 import { criarCreditoApi } from './credito';
+import { criarReformaApi } from './reforma';
 import { validarTendencias, type ComparacaoTendencias } from '../utilitarios/tendencias';
 import type { ContratoServidor } from './adaptarEValidarRespostasApi';
 import type { ConsultaOperacoes, ConsultaDespesas, PeriodoConsulta } from './contratosConsultas';
@@ -235,6 +236,7 @@ export const contratoServidor: ContratoServidor = {
   }),
   consultas: (enviar) => ({
     credito: criarCreditoApi(enviar as never),
+    reforma: criarReformaApi(enviar as never),
     exportarOperacoes: (f, sinal) => {
       const p = filtros(f);
       p.delete('page');
@@ -586,7 +588,13 @@ export const contratoServidor: ContratoServidor = {
         await intencoes.enviar(
           'EXPENSE',
           '/api/v1/expenses',
-          { description: d.descricao, amountCents: d.valor, categoryId: id, paidOn: d.data },
+          {
+            description: d.descricao,
+            amountCents: d.valor,
+            categoryId: id,
+            paidOn: d.data,
+            ...(d.credito ? { taxCreditCents: d.credito } : {}),
+          },
           despesa,
         );
       },

@@ -1,4 +1,5 @@
 import { criarCreditoDemo } from './credito';
+import { criarReformaDemo } from './reforma';
 import { criarCenario, DATA_REFERENCIA } from '../dados/cenarioDemonstrativo';
 import type { BaseDemonstracao, NovaVenda, Operacao, ServicoPlanner } from '../tipos';
 import { calcularExemplo } from '../utilitarios/valoresFinanceiros';
@@ -61,6 +62,7 @@ export function criarServicoDemonstrativo(): ServicoPlanner {
       return structuredClone(operacao);
     },
     credito: criarCreditoDemo(() => base, DATA_REFERENCIA),
+    reforma: criarReformaDemo(() => base),
     async reprocessar(id) {
       const operacao = base.operacoes.find((o) => o.id === id);
       if (!operacao) throw new Error('Operação não encontrada.');

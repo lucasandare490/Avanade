@@ -75,7 +75,8 @@ Por lo tanto, el problema central **no es cómo pagar el impuesto de cada venta*
 - proyecta la caja de los próximos días y avisa cuando el escenario indica déficit;
 - simula ventas antes de que ocurran, para entender el impacto de cada porcentaje;
 - explica los números en lenguaje simple, con análisis por reglas, sin IA externa y sin alterar valores;
-- cuando la caja va a quedar ajustada, ofrece **capital de trabajo** de un banco o fintech asociado dentro de la app, con todos los costos a la vista antes de contratar.
+- cuando la caja va a quedar ajustada, ofrece **capital de trabajo** de un banco o fintech asociado dentro de la app, con todos los costos a la vista antes de contratar;
+- se ocupa de los otros efectos de la reforma en la caja: sigue los **créditos de IBS/CBS de las compras** (incluso leyendo el XML de la NF-e), recalcula el **precio de venta**, muestra cuánta caja libera el **plazo con proveedores**, compara el **anticipo de cobros** con el crédito y genera el **paquete para el contador**.
 
 **Persistencia real en PostgreSQL. Los pagos, el split y los tributos son simulados:** no hay transferencia de dinero ni pago de impuestos. Los porcentajes de ejemplo no son legislación. El capital de trabajo ya funciona de punta a punta con socios simulados (un banco y una fintech); para usar dinero real, basta conectar un socio autorizado por el Banco Central de Brasil.
 
@@ -86,8 +87,9 @@ Capturas de la demostración (datos ficticios). Todas las pantallas están en po
 <table>
 <tr><td align="center" valign="top"><img src="documentacao/readme/es-entrada.png" alt="Entrada: tema e idioma elegidos arriba"><br><sub>Entrada: tema e idioma elegidos arriba</sub></td><td align="center" valign="top"><img src="documentacao/readme/es-painel.png" alt="Panel: bruto, impuesto, tasa y lo que realmente entra en la caja"><br><sub>Panel: bruto, impuesto, tasa y lo que realmente entra en la caja</sub></td></tr>
 <tr><td align="center" valign="top"><img src="documentacao/readme/es-fluxo-caixa.png" alt="Flujo de caja: entradas netas, gastos y saldo"><br><sub>Flujo de caja: entradas netas, gastos y saldo</sub></td><td align="center" valign="top"><img src="documentacao/readme/es-split.png" alt="Venta y split: adónde fue cada parte del pago"><br><sub>Venta y split: adónde fue cada parte del pago</sub></td></tr>
-<tr><td align="center" valign="top"><img src="documentacao/readme/es-capital-de-giro.png" alt="Capital de trabajo: diagnóstico de la descapitalización y ofertas de crédito"><br><sub>Capital de trabajo: diagnóstico de la descapitalización y ofertas de crédito</sub></td><td align="center" valign="top"><img src="documentacao/readme/es-explicacao.png" alt="Ícono i: explicación de cada información"><br><sub>Ícono i: explicación de cada información</sub></td></tr>
-<tr><td align="center" valign="top"><img src="documentacao/readme/es-capital-de-giro-escuro.png" alt="Tema oscuro"><br><sub>Tema oscuro</sub></td><td align="center" valign="top"><img src="documentacao/readme/es-celular.png" alt="Celular" width="230"><br><sub>Celular</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/es-capital-de-giro.png" alt="Capital de trabajo: diagnóstico de la descapitalización y ofertas de crédito"><br><sub>Capital de trabajo: diagnóstico de la descapitalización y ofertas de crédito</sub></td><td align="center" valign="top"><img src="documentacao/readme/es-reforma.png" alt="Reforma y caja: créditos de IBS/CBS de las compras, precio, plazo, anticipo y paquete para el contador"><br><sub>Reforma y caja: créditos de IBS/CBS de las compras, precio, plazo, anticipo y paquete para el contador</sub></td></tr>
+<tr><td align="center" valign="top"><img src="documentacao/readme/es-explicacao.png" alt="Ícono i: explicación de cada información"><br><sub>Ícono i: explicación de cada información</sub></td><td align="center" valign="top"><img src="documentacao/readme/es-capital-de-giro-escuro.png" alt="Tema oscuro"><br><sub>Tema oscuro</sub></td></tr>
+<tr><td align="center" valign="top" colspan="2"><img src="documentacao/readme/es-celular.png" alt="Celular" width="230"><br><sub>Celular</sub></td></tr>
 </table>
 
 ## Qué tiene el sistema
@@ -103,13 +105,14 @@ Capturas de la demostración (datos ficticios). Todas las pantallas están en po
 | Caja | Totales del servidor, composición diaria, caja semanal, proyección manual con aviso de déficit |
 | Informes | Ventas, gastos y composición tributaria por período, con CSV completo |
 | Capital de trabajo | Dentro de la app, sin ir al banco. **Diagnóstico de la descapitalización** (impuesto retenido, faltante de caja en 30 días, cobertura y recomendación), **ofertas de banco y fintech comparadas por el CET**, crédito responsable (bloquea cuotas por encima del 50% de las entradas), **caja antes y después** en 12 semanas, contratación, pago de cuotas, **liquidación anticipada con descuento**, desistimiento en 7 días, resumen del contrato e historial inmutable. Socios simulados hoy; conectar un socio real es una clase y un webhook firmado. [Especificación e integración](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) (en portugués) |
+| Reforma y caja | **Créditos de IBS/CBS de las compras** (campo en el gasto y lectura del **XML de la NF-e**), impuesto retenido, impuesto neto y crédito acumulado; **precio de venta** con IBS/CBS por fuera, crédito, tasa y margen; **plazo con proveedores** y cuánto cubre del faltante de caja; **anticipo de cobros** comparado con el capital de trabajo; **paquete para el contador** en CSV. [Fórmulas y reglas](documentacao/REFORMA-NO-CAIXA.md) (en portugués) |
 | Android | Cliente POS en Kotlin, local e integrado por HTTPS. La prueba en dispositivo físico está pendiente |
 
 ## Equipo y qué hizo cada persona
 
 | Persona | Rol en el squad | Contribuciones registradas |
 |---|---|---|
-| **Thayná Batista da Silva** | Scrum Master; diseño y prototipado; investigación; documentación de requisitos; README en portugués, inglés y español; pruebas | Prototipo de alta fidelidad en [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); investigación y levantamiento de requisitos de Split Pay y de Planner Comercial; documentación de requisitos. En la entrega final: corrección del problema central (descapitalización); inicio de sesión con bloqueo, aviso de intentos, recuperación por correo, botón de ojo, Recordarme y Regístrese; temas claro, oscuro y del sistema; idiomas PT/EN/ES; íconos **i** con explicaciones; verificadores de auditoría; nuevas pruebas de backend, unitarias y de navegador |
+| **Thayná Batista da Silva** | Scrum Master; diseño y prototipado; investigación; documentación de requisitos; README en portugués, inglés y español; pruebas | Prototipo de alta fidelidad en [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); investigación y levantamiento de requisitos de Split Pay y de Planner Comercial; documentación de requisitos. En la entrega final: corrección del problema central (descapitalización); inicio de sesión con bloqueo, aviso de intentos, recuperación por correo, botón de ojo, Recordarme y Regístrese; temas claro, oscuro y del sistema; idiomas PT/EN/ES; íconos **i** con explicaciones; verificadores de auditoría; capital de trabajo dentro de la app (diagnóstico, ofertas, contratación, cuotas, liquidación y desistimiento); reforma y caja (créditos de IBS/CBS con lectura de la NF-e, precio de venta, plazo con proveedores, anticipo y paquete para el contador); README visual y guion del pitch; nuevas pruebas de backend, unitarias y de navegador |
 | **Kássio Lima de Oliveira** | Código del proyecto y despliegue | Integración entre backend y frontend con persistencia; recuperación de operaciones; flujo seguro de recuperación de contraseña; configuración de Supabase; despliegue en Render (API) y Vercel (sitio); monitoreo y rutina de respaldo |
 | **Lucas André Cardoso de Lima** | Código del front-end | Primera entrega de los frontends web y Android; comparación de tendencias; contratos de integración; revisión de los 516 criterios con evidencias; caja semanal, registro e informes |
 | **Kleysson Teixeira da Cruz Junior** | Organización del equipo y entrevistas con usuarios | Organización y división de las tareas del equipo; estructuración y actualización del tablero de Trello; entrevistas con usuarios y apoyo en la investigación de campo; apoyo en la elaboración de la documentación; revisión del README del MVP; [repositorio inicial](https://github.com/Kleyssonteixeirapf/projeto-split-tributario) del proyecto; apoyo en las tareas generales del proyecto |
@@ -156,7 +159,7 @@ El sistema es auditable: cada cambio tiene un commit con autoría, el [CHANGELOG
 ## Carpetas
 
 - `frontend/`: sitio en React 19, TypeScript y Vite. Pantallas en `src/telas`; tema, idiomas y explicaciones en `src/preferencias`.
-- `backend/`: API en Java 21, Spring Boot, PostgreSQL y Flyway (migrations V1–V10).
+- `backend/`: API en Java 21, Spring Boot, PostgreSQL y Flyway (migrations V1–V11).
 - `android-pos/`: aplicación POS en Kotlin.
 - `scripts/`: ejecución local, Supabase, hosting y `auditoria/`.
 - `documentacao/`: estado, decisiones, operación e historial.

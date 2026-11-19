@@ -3,7 +3,7 @@ import axe from 'axe-core';
 
 // Entrega final (Thayná Batista da Silva): login seguro, tema, idioma e ícones "i".
 // Roda contra o modo demonstração: VITE_MODO_DADOS=demo npm run dev
-const ROTAS = ['dashboard', 'operacoes', 'operacoes/OP-0184', 'despesas', 'fluxo-caixa', 'analise', 'simulacao', 'configuracoes', 'ajuda', 'venda-demonstrativa', 'credito'];
+const ROTAS = ['dashboard', 'operacoes', 'operacoes/OP-0184', 'despesas', 'fluxo-caixa', 'analise', 'simulacao', 'configuracoes', 'ajuda', 'venda-demonstrativa', 'credito', 'reforma'];
 
 async function entrarDemo(page: Page) {
   await page.goto('/');
@@ -317,6 +317,65 @@ test.describe('ícones "i"', () => {
     await page.getByRole('button', { name: /Entrar com perfil|Conhecer as telas|Entrar/ }).last().click();
     await expect(page.getByLabel('E-mail', { exact: true })).toBeVisible();
     await expect(page.getByLabel('Senha', { exact: true })).toBeVisible();
+  });
+});
+
+test.describe('reforma no caixa', () => {
+  const nfe = `<?xml version="1.0" encoding="UTF-8"?><nfeProc xmlns="http://www.portalfiscal.inf.br/nfe"><NFe><infNFe Id="NFe1" versao="4.00"><ide><nNF>881</nNF><dhEmi>2026-10-07T09:00:00-03:00</dhEmi></ide><emit><xNome>Atacado Exemplo</xNome></emit><total><ICMSTot><vNF>400.00</vNF></ICMSTot><IBSCBSTot><gIBS><vIBS>7.08</vIBS></gIBS><gCBS><vCBS>35.40</vCBS></gCBS></IBSCBSTot></total></infNFe></NFe></nfeProc>`;
+  test('créditos das compras, NF-e, preço, prazo, antecipação e pacote do contador', async ({ page }) => {
+    await entrarDemo(page);
+    await page.getByRole('link', { name: 'Reforma no caixa' }).click();
+    await expect(page.getByRole('heading', { name: 'Reforma no caixa', level: 1 })).toBeVisible();
+    const creditos = page.locator('.indicador').filter({ hasText: 'CRÉDITOS DAS COMPRAS' });
+    await expect(creditos).toContainText('R$ 123,64');
+    await expect(page.getByRole('region', { name: 'Compras do período e créditos' }).getByRole('row')).toHaveCount(4);
+
+    // Preço: custo 100, crédito 10, alíquota 26,5%, taxa 2%, margem 20% (conferido à parte: R$ 146,97).
+    await page.getByLabel('Custo do produto (R$)', { exact: true }).fill('100,00');
+    await page.getByLabel('Crédito de IBS/CBS da compra (R$)', { exact: true }).fill('10,00');
+    await page.getByLabel('Alíquota de IBS/CBS (%)', { exact: true }).fill('26,5');
+    await page.getByLabel('Preço atual (R$)', { exact: true }).fill('130,00');
+    await page.getByRole('button', { name: 'Calcular preço' }).click();
+    await expect(page.getByText('R$ 146,97', { exact: true })).toBeVisible();
+    await expect(page.getByText('o preço precisa subir R$ 16,97', { exact: false })).toBeVisible();
+
+    await page.getByLabel('Compras por mês com fornecedores (R$)', { exact: true }).fill('3000,00');
+    await page.getByRole('button', { name: 'Calcular efeito no caixa' }).click();
+    await expect(page.getByText('Pagando 30 dias depois, ficam R$ 3.000,00 a mais no caixa', { exact: false })).toBeVisible();
+
+    await page.getByLabel('Vendas no cartão a receber (R$)', { exact: true }).fill('1000,00');
+    await page.getByRole('button', { name: 'Simular antecipação' }).click();
+    await expect(page.getByText('R$ 975,00', { exact: true })).toBeVisible();
+    await expect(page.getByText('O capital de giro do parceiro sai mais barato', { exact: false })).toBeVisible();
+
+    const download = page.waitForEvent('download');
+    await page.getByRole('button', { name: 'Baixar pacote do contador (CSV)' }).click();
+    const arquivo = await download;
+    expect(arquivo.suggestedFilename()).toMatch(/^pacote-contador-2026-09-10-a-2026-10-09-SIMULADO\.csv$/);
+    const csv = await (await arquivo.createReadStream())!.toArray().then((p) => Buffer.concat(p).toString('utf8'));
+    expect(csv).toContain('Crédito IBS/CBS (R$)');
+    expect(csv).toContain('"95,00"');
+
+    // NF-e de compra: o XML preenche o formulário de despesa e o crédito entra no resumo.
+    await page.getByRole('link', { name: 'Despesas' }).click();
+    await page.getByRole('button', { name: 'Registrar despesa' }).click();
+    await page.getByLabel('Importar XML da NF-e', { exact: true }).setInputFiles({ name: 'nota.xml', mimeType: 'application/xml', buffer: Buffer.from(nfe) });
+    await expect(page.getByText('Nota lida: R$ 400,00, com R$ 42,48 de crédito de IBS/CBS', { exact: false })).toBeVisible();
+    await expect(page.getByRole('textbox', { name: 'Descrição', exact: true })).toHaveValue('NF-e 881 · Atacado Exemplo');
+    await expect(page.getByLabel('Crédito de IBS/CBS da nota (R$)', { exact: true })).toHaveValue('42,48');
+    await page.getByRole('button', { name: 'Salvar despesa demonstrativa' }).click();
+    await expect(page.getByText('Despesa paga registrada no cenário local.', { exact: false })).toBeVisible();
+    await page.getByRole('link', { name: 'Reforma no caixa' }).click();
+    await expect(creditos).toContainText('R$ 166,12');
+  });
+
+  test('XML que não é NF-e mostra erro e não preenche nada', async ({ page }) => {
+    await entrarDemo(page);
+    await page.getByRole('link', { name: 'Despesas' }).click();
+    await page.getByRole('button', { name: 'Registrar despesa' }).click();
+    await page.getByLabel('Importar XML da NF-e', { exact: true }).setInputFiles({ name: 'x.xml', mimeType: 'application/xml', buffer: Buffer.from('<!DOCTYPE a [<!ENTITY b "c">]><a>&b;</a>') });
+    await expect(page.getByRole('alert').filter({ hasText: 'XML com declarações não permitidas.' })).toBeVisible();
+    await expect(page.getByRole('textbox', { name: 'Descrição', exact: true })).toHaveValue('');
   });
 });
 

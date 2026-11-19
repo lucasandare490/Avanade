@@ -2,6 +2,16 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-19 — Reforma no caixa (Thayná Batista da Silva)
+
+- Tela **Reforma no caixa** (menu Financeiro), na demonstração e na versão com servidor, em PT/EN/ES, nos dois temas e com ícone "i" em cada informação.
+- **Créditos de IBS/CBS das compras**: campo novo na despesa (`taxCreditCents`, migration V11 com `CHECK` de 0 até o valor da compra) e resumo do período com imposto retido, créditos, imposto líquido e crédito acumulado (`GET /api/v1/tax-reform/summary`).
+- **Leitura do XML da NF-e** no formulário de despesa: preenche descrição, valor, data e crédito (grupo `IBSCBSTot`) para conferência; recusa DOCTYPE, entidades e arquivos acima de 1 MB.
+- **Preço de venda** com IBS/CBS por fora, crédito da compra, taxa da maquininha e margem; **prazo com fornecedores** e quanto cobre da falta de caixa; **antecipação de recebíveis** comparada com o capital de giro.
+- **Pacote do contador** em CSV (resumo, vendas e compras com crédito), com proteção contra fórmulas.
+- Testes: `ReformaIntegrationTest` (5), `MigrationUpgradeTest` atualizado, `reforma.test.ts` (14), navegador na demonstração (2) e contra a API real (`reforma-integrado.spec.ts`). Especificação em `documentacao/REFORMA-NO-CAIXA.md`.
+- Roteiro do pitch com o bloco da Reforma no caixa e prints novos nos READMEs.
+
 ## 2026-11-19 — README visual, roteiro do pitch e documentação atualizada (Thayná Batista da Silva)
 
 - READMEs em português, inglês e espanhol com print de abertura, galeria de telas no idioma de cada versão (entrada, painel, fluxo de caixa, split, capital de giro, explicação "i", tema escuro e celular) e selos da tecnologia.

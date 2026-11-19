@@ -39,6 +39,7 @@ export function criarCenario(): BaseDemonstracao {
         valor: 95000,
         categoria: 'Estoque',
         data: '2026-10-08',
+        credito: 9500,
       },
       {
         id: 'DES-02',
@@ -46,6 +47,7 @@ export function criarCenario(): BaseDemonstracao {
         valor: 28640,
         categoria: 'Serviços',
         data: '2026-10-06',
+        credito: 2864,
       },
       {
         id: 'DES-03',

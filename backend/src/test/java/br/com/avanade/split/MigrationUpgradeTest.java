@@ -30,13 +30,17 @@ class MigrationUpgradeTest extends PostgresSupport {
     Map<String,String> before=new LinkedHashMap<>();
     for(String table:tables) before.put(table,snapshot(db,table));
     var flyway=Flyway.configure().dataSource(url,"postgres","").load();
-    assertThat(flyway.migrate().migrationsExecuted).isEqualTo(9);
+    assertThat(flyway.migrate().migrationsExecuted).isEqualTo(10);
     for(String table:tables) assertThat(snapshot(db,table)).as(table).isEqualTo(before.get(table));
     assertThat(flyway.migrate().migrationsExecuted).isZero();
     assertThatThrownBy(()->db.update("UPDATE request_intent SET response_json='{}' WHERE request_key='upgrade-key'")).isInstanceOf(org.springframework.dao.DataAccessException.class);
     assertThat(db.queryForObject("SELECT amount_cents FROM cash_entry WHERE expense_id=?",Long.class,expense)).isEqualTo(-1000L);
+    // V11: despesa antiga ganha crédito de IBS/CBS zero e o crédito nunca passa do valor da compra.
+    assertThat(db.queryForObject("SELECT tax_credit_cents FROM expense WHERE id=?",Long.class,expense)).isZero();
+    assertThatThrownBy(()->db.update("UPDATE expense SET tax_credit_cents=1001 WHERE id=?",expense)).isInstanceOf(org.springframework.dao.DataAccessException.class);
   }
   private String snapshot(JdbcTemplate db,String table) {
-    return db.queryForObject("SELECT COALESCE(jsonb_agg(to_jsonb(t) ORDER BY to_jsonb(t)::text),'[]'::jsonb)::text FROM "+table+" t",String.class);
+    // Colunas novas com valor padrão (V11: tax_credit_cents) ficam fora da comparação do antes e depois.
+    return db.queryForObject("SELECT COALESCE(jsonb_agg((to_jsonb(t)-'tax_credit_cents') ORDER BY (to_jsonb(t)-'tax_credit_cents')::text),'[]'::jsonb)::text FROM "+table+" t",String.class);
   }
 }

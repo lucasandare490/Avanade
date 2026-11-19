@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { CamposNotaCompra } from '../componentes/CamposNotaCompra';
 import type { ServicoPlanner } from '../tipos';
 import { CabecalhoPagina, Estado } from '../componentes/ElementosInterface';
 import { useConsultaRemota } from '../utilitarios/useConsultaRemota';
@@ -51,6 +52,12 @@ export function TelaDespesasIntegrada({
       setErros({ valor: 'Informe um valor positivo em reais, usando vírgula decimal.' });
       return;
     }
+    const textoCredito = String(dados.get('credito') ?? '').trim();
+    const credito = textoCredito ? lerCentavos(textoCredito) : 0;
+    if (credito === null || credito > valor) {
+      setErros({ taxCreditCents: 'O crédito de IBS/CBS deve ser um valor em reais, no máximo igual ao valor da compra.' });
+      return;
+    }
     const categoria = String(dados.get('categoria'));
     if (!categorias.includes(categoria)) {
       setErros({ categoria: 'Selecione uma categoria disponível.' });
@@ -66,6 +73,7 @@ export function TelaDespesasIntegrada({
         valor,
         categoria,
         data: String(dados.get('data')),
+        ...(credito ? { credito } : {}),
       });
       invalidarSugestao();
       setAberto(false);
@@ -206,6 +214,12 @@ export function TelaDespesasIntegrada({
                   </span>
                 )}
               </label>
+              <CamposNotaCompra desabilitado={ocupado || incerta} />
+              {erros.taxCreditCents && (
+                <span className="erro" role="alert">
+                  {erros.taxCreditCents}
+                </span>
+              )}
             </fieldset>
             {servico.sugerirCategoria && <button type="button" className="botao secundario" disabled={ocupado||incerta||sugerindo} onClick={async e=>{
               const form=e.currentTarget.form!;
