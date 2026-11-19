@@ -4,6 +4,7 @@ import { TelaDespesasIntegrada } from './telas/TelaDespesasIntegrada';
 import { TelaResumoFinanceiroApi } from './telas/TelaResumoFinanceiroApi';
 import { TelaAnaliseIntegrada } from './telas/TelaAnaliseIntegrada';
 import { TelaSimulacaoIntegrada } from './telas/TelaSimulacaoIntegrada';
+import { TelaCapitalGiro } from './telas/TelaCapitalGiro';
 import { TelaOperacoesApi, TelaDetalheRemoto } from './telas/TelaOperacoesApi';
 import { DialogoConfirmacao } from './componentes/DialogoConfirmacao';
 import { TelaLogin } from './telas/TelaLogin';
@@ -289,6 +290,8 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
     conteudo = <TelaOperacoesApi servico={servicoPlanner} permitirExportacao={sessao.permissoes.includes("financeiro")} />;
   else if (integracao && rota === 'simulacao')
     conteudo = <TelaSimulacaoIntegrada servico={servicoPlanner} />;
+  else if (integracao && rota === 'credito')
+    conteudo = <TelaCapitalGiro servico={servicoPlanner.credito} />;
   else if (integracao && rota === 'analise')
     conteudo = <TelaAnaliseIntegrada servico={servicoPlanner} />;
   else if (integracao && (rota === 'dashboard' || rota === 'fluxo-caixa'))
@@ -368,6 +371,9 @@ export function Aplicacao({ integracao }: { integracao?: DependenciasFrontend } 
             permitirExportacao={sessao.permissoes.includes('exportar')}
           />
         );
+        break;
+      case 'credito':
+        conteudo = <TelaCapitalGiro servico={servicoPlanner.credito} />;
         break;
       case 'simulacao':
         conteudo = integracao ? (

@@ -56,9 +56,10 @@ Por lo tanto, el problema central **no es cómo pagar el impuesto de cada venta*
 - calcula la caja realizada (entradas netas menos gastos pagados) y la caja por semana;
 - proyecta la caja de los próximos días y avisa cuando el escenario indica déficit;
 - simula ventas antes de que ocurran, para entender el impacto de cada porcentaje;
-- explica los números en lenguaje simple, con análisis por reglas, sin IA externa y sin alterar valores.
+- explica los números en lenguaje simple, con análisis por reglas, sin IA externa y sin alterar valores;
+- cuando la caja va a quedar ajustada, ofrece **capital de trabajo** de un banco o fintech asociado dentro de la app, con todos los costos a la vista antes de contratar.
 
-**Persistencia real en PostgreSQL. Los pagos, el split y los tributos son simulados:** no hay transferencia de dinero ni pago de impuestos. Los porcentajes de ejemplo no son legislación. El crédito simulado y la cancelación quedan para una evolución futura.
+**Persistencia real en PostgreSQL. Los pagos, el split y los tributos son simulados:** no hay transferencia de dinero ni pago de impuestos. Los porcentajes de ejemplo no son legislación. El capital de trabajo ya funciona con un socio simulado; la cancelación queda para una evolución futura.
 
 ## Qué tiene el sistema
 
@@ -72,6 +73,7 @@ Por lo tanto, el problema central **no es cómo pagar el impuesto de cada venta*
 | Gastos | Registro de gasto pagado, búsqueda y sugerencia de categoría confirmada por la persona |
 | Caja | Totales del servidor, composición diaria, caja semanal, proyección manual con aviso de déficit |
 | Informes | Ventas, gastos y composición tributaria por período, con CSV completo |
+| Capital de trabajo | Dentro de la app, sin ir al banco: límite, autorización para compartir datos, simulación con cuota, total, intereses y CET, y contratación. El crédito entra en la proyección de caja. Hoy el socio es simulado; para conectar un banco o fintech, vea la [integración con socio de crédito](documentacao/INTEGRACAO-PARCEIRO-CREDITO.md) (en portugués) |
 | Android | Cliente POS en Kotlin, local e integrado por HTTPS. La prueba en dispositivo físico está pendiente |
 
 ## Equipo y qué hizo cada persona
@@ -106,7 +108,7 @@ Mentor: **Eryson Moreira** (Avanade). Grupo: GROWUP-SENAC-N2. La autoría de cad
 | Frontend (unitarias) | `cd frontend && npm test` |
 | Tipos y build | `cd frontend && npm run build` |
 | Navegador: inicio de sesión, tema, idiomas, íconos **i** y accesibilidad (inicia la demostración solo) | `cd frontend && npm run test:e2e:entrega` |
-| Navegador contra la API real | con `./scripts/dev.sh` en ejecución: `cd frontend && npx playwright test` |
+| Navegador contra la API real | con `./scripts/dev.sh` en ejecución (use `LOGIN_RATE_LIMIT_PER_MINUTE=300` en el servidor local, porque la batería hace muchos inicios de sesión): `cd frontend && npx playwright test` |
 | Todas las frases de la interfaz traducidas | `node scripts/auditoria/verificar-traducoes.mjs` |
 | Ningún crédito de IA en el proyecto | `node scripts/auditoria/verificar-sem-credito-ia.mjs` |
 | Tema oscuro al día con el tema claro | `cd frontend && node scripts/gerar-tema-escuro.mjs --verificar` |
@@ -125,7 +127,7 @@ El sistema es auditable: cada cambio tiene un commit con autoría, el [CHANGELOG
 ## Carpetas
 
 - `frontend/`: sitio en React 19, TypeScript y Vite. Pantallas en `src/telas`; tema, idiomas y explicaciones en `src/preferencias`.
-- `backend/`: API en Java 21, Spring Boot, PostgreSQL y Flyway (migrations V1–V8).
+- `backend/`: API en Java 21, Spring Boot, PostgreSQL y Flyway (migrations V1–V9).
 - `android-pos/`: aplicación POS en Kotlin.
 - `scripts/`: ejecución local, Supabase, hosting y `auditoria/`.
 - `documentacao/`: estado, decisiones, operación e historial.

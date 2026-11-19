@@ -1,3 +1,4 @@
+import { criarCreditoApi } from './credito';
 import { validarTendencias, type ComparacaoTendencias } from '../utilitarios/tendencias';
 import type { ContratoServidor } from './adaptarEValidarRespostasApi';
 import type { ConsultaOperacoes, ConsultaDespesas, PeriodoConsulta } from './contratosConsultas';
@@ -233,6 +234,7 @@ export const contratoServidor: ContratoServidor = {
     chaveIdempotencia: chave,
   }),
   consultas: (enviar) => ({
+    credito: criarCreditoApi(enviar as never),
     exportarOperacoes: (f, sinal) => {
       const p = filtros(f);
       p.delete('page');
@@ -325,11 +327,14 @@ export const contratoServidor: ContratoServidor = {
             projectedCents = inteiro(o.projectedCents, Number.MIN_SAFE_INTEGER);
           const incomeCents = inteiro(o.incomeCents),
             expenseCents = inteiro(o.expenseCents);
+          // API anterior não envia os campos de crédito: valem zero.
+          const creditCents = o.creditCents === undefined ? 0 : inteiro(o.creditCents),
+            installmentsDueCents = o.installmentsDueCents === undefined ? 0 : inteiro(o.installmentsDueCents);
           if (
             o.until !== entrada.until ||
             incomeCents !== entrada.incomeCents ||
             expenseCents !== entrada.expenseCents ||
-            openingCents + incomeCents - expenseCents !== projectedCents ||
+            openingCents + creditCents - installmentsDueCents + incomeCents - expenseCents !== projectedCents ||
             o.origin !== 'MOCK'
           )
             throw new Error('Projeção inconsistente.');
@@ -339,6 +344,8 @@ export const contratoServidor: ContratoServidor = {
             openingCents,
             incomeCents,
             expenseCents,
+            creditCents,
+            installmentsDueCents,
             projectedCents,
             attention: opcao(o.attention, {
               DEFICIT: 'DEFICIT',

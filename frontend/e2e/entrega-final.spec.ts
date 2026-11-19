@@ -3,7 +3,7 @@ import axe from 'axe-core';
 
 // Entrega final (Thayná Batista da Silva): login seguro, tema, idioma e ícones "i".
 // Roda contra o modo demonstração: VITE_MODO_DADOS=demo npm run dev
-const ROTAS = ['dashboard', 'operacoes', 'operacoes/OP-0184', 'despesas', 'fluxo-caixa', 'analise', 'simulacao', 'configuracoes', 'ajuda', 'venda-demonstrativa'];
+const ROTAS = ['dashboard', 'operacoes', 'operacoes/OP-0184', 'despesas', 'fluxo-caixa', 'analise', 'simulacao', 'configuracoes', 'ajuda', 'venda-demonstrativa', 'credito'];
 
 async function entrarDemo(page: Page) {
   await page.goto('/');
@@ -126,6 +126,38 @@ test.describe('demonstração funcional', () => {
     await expect(page.locator('main#conteudo')).toBeVisible();
     await page.reload();
     await expect(page.locator('main#conteudo')).toBeVisible();
+  });
+});
+
+test.describe('capital de giro', () => {
+  test('autoriza, simula e contrata dentro do app, com cronograma de parcelas', async ({ page }) => {
+    await entrarDemo(page);
+    await page.getByRole('link', { name: 'Capital de giro' }).click();
+    await expect(page.getByRole('heading', { name: 'Capital de giro', level: 1 })).toBeVisible();
+    await expect(page.getByText('Parceiro demonstrativo: nenhum dinheiro é movimentado.', { exact: false })).toBeVisible();
+    await page.getByRole('checkbox', { name: 'Autorizo compartilhar esses dados com o parceiro financeiro' }).check();
+    await page.getByRole('button', { name: 'Autorizar compartilhamento' }).click();
+    await expect(page.getByText('Compartilhamento autorizado em', { exact: false })).toBeVisible();
+    await page.getByLabel('Valor do crédito (R$)', { exact: true }).fill('1000,00');
+    await page.getByLabel('Número de parcelas', { exact: true }).selectOption('6');
+    await page.getByRole('button', { name: 'Simular', exact: true }).click();
+    await expect(page.getByText('R$ 181,49').first()).toBeVisible();
+    await expect(page.getByText('34,33% ao ano')).toBeVisible();
+    const contratar = page.getByRole('button', { name: 'Contratar capital de giro' });
+    await expect(contratar).toBeDisabled();
+    await page.getByRole('checkbox', { name: 'Li e concordo com o valor total, a taxa de juros e o CET' }).check();
+    await contratar.click();
+    await expect(page.getByRole('status').filter({ hasText: 'Capital de giro contratado' })).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Parcelas do contrato' }).getByRole('row')).toHaveCount(7);
+  });
+  test('valor acima do limite é recusado antes de consultar o parceiro', async ({ page }) => {
+    await entrarDemo(page);
+    await page.evaluate(() => (location.hash = '/credito'));
+    await page.getByRole('checkbox', { name: 'Autorizo compartilhar esses dados com o parceiro financeiro' }).check();
+    await page.getByRole('button', { name: 'Autorizar compartilhamento' }).click();
+    await page.getByLabel('Valor do crédito (R$)', { exact: true }).fill('999999,00');
+    await page.getByRole('button', { name: 'Simular', exact: true }).click();
+    await expect(page.getByRole('alert')).toContainText('Escolha um valor entre R$ 500,00 e');
   });
 });
 

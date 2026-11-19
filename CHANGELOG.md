@@ -2,6 +2,14 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-18 — Capital de giro com parceiro (Thayná Batista da Silva)
+
+- Tela **Capital de giro** no menu: limite, autorização revogável para compartilhar dados agregados, simulação com parcela, total, juros, taxa e CET, aceite consciente e contratação sem ir ao banco. Funciona no MVP e na demonstração.
+- Parceiro plugável (`ParceiroCredito`); hoje simulado. Guia: `documentacao/INTEGRACAO-PARCEIRO-CREDITO.md`.
+- A projeção de caixa soma o capital de giro e desconta as parcelas; no déficit, oferece ver opções de capital de giro.
+- Migration V9 e testes (`CreditoIntegrationTest`, `credito.test.ts`, e2e na demonstração e na API real).
+- Limite de logins por IP configurável (`LOGIN_RATE_LIMIT_PER_MINUTE`, padrão 20).
+
 ## 2026-11-18 — Design e verificação da produção (Thayná Batista da Silva)
 
 - Documentação de design publicada em `documentacao/design/`: checklist de fidelidade visual, inventários de telas e componentes, tokens de design, 158 capturas e o documento completo em .docx e .pdf (gerados de novo a partir do .md revisado).

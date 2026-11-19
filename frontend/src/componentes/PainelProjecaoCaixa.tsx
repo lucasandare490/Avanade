@@ -111,6 +111,20 @@ export function PainelProjecaoCaixa({ servico }: { servico: ServicoPlanner }) {
               valor={resultado.openingCents}
               detalhe="Origem: servidor"
             />
+            {resultado.creditCents > 0 && (
+              <Indicador
+                titulo="CAPITAL DE GIRO"
+                valor={resultado.creditCents}
+                detalhe="Contratado com o parceiro · SIMULADO"
+              />
+            )}
+            {resultado.installmentsDueCents > 0 && (
+              <Indicador
+                titulo="PARCELAS ATÉ A DATA"
+                valor={resultado.installmentsDueCents}
+                detalhe="Saem do caixa até o fim do período"
+              />
+            )}
             <Indicador
               titulo="SALDO PROJETADO"
               valor={resultado.projectedCents}
@@ -125,6 +139,14 @@ export function PainelProjecaoCaixa({ servico }: { servico: ServicoPlanner }) {
                 : 'Cenário positivo'}
           </h3>
           <p>{resultado.explanation}</p>
+          {resultado.attention !== 'POSITIVO' && servico.credito && (
+            <p className="nota">
+              Para não faltar dinheiro, você pode simular capital de giro com o parceiro financeiro, sem sair do app.{' '}
+              <a className="botao secundario" href="#/credito">
+                Ver opções de capital de giro
+              </a>
+            </p>
+          )}
           <small>Estimativa por regras. Nenhuma garantia de resultado futuro.</small>
         </div>
       )}

@@ -133,6 +133,7 @@ export function criarIntegracaoApi(
       if(consultas?.salvarNomeLoja) seguras.salvarNomeLoja=consultas.salvarNomeLoja;
       if(consultas?.sugerirCategoria) seguras.sugerirCategoria=consultas.sugerirCategoria;
       if (consultas?.projetarCaixa) seguras.projetarCaixa = consultas.projetarCaixa;
+      if (consultas?.credito) seguras.credito = consultas.credito;
       if (consultas?.exportarOperacoes) seguras.exportarOperacoes = consultas.exportarOperacoes;
       if (consultas?.consultarComposicao) seguras.consultarComposicao = consultas.consultarComposicao;
       if (consultas?.consultarTendencias)
