@@ -382,6 +382,8 @@ test.describe('reforma no caixa', () => {
 test.describe('acessibilidade nos dois temas', () => {
   for (const tema of ['claro', 'escuro'] as const) {
     test(`sem violações WCAG A/AA no tema ${tema}, em todas as telas`, async ({ page }) => {
+      // Percorre as 12 telas com o axe: precisa de mais tempo que o padrão de 45 s.
+      test.setTimeout(180_000);
       await page.addInitScript((t) => localStorage.setItem('planner:tema', t), tema);
       await entrarDemo(page);
       await page.addInitScript((t) => localStorage.setItem('planner:tema', t), tema);
