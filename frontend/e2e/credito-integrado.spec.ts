@@ -20,12 +20,25 @@ test('API real: contrata capital de giro e a projeção soma o crédito', async 
   await page.getByRole('button', { name: 'Entrar', exact: true }).click();
   await expect(page.locator('main#conteudo')).toBeVisible();
   await page.getByRole('link', { name: 'Capital de giro' }).click();
-  await page.getByRole('checkbox', { name: 'Autorizo compartilhar esses dados com o parceiro financeiro' }).check();
+  await page.getByRole('checkbox', { name: 'Autorizo compartilhar esses dados com os parceiros financeiros' }).check();
   await page.getByRole('button', { name: 'Autorizar compartilhamento' }).click();
   await page.getByLabel('Valor do crédito (R$)', { exact: true }).fill('1000,00');
   await page.getByLabel('Número de parcelas', { exact: true }).selectOption('6');
   await page.getByRole('button', { name: 'Simular', exact: true }).click();
-  await expect(page.getByText('R$ 181,49').first()).toBeVisible();
+  await expect(page.getByRole('group', { name: 'Escolha a oferta' }).getByRole('radio')).toHaveCount(2);
+  await expect(page.getByText('6x de R$ 177,87', { exact: false }).first()).toBeVisible();
+  await page.getByRole('checkbox', { name: 'Li e concordo com o valor total, a taxa de juros e o CET' }).check();
+  await page.getByRole('button', { name: 'Contratar capital de giro' }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Capital de giro contratado' })).toBeVisible();
+  await page.getByRole('button', { name: 'Registrar pagamento da próxima parcela' }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Parcela registrada como paga.' })).toBeVisible();
+  await page.getByRole('button', { name: 'Quitar antecipadamente' }).click();
+  await expect(page.getByText('Valor para quitar hoje', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Histórico do crédito' })).toBeVisible();
+  // Segundo contrato, que fica ativo para aparecer na projeção.
+  await page.getByLabel('Valor do crédito (R$)', { exact: true }).fill('600,00');
+  await page.getByLabel('Número de parcelas', { exact: true }).selectOption('3');
+  await page.getByRole('button', { name: 'Simular', exact: true }).click();
   await page.getByRole('checkbox', { name: 'Li e concordo com o valor total, a taxa de juros e o CET' }).check();
   await page.getByRole('button', { name: 'Contratar capital de giro' }).click();
   await expect(page.getByRole('status').filter({ hasText: 'Capital de giro contratado' })).toBeVisible();

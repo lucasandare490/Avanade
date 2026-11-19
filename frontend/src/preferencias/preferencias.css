@@ -56,3 +56,45 @@ html[data-tema="escuro"] .botao.texto.destaque { color: #93c5fd; }
 .contrato-credito + .contrato-credito { margin-top: 18px; padding-top: 14px; border-top: 1px solid #e2e8f0; }
 html[data-tema="escuro"] .detalhes-credito dt { color: #9fb0c6; }
 html[data-tema="escuro"] .contrato-credito + .contrato-credito { border-top-color: #263247; }
+.selo-situacao { display: inline-block; padding: 3px 10px; border-radius: 999px; font-weight: 700; font-size: 12px; }
+.selo-situacao.descapitalizado { color: #9d1c1c; background: #fdecec; }
+.selo-situacao.atencao { color: #7a4a00; background: #fff4db; }
+.selo-situacao.saudavel { color: #166534; background: #e7f6ec; }
+.recomendacao-credito { margin: 12px 0 0; padding: 10px 12px; border-left: 4px solid #1e54b7; border-radius: 6px; background: #eef3fc; font-weight: 600; }
+.lista-ofertas { display: grid; gap: 10px; margin: 14px 0; padding: 0; border: 0; }
+.lista-ofertas legend { margin-bottom: 6px; font-weight: 600; }
+.oferta-credito { display: grid; gap: 3px; padding: 12px 14px 12px 40px; position: relative; border: 1px solid #d6dee9; border-radius: 10px; cursor: pointer; }
+.oferta-credito input { position: absolute; top: 15px; left: 14px; }
+.oferta-credito.escolhida { border-color: #1e54b7; box-shadow: 0 0 0 1px #1e54b7; }
+.oferta-titulo { font-weight: 700; }
+.selo-melhor { margin-left: 6px; padding: 1px 8px; border-radius: 999px; color: #fff; background: #15803d; font-size: 11px; }
+.nivel-comprometimento { font-size: 12.5px; font-weight: 600; }
+.nivel-comprometimento.saudavel { color: #166534; }
+.nivel-comprometimento.atencao { color: #7a4a00; }
+.nivel-comprometimento.alto, .nivel-comprometimento.excessivo { color: #9d1c1c; }
+.acoes-contrato { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.quitacao-credito, .resumo-contrato { margin: 10px 0; padding: 12px; border: 1px dashed #b8c4d6; border-radius: 10px; }
+.status-contrato { font-weight: 700; }
+.status-contrato.cancelado { color: #9d1c1c; }
+.status-contrato.quitado { color: #166534; }
+.historico-credito { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.historico-credito time { margin-right: 6px; color: #5b6b82; }
+.barras-semana { min-width: 120px; }
+.barras-semana .barra { display: block; height: 6px; margin: 2px 0; border-radius: 3px; background: #9aa9bd; }
+.barras-semana .barra.com { background: #1e54b7; }
+.barras-semana .barra.negativa { background: #c53030; }
+html[data-tema="escuro"] .selo-situacao.descapitalizado { color: #fca5a5; background: #3b1414; }
+html[data-tema="escuro"] .selo-situacao.atencao { color: #fcd38a; background: #3a2a0c; }
+html[data-tema="escuro"] .selo-situacao.saudavel { color: #86efac; background: #12301f; }
+html[data-tema="escuro"] .recomendacao-credito { background: #14213a; border-left-color: #93c5fd; }
+html[data-tema="escuro"] .oferta-credito { border-color: #334155; }
+html[data-tema="escuro"] .oferta-credito.escolhida { border-color: #93c5fd; box-shadow: 0 0 0 1px #93c5fd; }
+html[data-tema="escuro"] .nivel-comprometimento.saudavel, html[data-tema="escuro"] .status-contrato.quitado { color: #86efac; }
+html[data-tema="escuro"] .nivel-comprometimento.atencao { color: #fcd38a; }
+html[data-tema="escuro"] .nivel-comprometimento.alto, html[data-tema="escuro"] .nivel-comprometimento.excessivo, html[data-tema="escuro"] .status-contrato.cancelado { color: #fca5a5; }
+html[data-tema="escuro"] .historico-credito time { color: #9fb0c6; }
+html[data-tema="escuro"] .quitacao-credito, html[data-tema="escuro"] .resumo-contrato { border-color: #334155; }
+@media print {
+  .barra-lateral, .barra-superior, .seletor-preferencias, .acoes-contrato, .dica-i, button { display: none !important; }
+  .area-principal { margin: 0 !important; }
+}

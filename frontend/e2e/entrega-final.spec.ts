@@ -130,31 +130,77 @@ test.describe('demonstração funcional', () => {
 });
 
 test.describe('capital de giro', () => {
-  test('autoriza, simula e contrata dentro do app, com cronograma de parcelas', async ({ page }) => {
+  async function autorizar(page: Page) {
+    await page.getByRole('checkbox', { name: 'Autorizo compartilhar esses dados com os parceiros financeiros' }).check();
+    await page.getByRole('button', { name: 'Autorizar compartilhamento' }).click();
+    await expect(page.getByText('Compartilhamento autorizado em', { exact: false })).toBeVisible();
+  }
+  async function contratar(page: Page, valor: string, parcelas: string) {
+    await page.getByLabel('Valor do crédito (R$)', { exact: true }).fill(valor);
+    await page.getByLabel('Número de parcelas', { exact: true }).selectOption(parcelas);
+    await page.getByRole('button', { name: 'Simular', exact: true }).click();
+    await page.getByRole('checkbox', { name: 'Li e concordo com o valor total, a taxa de juros e o CET' }).check();
+    await page.getByRole('button', { name: 'Contratar capital de giro' }).click();
+    await expect(page.getByRole('status').filter({ hasText: 'Capital de giro contratado' })).toBeVisible();
+  }
+  test('diagnóstico, comparação de ofertas e contratação com cronograma', async ({ page }) => {
     await entrarDemo(page);
     await page.getByRole('link', { name: 'Capital de giro' }).click();
     await expect(page.getByRole('heading', { name: 'Capital de giro', level: 1 })).toBeVisible();
-    await expect(page.getByText('Parceiro demonstrativo: nenhum dinheiro é movimentado.', { exact: false })).toBeVisible();
-    await page.getByRole('checkbox', { name: 'Autorizo compartilhar esses dados com o parceiro financeiro' }).check();
-    await page.getByRole('button', { name: 'Autorizar compartilhamento' }).click();
-    await expect(page.getByText('Compartilhamento autorizado em', { exact: false })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Diagnóstico do capital de giro' })).toBeVisible();
+    await expect(page.getByText('IMPOSTO RETIDO POR MÊS', { exact: true })).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Parceiros financeiros e limites' }).getByRole('row')).toHaveCount(3);
+    await expect(page.getByRole('region', { name: 'Caixa estimado por semana' }).getByRole('row')).toHaveCount(14);
+    await autorizar(page);
     await page.getByLabel('Valor do crédito (R$)', { exact: true }).fill('1000,00');
     await page.getByLabel('Número de parcelas', { exact: true }).selectOption('6');
     await page.getByRole('button', { name: 'Simular', exact: true }).click();
-    await expect(page.getByText('R$ 181,49').first()).toBeVisible();
-    await expect(page.getByText('34,33% ao ano')).toBeVisible();
-    const contratar = page.getByRole('button', { name: 'Contratar capital de giro' });
-    await expect(contratar).toBeDisabled();
+    const ofertas = page.getByRole('group', { name: 'Escolha a oferta' });
+    await expect(ofertas.getByRole('radio')).toHaveCount(2);
+    await expect(ofertas.getByText('Menor CET')).toBeVisible();
+    await expect(ofertas.getByRole('radio').first()).toBeChecked();
+    await expect(page.getByText('6x de R$ 177,87', { exact: false }).first()).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: 'Com crédito' })).toBeVisible();
+    const botao = page.getByRole('button', { name: 'Contratar capital de giro' });
+    await expect(botao).toBeDisabled();
     await page.getByRole('checkbox', { name: 'Li e concordo com o valor total, a taxa de juros e o CET' }).check();
-    await contratar.click();
+    await botao.click();
     await expect(page.getByRole('status').filter({ hasText: 'Capital de giro contratado' })).toBeVisible();
     await expect(page.getByRole('region', { name: 'Parcelas do contrato' }).getByRole('row')).toHaveCount(7);
+    await expect(page.getByText('Você pode desistir sem pagar juros até', { exact: false })).toBeVisible();
   });
-  test('valor acima do limite é recusado antes de consultar o parceiro', async ({ page }) => {
+  test('pagar parcela, quitar com desconto e ver o histórico', async ({ page }) => {
     await entrarDemo(page);
     await page.evaluate(() => (location.hash = '/credito'));
-    await page.getByRole('checkbox', { name: 'Autorizo compartilhar esses dados com o parceiro financeiro' }).check();
-    await page.getByRole('button', { name: 'Autorizar compartilhamento' }).click();
+    await autorizar(page);
+    await contratar(page, '1000,00', '6');
+    await page.getByRole('button', { name: 'Registrar pagamento da próxima parcela' }).click();
+    await expect(page.getByRole('status').filter({ hasText: 'Parcela registrada como paga.' })).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Parcelas do contrato' }).getByRole('cell', { name: 'Paga', exact: true })).toHaveCount(1);
+    await page.getByRole('button', { name: 'Quitar antecipadamente' }).click();
+    await expect(page.getByText('Valor para quitar hoje', { exact: true })).toBeVisible();
+    await expect(page.getByText('Desconto dos juros', { exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Confirmar quitação' }).click();
+    await expect(page.getByRole('status').filter({ hasText: 'Contrato quitado antecipadamente' })).toBeVisible();
+    await expect(page.getByText('Quitado', { exact: true })).toBeVisible();
+    await page.getByRole('button', { name: 'Resumo do contrato' }).click();
+    await expect(page.getByRole('heading', { name: 'Resumo do contrato de capital de giro' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Histórico do crédito' })).toBeVisible();
+    await expect(page.locator('.historico-credito').getByText('Contrato quitado')).toBeVisible();
+  });
+  test('desistir em 7 dias e bloqueio de parcela que compromete demais', async ({ page }) => {
+    await entrarDemo(page);
+    await page.evaluate(() => (location.hash = '/credito'));
+    await autorizar(page);
+    await contratar(page, '600,00', '3');
+    await page.getByRole('button', { name: 'Desistir do contrato' }).click();
+    await expect(page.getByRole('status').filter({ hasText: 'Desistência registrada' })).toBeVisible();
+    await expect(page.getByText('Cancelado', { exact: true })).toBeVisible();
+    await page.getByLabel('Valor do crédito (R$)', { exact: true }).fill('1100,00');
+    await page.getByLabel('Número de parcelas', { exact: true }).selectOption('1');
+    await page.getByRole('button', { name: 'Simular', exact: true }).click();
+    await expect(page.getByRole('alert')).toContainText('mais da metade das entradas líquidas mensais');
+    await expect(page.getByRole('button', { name: 'Contratar capital de giro' })).toHaveCount(0);
     await page.getByLabel('Valor do crédito (R$)', { exact: true }).fill('999999,00');
     await page.getByRole('button', { name: 'Simular', exact: true }).click();
     await expect(page.getByRole('alert')).toContainText('Escolha um valor entre R$ 500,00 e');

@@ -265,6 +265,7 @@ describe('tela Capital de giro com servidor desatualizado', () => {
     const servico = {
       consultar: vi.fn().mockRejectedValue(new FalhaTransporte(404, 'O registro não foi encontrado.')),
       consentir: vi.fn(), revogar: vi.fn(), simular: vi.fn(), contratar: vi.fn(),
+      pagarParcela: vi.fn(), cotarQuitacao: vi.fn(), quitar: vi.fn(), desistir: vi.fn(), eventos: vi.fn().mockResolvedValue([]),
     };
     render(<TelaCapitalGiro servico={servico} />);
     expect(await screen.findByText(/O servidor ainda não foi atualizado com o capital de giro/)).toBeInTheDocument();
