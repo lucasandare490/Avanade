@@ -4,6 +4,7 @@ import { Aviso, CabecalhoPagina, Estado, Indicador, SeloSimulado } from '../comp
 import type { ContratoCredito, PropostaCredito, ServicoCredito, SituacaoCredito } from '../servicos/credito';
 import { MINIMO_CREDITO_CENTS } from '../servicos/credito';
 import { lerCentavos, moeda } from '../utilitarios/valoresFinanceiros';
+import { FalhaTransporte } from '../servicos/transporteApi';
 
 const porcentagem = (bp: number) =>
   `${(bp / 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`;
@@ -19,6 +20,7 @@ const data = (iso: string) => {
 export function TelaCapitalGiro({ servico }: { servico?: ServicoCredito }) {
   const [situacao, setSituacao] = useState<SituacaoCredito | null>(null);
   const [erro, setErro] = useState('');
+  const [semRecurso, setSemRecurso] = useState(false);
   const [sucesso, setSucesso] = useState('');
   const [ocupado, setOcupado] = useState(false);
   const [autorizo, setAutorizo] = useState(false);
@@ -37,7 +39,10 @@ export function TelaCapitalGiro({ servico }: { servico?: ServicoCredito }) {
       const s = await servico.consultar(c.signal);
       if (!c.signal.aborted) setSituacao(s);
     } catch (e) {
-      if (!c.signal.aborted) setErro(e instanceof Error ? e.message : 'Não foi possível consultar os dados.');
+      if (c.signal.aborted) return;
+      // Servidor ainda sem o módulo de crédito (rota inexistente): aviso claro, sem erro genérico.
+      if (e instanceof FalhaTransporte && e.codigo === 404) setSemRecurso(true);
+      else setErro(e instanceof Error ? e.message : 'Não foi possível consultar os dados.');
     }
   }
   useEffect(() => {
@@ -60,8 +65,13 @@ export function TelaCapitalGiro({ servico }: { servico?: ServicoCredito }) {
     }
   }
 
-  if (!servico)
-    return <Estado titulo="Capital de giro indisponível" descricao="Este recurso ainda não está ligado a este ambiente." />;
+  if (!servico || semRecurso)
+    return (
+      <Estado
+        titulo="Capital de giro indisponível"
+        descricao={semRecurso ? 'O servidor ainda não foi atualizado com o capital de giro. Assim que a API for publicada com esta versão, a tela funciona normalmente.' : 'Este recurso ainda não está ligado a este ambiente.'}
+      />
+    );
   if (!situacao)
     return erro ? (
       <Estado titulo="Consulta indisponível" descricao={erro} acao={<button className="botao primario" onClick={() => { setErro(''); void carregar(); }}>Tentar novamente</button>} />

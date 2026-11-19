@@ -258,3 +258,15 @@ describe('demonstração: recuperação de senha e lembrar de mim', () => {
     expect(demo.retomar!()).toBeNull();
   });
 });
+
+describe('tela Capital de giro com servidor desatualizado', () => {
+  it('mostra aviso claro quando a API ainda não tem o módulo de crédito', async () => {
+    const { TelaCapitalGiro } = await import('../telas/TelaCapitalGiro');
+    const servico = {
+      consultar: vi.fn().mockRejectedValue(new FalhaTransporte(404, 'O registro não foi encontrado.')),
+      consentir: vi.fn(), revogar: vi.fn(), simular: vi.fn(), contratar: vi.fn(),
+    };
+    render(<TelaCapitalGiro servico={servico} />);
+    expect(await screen.findByText(/O servidor ainda não foi atualizado com o capital de giro/)).toBeInTheDocument();
+  });
+});
