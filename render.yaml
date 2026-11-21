@@ -4,8 +4,9 @@ services:
     runtime: docker
     region: oregon
     plan: free
-    dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend
+    # Imagem única: o site é montado e entregue pela própria API (mesmo endereço).
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     healthCheckPath: /actuator/health/readiness
     envVars:
       - key: SPRING_PROFILES_ACTIVE
@@ -34,7 +35,7 @@ services:
         sync: false
       # Recuperação de senha por e-mail (preencher no painel do Render; sem isso nada é enviado).
       - key: PASSWORD_RESET_LINK_BASE
-        value: https://avanade-frontend-xi.vercel.app
+        value: https://planner-api-tvmg.onrender.com
       - key: PASSWORD_RESET_FROM
         sync: false
       - key: SPRING_MAIL_HOST

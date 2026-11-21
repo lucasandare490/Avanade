@@ -4,13 +4,13 @@
 
 <p align="center"><em>Planificación de caja para que el pequeño comerciante no se descapitalice con el split payment de la reforma tributaria de Brasil.</em></p>
 
-<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><img src="documentacao/readme/es-painel.png" alt="Panel del Planner Comercial" width="860"></a></p>
+<p align="center"><a href="https://planner-api-tvmg.onrender.com/"><img src="documentacao/readme/es-painel.png" alt="Panel del Planner Comercial" width="860"></a></p>
 
-<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><b>▶ Abrir el sitio publicado</b></a></p>
+<p align="center"><a href="https://planner-api-tvmg.onrender.com/"><b>▶ Abrir el sitio publicado</b></a></p>
 
 Proyecto del **Squad 19** de la Residencia Tecnológica **Grow Up 2026.2** (Porto Digital y Faculdade Senac de Pernambuco, Recife, Brasil), hecho con la empresa asociada **Avanade**.
 
-**Véalo funcionando ahora:** https://avanade-frontend-xi.vercel.app/ (la API en el plan gratuito de Render puede tardar hasta 1 minuto en activarse en el primer acceso).
+**Véalo funcionando ahora:** https://planner-api-tvmg.onrender.com/ (sitio y API en la misma dirección, en Render; en el plan gratuito, el primer acceso puede tardar hasta 1 minuto).
 
 ## Instalar y ejecutar
 

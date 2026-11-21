@@ -1,0 +1,14 @@
+**/node_modules
+**/dist
+**/target
+**/.local
+**/.env
+**/.env.*
+!**/.env.example
+**/test-results
+**/playwright-report
+android-pos
+documentacao
+backend/docs/*
+!backend/docs/examples
+.git

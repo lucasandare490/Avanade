@@ -22,7 +22,7 @@ lang: pt-BR
 | Empresa parceira | Avanade |
 | Mentor | Eryson Moreira |
 | Versão | MVP acadêmico publicado |
-| Site publicado | https://avanade-frontend-xi.vercel.app/ |
+| Site publicado | https://planner-api-tvmg.onrender.com/ |
 | Repositório | https://github.com/lucasandare490/Avanade |
 | Documento produzido por | Thayná Batista da Silva — design e prototipação de alta fidelidade ([Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design)), pesquisa e [levantamento de requisitos](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing), [documentação de requisitos](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing), README (PT/EN/ES), Scrum Master e testes |
 | Organização da equipe, Trello e entrevista com pessoas usuárias | Kleysson Teixeira da Cruz Junior |
@@ -289,7 +289,7 @@ As alíquotas são informadas pela pessoa e nada movimenta dinheiro. As fórmula
 | Web | React 19, TypeScript, Vite; tema, idiomas e explicações sem dependências externas |
 | Android | Kotlin, cliente POS integrado por HTTPS |
 | Testes | JUnit, MockMvc, Vitest, Testing Library, Playwright, axe-core |
-| Infraestrutura | GitHub e GitHub Actions; API no Render (Docker); site na Vercel |
+| Infraestrutura | GitHub e GitHub Actions; site e API num único deploy no Render (Docker) |
 
 Smart POS/POS web e painel web → API REST (autenticação, núcleo de split, Planner, explicações) → PostgreSQL. Adaptadores de pagamento e de split são simulados no MVP e podem ser trocados por integrações oficiais sem mudar o núcleo.
 
@@ -339,7 +339,6 @@ Equipe dividida por frentes (produto e design, front-end, código e deploy, entr
 
 | Pendência | Responsável |
 |---|---|
-| Publicar a API junto com o site num único deploy na Vercel: cadastrar as variáveis do banco no projeto e juntar o PR (passo a passo em `documentacao/DEPLOY-UNICO-VERCEL.md`; aplica as migrations V7 a V12) | Lucas |
 | Configurar o SMTP no Render para o e-mail de recuperação (guia em `documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md`) | Kássio |
 | Homologação do aplicativo Android em aparelho físico | Equipe |
 | Integração oficial de pagamento e recolhimento (fora do MVP) | Evolução futura |

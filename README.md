@@ -4,13 +4,13 @@
 
 <p align="center"><em>Planejamento de caixa para o pequeno comerciante não se descapitalizar com o split payment da Reforma Tributária.</em></p>
 
-<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><img src="documentacao/readme/pt-painel.png" alt="Painel do Planner Comercial" width="860"></a></p>
+<p align="center"><a href="https://planner-api-tvmg.onrender.com/"><img src="documentacao/readme/pt-painel.png" alt="Painel do Planner Comercial" width="860"></a></p>
 
-<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><b>▶ Abrir o site publicado</b></a></p>
+<p align="center"><a href="https://planner-api-tvmg.onrender.com/"><b>▶ Abrir o site publicado</b></a></p>
 
 Projeto da **Squad 19** da Residência Tecnológica **Grow Up 2026.2** (Porto Digital e Faculdade Senac de Pernambuco, Recife-PE), feito com a empresa parceira **Avanade**.
 
-**Ver funcionando agora:** https://avanade-frontend-xi.vercel.app/ (a API no plano gratuito do Render pode levar até 1 minuto para acordar no primeiro acesso).
+**Ver funcionando agora:** https://planner-api-tvmg.onrender.com/ (site e API no mesmo endereço, no Render; no plano gratuito, o primeiro acesso pode levar até 1 minuto).
 
 ## Instalar e rodar
 

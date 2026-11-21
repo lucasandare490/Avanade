@@ -2,12 +2,13 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
-## 2026-11-19 — Site e API prontos para um único deploy na Vercel (Thayná Batista da Silva)
+## 2026-11-20 — Produção atualizada e site + API num único deploy no Render (Thayná Batista da Silva)
 
-- `vercel.json` com dois serviços no mesmo projeto: site (Vite) e API (contêiner do `backend/Dockerfile`), com `/api/` indo para a API. Passo a passo em `documentacao/DEPLOY-UNICO-VERCEL.md`.
-- API pronta para rodar atrás da Vercel: ouve em `0.0.0.0` e em `PORT`, aceita o certificado público do Supabase por `SUPABASE_SSL_ROOT_CERT_PEM` e lê o IP real em `x-vercel-forwarded-for` (só com `CLIENT_IP_HEADER` ligado).
+- Deploy da API nova no Render: o banco recebeu as migrations V6 a V11 (recuperação de senha, tentativas de login, capital de giro e créditos de IBS/CBS). Login com aviso de tentativas, recuperação sem sessão, capital de giro e Reforma no caixa funcionando em produção.
+- Imagem única (`Dockerfile` da raiz): o site é montado e entregue pela própria API, no mesmo endereço (https://planner-api-tvmg.onrender.com). `render.yaml` aponta para ela. Guia em `documentacao/DEPLOY-UNICO-RENDER.md`.
+- API pronta para rodar atrás de proxy: ouve em `0.0.0.0` e em `PORT`, aceita o certificado do Supabase também por `SUPABASE_SSL_ROOT_CERT_PEM` e lê o IP real num cabeçalho confiável só quando `CLIENT_IP_HEADER` é configurado.
 - Limite de pedidos de acesso por IP guardado no banco (migration V12, só o hash do IP), igual em todas as cópias da API. Teste novo: `LimiteAcessoCompartilhadoTest` (4).
-- `scripts/auditoria/api-producao.mjs` aceita o endereço da API (Render ou Vercel).
+- `scripts/auditoria/api-producao.mjs` aceita o endereço a conferir.
 
 ## 2026-11-19 — Reforma no caixa (Thayná Batista da Silva)
 

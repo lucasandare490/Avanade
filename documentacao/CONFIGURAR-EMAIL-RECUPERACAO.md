@@ -25,7 +25,7 @@ No painel do Render: serviço **planner-api** → **Environment** → adicione o
 | `SPRING_MAIL_PASSWORD` | senha ou chave SMTP (fica só no Render, nunca no GitHub) |
 | `SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE` | `true` |
 | `PASSWORD_RESET_FROM` | remetente, por exemplo `Planner Comercial <seu-remetente@dominio>`. No Brevo, precisa ser um remetente verificado |
-| `PASSWORD_RESET_LINK_BASE` | `https://avanade-frontend-xi.vercel.app` (já vem do `render.yaml`) |
+| `PASSWORD_RESET_LINK_BASE` | `https://planner-api-tvmg.onrender.com` (já vem do `render.yaml`) |
 
 Salve e faça **Manual Deploy → Deploy latest commit**. Esse deploy também aplica as migrations V7 (bloqueio de login) e V8 (permissão para trocar a senha).
 

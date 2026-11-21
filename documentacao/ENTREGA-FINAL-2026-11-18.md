@@ -80,7 +80,7 @@ Fica de fora (risco aceito ou depende de outra pessoa):
 
 ## 5. Pendências
 
-- O site na Vercel já está com esta versão. A API ainda roda a versão antiga no Render. O caminho preparado é juntar site e API num único deploy na Vercel (PR "Site e API num único deploy na Vercel"), que aplica as migrations V7 a V12 sozinho. Falta o Lucas cadastrar as variáveis do banco no projeto: [passo a passo](DEPLOY-UNICO-VERCEL.md). Na demonstração, tudo já funciona.
+- Produção atualizada em 20/11/2026: site e API num único deploy no Render (https://planner-api-tvmg.onrender.com), com as migrations aplicadas no banco. [Como publicar](DEPLOY-UNICO-RENDER.md).
 - Configurar o SMTP no Render para o e-mail de recuperação sair de verdade: [passo a passo](CONFIGURAR-EMAIL-RECUPERACAO.md).
 - Aplicar a correção do problema central também nos documentos do Google Docs.
 - Homologação do aplicativo Android em aparelho físico.

@@ -4,13 +4,13 @@
 
 <p align="center"><em>Cash planning so small merchants are not decapitalized by the split payment of Brazil's tax reform.</em></p>
 
-<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><img src="documentacao/readme/en-painel.png" alt="Planner Comercial dashboard" width="860"></a></p>
+<p align="center"><a href="https://planner-api-tvmg.onrender.com/"><img src="documentacao/readme/en-painel.png" alt="Planner Comercial dashboard" width="860"></a></p>
 
-<p align="center"><a href="https://avanade-frontend-xi.vercel.app/"><b>▶ Open the live site</b></a></p>
+<p align="center"><a href="https://planner-api-tvmg.onrender.com/"><b>▶ Open the live site</b></a></p>
 
 Project by **Squad 19** of the **Grow Up 2026.2** Technology Residency (Porto Digital and Faculdade Senac de Pernambuco, Recife, Brazil), built with partner company **Avanade**.
 
-**See it running now:** https://avanade-frontend-xi.vercel.app/ (the API on Render's free plan may take up to 1 minute to wake up on first access).
+**See it running now:** https://planner-api-tvmg.onrender.com/ (site and API at the same address, on Render; on the free plan, the first visit may take up to 1 minute).
 
 ## Install and run
 
