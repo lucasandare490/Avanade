@@ -22,10 +22,14 @@ import './estilos-pos.css';
 import './preferencias/preferencias.css';
 import './preferencias/tema-escuro.css';
 import { aplicarTema, lerTema } from './preferencias/tema';
+import { destinoOficial } from './servicos/enderecoOficial';
 import { lerIdioma, tradutor, traduzirTexto, temTraducao } from './preferencias/idioma';
 import { textosSemTraducao } from './preferencias/traducoes';
 import { dicas } from './preferencias/dicas';
 import { SeletorPreferencias } from './componentes/SeletorPreferencias';
+// Endereço antigo (Vercel): vai para o endereço único no Render, na mesma tela.
+const destinoAntigo = destinoOficial(window.location);
+if (destinoAntigo) window.location.replace(destinoAntigo);
 aplicarTema(lerTema(), false);
 let integracao: ReturnType<typeof criarIntegracaoApi> | undefined;
 let erroConfiguracao = '';
@@ -46,7 +50,7 @@ try {
 } catch (e) {
   erroConfiguracao = e instanceof Error ? e.message : 'Configuração indisponível.';
 }
-createRoot(document.getElementById('root')!).render(
+if (!destinoAntigo) createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <LimiteErro>
       {erroConfiguracao ? (
