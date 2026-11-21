@@ -50,7 +50,7 @@ app:
   login-max-attempts: ${LOGIN_MAX_ATTEMPTS:5}
   login-lock-minutes: ${LOGIN_LOCK_MINUTES:15}
   login-rate-limit-per-minute: ${LOGIN_RATE_LIMIT_PER_MINUTE:20}
-  # Na Vercel: x-vercel-forwarded-for. Vazio = IP da conexão (sem proxy na frente).
+  # Cabeçalho de IP sobrescrito por um proxy confiável. Vazio = IP da conexão (sem proxy na frente).
   client-ip-header: ${CLIENT_IP_HEADER:}
   credit:
     partner: ${CREDIT_PARTNER:simulado}

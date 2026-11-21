@@ -3,7 +3,7 @@
 Este documento fecha a operação mínima do ambiente publicado:
 
 ```text
-Vercel → Render → Supabase
+Render (site + API, imagem única) → Supabase
 ```
 
 ## Origem permitida no Render

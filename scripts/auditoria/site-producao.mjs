@@ -1,4 +1,4 @@
-// O site publicado na Vercel serve a versão da entrega final.
+// O site publicado (endereço único no Render) serve a versão da entrega final.
 const base = process.argv[2] ?? 'https://planner-api-tvmg.onrender.com';
 const html = await (await fetch(base + '/')).text();
 const js = html.match(/\/assets\/[^"]+\.js/)?.[0];

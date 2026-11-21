@@ -1,4 +1,4 @@
-// A API publicada (Render, ou a Vercel se passar o endereço) roda a versão nova: conta tentativas e aceita
+// A API publicada no Render (ou no endereço passado) roda a versão nova: conta tentativas e aceita
 // pedido de recuperação sem sessão. Usa um e-mail fictício diferente a cada vez.
 // Uso: node scripts/auditoria/api-producao.mjs [https://endereço-da-api]  (padrão: Render)
 const base = new URL(process.argv[2] ?? 'https://planner-api-tvmg.onrender.com');

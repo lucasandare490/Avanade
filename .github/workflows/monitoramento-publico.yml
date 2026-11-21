@@ -14,5 +14,5 @@ jobs:
       - name: Verificar API, frontend e CORS
         env:
           API_URL: https://planner-api-tvmg.onrender.com
-          FRONTEND_URL: https://avanade-frontend-xi.vercel.app
+          FRONTEND_URL: https://planner-api-tvmg.onrender.com
         run: bash scripts/operacao/verificar-publicacao.sh
