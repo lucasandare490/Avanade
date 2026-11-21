@@ -36,9 +36,14 @@ Deve responder `api em producao atualizada`.
 
 Em **planner-api → Deploys**, use **Rollback** no deploy anterior. As migrations aplicadas continuam no banco. A versão anterior da API ignora tabelas e colunas que ela não conhece.
 
-## E o endereço antigo da Vercel?
+## A Vercel não é mais usada
 
-O projeto da Vercel (`avanade-frontend-xi.vercel.app`, conta do Lucas) não serve mais o site. O `vercel.json` faz um redirecionamento permanente (308) de qualquer caminho para o mesmo caminho no Render. Quem tiver o link antigo cai no endereço oficial, e não existe uma segunda cópia do site. Se a equipe quiser, o Lucas pode desligar o projeto da Vercel de vez.
+O projeto não publica mais nada na Vercel:
+
+- o `vercel.json` desliga os deploys automáticos a partir do GitHub (`git.deploymentEnabled: false`);
+- a última versão publicada lá só manda quem abrir o endereço antigo (`avanade-frontend-xi.vercel.app`) para o endereço único no Render, na mesma tela. O destino é fixo no código (`frontend/src/servicos/enderecoOficial.ts`).
+
+Para apagar o projeto e os deploys antigos, o dono da conta da Vercel (Lucas) abre **Project → Settings → Delete Project**. Ninguém mais tem acesso para fazer isso.
 
 ## Testado antes de publicar
 
