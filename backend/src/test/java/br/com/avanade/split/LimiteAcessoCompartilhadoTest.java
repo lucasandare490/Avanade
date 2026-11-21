@@ -37,10 +37,20 @@ class LimiteAcessoCompartilhadoTest extends PostgresSupport {
 
   @Test
   void quartoPedidoDoMesmoIpNoMinutoERecusadoEOutroIpSegue() throws Exception {
-    String a = ip(), b = ip();
-    for (int i = 0; i < 3; i++) login(a).andExpect(status().isUnauthorized());
-    login(a).andExpect(status().isTooManyRequests()).andExpect(header().string("Retry-After", "60"));
-    login(b).andExpect(status().isUnauthorized());
+    // A janela é por minuto: se a virada do minuto cair no meio, repete com outro IP.
+    for (int tentativa = 0; tentativa < 3; tentativa++) {
+      String a = ip(), b = ip();
+      long antes = System.currentTimeMillis() / 60000;
+      int[] status = new int[4];
+      for (int i = 0; i < 4; i++) status[i] = login(a).andReturn().getResponse().getStatus();
+      long depois = System.currentTimeMillis() / 60000;
+      if (antes != depois) continue;
+      assertThat(status).containsExactly(401, 401, 401, 429);
+      login(a).andExpect(header().string("Retry-After", "60"));
+      login(b).andExpect(status().isUnauthorized());
+      return;
+    }
+    fail("A virada do minuto caiu no meio das três tentativas.");
   }
 
   @Test

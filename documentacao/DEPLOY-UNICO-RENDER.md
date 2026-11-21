@@ -36,9 +36,9 @@ Deve responder `api em producao atualizada`.
 
 Em **planner-api → Deploys**, use **Rollback** no deploy anterior. As migrations aplicadas continuam no banco. A versão anterior da API ignora tabelas e colunas que ela não conhece.
 
-## E o site da Vercel?
+## E o endereço antigo da Vercel?
 
-O endereço antigo (`avanade-frontend-xi.vercel.app`) está na conta do Lucas e continua funcionando: ele chama a mesma API do Render. O endereço oficial passa a ser o do Render, para tudo ficar num lugar só. Quando a equipe quiser, o Lucas pode desligar o projeto da Vercel ou fazer o endereço antigo redirecionar para o novo.
+O projeto da Vercel (`avanade-frontend-xi.vercel.app`, conta do Lucas) não serve mais o site. O `vercel.json` faz um redirecionamento permanente (308) de qualquer caminho para o mesmo caminho no Render. Quem tiver o link antigo cai no endereço oficial, e não existe uma segunda cópia do site. Se a equipe quiser, o Lucas pode desligar o projeto da Vercel de vez.
 
 ## Testado antes de publicar
 
