@@ -21,7 +21,7 @@ Roteiro: Thayná Batista da Silva
 
 ## Antes de gravar
 
-**Use a demonstração.** O site publicado (https://avanade-frontend-xi.vercel.app/) é a versão real, com login e banco de dados, e não mostra a maquininha. Para gravar, rode a demonstração no computador. Ela tem dados fictícios, não pede senha e não movimenta dinheiro de verdade. Precisa de Git e Node.js 20 ou mais novo:
+**Use a demonstração.** O site publicado (https://planner-api-tvmg.onrender.com/) é a versão real, com login e banco de dados, e não mostra a maquininha. Para gravar, rode a demonstração no computador. Ela tem dados fictícios, não pede senha e não movimenta dinheiro de verdade. Precisa de Git e Node.js 20 ou mais novo:
 
 ```bash
 git clone https://github.com/lucasandare490/Avanade.git && cd Avanade/frontend && npm ci && VITE_MODO_DADOS=demo npm run dev
@@ -208,7 +208,7 @@ Abra http://127.0.0.1:5173 e clique em **Explorar demonstração**.
 |---|---|
 | Volte para a tela inicial do Smart POS. | Volte para o Dashboard. |
 
-**Texto na tela (opcional):** *Planner Comercial · avanade-frontend-xi.vercel.app · Squad 19 · Avanade*
+**Texto na tela (opcional):** *Planner Comercial · planner-api-tvmg.onrender.com · Squad 19 · Avanade*
 
 **Fala:**
 

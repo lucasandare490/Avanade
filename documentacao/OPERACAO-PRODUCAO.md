@@ -12,7 +12,7 @@ Em **Render → planner-api → Environment**, configure `CORS_ORIGINS` com a
 origem exata do frontend publicado:
 
 ```text
-https://avanade-frontend-xi.vercel.app
+https://planner-api-tvmg.onrender.com
 ```
 
 Use apenas esquema e domínio, sem caminho ou barra final. `localhost` só

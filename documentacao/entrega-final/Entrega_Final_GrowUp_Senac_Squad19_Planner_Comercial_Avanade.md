@@ -22,7 +22,7 @@ lang: pt-BR
 | Empresa parceira | Avanade |
 | Mentor | Eryson Moreira |
 | Versão | MVP acadêmico publicado |
-| Site publicado | https://avanade-frontend-xi.vercel.app/ |
+| Site publicado | https://planner-api-tvmg.onrender.com/ |
 | Repositório | https://github.com/lucasandare490/Avanade |
 | Documento produzido por | Thayná Batista da Silva — design e prototipação de alta fidelidade ([Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design)), pesquisa e [levantamento de requisitos](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing), [documentação de requisitos](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing), README (PT/EN/ES), Scrum Master e testes |
 | Organização da equipe, Trello e entrevista com pessoas usuárias | Kleysson Teixeira da Cruz Junior |
@@ -193,7 +193,7 @@ Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes 
 
 # 4. Banco de dados e API
 
-## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V11)
+## 4.1 Banco de dados (PostgreSQL, migrations Flyway V1–V12)
 
 | Tabela | Função |
 |---|---|
@@ -210,7 +210,7 @@ Ferramentas de IA apoiaram descoberta, revisão de código, sugestão de testes 
 | `ai_interaction` | Registro das explicações geradas, sem dados sensíveis |
 | `credit_consent`, `credit_offer`, `credit_contract`, `credit_installment`, `credit_event`, `credit_webhook_event` | Capital de giro: consentimento revogável, propostas (com os fatos usados e o comprometimento), contratos, parcelas, trilha imutável e avisos do parceiro |
 
-Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos. Migrations V1–V11.
+Valores em centavos inteiros; percentuais em pontos-base. A API usa um papel de banco com privilégios mínimos. Migrations V1–V12.
 
 ## 4.2 Principais endpoints (`/api/v1`)
 
@@ -289,7 +289,7 @@ As alíquotas são informadas pela pessoa e nada movimenta dinheiro. As fórmula
 | Web | React 19, TypeScript, Vite; tema, idiomas e explicações sem dependências externas |
 | Android | Kotlin, cliente POS integrado por HTTPS |
 | Testes | JUnit, MockMvc, Vitest, Testing Library, Playwright, axe-core |
-| Infraestrutura | GitHub e GitHub Actions; API no Render (Docker); site na Vercel |
+| Infraestrutura | GitHub e GitHub Actions; site e API num único deploy no Render (Docker) |
 
 Smart POS/POS web e painel web → API REST (autenticação, núcleo de split, Planner, explicações) → PostgreSQL. Adaptadores de pagamento e de split são simulados no MVP e podem ser trocados por integrações oficiais sem mudar o núcleo.
 
@@ -299,7 +299,7 @@ Smart POS/POS web e painel web → API REST (autenticação, núcleo de split, P
 
 | Bateria | Resultado |
 |---|---|
-| Backend (`./mvnw test`) | **86 de 86** |
+| Backend (`./mvnw test`) | **90 de 90** |
 | Frontend unitários (`npm test`) | **154 de 154** |
 | Navegador na demonstração (`npm run test:e2e:entrega`) | **25 de 25** — login, recuperação, lembrar de mim, ciclo completo do capital de giro, Reforma no caixa (NF-e, créditos, preço, prazo, antecipação e CSV), tema, idiomas, ícones "i", WCAG A/AA nos dois temas, teclado |
 | Navegador contra a API real | **23 de 23**, incluindo o ciclo do capital de giro, a projeção e a NF-e com crédito no resumo da reforma (no `main` antes desta entrega: 0 de 22) |
@@ -339,7 +339,6 @@ Equipe dividida por frentes (produto e design, front-end, código e deploy, entr
 
 | Pendência | Responsável |
 |---|---|
-| Deploy manual da API no Render com a versão final (aplica as migrations V7 a V11: bloqueio de login, recuperação de senha e capital de giro) | Kássio |
 | Configurar o SMTP no Render para o e-mail de recuperação (guia em `documentacao/CONFIGURAR-EMAIL-RECUPERACAO.md`) | Kássio |
 | Homologação do aplicativo Android em aparelho físico | Equipe |
 | Integração oficial de pagamento e recolhimento (fora do MVP) | Evolução futura |

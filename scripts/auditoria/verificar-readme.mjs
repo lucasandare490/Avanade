@@ -23,7 +23,7 @@ for (const v of VERSOES) {
   if (!v.termo.test(problema)) erros.push(`${v.arquivo}: o problema precisa falar da descapitalização`);
   if (!v.confirmar.test(t)) erros.push(`${v.arquivo}: falta como confirmar que funcionou`);
   if (!t.includes('```bash') || !t.includes('./scripts/dev.sh')) erros.push(`${v.arquivo}: falta o comando de instalação pronto para copiar`);
-  if (!t.includes('https://avanade-frontend-xi.vercel.app/')) erros.push(`${v.arquivo}: falta o link do deploy`);
+  if (!t.includes('https://planner-api-tvmg.onrender.com/')) erros.push(`${v.arquivo}: falta o link do deploy`);
   const secaoEquipe = t.slice(pos(v.equipe));
   for (const pessoa of EQUIPE) if (!secaoEquipe.includes(pessoa)) erros.push(`${v.arquivo}: falta ${pessoa} na equipe`);
   for (const outro of VERSOES) if (outro !== v && !t.includes(`(${outro.arquivo})`)) erros.push(`${v.arquivo}: falta link para ${outro.arquivo}`);

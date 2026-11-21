@@ -39,7 +39,7 @@ Os números abaixo foram medidos nesta entrega, no Linux (Node 20.20, JDK 21.0.1
 
 | Bateria | `main` antes da entrega | Esta entrega |
 |---|---|---|
-| Backend (`./mvnw test`, PostgreSQL embutido) | 61 testes, 1 falha por tempo de espera (`CrashRecoveryTest`, máquina ocupada) | **86 testes, 0 falhas** (25 novos: bloqueio, recuperação, e-mail, capital de giro e Reforma no caixa) |
+| Backend (`./mvnw test`, PostgreSQL embutido) | 61 testes, 1 falha por tempo de espera (`CrashRecoveryTest`, máquina ocupada) | **90 testes, 0 falhas** (29 novos: bloqueio, recuperação, e-mail, capital de giro, Reforma no caixa e limite de acesso no banco) |
 | Frontend unitários (`npm test`) | 110 testes | **154 testes, 0 falhas** (44 novos) |
 | Tipos e build de produção (`npm run build`) | passa | **passa**; o código de teste (`__planner`) não vai para o build |
 | Navegador na demonstração (`npm run test:e2e:entrega`) | — | **25 de 25**: login, recuperação de senha completa, lembrar de mim, ciclo completo do capital de giro, Reforma no caixa, tema, idiomas, ícones "i", WCAG A/AA nos temas claro e escuro, teclado e ampliação |
@@ -80,7 +80,7 @@ Fica de fora (risco aceito ou depende de outra pessoa):
 
 ## 5. Pendências
 
-- O site na Vercel já está com esta versão. Falta o deploy manual da API no Render, que aplica as migrations V7 a V11 e liga em produção o bloqueio de login, a recuperação de senha e o capital de giro com a conta real. Na demonstração do site, tudo já funciona.
+- Produção atualizada em 20/11/2026: site e API num único deploy no Render (https://planner-api-tvmg.onrender.com), com as migrations aplicadas no banco. [Como publicar](DEPLOY-UNICO-RENDER.md).
 - Configurar o SMTP no Render para o e-mail de recuperação sair de verdade: [passo a passo](CONFIGURAR-EMAIL-RECUPERACAO.md).
 - Aplicar a correção do problema central também nos documentos do Google Docs.
 - Homologação do aplicativo Android em aparelho físico.
