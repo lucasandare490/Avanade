@@ -9,6 +9,7 @@ Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autori
 - API pronta para rodar atrás de proxy: ouve em `0.0.0.0` e em `PORT`, aceita o certificado do Supabase também por `SUPABASE_SSL_ROOT_CERT_PEM` e lê o IP real num cabeçalho confiável só quando `CLIENT_IP_HEADER` é configurado.
 - Limite de pedidos de acesso por IP guardado no banco (migration V12, só o hash do IP), igual em todas as cópias da API. Teste novo: `LimiteAcessoCompartilhadoTest` (4).
 - `scripts/auditoria/api-producao.mjs` aceita o endereço a conferir.
+- O endereço antigo da Vercel redireciona (308) para o endereço único no Render: não há mais uma segunda cópia do site.
 
 ## 2026-11-19 — Reforma no caixa (Thayná Batista da Silva)
 

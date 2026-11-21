@@ -1,7 +1,10 @@
 {
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "mkdir -p dist && printf '<!doctype html><meta charset=utf-8><title>Planner Comercial</title><meta http-equiv=refresh content=\"0;url=https://planner-api-tvmg.onrender.com/\"><a href=\"https://planner-api-tvmg.onrender.com/\">Planner Comercial</a>' > dist/index.html",
+  "installCommand": "true",
   "outputDirectory": "dist",
-  "framework": "vite",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "framework": null,
+  "redirects": [
+    { "source": "/:path*", "destination": "https://planner-api-tvmg.onrender.com/:path*", "permanent": true }
+  ]
 }
