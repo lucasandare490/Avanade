@@ -2,6 +2,10 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-25 — Contribuições do Lucas na documentação (Thayná Batista da Silva)
+
+- READMEs (PT/EN/ES), entrega final e documentação de requisitos V3 (seção 38.12, também no Drive) com o detalhamento enviado pelo Lucas: primeira versão do painel web e do Android, venda simulada, despesas, comparação, projeção e caixa semanal; no back-end, cadastro da loja e do gerente, edição do estabelecimento por permissão, relatórios com CSV, sugestão de categorias, regra vigente e recuperação do split; contratos da API, revisão dos 516 critérios, testes, acessibilidade, restauração do banco, demonstração, mentoria e pacote de hospedagem.
+
 ## 2026-11-25 — Contagem de testes do README automática (Thayná Batista da Silva)
 
 - `scripts/auditoria/contagem-testes.mjs` mede os testes (relatórios do Surefire, resultado JSON do Vitest e lista do Playwright) e mantém os números do README nas três línguas, entre marcadores `<!-- t:chave -->`.
