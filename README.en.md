@@ -119,6 +119,17 @@ Screenshots from the demo (fictitious data). Every screen is available in Portug
 
 ## Team and what each person did
 
+### Roles in the squad
+
+- **Thayná Batista da Silva:** Scrum Master; design and prototyping; research; requirements documentation; README in Portuguese, English and Spanish; development and testing of the final delivery.
+- **Kássio Lima de Oliveira:** project code and deployment.
+- **Lucas André Cardoso de Lima:** front-end code (web and Android) and back-end features up to the partial delivery.
+- **Kleysson Teixeira da Cruz Junior:** team organization (Trello) and user interviews.
+- **Heitor Sette Couto de Melo:** pitch deck presentation.
+- **James Bernardino da Silva Neto:** squad member.
+
+### What each person did
+
 | Person | Role in the squad | Recorded contributions |
 |---|---|---|
 | **Thayná Batista da Silva** | Scrum Master; design and prototyping; research; requirements documentation; README in Portuguese, English and Spanish; testing | High-fidelity prototype in [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); research and requirements gathering for Split Pay and Planner Comercial; requirements documentation. In the final delivery: corrected core problem (decapitalization); sign-in with lock, attempts warning, email recovery, eye button, Remember me and Sign up; light, dark and system themes; PT/EN/ES languages; **i** icons with explanations; audit checkers; in-app working capital (diagnosis, offers, contracting, installments, payoff and withdrawal); tax reform and cash (IBS/CBS credits with NF-e reading, selling price, supplier terms, advances and accountant package); site and API in a single deploy on Render, with production updated, and Vercel no longer used; requirements documentation V3; visual README and pitch script; new backend, unit and browser tests |
