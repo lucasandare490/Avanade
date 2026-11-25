@@ -117,6 +117,17 @@ Prints da demonstração (dados fictícios). Todas as telas existem em portuguê
 
 ## Equipe e o que cada pessoa fez
 
+### Papéis na squad
+
+- **Thayná Batista da Silva:** Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; desenvolvimento e testes da entrega final.
+- **Kássio Lima de Oliveira:** código do projeto e deploy.
+- **Lucas André Cardoso de Lima:** código do front-end (web e Android) e funcionalidades do back-end até a entrega parcial.
+- **Kleysson Teixeira da Cruz Junior:** organização da equipe (Trello) e entrevistas com pessoas usuárias.
+- **Heitor Sette Couto de Melo:** apresentação do pitch deck.
+- **James Bernardino da Silva Neto:** integrante da squad.
+
+### O que cada pessoa fez
+
 | Pessoa | Papel na squad | Contribuições registradas |
 |---|---|---|
 | **Thayná Batista da Silva** | Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; testes | Protótipo de alta fidelidade no [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); pesquisa e levantamento de requisitos do Split Pay e do Planner Comercial; documentação de requisitos. Na entrega final: correção do problema central (descapitalização); login com bloqueio, aviso de tentativas, recuperação por e-mail, botão de olho, Lembrar de mim e Cadastre-se; temas claro, escuro e do sistema; idiomas PT/EN/ES; ícones **i** com explicações; verificadores de auditoria; capital de giro dentro do app (diagnóstico, ofertas, contratação, parcelas, quitação e desistência); Reforma no caixa (créditos de IBS/CBS com leitura da NF-e, preço de venda, prazo com fornecedores, antecipação e pacote do contador); site e API num único deploy no Render, com a produção atualizada, e fim do uso da Vercel; documentação de requisitos V3; README visual e roteiro do pitch; testes novos de backend, unitários e de navegador |
