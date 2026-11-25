@@ -5,6 +5,7 @@ Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autori
 ## 2026-11-25 — Documentação de requisitos V3 e registro de todos os testes (Thayná Batista da Silva)
 
 - Documentação de requisitos atualizada para a versão 3 (`documentacao/requisitos/`, Word e PDF): problema central (descapitalização), objetivo, solução, datas, capital de giro concluído e a seção 38 com tudo o que mudou na entrega final, o deploy único no Render, o banco (V6 a V12), as rotas novas, os testes, a segurança, as pendências e onde encontrar cada coisa.
+- Conta de teste compartilhada no site publicado (dados fictícios) e link da documentação V3 no Drive, nos três READMEs.
 - READMEs nas três línguas com o registro de todos os testes (backend por classe, frontend, navegador por arquivo, produção, traduções, acessibilidade e auditoria) e com o crédito da Thayná pelo deploy único e pela documentação V3.
 
 ## 2026-11-20 — Produção atualizada e site + API num único deploy no Render (Thayná Batista da Silva)
