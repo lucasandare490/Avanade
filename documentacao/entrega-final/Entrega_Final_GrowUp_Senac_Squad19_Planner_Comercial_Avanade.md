@@ -34,7 +34,7 @@ lang: pt-BR
 | Thayná Batista da Silva | Scrum Master; design e prototipação; pesquisa; documentação de requisitos; README em português, inglês e espanhol; testes; implementação da entrega final (login seguro, tema, idiomas, explicações, capital de giro, Reforma no caixa, correções e auditoria) |
 | Kássio Lima de Oliveira | Código do projeto e deploy (Render e Vercel); integração backend–frontend; Supabase |
 | Lucas André Cardoso de Lima | Código do front-end (web e Android) |
-| Kleysson Teixeira da Cruz Junior | Organização e divisão das demandas da equipe; estruturação e atualização do quadro no Trello; entrevistas com pessoas usuárias e auxílio na pesquisa de campo; auxílio na elaboração da documentação; repositório inicial; suporte nas demandas gerais do projeto |
+| Kleysson Teixeira da Cruz Junior | Organização e divisão das demandas da equipe; estruturação e atualização do quadro no Trello, com as demandas da equipe de desenvolvimento; jornada e fluxo de valor visual e mapa de navegação visual para a equipe de desenvolvimento, junto com a documentação de requisitos; entrevistas com pessoas usuárias e auxílio na pesquisa de campo; auxílio na elaboração da documentação; criação e compartilhamento do repositório inicial no GitHub; registro das atividades no Discord; suporte nas demandas gerais do projeto |
 | Heitor Sette Couto de Melo | Apresentação do pitch deck |
 | James Bernardino da Silva Neto | Integrante da squad |
 
