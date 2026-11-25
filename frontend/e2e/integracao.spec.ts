@@ -1,7 +1,6 @@
+import { senhaDemo } from './senhaDemo';
 import { test, expect, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
-const senha =
-  process.env.DEMO_PASSWORD || readFileSync('../backend/.local/demo-password', 'utf8').trim();
 const hoje = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'America/Recife',
   year: 'numeric',
@@ -12,7 +11,7 @@ async function entrar(page: Page, perfil = 'gerente1') {
   await page.goto('/');
   await page.getByRole('button', { name: 'Entrar', exact: true }).click();
   await page.getByLabel('E-mail', { exact: true }).fill(`${perfil}@demo.local`);
-  await page.getByLabel('Senha', { exact: true }).fill(senha);
+  await page.getByLabel('Senha', { exact: true }).fill(senhaDemo());
   const resposta = page.waitForResponse((r) => r.url().endsWith('/api/v1/auth/login'));
   await page.getByRole('button', { name: 'Entrar', exact: true }).click();
   const r = await resposta;
@@ -211,7 +210,7 @@ test('exportação baixa todo o filtro e servidor impede operador', async ({ pag
   expect(csv.split('\r\n')).toHaveLength(dados.total + 1);
   expect(csv).toContain('centavos');
   if (dados.total) expect(csv).toContain(dados.rows[0][0]);
-  const login = await page.request.post('/api/v1/auth/login', { data: { email: 'operador1@demo.local', password: senha } });
+  const login = await page.request.post('/api/v1/auth/login', { data: { email: 'operador1@demo.local', password: senhaDemo() } });
   expect(login.status()).toBe(200);
   const operador = (await login.json()).accessToken;
   expect((await page.request.get(url, { headers: { Authorization: `Bearer ${operador}` } })).status()).toBe(403);

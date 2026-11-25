@@ -1,14 +1,13 @@
+import { senhaDemo } from './senhaDemo';
 import { test, expect } from '@playwright/test';
-import { readFileSync } from 'node:fs';
 import axe from 'axe-core';
-const senha = process.env.DEMO_PASSWORD || readFileSync('../backend/.local/demo-password','utf8').trim();
 for (const largura of [320,390,768,1024,1440]) {
  test(`telas integradas sem transbordamento em ${largura}px`, async ({page}) => {
   await page.setViewportSize({width:largura,height:800});
   await page.goto('/');
   await page.getByRole('button',{name:'Entrar',exact:true}).click();
   await page.getByLabel('E-mail',{exact:true}).fill('gerente1@demo.local');
-  await page.getByLabel('Senha',{exact:true}).fill(senha);
+  await page.getByLabel('Senha',{exact:true}).fill(senhaDemo());
   await page.getByRole('button',{name:'Entrar',exact:true}).click();
   await expect(page.locator('main#conteudo')).toBeVisible();
   await page.addScriptTag({content:axe.source});

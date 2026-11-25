@@ -1,13 +1,12 @@
+import { senhaDemo } from './senhaDemo';
 import {test,expect} from '@playwright/test';
-import {readFileSync} from 'node:fs';
 import axe from 'axe-core';
-const senha=readFileSync('../backend/.local/demo-password','utf8').trim();
 test('relatórios: vazio, erro recuperável, dados, CSV e acessibilidade',async({page})=>{
  await page.goto('/');
  // O MVP abre na apresentação pública; o login fica no botão Entrar.
  await page.getByRole('button',{name:'Entrar',exact:true}).click();
  await page.getByLabel('E-mail',{exact:true}).fill('gerente1@demo.local');
- await page.getByLabel('Senha',{exact:true}).fill(senha);
+ await page.getByLabel('Senha',{exact:true}).fill(senhaDemo());
  await page.getByRole('button',{name:'Entrar',exact:true}).click();
  await expect(page.locator('main#conteudo')).toBeVisible();
  await page.evaluate(()=>location.hash='/relatorios');
