@@ -19,7 +19,10 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
-      - run: npm test
+      - name: Testes unitários (com resultado em JSON para a contagem do README)
+        run: npm test -- --reporter=default --reporter=json --outputFile=test-results/vitest.json
+      - name: Contagem de testes do README (frontend e navegador)
+        run: node ../scripts/auditoria/contagem-testes.mjs --verificar --vitest test-results/vitest.json --playwright
       - run: npm run build
       - run: npm audit --omit=dev --audit-level=high
       - run: npx playwright install --with-deps chromium
@@ -57,6 +60,8 @@ jobs:
           java-version: '21'
           cache: maven
       - run: chmod +x mvnw && ./mvnw -B verify dependency:tree -DoutputType=json -DoutputFile=target/dependency-tree.json
+      - name: Contagem de testes do README (backend)
+        run: node ../scripts/auditoria/contagem-testes.mjs --verificar --backend target/surefire-reports
       - name: Consultar alertas OSV (relatório, não aceite de segurança)
         continue-on-error: true
         run: python3 ../scripts/auditar-dependencias.py --maven-tree target/dependency-tree.json --output target/auditoria-osv.json

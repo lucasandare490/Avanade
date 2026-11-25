@@ -154,19 +154,20 @@ Mentor: **Eryson Moreira** (Avanade). Class: GROWUP-SENAC-N2. The authorship of 
 | No AI credit anywhere in the project | `node scripts/auditoria/verificar-sem-credito-ia.mjs` |
 | Dark theme in sync with the light theme | `cd frontend && node scripts/gerar-tema-escuro.mjs --verificar` |
 | Published site and API up to date | `node scripts/auditoria/site-producao.mjs` and `node scripts/auditoria/api-producao.mjs` |
+| Update the test counts in this README (CI rejects outdated numbers) | `npm run testes:contagem`, then commit the READMEs |
 
 The system is auditable: every change has an authored commit, the [CHANGELOG](CHANGELOG.md) summarizes what changed and anyone can run the checkers above.
 
 ### Record of all tests
 
-Results measured on 2026-11-25, in GitHub CI and on Thayná's machine. All passed.
+Results measured on <!-- t:data -->2026-11-25<!-- /t -->, in GitHub CI and on Thayná's machine. All passed.
 
 | Suite | What it covers | Result | Where it ran |
 |---|---|---|---|
-| Backend | 23 classes: `BackendIntegrationTest` (21), `CadastroIntegrationTest` (3), `CenarioCompletoTest` (1), `ConsultaExplicacaoLimitadaTest` (2), `CrashRecoveryTest` (1), `CreditoIntegrationTest` (10), `CreditoWebhookIntegrationTest` (1), `EstabelecimentoIntegrationTest` (2), `InterpretacaoTendenciasTest` (3), `LimiteAcessoCompartilhadoTest` (4), `LoginBloqueioIntegrationTest` (4), `MigrationUpgradeTest` (1), `OperacaoSeguraTest` (2), `OperationExportLimitTest` (1), `PlanejamentoIntegrationTest` (2), `QueryAndCashIntegrationTest` (14), `RecuperacaoSenhaEmailTest` (3), `RecuperacaoSenhaIntegrationTest` (2), `ReformaIntegrationTest` (5), `shared.ApiErrorsTest` (1), `TaxEngineTest` (4), `ValidacaoExplicacaoFinanceiraTest` (2), `VigenciaRegraIntegrationTest` (1) | **90 of 90** | GitHub CI (`main`) |
-| Frontend, unit | 20 files in `frontend/src`: credit and tax reform calculations, NF-e, API contract, session, screens, languages and **i** icons | **157 of 157** | Local machine |
-| Browser on the demo | `entrega-final.spec.ts` (22), `teclado-e-ampliacao.spec.ts` (3): login, recovery, Remember me, working capital, tax reform, theme, languages, **i** icons, WCAG A/AA in both themes, keyboard and zoom | **25 of 25** | Local machine |
-| Browser against the real API | `acesso-acessibilidade.spec.ts` (3), `cadastro.spec.ts` (1), `caixa-semanal.spec.ts` (1), `credito-integrado.spec.ts` (1), `estados-consulta.spec.ts` (2), `integracao.spec.ts` (6), `login-integrado.spec.ts` (2), `reforma-integrado.spec.ts` (1), `relatorios-acessibilidade.spec.ts` (1), `responsividade.spec.ts` (5) | **23 of 23** | Local machine, with local API and database |
+| Backend | <!-- t:backend-classes -->23 classes: `BackendIntegrationTest` (21), `CadastroIntegrationTest` (3), `CenarioCompletoTest` (1), `ConsultaExplicacaoLimitadaTest` (2), `CrashRecoveryTest` (1), `CreditoIntegrationTest` (10), `CreditoWebhookIntegrationTest` (1), `EstabelecimentoIntegrationTest` (2), `InterpretacaoTendenciasTest` (3), `LimiteAcessoCompartilhadoTest` (4), `LoginBloqueioIntegrationTest` (4), `MigrationUpgradeTest` (1), `OperacaoSeguraTest` (2), `OperationExportLimitTest` (1), `PlanejamentoIntegrationTest` (2), `QueryAndCashIntegrationTest` (14), `RecuperacaoSenhaEmailTest` (3), `RecuperacaoSenhaIntegrationTest` (2), `ReformaIntegrationTest` (5), `shared.ApiErrorsTest` (1), `TaxEngineTest` (4), `ValidacaoExplicacaoFinanceiraTest` (2), `VigenciaRegraIntegrationTest` (1)<!-- /t --> | **<!-- t:backend -->90 of 90<!-- /t -->** | GitHub CI (`main`) |
+| Frontend, unit | <!-- t:unit-arquivos -->20<!-- /t --> files in `frontend/src`: credit and tax reform calculations, NF-e, API contract, session, screens, languages and **i** icons | **<!-- t:unit -->157 of 157<!-- /t -->** | Local machine |
+| Browser on the demo | <!-- t:demo-arquivos -->`entrega-final.spec.ts` (22), `teclado-e-ampliacao.spec.ts` (3)<!-- /t -->: login, recovery, Remember me, working capital, tax reform, theme, languages, **i** icons, WCAG A/AA in both themes, keyboard and zoom | **<!-- t:demo -->25 of 25<!-- /t -->** | Local machine |
+| Browser against the real API | <!-- t:api-arquivos -->`acesso-acessibilidade.spec.ts` (3), `cadastro.spec.ts` (1), `caixa-semanal.spec.ts` (1), `credito-integrado.spec.ts` (1), `estados-consulta.spec.ts` (2), `integracao.spec.ts` (6), `login-integrado.spec.ts` (2), `reforma-integrado.spec.ts` (1), `relatorios-acessibilidade.spec.ts` (1), `responsividade.spec.ts` (5)<!-- /t --> | **<!-- t:api -->23 of 23<!-- /t -->** | Local machine, with local API and database |
 | Browser on the single address (site served by the API) | `login-integrado`, `credito-integrado` and `reforma-integrado` | **4 of 4** | Local machine |
 | Production | site and API at one address, remaining attempts on login, recovery without a session, security headers, database updated (V6 to V13) | **passed** | https://planner-api-tvmg.onrender.com |
 | Translations and explanations | 1,145 texts in English and Spanish and 241 explanations in three languages | **complete** | `verificar-traducoes.mjs` |
@@ -174,7 +175,7 @@ Results measured on 2026-11-25, in GitHub CI and on Thayná's machine. All passe
 | Audit | no AI credit, commit authorship, README in three languages | **passed** | `scripts/auditoria/` |
 | GitHub CI | backend, Android, Docker, hosting and site | **all checks** | GitHub Actions |
 
-Tests that failed and were fixed are listed in the [CHANGELOG](CHANGELOG.md) and in the [final delivery](documentacao/ENTREGA-FINAL-2026-11-18.md) (in Portuguese). `CrashRecoveryTest` depends on timing and can time out on a very busy machine; it passes in CI.
+The numbers in this table are checked by GitHub CI on every change (`scripts/auditoria/contagem-testes.mjs`): if a test is added or removed without updating the README, CI rejects it. Tests that failed and were fixed are listed in the [CHANGELOG](CHANGELOG.md) and in the [final delivery](documentacao/ENTREGA-FINAL-2026-11-18.md) (in Portuguese). `CrashRecoveryTest` depends on timing and can time out on a very busy machine; it passes in CI.
 
 ## Security and privacy
 
