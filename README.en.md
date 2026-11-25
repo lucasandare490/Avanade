@@ -168,7 +168,7 @@ Results measured on 2026-11-25, in GitHub CI and on Thayná's machine. All passe
 | Browser on the demo | `entrega-final.spec.ts` (22), `teclado-e-ampliacao.spec.ts` (3): login, recovery, Remember me, working capital, tax reform, theme, languages, **i** icons, WCAG A/AA in both themes, keyboard and zoom | **25 of 25** | Local machine |
 | Browser against the real API | `acesso-acessibilidade.spec.ts` (3), `cadastro.spec.ts` (1), `caixa-semanal.spec.ts` (1), `credito-integrado.spec.ts` (1), `estados-consulta.spec.ts` (2), `integracao.spec.ts` (6), `login-integrado.spec.ts` (2), `reforma-integrado.spec.ts` (1), `relatorios-acessibilidade.spec.ts` (1), `responsividade.spec.ts` (5) | **23 of 23** | Local machine, with local API and database |
 | Browser on the single address (site served by the API) | `login-integrado`, `credito-integrado` and `reforma-integrado` | **4 of 4** | Local machine |
-| Production | site and API at one address, remaining attempts on login, recovery without a session, security headers, database updated (V6 to V12) | **passed** | https://planner-api-tvmg.onrender.com |
+| Production | site and API at one address, remaining attempts on login, recovery without a session, security headers, database updated (V6 to V13) | **passed** | https://planner-api-tvmg.onrender.com |
 | Translations and explanations | 1,145 texts in English and Spanish and 241 explanations in three languages | **complete** | `verificar-traducoes.mjs` |
 | Accessibility (axe) | 12 screens, light and dark themes | **0 violations** | inside the demo suite |
 | Audit | no AI credit, commit authorship, README in three languages | **passed** | `scripts/auditoria/` |
