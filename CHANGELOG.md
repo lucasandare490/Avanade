@@ -2,6 +2,11 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-25 — Documentação de requisitos V3 e registro de todos os testes (Thayná Batista da Silva)
+
+- Documentação de requisitos atualizada para a versão 3 (`documentacao/requisitos/`, Word e PDF): problema central (descapitalização), objetivo, solução, datas, capital de giro concluído e a seção 38 com tudo o que mudou na entrega final, o deploy único no Render, o banco (V6 a V12), as rotas novas, os testes, a segurança, as pendências e onde encontrar cada coisa.
+- READMEs nas três línguas com o registro de todos os testes (backend por classe, frontend, navegador por arquivo, produção, traduções, acessibilidade e auditoria) e com o crédito da Thayná pelo deploy único e pela documentação V3.
+
 ## 2026-11-20 — Produção atualizada e site + API num único deploy no Render (Thayná Batista da Silva)
 
 - Deploy da API nova no Render: o banco recebeu as migrations V6 a V11 (recuperação de senha, tentativas de login, capital de giro e créditos de IBS/CBS). Login com aviso de tentativas, recuperação sem sessão, capital de giro e Reforma no caixa funcionando em produção.

@@ -112,7 +112,7 @@ Screenshots from the demo (fictitious data). Every screen is available in Portug
 
 | Person | Role in the squad | Recorded contributions |
 |---|---|---|
-| **Thayná Batista da Silva** | Scrum Master; design and prototyping; research; requirements documentation; README in Portuguese, English and Spanish; testing | High-fidelity prototype in [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); research and requirements gathering for Split Pay and Planner Comercial; requirements documentation. In the final delivery: corrected core problem (decapitalization); sign-in with lock, attempts warning, email recovery, eye button, Remember me and Sign up; light, dark and system themes; PT/EN/ES languages; **i** icons with explanations; audit checkers; in-app working capital (diagnosis, offers, contracting, installments, payoff and withdrawal); tax reform and cash (IBS/CBS credits with NF-e reading, selling price, supplier terms, advances and accountant package); visual README and pitch script; new backend, unit and browser tests |
+| **Thayná Batista da Silva** | Scrum Master; design and prototyping; research; requirements documentation; README in Portuguese, English and Spanish; testing | High-fidelity prototype in [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); research and requirements gathering for Split Pay and Planner Comercial; requirements documentation. In the final delivery: corrected core problem (decapitalization); sign-in with lock, attempts warning, email recovery, eye button, Remember me and Sign up; light, dark and system themes; PT/EN/ES languages; **i** icons with explanations; audit checkers; in-app working capital (diagnosis, offers, contracting, installments, payoff and withdrawal); tax reform and cash (IBS/CBS credits with NF-e reading, selling price, supplier terms, advances and accountant package); site and API in a single deploy on Render, with production updated, and Vercel no longer used; requirements documentation V3; visual README and pitch script; new backend, unit and browser tests |
 | **Kássio Lima de Oliveira** | Project code and deployment | Backend–frontend integration with persistence; operation recovery; secure password recovery flow; Supabase setup; deployment on Render (API) and Vercel (website); monitoring and backup routine |
 | **Lucas André Cardoso de Lima** | Front-end code | First delivery of the web and Android frontends; trend comparison; integration contracts; review of the 516 criteria with evidence; weekly cash, sign-up and reports |
 | **Kleysson Teixeira da Cruz Junior** | Team organization and user interviews | Organized and split the team's tasks; set up and kept the Trello board up to date; user interviews and support in field research; support in writing the documentation; MVP README review; the project's [initial repository](https://github.com/Kleyssonteixeirapf/projeto-split-tributario); support for general project tasks |
@@ -126,7 +126,7 @@ Mentor: **Eryson Moreira** (Avanade). Class: GROWUP-SENAC-N2. The authorship of 
 - [Figma prototype](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design) and [design documentation, tokens and screenshots](documentacao/design/README.md)
 - [Squad 19 documentation folder](https://drive.google.com/drive/folders/1_4WXflZ5LvJ3yTbEgqiSV5Qw5S6jHoYp?usp=sharing)
 - [Split Pay and Planner Comercial analysis and requirements gathering](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing)
-- [Requirements documentation (V2)](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
+- [Requirements documentation V3, updated 2026-11-25](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.pdf) ([Word](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.docx)); [V2 version on Drive](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
 - [Final delivery document (PDF, in Portuguese)](documentacao/entrega-final/Entrega_Final_GrowUp_Senac_Squad19_Planner_Comercial_Avanade.pdf)
 - [Partial delivery](https://docs.google.com/document/d/16FiTQW6DRE6WRpWBlSeXzVHnP-lr3DfT/edit?usp=sharing)
 - [Final delivery record](documentacao/ENTREGA-FINAL-2026-11-18.md) (in Portuguese): what changed, how it was tested and what is pending
@@ -147,6 +147,25 @@ Mentor: **Eryson Moreira** (Avanade). Class: GROWUP-SENAC-N2. The authorship of 
 | Published site and API up to date | `node scripts/auditoria/site-producao.mjs` and `node scripts/auditoria/api-producao.mjs` |
 
 The system is auditable: every change has an authored commit, the [CHANGELOG](CHANGELOG.md) summarizes what changed and anyone can run the checkers above.
+
+### Record of all tests
+
+Results measured on 2026-11-25, in GitHub CI and on Thayná's machine. All passed.
+
+| Suite | What it covers | Result | Where it ran |
+|---|---|---|---|
+| Backend | 23 classes: `BackendIntegrationTest` (21), `CadastroIntegrationTest` (3), `CenarioCompletoTest` (1), `ConsultaExplicacaoLimitadaTest` (2), `CrashRecoveryTest` (1), `CreditoIntegrationTest` (10), `CreditoWebhookIntegrationTest` (1), `EstabelecimentoIntegrationTest` (2), `InterpretacaoTendenciasTest` (3), `LimiteAcessoCompartilhadoTest` (4), `LoginBloqueioIntegrationTest` (4), `MigrationUpgradeTest` (1), `OperacaoSeguraTest` (2), `OperationExportLimitTest` (1), `PlanejamentoIntegrationTest` (2), `QueryAndCashIntegrationTest` (14), `RecuperacaoSenhaEmailTest` (3), `RecuperacaoSenhaIntegrationTest` (2), `ReformaIntegrationTest` (5), `shared.ApiErrorsTest` (1), `TaxEngineTest` (4), `ValidacaoExplicacaoFinanceiraTest` (2), `VigenciaRegraIntegrationTest` (1) | **90 of 90** | GitHub CI (`main`) |
+| Frontend, unit | 20 files in `frontend/src`: credit and tax reform calculations, NF-e, API contract, session, screens, languages and **i** icons | **157 of 157** | Local machine |
+| Browser on the demo | `entrega-final.spec.ts` (22), `teclado-e-ampliacao.spec.ts` (3): login, recovery, Remember me, working capital, tax reform, theme, languages, **i** icons, WCAG A/AA in both themes, keyboard and zoom | **25 of 25** | Local machine |
+| Browser against the real API | `acesso-acessibilidade.spec.ts` (3), `cadastro.spec.ts` (1), `caixa-semanal.spec.ts` (1), `credito-integrado.spec.ts` (1), `estados-consulta.spec.ts` (2), `integracao.spec.ts` (6), `login-integrado.spec.ts` (2), `reforma-integrado.spec.ts` (1), `relatorios-acessibilidade.spec.ts` (1), `responsividade.spec.ts` (5) | **23 of 23** | Local machine, with local API and database |
+| Browser on the single address (site served by the API) | `login-integrado`, `credito-integrado` and `reforma-integrado` | **4 of 4** | Local machine |
+| Production | site and API at one address, remaining attempts on login, recovery without a session, security headers, database updated (V6 to V12) | **passed** | https://planner-api-tvmg.onrender.com |
+| Translations and explanations | 1,145 texts in English and Spanish and 241 explanations in three languages | **complete** | `verificar-traducoes.mjs` |
+| Accessibility (axe) | 12 screens, light and dark themes | **0 violations** | inside the demo suite |
+| Audit | no AI credit, commit authorship, README in three languages | **passed** | `scripts/auditoria/` |
+| GitHub CI | backend, Android, Docker, hosting and site | **all checks** | GitHub Actions |
+
+Tests that failed and were fixed are listed in the [CHANGELOG](CHANGELOG.md) and in the [final delivery](documentacao/ENTREGA-FINAL-2026-11-18.md) (in Portuguese). `CrashRecoveryTest` depends on timing and can time out on a very busy machine; it passes in CI.
 
 ## Security and privacy
 

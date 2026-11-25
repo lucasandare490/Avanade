@@ -112,7 +112,7 @@ Capturas de la demostración (datos ficticios). Todas las pantallas están en po
 
 | Persona | Rol en el squad | Contribuciones registradas |
 |---|---|---|
-| **Thayná Batista da Silva** | Scrum Master; diseño y prototipado; investigación; documentación de requisitos; README en portugués, inglés y español; pruebas | Prototipo de alta fidelidad en [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); investigación y levantamiento de requisitos de Split Pay y de Planner Comercial; documentación de requisitos. En la entrega final: corrección del problema central (descapitalización); inicio de sesión con bloqueo, aviso de intentos, recuperación por correo, botón de ojo, Recordarme y Regístrese; temas claro, oscuro y del sistema; idiomas PT/EN/ES; íconos **i** con explicaciones; verificadores de auditoría; capital de trabajo dentro de la app (diagnóstico, ofertas, contratación, cuotas, liquidación y desistimiento); reforma y caja (créditos de IBS/CBS con lectura de la NF-e, precio de venta, plazo con proveedores, anticipo y paquete para el contador); README visual y guion del pitch; nuevas pruebas de backend, unitarias y de navegador |
+| **Thayná Batista da Silva** | Scrum Master; diseño y prototipado; investigación; documentación de requisitos; README en portugués, inglés y español; pruebas | Prototipo de alta fidelidad en [Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design); investigación y levantamiento de requisitos de Split Pay y de Planner Comercial; documentación de requisitos. En la entrega final: corrección del problema central (descapitalización); inicio de sesión con bloqueo, aviso de intentos, recuperación por correo, botón de ojo, Recordarme y Regístrese; temas claro, oscuro y del sistema; idiomas PT/EN/ES; íconos **i** con explicaciones; verificadores de auditoría; capital de trabajo dentro de la app (diagnóstico, ofertas, contratación, cuotas, liquidación y desistimiento); reforma y caja (créditos de IBS/CBS con lectura de la NF-e, precio de venta, plazo con proveedores, anticipo y paquete para el contador); sitio y API en un único despliegue en Render, con la producción actualizada, y fin del uso de Vercel; documentación de requisitos V3; README visual y guion del pitch; nuevas pruebas de backend, unitarias y de navegador |
 | **Kássio Lima de Oliveira** | Código del proyecto y despliegue | Integración entre backend y frontend con persistencia; recuperación de operaciones; flujo seguro de recuperación de contraseña; configuración de Supabase; despliegue en Render (API) y Vercel (sitio); monitoreo y rutina de respaldo |
 | **Lucas André Cardoso de Lima** | Código del front-end | Primera entrega de los frontends web y Android; comparación de tendencias; contratos de integración; revisión de los 516 criterios con evidencias; caja semanal, registro e informes |
 | **Kleysson Teixeira da Cruz Junior** | Organización del equipo y entrevistas con usuarios | Organización y división de las tareas del equipo; estructuración y actualización del tablero de Trello; entrevistas con usuarios y apoyo en la investigación de campo; apoyo en la elaboración de la documentación; revisión del README del MVP; [repositorio inicial](https://github.com/Kleyssonteixeirapf/projeto-split-tributario) del proyecto; apoyo en las tareas generales del proyecto |
@@ -126,7 +126,7 @@ Mentor: **Eryson Moreira** (Avanade). Grupo: GROWUP-SENAC-N2. La autoría de cad
 - [Prototipo en Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design) y [documentación de diseño, tokens y capturas](documentacao/design/README.md)
 - [Carpeta de documentación del Squad 19](https://drive.google.com/drive/folders/1_4WXflZ5LvJ3yTbEgqiSV5Qw5S6jHoYp?usp=sharing)
 - [Análisis y levantamiento de requisitos de Split Pay y Planner Comercial](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing)
-- [Documentación de requisitos (V2)](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
+- [Documentación de requisitos V3, actualizada el 25/11/2026](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.pdf) ([Word](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.docx)); [versión V2 en Drive](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
 - [Documento de la entrega final (PDF, en portugués)](documentacao/entrega-final/Entrega_Final_GrowUp_Senac_Squad19_Planner_Comercial_Avanade.pdf)
 - [Entrega parcial](https://docs.google.com/document/d/16FiTQW6DRE6WRpWBlSeXzVHnP-lr3DfT/edit?usp=sharing)
 - [Registro de la entrega final](documentacao/ENTREGA-FINAL-2026-11-18.md) (en portugués): qué cambió, cómo se probó y qué quedó pendiente
@@ -147,6 +147,25 @@ Mentor: **Eryson Moreira** (Avanade). Grupo: GROWUP-SENAC-N2. La autoría de cad
 | Sitio y API publicados actualizados | `node scripts/auditoria/site-producao.mjs` y `node scripts/auditoria/api-producao.mjs` |
 
 El sistema es auditable: cada cambio tiene un commit con autoría, el [CHANGELOG](CHANGELOG.md) resume lo que cambió y cualquier persona puede ejecutar los verificadores de arriba.
+
+### Registro de todas las pruebas
+
+Resultados medidos el 25/11/2026, en el CI de GitHub y en la máquina de Thayná. Todas pasaron.
+
+| Batería | Qué cubre | Resultado | Dónde se ejecutó |
+|---|---|---|---|
+| Backend | 23 clases: `BackendIntegrationTest` (21), `CadastroIntegrationTest` (3), `CenarioCompletoTest` (1), `ConsultaExplicacaoLimitadaTest` (2), `CrashRecoveryTest` (1), `CreditoIntegrationTest` (10), `CreditoWebhookIntegrationTest` (1), `EstabelecimentoIntegrationTest` (2), `InterpretacaoTendenciasTest` (3), `LimiteAcessoCompartilhadoTest` (4), `LoginBloqueioIntegrationTest` (4), `MigrationUpgradeTest` (1), `OperacaoSeguraTest` (2), `OperationExportLimitTest` (1), `PlanejamentoIntegrationTest` (2), `QueryAndCashIntegrationTest` (14), `RecuperacaoSenhaEmailTest` (3), `RecuperacaoSenhaIntegrationTest` (2), `ReformaIntegrationTest` (5), `shared.ApiErrorsTest` (1), `TaxEngineTest` (4), `ValidacaoExplicacaoFinanceiraTest` (2), `VigenciaRegraIntegrationTest` (1) | **90 de 90** | CI de GitHub (`main`) |
+| Frontend, unitarias | 20 archivos en `frontend/src`: cálculos del crédito y de la reforma, NF-e, contrato de la API, sesión, pantallas, idiomas e íconos **i** | **157 de 157** | Máquina local |
+| Navegador en la demostración | `entrega-final.spec.ts` (22), `teclado-e-ampliacao.spec.ts` (3): inicio de sesión, recuperación, Recordarme, capital de trabajo, reforma y caja, tema, idiomas, íconos **i**, WCAG A/AA en los dos temas, teclado y ampliación | **25 de 25** | Máquina local |
+| Navegador contra la API real | `acesso-acessibilidade.spec.ts` (3), `cadastro.spec.ts` (1), `caixa-semanal.spec.ts` (1), `credito-integrado.spec.ts` (1), `estados-consulta.spec.ts` (2), `integracao.spec.ts` (6), `login-integrado.spec.ts` (2), `reforma-integrado.spec.ts` (1), `relatorios-acessibilidade.spec.ts` (1), `responsividade.spec.ts` (5) | **23 de 23** | Máquina local, con la API y la base locales |
+| Navegador en la dirección única (sitio servido por la API) | `login-integrado`, `credito-integrado` y `reforma-integrado` | **4 de 4** | Máquina local |
+| Producción | sitio y API en la misma dirección, intentos restantes en el inicio de sesión, recuperación sin sesión, encabezados de seguridad, base actualizada (V6 a V12) | **aprobado** | https://planner-api-tvmg.onrender.com |
+| Traducciones y explicaciones | 1.145 textos en inglés y español y 241 explicaciones en tres idiomas | **completas** | `verificar-traducoes.mjs` |
+| Accesibilidad (axe) | 12 pantallas, temas claro y oscuro | **0 violaciones** | dentro de la batería de la demostración |
+| Auditoría | ningún crédito de IA, autoría de los commits, README en tres idiomas | **aprobada** | `scripts/auditoria/` |
+| CI de GitHub | backend, Android, Docker, hosting y sitio | **todas las verificaciones** | GitHub Actions |
+
+Las pruebas que fallaron y se corrigieron están en el [CHANGELOG](CHANGELOG.md) y en la [entrega final](documentacao/ENTREGA-FINAL-2026-11-18.md) (en portugués). `CrashRecoveryTest` depende del tiempo y puede agotar el plazo en una máquina muy cargada; en el CI pasa.
 
 ## Seguridad y privacidad
 

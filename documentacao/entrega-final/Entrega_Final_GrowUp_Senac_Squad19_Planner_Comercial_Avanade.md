@@ -300,7 +300,7 @@ Smart POS/POS web e painel web → API REST (autenticação, núcleo de split, P
 | Bateria | Resultado |
 |---|---|
 | Backend (`./mvnw test`) | **90 de 90** |
-| Frontend unitários (`npm test`) | **154 de 154** |
+| Frontend unitários (`npm test`) | **157 de 157** |
 | Navegador na demonstração (`npm run test:e2e:entrega`) | **25 de 25** — login, recuperação, lembrar de mim, ciclo completo do capital de giro, Reforma no caixa (NF-e, créditos, preço, prazo, antecipação e CSV), tema, idiomas, ícones "i", WCAG A/AA nos dois temas, teclado |
 | Navegador contra a API real | **23 de 23**, incluindo o ciclo do capital de giro, a projeção e a NF-e com crédito no resumo da reforma (no `main` antes desta entrega: 0 de 22) |
 | CI do GitHub | 12 de 12 verificações |
