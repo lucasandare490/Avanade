@@ -12,6 +12,15 @@ Proyecto del **Squad 19** de la Residencia Tecnológica **Grow Up 2026.2** (Port
 
 **Véalo funcionando ahora:** https://planner-api-tvmg.onrender.com/ (sitio y API en la misma dirección, en Render; en el plan gratuito, el primer acceso puede tardar hasta 1 minuto).
 
+**Cuenta de prueba en el sitio publicado** (compartida, solo con datos ficticios):
+
+| Correo | Contraseña |
+|---|---|
+| `teste.planner.squad19@example.com` | `Testepl@annersquad19` |
+
+Cualquier persona puede usar esta cuenta, así que no ponga datos reales en ella. Después de 5 contraseñas incorrectas seguidas, el acceso queda bloqueado por 15 minutos para todos. Para probar sin ese riesgo, cree su propia cuenta en **Entrar → Cadastre-se** (Iniciar sesión → Registrarse).
+
+
 ## Instalar y ejecutar
 
 **Requisitos:** Git, JDK 21, Node.js 20.19+ (o 22.12+), Python 3 y curl. No se necesita Docker.
@@ -126,7 +135,7 @@ Mentor: **Eryson Moreira** (Avanade). Grupo: GROWUP-SENAC-N2. La autoría de cad
 - [Prototipo en Figma](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design) y [documentación de diseño, tokens y capturas](documentacao/design/README.md)
 - [Carpeta de documentación del Squad 19](https://drive.google.com/drive/folders/1_4WXflZ5LvJ3yTbEgqiSV5Qw5S6jHoYp?usp=sharing)
 - [Análisis y levantamiento de requisitos de Split Pay y Planner Comercial](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing)
-- [Documentación de requisitos V3, actualizada el 25/11/2026](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.pdf) ([Word](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.docx)); [versión V2 en Drive](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
+- [Documentación de requisitos V3, actualizada el 25/11/2026](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.pdf) ([Word](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.docx)); [versión V3 en Drive](https://drive.google.com/file/d/12pjgbLKQg8bfVqJG5wncUxMSB-ffX-uW/view); [versión V2 en Drive](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
 - [Documento de la entrega final (PDF, en portugués)](documentacao/entrega-final/Entrega_Final_GrowUp_Senac_Squad19_Planner_Comercial_Avanade.pdf)
 - [Entrega parcial](https://docs.google.com/document/d/16FiTQW6DRE6WRpWBlSeXzVHnP-lr3DfT/edit?usp=sharing)
 - [Registro de la entrega final](documentacao/ENTREGA-FINAL-2026-11-18.md) (en portugués): qué cambió, cómo se probó y qué quedó pendiente

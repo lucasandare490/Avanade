@@ -12,6 +12,15 @@ Project by **Squad 19** of the **Grow Up 2026.2** Technology Residency (Porto Di
 
 **See it running now:** https://planner-api-tvmg.onrender.com/ (site and API at the same address, on Render; on the free plan, the first visit may take up to 1 minute).
 
+**Test account on the live site** (shared, fictitious data only):
+
+| Email | Password |
+|---|---|
+| `teste.planner.squad19@example.com` | `Testepl@annersquad19` |
+
+Anyone can use this account, so do not put real data in it. After 5 wrong passwords in a row, access is locked for 15 minutes for everyone. To test without that risk, create your own account under **Entrar → Cadastre-se** (Sign in → Sign up).
+
+
 ## Install and run
 
 **Requirements:** Git, JDK 21, Node.js 20.19+ (or 22.12+), Python 3 and curl. Docker is not needed.
@@ -126,7 +135,7 @@ Mentor: **Eryson Moreira** (Avanade). Class: GROWUP-SENAC-N2. The authorship of 
 - [Figma prototype](https://www.figma.com/make/tJXFL2o4nYoZnZARUCkBLQ/Planner-Comercial-MVP-Design) and [design documentation, tokens and screenshots](documentacao/design/README.md)
 - [Squad 19 documentation folder](https://drive.google.com/drive/folders/1_4WXflZ5LvJ3yTbEgqiSV5Qw5S6jHoYp?usp=sharing)
 - [Split Pay and Planner Comercial analysis and requirements gathering](https://docs.google.com/document/d/1QoIXru-uVBmSDMy6YKjTAkVvk_0Q2kk5_WnfubFtVPU/edit?usp=sharing)
-- [Requirements documentation V3, updated 2026-11-25](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.pdf) ([Word](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.docx)); [V2 version on Drive](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
+- [Requirements documentation V3, updated 2026-11-25](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.pdf) ([Word](documentacao/requisitos/V3_Documentacao_de_planejamento_Planner_Comercial.docx)); [V3 version on Drive](https://drive.google.com/file/d/12pjgbLKQg8bfVqJG5wncUxMSB-ffX-uW/view); [V2 version on Drive](https://docs.google.com/document/d/13OdFEBoY3y_6TPt6pDJQwXycZW9mGdwy/edit?usp=sharing)
 - [Final delivery document (PDF, in Portuguese)](documentacao/entrega-final/Entrega_Final_GrowUp_Senac_Squad19_Planner_Comercial_Avanade.pdf)
 - [Partial delivery](https://docs.google.com/document/d/16FiTQW6DRE6WRpWBlSeXzVHnP-lr3DfT/edit?usp=sharing)
 - [Final delivery record](documentacao/ENTREGA-FINAL-2026-11-18.md) (in Portuguese): what changed, how it was tested and what is pending
