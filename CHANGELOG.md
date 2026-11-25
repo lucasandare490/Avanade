@@ -2,6 +2,11 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-25 — Contribuições do Kleysson e quem fez o quê na documentação (Thayná Batista da Silva)
+
+- READMEs (PT/EN/ES), entrega final e documentação de requisitos V3 com o que o Kleysson fez: demandas da equipe de desenvolvimento no Trello, jornada e fluxo de valor visual, mapa de navegação visual, criação e compartilhamento do repositório inicial no GitHub e registro das atividades no Discord.
+- Documentação de requisitos V3 ganhou a seção 38.12 (quem fez o quê, divisão real da equipe) e a migration V13 na lista do banco.
+
 ## 2026-11-25 — Correção: vendas sem split na produção (Thayná Batista da Silva)
 
 - A produção não tinha nenhuma regra financeira cadastrada (a regra só vinha da semente de demonstração, desligada lá), então toda venda voltava com `TAX_RULE_UNAVAILABLE` e não entrava no caixa. A migration V13 cadastra a regra simulada do MVP (categoria GENERAL, 10% de tributo e 2% de taxa, os mesmos percentuais do site), com início antes da regra de demonstração para não mudar nada onde ela existe. Teste: `MigrationUpgradeTest` confere que, num banco sem semente, uma venda de agora encontra essa regra.
