@@ -6,6 +6,7 @@
     "dev": "npm --prefix frontend run dev",
     "dev:backend": "powershell -NoProfile -File scripts/iniciar-backend-local.ps1",
     "build": "npm --prefix frontend run build",
-    "test:frontend": "npm --prefix frontend test"
+    "test:frontend": "npm --prefix frontend test",
+    "testes:contagem": "bash scripts/atualizar-contagem-testes.sh"
   }
 }

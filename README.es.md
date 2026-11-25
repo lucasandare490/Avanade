@@ -154,19 +154,20 @@ Mentor: **Eryson Moreira** (Avanade). Grupo: GROWUP-SENAC-N2. La autoría de cad
 | Ningún crédito de IA en el proyecto | `node scripts/auditoria/verificar-sem-credito-ia.mjs` |
 | Tema oscuro al día con el tema claro | `cd frontend && node scripts/gerar-tema-escuro.mjs --verificar` |
 | Sitio y API publicados actualizados | `node scripts/auditoria/site-producao.mjs` y `node scripts/auditoria/api-producao.mjs` |
+| Actualizar el conteo de pruebas de este README (el CI rechaza números desactualizados) | `npm run testes:contagem` y luego commit de los README |
 
 El sistema es auditable: cada cambio tiene un commit con autoría, el [CHANGELOG](CHANGELOG.md) resume lo que cambió y cualquier persona puede ejecutar los verificadores de arriba.
 
 ### Registro de todas las pruebas
 
-Resultados medidos el 25/11/2026, en el CI de GitHub y en la máquina de Thayná. Todas pasaron.
+Resultados medidos el <!-- t:data -->25/11/2026<!-- /t -->, en el CI de GitHub y en la máquina de Thayná. Todas pasaron.
 
 | Batería | Qué cubre | Resultado | Dónde se ejecutó |
 |---|---|---|---|
-| Backend | 23 clases: `BackendIntegrationTest` (21), `CadastroIntegrationTest` (3), `CenarioCompletoTest` (1), `ConsultaExplicacaoLimitadaTest` (2), `CrashRecoveryTest` (1), `CreditoIntegrationTest` (10), `CreditoWebhookIntegrationTest` (1), `EstabelecimentoIntegrationTest` (2), `InterpretacaoTendenciasTest` (3), `LimiteAcessoCompartilhadoTest` (4), `LoginBloqueioIntegrationTest` (4), `MigrationUpgradeTest` (1), `OperacaoSeguraTest` (2), `OperationExportLimitTest` (1), `PlanejamentoIntegrationTest` (2), `QueryAndCashIntegrationTest` (14), `RecuperacaoSenhaEmailTest` (3), `RecuperacaoSenhaIntegrationTest` (2), `ReformaIntegrationTest` (5), `shared.ApiErrorsTest` (1), `TaxEngineTest` (4), `ValidacaoExplicacaoFinanceiraTest` (2), `VigenciaRegraIntegrationTest` (1) | **90 de 90** | CI de GitHub (`main`) |
-| Frontend, unitarias | 20 archivos en `frontend/src`: cálculos del crédito y de la reforma, NF-e, contrato de la API, sesión, pantallas, idiomas e íconos **i** | **157 de 157** | Máquina local |
-| Navegador en la demostración | `entrega-final.spec.ts` (22), `teclado-e-ampliacao.spec.ts` (3): inicio de sesión, recuperación, Recordarme, capital de trabajo, reforma y caja, tema, idiomas, íconos **i**, WCAG A/AA en los dos temas, teclado y ampliación | **25 de 25** | Máquina local |
-| Navegador contra la API real | `acesso-acessibilidade.spec.ts` (3), `cadastro.spec.ts` (1), `caixa-semanal.spec.ts` (1), `credito-integrado.spec.ts` (1), `estados-consulta.spec.ts` (2), `integracao.spec.ts` (6), `login-integrado.spec.ts` (2), `reforma-integrado.spec.ts` (1), `relatorios-acessibilidade.spec.ts` (1), `responsividade.spec.ts` (5) | **23 de 23** | Máquina local, con la API y la base locales |
+| Backend | <!-- t:backend-classes -->23 clases: `BackendIntegrationTest` (21), `CadastroIntegrationTest` (3), `CenarioCompletoTest` (1), `ConsultaExplicacaoLimitadaTest` (2), `CrashRecoveryTest` (1), `CreditoIntegrationTest` (10), `CreditoWebhookIntegrationTest` (1), `EstabelecimentoIntegrationTest` (2), `InterpretacaoTendenciasTest` (3), `LimiteAcessoCompartilhadoTest` (4), `LoginBloqueioIntegrationTest` (4), `MigrationUpgradeTest` (1), `OperacaoSeguraTest` (2), `OperationExportLimitTest` (1), `PlanejamentoIntegrationTest` (2), `QueryAndCashIntegrationTest` (14), `RecuperacaoSenhaEmailTest` (3), `RecuperacaoSenhaIntegrationTest` (2), `ReformaIntegrationTest` (5), `shared.ApiErrorsTest` (1), `TaxEngineTest` (4), `ValidacaoExplicacaoFinanceiraTest` (2), `VigenciaRegraIntegrationTest` (1)<!-- /t --> | **<!-- t:backend -->90 de 90<!-- /t -->** | CI de GitHub (`main`) |
+| Frontend, unitarias | <!-- t:unit-arquivos -->20<!-- /t --> archivos en `frontend/src`: cálculos del crédito y de la reforma, NF-e, contrato de la API, sesión, pantallas, idiomas e íconos **i** | **<!-- t:unit -->157 de 157<!-- /t -->** | Máquina local |
+| Navegador en la demostración | <!-- t:demo-arquivos -->`entrega-final.spec.ts` (22), `teclado-e-ampliacao.spec.ts` (3)<!-- /t -->: inicio de sesión, recuperación, Recordarme, capital de trabajo, reforma y caja, tema, idiomas, íconos **i**, WCAG A/AA en los dos temas, teclado y ampliación | **<!-- t:demo -->25 de 25<!-- /t -->** | Máquina local |
+| Navegador contra la API real | <!-- t:api-arquivos -->`acesso-acessibilidade.spec.ts` (3), `cadastro.spec.ts` (1), `caixa-semanal.spec.ts` (1), `credito-integrado.spec.ts` (1), `estados-consulta.spec.ts` (2), `integracao.spec.ts` (6), `login-integrado.spec.ts` (2), `reforma-integrado.spec.ts` (1), `relatorios-acessibilidade.spec.ts` (1), `responsividade.spec.ts` (5)<!-- /t --> | **<!-- t:api -->23 de 23<!-- /t -->** | Máquina local, con la API y la base locales |
 | Navegador en la dirección única (sitio servido por la API) | `login-integrado`, `credito-integrado` y `reforma-integrado` | **4 de 4** | Máquina local |
 | Producción | sitio y API en la misma dirección, intentos restantes en el inicio de sesión, recuperación sin sesión, encabezados de seguridad, base actualizada (V6 a V13) | **aprobado** | https://planner-api-tvmg.onrender.com |
 | Traducciones y explicaciones | 1.145 textos en inglés y español y 241 explicaciones en tres idiomas | **completas** | `verificar-traducoes.mjs` |
@@ -174,7 +175,7 @@ Resultados medidos el 25/11/2026, en el CI de GitHub y en la máquina de Thayná
 | Auditoría | ningún crédito de IA, autoría de los commits, README en tres idiomas | **aprobada** | `scripts/auditoria/` |
 | CI de GitHub | backend, Android, Docker, hosting y sitio | **todas las verificaciones** | GitHub Actions |
 
-Las pruebas que fallaron y se corrigieron están en el [CHANGELOG](CHANGELOG.md) y en la [entrega final](documentacao/ENTREGA-FINAL-2026-11-18.md) (en portugués). `CrashRecoveryTest` depende del tiempo y puede agotar el plazo en una máquina muy cargada; en el CI pasa.
+Los números de esta tabla los verifica el CI de GitHub en cada cambio (`scripts/auditoria/contagem-testes.mjs`): si se agrega o quita una prueba sin actualizar el README, el CI lo rechaza. Las pruebas que fallaron y se corrigieron están en el [CHANGELOG](CHANGELOG.md) y en la [entrega final](documentacao/ENTREGA-FINAL-2026-11-18.md) (en portugués). `CrashRecoveryTest` depende del tiempo y puede agotar el plazo en una máquina muy cargada; en el CI pasa.
 
 ## Seguridad y privacidad
 

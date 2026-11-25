@@ -2,6 +2,12 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-25 — Contagem de testes do README automática (Thayná Batista da Silva)
+
+- `scripts/auditoria/contagem-testes.mjs` mede os testes (relatórios do Surefire, resultado JSON do Vitest e lista do Playwright) e mantém os números do README nas três línguas, entre marcadores `<!-- t:chave -->`.
+- O CI confere a contagem a cada mudança (jobs `web` e `backend`) e recusa README com número diferente dos testes que rodaram.
+- `npm run testes:contagem` roda os testes e atualiza os READMEs para o commit.
+
 ## 2026-11-25 — Contribuições do Kleysson e quem fez o quê na documentação (Thayná Batista da Silva)
 
 - READMEs (PT/EN/ES), entrega final e documentação de requisitos V3 com o que o Kleysson fez: demandas da equipe de desenvolvimento no Trello, jornada e fluxo de valor visual, mapa de navegação visual, criação e compartilhamento do repositório inicial no GitHub e registro das atividades no Discord.
