@@ -30,7 +30,7 @@ class MigrationUpgradeTest extends PostgresSupport {
     Map<String,String> before=new LinkedHashMap<>();
     for(String table:tables) before.put(table,snapshot(db,table));
     var flyway=Flyway.configure().dataSource(url,"postgres","").load();
-    assertThat(flyway.migrate().migrationsExecuted).isEqualTo(11);
+    assertThat(flyway.migrate().migrationsExecuted).isEqualTo(12);
     for(String table:tables) assertThat(snapshot(db,table)).as(table).isEqualTo(before.get(table));
     assertThat(flyway.migrate().migrationsExecuted).isZero();
     assertThatThrownBy(()->db.update("UPDATE request_intent SET response_json='{}' WHERE request_key='upgrade-key'")).isInstanceOf(org.springframework.dao.DataAccessException.class);
@@ -38,9 +38,14 @@ class MigrationUpgradeTest extends PostgresSupport {
     // V11: despesa antiga ganha crédito de IBS/CBS zero e o crédito nunca passa do valor da compra.
     assertThat(db.queryForObject("SELECT tax_credit_cents FROM expense WHERE id=?",Long.class,expense)).isZero();
     assertThatThrownBy(()->db.update("UPDATE expense SET tax_credit_cents=1001 WHERE id=?",expense)).isInstanceOf(org.springframework.dao.DataAccessException.class);
+    // V13: sem semente de demonstração (como na produção), uma venda de agora encontra a regra simulada do MVP.
+    var regra=db.queryForMap("SELECT version,tax_bps,fee_bps FROM tax_rule WHERE category='GENERAL' AND valid_from<=now() AND (valid_to IS NULL OR valid_to>now()) ORDER BY valid_from DESC LIMIT 1");
+    assertThat(regra.get("version")).isEqualTo("MVP-SIMULADO-v1");
+    assertThat(regra.get("tax_bps")).isEqualTo(1000);
+    assertThat(regra.get("fee_bps")).isEqualTo(200);
   }
   private String snapshot(JdbcTemplate db,String table) {
     // Colunas novas com valor padrão (V11: tax_credit_cents) ficam fora da comparação do antes e depois.
-    return db.queryForObject("SELECT COALESCE(jsonb_agg((to_jsonb(t)-'tax_credit_cents') ORDER BY (to_jsonb(t)-'tax_credit_cents')::text),'[]'::jsonb)::text FROM "+table+" t",String.class);
+    return db.queryForObject("SELECT COALESCE(jsonb_agg((to_jsonb(t)-'tax_credit_cents') ORDER BY (to_jsonb(t)-'tax_credit_cents')::text),'[]'::jsonb)::text FROM "+table+" t"+(table.equals("tax_rule")?" WHERE version<>'MVP-SIMULADO-v1'":""),String.class);
   }
 }

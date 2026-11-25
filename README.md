@@ -166,7 +166,7 @@ Resultados medidos em 25/11/2026, no CI do GitHub e na máquina da Thayná. Todo
 | Navegador na demonstração | `entrega-final.spec.ts` (22), `teclado-e-ampliacao.spec.ts` (3): login, recuperação, Lembrar de mim, capital de giro, Reforma no caixa, tema, idiomas, ícones **i**, WCAG A/AA nos dois temas, teclado e ampliação | **25 de 25** | Máquina local |
 | Navegador contra a API real | `acesso-acessibilidade.spec.ts` (3), `cadastro.spec.ts` (1), `caixa-semanal.spec.ts` (1), `credito-integrado.spec.ts` (1), `estados-consulta.spec.ts` (2), `integracao.spec.ts` (6), `login-integrado.spec.ts` (2), `reforma-integrado.spec.ts` (1), `relatorios-acessibilidade.spec.ts` (1), `responsividade.spec.ts` (5) | **23 de 23** | Máquina local, com a API e o banco locais |
 | Navegador no endereço único (site servido pela API) | `login-integrado`, `credito-integrado` e `reforma-integrado` | **4 de 4** | Máquina local |
-| Produção | site e API no mesmo endereço, tentativas restantes no login, recuperação sem sessão, cabeçalhos de segurança, banco atualizado (V6 a V12) | **aprovado** | https://planner-api-tvmg.onrender.com |
+| Produção | site e API no mesmo endereço, tentativas restantes no login, recuperação sem sessão, cabeçalhos de segurança, banco atualizado (V6 a V13) | **aprovado** | https://planner-api-tvmg.onrender.com |
 | Traduções e explicações | 1.145 textos em inglês e espanhol e 241 explicações em três idiomas | **completas** | `verificar-traducoes.mjs` |
 | Acessibilidade (axe) | 12 telas, temas claro e escuro | **0 violações** | dentro da bateria da demonstração |
 | Auditoria | nenhum crédito de IA, autoria dos commits, README nas três línguas | **aprovada** | `scripts/auditoria/` |
