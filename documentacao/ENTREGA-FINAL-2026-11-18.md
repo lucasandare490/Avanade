@@ -40,7 +40,7 @@ Os números abaixo foram medidos nesta entrega, no Linux (Node 20.20, JDK 21.0.1
 | Bateria | `main` antes da entrega | Esta entrega |
 |---|---|---|
 | Backend (`./mvnw test`, PostgreSQL embutido) | 61 testes, 1 falha por tempo de espera (`CrashRecoveryTest`, máquina ocupada) | **90 testes, 0 falhas** (29 novos: bloqueio, recuperação, e-mail, capital de giro, Reforma no caixa e limite de acesso no banco) |
-| Frontend unitários (`npm test`) | 110 testes | **154 testes, 0 falhas** (44 novos) |
+| Frontend unitários (`npm test`) | 110 testes | **157 testes, 0 falhas** (47 novos) |
 | Tipos e build de produção (`npm run build`) | passa | **passa**; o código de teste (`__planner`) não vai para o build |
 | Navegador na demonstração (`npm run test:e2e:entrega`) | — | **25 de 25**: login, recuperação de senha completa, lembrar de mim, ciclo completo do capital de giro, Reforma no caixa, tema, idiomas, ícones "i", WCAG A/AA nos temas claro e escuro, teclado e ampliação |
 | Navegador contra a API real (`npx playwright test`, com backend local) | **0 de 22** (testes desatualizados: esperavam o login na primeira tela) | **23 de 23** (19 do time, atualizados, 2 de login integrado, 1 do capital de giro e 1 da Reforma no caixa) |
