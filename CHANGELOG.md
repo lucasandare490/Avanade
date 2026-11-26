@@ -2,6 +2,11 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-26 — Papel do Kássio e e-mail dos commits (Thayná Batista da Silva)
+
+- READMEs (PT/EN/ES), entrega final e documentação de requisitos V3 (seção 38.12, também no Drive) com o papel descrito pelo Kássio: desenvolvimento do back-end e do banco de dados, deploy do projeto e participação nas validações do front-end.
+- `verificar-autoria.mjs` aceita o e-mail pessoal da Thayná, usado nos commits a partir de 26/11/2026.
+
 ## 2026-11-25 — Contribuições do Lucas na documentação (Thayná Batista da Silva)
 
 - READMEs (PT/EN/ES), entrega final e documentação de requisitos V3 (seção 38.12, também no Drive) com o detalhamento enviado pelo Lucas: primeira versão do painel web e do Android, venda simulada, despesas, comparação, projeção e caixa semanal; no back-end, cadastro da loja e do gerente, edição do estabelecimento por permissão, relatórios com CSV, sugestão de categorias, regra vigente e recuperação do split; contratos da API, revisão dos 516 critérios, testes, acessibilidade, restauração do banco, demonstração, mentoria e pacote de hospedagem.
