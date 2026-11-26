@@ -2,6 +2,11 @@
 
 Mudanças relevantes do Planner Comercial. Datas no formato AAAA-MM-DD. A autoria de cada mudança está no histórico de commits.
 
+## 2026-11-26 — Contribuições da Thayná completas (Thayná Batista da Silva)
+
+- READMEs (PT/EN/ES), entrega final e documentação de requisitos V3 (seção 38.12, também no Drive) passam a listar o que faltava do trabalho da Thayná: correção da regra financeira da produção (V13), limite de tentativas de acesso guardado no banco sem guardar o IP, acessibilidade, documento da entrega final, conta de teste do site publicado, contagem automática de testes conferida pelo CI e registro do que cada pessoa fez.
+- Estrutura do backend no README indica as migrations V1–V13.
+
 ## 2026-11-26 — Papel do Kássio e e-mail dos commits (Thayná Batista da Silva)
 
 - READMEs (PT/EN/ES), entrega final e documentação de requisitos V3 (seção 38.12, também no Drive) com o papel descrito pelo Kássio: desenvolvimento do back-end e do banco de dados, deploy do projeto e participação nas validações do front-end.
